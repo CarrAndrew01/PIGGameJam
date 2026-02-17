@@ -3,23 +3,32 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public enum FishState
-{
-    Up,
-    Down,
-    Struggling,
-    Caught,
-    Escaped
-}
-
+/// <summary>
+/// Handles the fishing minigame logic inspired by Stardew Valley's fishing.
+/// </summary>
 public class Stardew : MonoBehaviour
 {
+    /// <summary>
+    /// FishState enum represents the different states the fish can be in during the stardew fishing minigame.
+    /// </summary>
+    private enum FishState
+    {
+        Up,
+        Down,
+        Struggling,
+        Caught,
+        Escaped
+    }
+
+    // Constants
+    public static readonly string DEFAULT_FISH_RESOURCE_PATH = "DEFAULT FISH"; // The path in the Resources folder where the default Fish is
+
     // State
     [Header("Fish State")]
     [ShowInInspector, ReadOnly] private bool isCatching = false;
     [ShowInInspector, ReadOnly] private bool isReeling = false; // whether the player is currently pressing the reel button to move the catch slider up
     [ShowInInspector, ReadOnly] private FishState fishState = FishState.Struggling; // Whether the fish is currently up, down, or struggling
-    [ShowInInspector,ReadOnly,Range(-1f, 1f)]
+    [ShowInInspector, ReadOnly, Range(-1f, 1f)]
     private float caughtProgress = 0f;
     private float timeSinceStateChange = 0f; // How much time has passed since the fish last changed state
     private float currentStateDuration = 0f; // How long the fish will stay in its current state
@@ -52,8 +61,8 @@ public class Stardew : MonoBehaviour
     public float Speed => fish.speed * speedMult;
     public float Stubbornness => fish.stubbornness * stubbornnessMult;
     public float Size => fish.size * sizeMult;
-    public float Weight => fishWeight * weightMult;
-    
+    public float Weight => fishWeight * weightMult; // TODO: Remove weight from affecting acceleration and instead use size. Also stop using size for catch area.
+
     private float fishWeight; // Instance-specific weight value
 
     // Input actions
@@ -74,15 +83,19 @@ public class Stardew : MonoBehaviour
         if (fish == null)
         {
             // Grab default fish from Resources if not set in Inspector
-            fish = Resources.Load<Fish>("DEFAULT FISH");
+            fish = Resources.Load<Fish>(DEFAULT_FISH_RESOURCE_PATH);
         }
 
+        // Assign the fish sprite to the UI image
+        if (fishImage != null && fish != null)
+            fishImage.sprite = fish.sprite;
+
         // Initialize instance-specific values
-        fishWeight = Random.Range(fish.minSize, fish.maxSize);
+        fishWeight = Random.Range(fish.minWeight, fish.maxWeight);
 
         RectTransform hookRect = catchImage.GetComponent<RectTransform>();
         float catchAreaSize = Mathf.Lerp(catchMinSize, catchMaxSize, Size);
-        hookRect.sizeDelta = new Vector2(hookRect.sizeDelta.x, catchAreaSize*200f);
+        hookRect.sizeDelta = new Vector2(hookRect.sizeDelta.x, catchAreaSize * 200f);
     }
 
     // Update is called once per frame

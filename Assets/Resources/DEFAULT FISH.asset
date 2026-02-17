@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: DEFAULT FISH
   m_EditorClassIdentifier: 
   sprite: {fileID: 6645427384175290001, guid: 4dffe6eab57ca4e4ba2f967307bd1c29, type: 3}
-  minSize: 2
-  maxSize: 3
+  minWeight: 2
+  maxWeight: 3
   jumpiness: 0.5
   speed: 0.5
   stubbornness: 0.5
   size: 0.5
-  weight: 2.7031314

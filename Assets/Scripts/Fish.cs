@@ -1,12 +1,15 @@
 using UnityEngine;
 
+/// <summary>
+/// Represents a type of fish.
+/// </summary>
 [CreateAssetMenu(fileName = "New Fish", menuName = "Fish")]
 public class Fish : ScriptableObject
 {
     // Variables
     [Header("General")]
     public Sprite sprite;
-    public float minSize, maxSize;
+    public float minWeight, maxWeight; // Weight range for the fish, which will affect money earned I guess
 
     [Header("Stardew variables")]
     [Range(0f, 1f)]
