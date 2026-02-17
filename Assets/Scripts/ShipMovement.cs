@@ -29,6 +29,10 @@ public class ShipMovement : MonoBehaviour
     [Header("Components")]
     public Transform spriteTransform; // Child object that bobs up and down
 
+    [Header("Shadow")]
+    public Transform spriteShadow; // Shadow
+    public float shadowMin, shadowMax; // Min and max scale for the shadow based on bobbing
+
     // Components
     private Rigidbody2D rb;
 
@@ -95,6 +99,11 @@ public class ShipMovement : MonoBehaviour
     {
         // Bobbing effect on the child so it doesn't interfere with physics
         float bobbingY = Mathf.Sin(Time.time * bobbingFrequency) * bobbingAmplitude;
+
+        // Scale shadow based on bobbing
+        float shadowScale = Mathf.Lerp(shadowMax, shadowMin, (bobbingY + bobbingAmplitude) / (2 * bobbingAmplitude));
+        spriteShadow.localScale = new Vector3(shadowScale, .5f, 1f);
+
         spriteTransform.localPosition = new Vector3(0f, bobbingY, 0f);
     }
 }
