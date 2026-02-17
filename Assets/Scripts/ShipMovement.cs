@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// Allows the player to move the ship left and right on the water.
 /// </summary>
-/// 
 public class ShipMovement : MonoBehaviour
 {
     // State

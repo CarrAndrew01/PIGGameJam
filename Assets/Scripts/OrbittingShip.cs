@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Just handles animations for the orbitting ship.
 /// </summary>
-
 public class OrbittingShip : MonoBehaviour
 {
     // State
