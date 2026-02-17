@@ -448,6 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb18590877de7d443b3f6ab6ddb25c72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentPlayerValue: 0
   cardPrefab: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
   canvas: {fileID: 1995241497}
   playerCards: []
@@ -468,6 +469,7 @@ GameObject:
   - component: {fileID: 1995241500}
   - component: {fileID: 1995241499}
   - component: {fileID: 1995241498}
+  - component: {fileID: 1995241501}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -558,6 +560,32 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1995241501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995241496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &2019321022
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,6 +948,10 @@ PrefabInstance:
     - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_Name
       value: Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2972131385351825044, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_fontColor.b
