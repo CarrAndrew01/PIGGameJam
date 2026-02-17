@@ -47,5 +47,14 @@ public class BlackjackScript : MonoBehaviour
 
         currentPlayerValue += cardNumber;
         playerCards.Add(newCard);
+
+        if (currentPlayerValue >= BUSTNUMBER)
+        {
+            Bust();
+        }
+    }
+    void Bust()
+    {
+        Debug.Log("BUST!! Card value: " + currentPlayerValue.ToString());
     }
 }
