@@ -806,8 +806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abb0d8ee9841c448a8c46c5ce6a12c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catchMinSize: 0.1
-  catchMaxSize: 0.5
+  catchSize: 60
   catchRate: 0.15
   escapeRate: 0.2
   hookAcceleration: 1
@@ -823,7 +822,6 @@ MonoBehaviour:
   speedMult: 1
   stubbornnessMult: 2
   sizeMult: 1
-  weightMult: 1
   reelAction: {fileID: 1120369429361536294, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   fishSlider: {fileID: 308167335481033471}
   catchSlider: {fileID: 1377393695156173234}
