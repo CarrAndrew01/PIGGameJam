@@ -19,3 +19,7 @@ MonoBehaviour:
     value: 1
   - type: fishWeight
     value: 1
+  - type: hookGravity
+    value: 1
+  - type: fishEscapeRate
+    value: 1

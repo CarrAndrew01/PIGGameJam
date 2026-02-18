@@ -4,6 +4,16 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 /// <summary>
+/// Struct for holding a fish
+/// </summary>
+public struct CaughtFish
+{
+    public Fish fish;
+    public float weight;
+    public string planetOfOrigin;
+}
+
+/// <summary>
 /// Handles the fishing minigame logic inspired by Stardew Valley's fishing.
 /// </summary>
 public class Stardew : MonoBehaviour
@@ -39,8 +49,7 @@ public class Stardew : MonoBehaviour
 
     // Variables
     [Header("Catching Settings")]
-    public float catchMinSize = 0.1f; // Minimum size of the catch area
-    public float catchMaxSize = 0.5f; // Maximum size of the catch area
+    public float catchSize = 200f; // Size of the catch area in pixels
     public float catchRate = 0.1f; // How quickly the player catches the fish when succesfully catching
     public float escapeRate = 0.2f; // How quickly the fish escapes when the player is not successfully catching
     public float hookAcceleration = 1f; // How quickly the hook accelerates upward when reeling
@@ -50,6 +59,12 @@ public class Stardew : MonoBehaviour
     public Color catchNeutralColor = Color.cyan; // Color of the success slider when the catch is neutral (neither successful nor unsuccessful)
     public Color catchFailureColor = Color.red; // Color of the success slider when the catch is unsuccessful
 
+    // Catch properties that take into account player stats and upgrades
+    public float CatchRate => catchRate * statCatchSpeed;
+    public float EscapeRate => escapeRate * statFishEscapeRate;
+    public float HookGravity => hookGravity * statHookGravity;
+    public float CatchAreaSize => catchSize * statCatchArea;
+
     [Header("Fish Settings")]
     public float fishMaxVelocity = 1.5f; // Maximum velocity the fish can reach
     public float fishMinMoveDistance = 0.05f; // Minimum distance the fish moves in one direction before struggling
@@ -58,15 +73,17 @@ public class Stardew : MonoBehaviour
     public float speedMult = 1f; // Multiplier for how quickly the fish accelerates
     public float stubbornnessMult = 1f; // Multiplier for how unlikely the fish is to change direction
     public float sizeMult = 1f; // Multiplier for how big the fish is, which will affect catch area
-    public float weightMult = 1f; // Multiplier for how weighty the fish is, which will affect changing direction
 
+    // Fish properties which take into account modifers
     public float Jumpiness => fish.jumpiness * jumpinessMult;
     public float Speed => fish.speed * speedMult;
     public float Stubbornness => fish.stubbornness * stubbornnessMult;
     public float Size => fish.size * sizeMult;
-    public float Weight => fishWeight * weightMult; // TODO: Remove weight from affecting acceleration and instead use size. Also stop using size for catch area.
 
-    private float fishWeight; // Instance-specific weight value
+    private CaughtFish caughtFish;
+
+    // Player stats that affect minigame
+    private float statCatchSpeed, statCatchArea, statFishWeight, statHookGravity, statFishEscapeRate;
 
     // Input actions
     [Header("Input Actions")]
@@ -85,6 +102,13 @@ public class Stardew : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Grab player stats from GameManager
+        statCatchSpeed = GameManager.GetPlayerStat("catchSpeed");
+        statCatchArea = GameManager.GetPlayerStat("catchArea");
+        statFishWeight = GameManager.GetPlayerStat("fishWeight");
+        statHookGravity = GameManager.GetPlayerStat("hookGravity");
+        statFishEscapeRate = GameManager.GetPlayerStat("fishEscapeRate");
+
         if (fish == null)
         {
             // Grab default fish from Resources if not set in Inspector
@@ -96,11 +120,15 @@ public class Stardew : MonoBehaviour
             fishImage.sprite = fish.sprite;
 
         // Initialize instance-specific values
-        fishWeight = Random.Range(fish.minWeight, fish.maxWeight);
+        caughtFish = new CaughtFish()
+        {
+            fish = fish,
+            weight = Random.Range(fish.minWeight, fish.maxWeight) * statFishWeight,
+            planetOfOrigin = "Earth" // TODO: Placeholder, can be set to different planets based on game logic
+        };
 
         RectTransform hookRect = catchImage.GetComponent<RectTransform>();
-        float catchAreaSize = Mathf.Lerp(catchMinSize, catchMaxSize, Size);
-        hookRect.sizeDelta = new Vector2(hookRect.sizeDelta.x, catchAreaSize * 200f);
+        hookRect.sizeDelta = new Vector2(hookRect.sizeDelta.x, CatchAreaSize);
     }
 
     // Update is called once per frame
@@ -146,7 +174,7 @@ public class Stardew : MonoBehaviour
         if (!isReeling)
         {
             // Gravity decelerates / pulls hook downward
-            currentHookVelocity -= hookGravity * Time.deltaTime;
+            currentHookVelocity -= HookGravity * Time.deltaTime;
         }
     }
 
@@ -219,7 +247,7 @@ public class Stardew : MonoBehaviour
                 break;
             case FishState.Struggling:
                 // Decelerate based on Weight (heavier fish slow down slower due to momentum)
-                float deceleration = fishAcceleration / (1f + Weight);
+                float deceleration = fishAcceleration / (1f + Size);
                 currentFishVelocity = Mathf.MoveTowards(currentFishVelocity, 0f, deceleration * Time.deltaTime);
 
                 // Wriggle randomly based on Jumpiness
@@ -245,7 +273,6 @@ public class Stardew : MonoBehaviour
         float fishValue = fishSlider.value;
         float catchValue = catchSlider.value;
 
-        // Derive the catch half-size in normalized slider space from the actual visual hook size
         RectTransform hookRect = catchImage.GetComponent<RectTransform>();
         RectTransform sliderRect = catchSlider.GetComponent<RectTransform>();
         float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f;
@@ -259,11 +286,11 @@ public class Stardew : MonoBehaviour
 
         if (isCatching)
         {
-            caughtProgress += catchRate * Time.deltaTime;
+            caughtProgress += CatchRate * Time.deltaTime;
         }
         else
         {
-            caughtProgress -= escapeRate * Time.deltaTime;
+            caughtProgress -= EscapeRate * Time.deltaTime;
         }
 
         caughtProgress = Mathf.Clamp(caughtProgress, -1f, 1f); // Clamp to either -1 (fully escaped) or 1 (fully caught)
