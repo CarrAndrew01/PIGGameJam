@@ -46,6 +46,9 @@ public class Stardew : MonoBehaviour
     public float hookAcceleration = 1f; // How quickly the hook accelerates upward when reeling
     public float hookGravity = 0.5f; // Downward acceleration applied when not reeling
     public float hookMaxVelocity = 2f; // Maximum velocity the hook can reach
+    public Color catchSuccessColor = Color.green; // Color of the success slider when the catch is successful
+    public Color catchNeutralColor = Color.cyan; // Color of the success slider when the catch is neutral (neither successful nor unsuccessful)
+    public Color catchFailureColor = Color.red; // Color of the success slider when the catch is unsuccessful
 
     [Header("Fish Settings")]
     public float fishMaxVelocity = 1.5f; // Maximum velocity the fish can reach
@@ -73,8 +76,10 @@ public class Stardew : MonoBehaviour
     [Header("Components")]
     public Slider fishSlider; // Reference to the Slider component used for showing the fish location
     public Slider catchSlider; // Reference to the Slider component used for showing the catch progress
+    public Slider successSlider; // Reference to Slider for success rate
     public Image fishImage; // Reference to the Image component of the slider handle
     public Image catchImage; // ^ but for the catch slider
+    public Image successImage; // Reference to the fill area of the success slider, which changes color based on success
     [HideInInspector] public Fish fish; // Reference to the fish ScriptableObject, set when we create the Stardew instance in the scene
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -276,5 +281,14 @@ public class Stardew : MonoBehaviour
             Debug.Log("Fish Escaped!");
             // TODO: Trigger any escape animations or logic here
         }
+
+        // Finally, update the success slider to show how close the player is to catching the fish
+        float successValue = Mathf.InverseLerp(-1f, 1f, caughtProgress); // Convert caughtProgress to a 0-1 range for the slider
+        successSlider.value = successValue;
+        if (caughtProgress > 0f)
+            successImage.color = Color.Lerp(catchNeutralColor, catchSuccessColor, caughtProgress);
+
+        else
+            successImage.color = Color.Lerp(catchNeutralColor, catchFailureColor, -caughtProgress);
     }
 }
