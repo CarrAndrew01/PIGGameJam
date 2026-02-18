@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3f2c2a7737991914b9bce91dfacaa996
+guid: 96b61b4188811f387bbcd672ef84e915
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3846971093251694556
-    second: Alien64_0
+      213: -4612430796752227774
+    second: Valentines Jelly Glow_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Alien64_0
+      name: Valentines Jelly Glow_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 2
-        width: 60
-        height: 61
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cdf9672c3df236530800000000000000
-      internalID: 3846971093251694556
+      spriteID: 242f288c0aa5dffb0800000000000000
+      internalID: -4612430796752227774
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Alien64_0: 3846971093251694556
+      Valentines Jelly Glow_0: -4612430796752227774
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

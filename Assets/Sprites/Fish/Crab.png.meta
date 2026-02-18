@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3f2c2a7737991914b9bce91dfacaa996
+guid: eb2e8851a498f2245b256fe8df4be4c0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3846971093251694556
-    second: Alien64_0
+      213: 2104901783972924173
+    second: Crab_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Alien64_0
+      name: Crab_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 2
-        width: 60
-        height: 61
+        width: 64
+        height: 56
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cdf9672c3df236530800000000000000
-      internalID: 3846971093251694556
+      spriteID: d0bcac0350d163d10800000000000000
+      internalID: 2104901783972924173
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Alien64_0: 3846971093251694556
+      Crab_0: 2104901783972924173
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
