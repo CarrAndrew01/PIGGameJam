@@ -23,3 +23,5 @@ MonoBehaviour:
     value: 1
   - type: fishEscapeRate
     value: 1
+  - type: fishStorage
+    value: 1

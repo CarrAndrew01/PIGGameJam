@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [Header("Player Stats and Upgrades")]
     public PlayerStats playerStats = new PlayerStats(); // Manages player upgrades and stats
 
+    public PlayerInventory playerInventory = new PlayerInventory(); // Manages player inventory
+
     // Variables
     
     // Components
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
 
         // Setup
         playerStats.Init();
+        playerInventory.Init();
     }
 
     // Methods
@@ -36,4 +39,5 @@ public class GameManager : MonoBehaviour
     // Static methods
     public static List<Upgrade> GetPlayerUpgrades() => Instance.playerStats.upgrades;
     public static float GetPlayerStat(string statType) => Instance.playerStats.GetStat(statType);
+    public static void AddFishToInventory(CaughtFish newCatch) => Instance.playerInventory.AddFish(newCatch);
 }

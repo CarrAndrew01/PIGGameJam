@@ -4,16 +4,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 /// <summary>
-/// Struct for holding a fish
-/// </summary>
-public struct CaughtFish
-{
-    public Fish fish;
-    public float weight;
-    public string planetOfOrigin;
-}
-
-/// <summary>
 /// Handles the fishing minigame logic inspired by Stardew Valley's fishing.
 /// </summary>
 public class Stardew : MonoBehaviour
@@ -58,6 +48,7 @@ public class Stardew : MonoBehaviour
     public Color catchSuccessColor = Color.green; // Color of the success slider when the catch is successful
     public Color catchNeutralColor = Color.cyan; // Color of the success slider when the catch is neutral (neither successful nor unsuccessful)
     public Color catchFailureColor = Color.red; // Color of the success slider when the catch is unsuccessful
+    public Color hookColor = Color.gray; // Color of the catch slider handle (the hook)
 
     // Catch properties that take into account player stats and upgrades
     public float CatchRate => catchRate * statCatchSpeed;
@@ -81,6 +72,7 @@ public class Stardew : MonoBehaviour
     public float Size => fish.size * sizeMult;
 
     private CaughtFish caughtFish;
+    private int amountInCatch = 1; // determines if extra fish are added if we successfully catch
 
     // Player stats that affect minigame
     private float statCatchSpeed, statCatchArea, statFishWeight, statHookGravity, statFishEscapeRate;
@@ -109,9 +101,12 @@ public class Stardew : MonoBehaviour
         statHookGravity = GameManager.GetPlayerStat("hookGravity");
         statFishEscapeRate = GameManager.GetPlayerStat("fishEscapeRate");
 
+        // Grab a random fish from the current environment
+        fish = Environment.GetRandomFish();
         if (fish == null)
         {
-            // Grab default fish from Resources if not set in Inspector
+            // Grab default fish from Resources if not set for some reason
+            Debug.LogWarning("No fish found for current environment, loading default fish from Resources.");
             fish = Resources.Load<Fish>(DEFAULT_FISH_RESOURCE_PATH);
         }
 
@@ -124,11 +119,13 @@ public class Stardew : MonoBehaviour
         {
             fish = fish,
             weight = Random.Range(fish.minWeight, fish.maxWeight) * statFishWeight,
-            planetOfOrigin = "Earth" // TODO: Placeholder, can be set to different planets based on game logic
+            planetOfOrigin = Environment.Name
         };
+        amountInCatch = Random.Range(fish.minAmount, fish.maxAmount + 1); // +1 because Random.Range is exclusive of the upper bound
 
         RectTransform hookRect = catchImage.GetComponent<RectTransform>();
         hookRect.sizeDelta = new Vector2(hookRect.sizeDelta.x, CatchAreaSize);
+        catchImage.color = hookColor;
     }
 
     // Update is called once per frame
@@ -300,13 +297,28 @@ public class Stardew : MonoBehaviour
         {
             fishState = FishState.Caught;
             Debug.Log("Fish Caught!");
-            // TODO: Trigger any catch animations or logic here
+            
+            // Trigger any catch animations or logic here
+            GameManager.AddFishToInventory(caughtFish);
+            for (int i = 0; i < amountInCatch - 1; i++)
+            {
+                // Create additional caught fish for any extra amount
+                CaughtFish extraFish = new CaughtFish()
+                {
+                    fish = fish,
+                    weight = Random.Range(fish.minWeight, fish.maxWeight) * statFishWeight,
+                    planetOfOrigin = Environment.Name
+                };
+                GameManager.AddFishToInventory(extraFish);
+            }
+            Popup.TriggerPopOut();
         }
         else if (caughtProgress <= -1f)
         {
             fishState = FishState.Escaped;
             Debug.Log("Fish Escaped!");
-            // TODO: Trigger any escape animations or logic here
+            // Trigger any escape animations or logic here
+            Popup.TriggerPopOut();
         }
 
         // Finally, update the success slider to show how close the player is to catching the fish

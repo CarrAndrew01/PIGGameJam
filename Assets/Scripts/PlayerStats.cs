@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// Class to set base player stats to then grab from in other scripts.
@@ -10,7 +11,7 @@ public class BasePlayerStats : ScriptableObject
 {
     // Constants
     public static readonly string RESOURCE_PATH = "BASE PLAYER STATS"; // The path in the Resources folder where the PlayerStats asset is
-    // Variables
+    // State
     public List<Stat> stats;
 
     [Serializable]
@@ -39,6 +40,7 @@ public class BasePlayerStats : ScriptableObject
 public class PlayerStats
 {
     // State
+    [ReadOnly]
     public bool hasAppliedUpgrades = false;
     public Dictionary<string, float> currentStats = new Dictionary<string, float>(); // Dictionary to hold the player's current stats
     public Dictionary<string, float> baseStats = new Dictionary<string, float>(); // Dictionary to hold the base values of stats before upgrades, used for calculating the effects of upgrades
