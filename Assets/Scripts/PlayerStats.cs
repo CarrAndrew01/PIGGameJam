@@ -5,7 +5,7 @@ using System;
 /// <summary>
 /// Class to set base player stats to then grab from in other scripts.
 /// </summary>
-[CreateAssetMenu(fileName = "Base Player Stats", menuName = "Base Player Stats")]
+[CreateAssetMenu(fileName = "BASE PLAYER STATS", menuName = "Base Player Stats")]
 public class BasePlayerStats : ScriptableObject
 {
     // Constants
