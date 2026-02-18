@@ -25,7 +25,6 @@ public class BlackjackScript : MonoBehaviour
         {
             CreateNewCard();
             CreateNewCard();
-            CreateNewCard();
         }
     }
 
