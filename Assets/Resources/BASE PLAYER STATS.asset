@@ -12,16 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: BASE PLAYER STATS
   m_EditorClassIdentifier: Assembly-CSharp::BasePlayerStats
-  stats:
-  - type: catchSpeed
-    value: 1
-  - type: catchArea
-    value: 1
-  - type: fishWeight
-    value: 1
-  - type: hookGravity
-    value: 1
-  - type: fishEscapeRate
-    value: 1
-  - type: fishStorage
-    value: 1
+  stats: []

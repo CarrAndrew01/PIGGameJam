@@ -9,8 +9,10 @@ public class Popup : MonoBehaviour
 {
     // State
     public static Popup Instance { get; private set; }
+    public bool isPoppedIn = false;
 
     // Variables
+    public bool destroyCanvasOnPopOut = true; // Whether to destroy the child canvas when popping out
     public float popInDuration = 1f; // Duration of the pop-in animation in seconds
     public float popOutDuration = 1f; // Duration of the pop-out animation in seconds
     [Range(0f, 1f)]
@@ -18,7 +20,7 @@ public class Popup : MonoBehaviour
 
     // Components
     public RectTransform windowRect; // The RectTransform of the popup window, used for scaling animations
-    public Canvas minigameCanvas;
+    public Canvas childCanvas;
 
     private CanvasGroup windowCanvasGroup;
 
@@ -61,24 +63,27 @@ public class Popup : MonoBehaviour
     }
 
     // Methods
-    public static void TriggerPopIn(GameObject minigamePrefab)
+    public static void TriggerPopIn(GameObject canvasPrefab)
     {
-        if (Instance.minigameCanvas != null)
+        if (Instance.childCanvas != null || Instance.isPoppedIn)
             return;
-
-        Instance.StartCoroutine(Instance.ShowPopup(minigamePrefab));
+        // Pops in the popup with the given prefab as a child canvas
+        Instance.StartCoroutine(Instance.ShowPopup(canvasPrefab));
     }
 
     public static void TriggerPopOut()
     {
+        if (!Instance.isPoppedIn)
+            return;
+        // Pops out the popup, which will also destroy the child canvas if destroyCanvasOnPopOut is true
         Instance.StartCoroutine(Instance.HidePopup());
     }
 
     // Coroutines for showing and hiding the popup
-    private IEnumerator ShowPopup(GameObject minigamePrefab)
+    private IEnumerator ShowPopup(GameObject canvasPrefab)
     {
-        // Instantiate the minigame prefab as a child of the popup canvas
-        minigameCanvas = Instantiate(minigamePrefab, windowRect).GetComponent<Canvas>();
+        // Instantiate the canvas prefab as a child of the popup canvas
+        childCanvas = Instantiate(canvasPrefab, windowRect).GetComponent<Canvas>();
 
         // Start with the canvas x scale at 0, y and z at 1, and fully transparent
         windowRect.localScale = new Vector3(0f, 1f, 1f);
@@ -102,6 +107,7 @@ public class Popup : MonoBehaviour
         }
         windowRect.localScale = new Vector3(1f, 1f, 1f); // Ensure it's fully stretched at the end
         windowCanvasGroup.alpha = 1f; // Ensure fully visible
+        isPoppedIn = true;
     }
 
     private IEnumerator HidePopup()
@@ -124,7 +130,11 @@ public class Popup : MonoBehaviour
         windowRect.localScale = new Vector3(0f, 1f, 1f); // Ensure it's fully shrunk at the end
         windowCanvasGroup.alpha = 0f; // Ensure fully transparent
 
-        Destroy(minigameCanvas.gameObject); // Destroy the minigame but leave the popup canvas
-        minigameCanvas = null;
+        if (destroyCanvasOnPopOut && childCanvas != null)
+        {
+            Destroy(childCanvas.gameObject);
+            childCanvas = null;
+        }
+        isPoppedIn = false;
     }
 }
