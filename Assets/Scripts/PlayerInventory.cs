@@ -17,7 +17,7 @@ public class PlayerInventory
     public void Init()
     {
         // Grab player stats from GameManager
-        statFishStorage = (int)GameManager.GetPlayerStat("fishStorage");
+        statFishStorage = (int)GameManager.GetPlayerStat(StatType.fishStorage);
     }
 
     // Methods

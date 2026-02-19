@@ -95,11 +95,11 @@ public class Stardew : MonoBehaviour
     void Start()
     {
         // Grab player stats from GameManager
-        statCatchSpeed = GameManager.GetPlayerStat("catchSpeed");
-        statCatchArea = GameManager.GetPlayerStat("catchArea");
-        statFishWeight = GameManager.GetPlayerStat("fishWeight");
-        statHookGravity = GameManager.GetPlayerStat("hookGravity");
-        statFishEscapeRate = GameManager.GetPlayerStat("fishEscapeRate");
+        statCatchSpeed = GameManager.GetPlayerStat(StatType.catchSpeed);
+        statCatchArea = GameManager.GetPlayerStat(StatType.catchArea);
+        statFishWeight = GameManager.GetPlayerStat(StatType.fishWeight);
+        statHookGravity = GameManager.GetPlayerStat(StatType.hookGravity);
+        statFishEscapeRate = GameManager.GetPlayerStat(StatType.fishEscapeChance);
 
         // Grab a random fish from the current environment
         fish = Environment.GetRandomFish();

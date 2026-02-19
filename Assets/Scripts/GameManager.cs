@@ -38,6 +38,6 @@ public class GameManager : MonoBehaviour
 
     // Static methods
     public static List<Upgrade> GetPlayerUpgrades() => Instance.playerStats.upgrades;
-    public static float GetPlayerStat(string statType) => Instance.playerStats.GetStat(statType);
+    public static float GetPlayerStat(StatType statType) => Instance.playerStats.GetStat(statType);
     public static void AddFishToInventory(CaughtFish newCatch) => Instance.playerInventory.AddFish(newCatch);
 }

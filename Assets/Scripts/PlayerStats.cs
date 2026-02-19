@@ -4,6 +4,19 @@ using System;
 using Sirenix.OdinInspector;
 
 /// <summary>
+/// Yes I'm aware old way was more flexible. Jes complained.
+/// </summary>
+public enum StatType
+{
+    catchSpeed,
+    catchArea,
+    fishWeight,
+    hookGravity,
+    fishEscapeChance,
+    fishStorage,
+}
+
+/// <summary>
 /// Class to set base player stats to then grab from in other scripts.
 /// </summary>
 [CreateAssetMenu(fileName = "BASE PLAYER STATS", menuName = "Base Player Stats")]
@@ -17,7 +30,7 @@ public class BasePlayerStats : ScriptableObject
     [Serializable]
     public class Stat
     {
-        public string type;
+        public StatType type;
         public float value = 1f;
     }
 
@@ -42,8 +55,8 @@ public class PlayerStats
     // State
     [ReadOnly]
     public bool hasAppliedUpgrades = false;
-    public Dictionary<string, float> currentStats = new Dictionary<string, float>(); // Dictionary to hold the player's current stats
-    public Dictionary<string, float> baseStats = new Dictionary<string, float>(); // Dictionary to hold the base values of stats before upgrades, used for calculating the effects of upgrades
+    public Dictionary<StatType, float> currentStats = new Dictionary<StatType, float>(); // Dictionary to hold the player's current stats
+    public Dictionary<StatType, float> baseStats = new Dictionary<StatType, float>(); // Dictionary to hold the base values of stats before upgrades, used for calculating the effects of upgrades
     public List<Upgrade> upgrades = new List<Upgrade>();
 
     public void Init()
@@ -54,7 +67,7 @@ public class PlayerStats
     }
 
     // Methods
-    public float GetStat(string statType)
+    public float GetStat(StatType statType)
     {
         if (currentStats.TryGetValue(statType, out float value))
             return value;
@@ -64,7 +77,7 @@ public class PlayerStats
             return 0f;
         }
     }
-    
+
     public void InitializeBaseStats()
     {
         // Grabs the resource for base player stats
@@ -175,7 +188,7 @@ public class Upgrade : ScriptableObject
     public string description;
     public Sprite icon;
 
-    public string type;
+    public StatType type;
     public UpgradeModifierType modifierType;
     public float amount; // The amount the upgrade modifies the relevant stat by
 }

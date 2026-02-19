@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: BASE PLAYER STATS
   m_EditorClassIdentifier: Assembly-CSharp::BasePlayerStats
-  stats: []
+  stats:
+  - type: 0
+    value: 1
+  - type: 1
+    value: 1
+  - type: 2
+    value: 1
+  - type: 3
+    value: 1
+  - type: 4
+    value: 1
+  - type: 5
+    value: 1
