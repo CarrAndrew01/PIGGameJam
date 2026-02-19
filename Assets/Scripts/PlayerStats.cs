@@ -17,36 +17,6 @@ public enum StatType
 }
 
 /// <summary>
-/// Class to set base player stats to then grab from in other scripts.
-/// </summary>
-[CreateAssetMenu(fileName = "BASE PLAYER STATS", menuName = "Base Player Stats")]
-public class BasePlayerStats : ScriptableObject
-{
-    // Constants
-    public static readonly string RESOURCE_PATH = "BASE PLAYER STATS"; // The path in the Resources folder where the PlayerStats asset is
-    // State
-    public List<Stat> stats;
-
-    [Serializable]
-    public class Stat
-    {
-        public StatType type;
-        public float value = 1f;
-    }
-
-    // Static methods
-    public static BasePlayerStats LoadFromResources()
-    {
-        BasePlayerStats baseStats = Resources.Load<BasePlayerStats>(RESOURCE_PATH);
-        if (baseStats == null)
-        {
-            Debug.LogError($"PlayerStats resource not found at path {RESOURCE_PATH}! Make sure there's a PlayerStats asset in a Resources folder at that path.");
-        }
-        return baseStats;
-    }
-}
-
-/// <summary>
 /// Class to manage player stats and upgrades.
 /// </summary>
 [Serializable]
@@ -132,7 +102,7 @@ public class PlayerStats
                 currentStats[upgrade.type] += upgrade.amount;
                 break;
             case Upgrade.UpgradeModifierType.Multiplicative:
-                currentStats[upgrade.type] *= (1 + upgrade.amount);
+                currentStats[upgrade.type] *= (upgrade.amount);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -164,31 +134,10 @@ public class PlayerStats
                 currentStats[upgrade.type] -= upgrade.amount;
                 break;
             case Upgrade.UpgradeModifierType.Multiplicative:
-                currentStats[upgrade.type] /= (1 + upgrade.amount);
+                currentStats[upgrade.type] /= (upgrade.amount);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
-}
-
-/// <summary>
-/// Represents an upgrade that can be applied to the player, modifying their stats in some way.
-/// </summary>
-[CreateAssetMenu(fileName = "New Upgrade", menuName = "Upgrade")]
-public class Upgrade : ScriptableObject
-{
-    public enum UpgradeModifierType
-    {
-        Additive, // Adds a flat amount to the relevant stat
-        Multiplicative, // Multiplies the relevant stat by (1 + amount), so 0.5 would be +50% and -0.5 would be -50%
-    }
-
-    // Variables
-    public string description;
-    public Sprite icon;
-
-    public StatType type;
-    public UpgradeModifierType modifierType;
-    public float amount; // The amount the upgrade modifies the relevant stat by
 }
