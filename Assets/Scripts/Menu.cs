@@ -42,7 +42,82 @@ public class Menu : MonoBehaviour
             }
         }
     }
-    public void PopulateList(Dictionary<string, int> items, List<CaughtFish> fishTypes = null)
+
+    public void PopulateListWithUpgrades(List<Upgrade> upgrades)
+    {
+        // Clear existing list items
+        foreach (Transform child in listContentArea)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Instantiate new list items based on the provided list of upgrades
+        foreach (Upgrade upgrade in upgrades)
+        {
+            GameObject newItem = Instantiate(listItemPrefab, listContentArea);
+            TextMeshProUGUI itemText = newItem.GetComponentInChildren<TextMeshProUGUI>();
+            Image itemImage = null;
+            foreach (Image img in newItem.GetComponentsInChildren<Image>())
+            {
+                if (img.gameObject != newItem) // Ensure we don't accidentally grab the background image of the list item
+                {
+                    itemImage = img;
+                    break;
+                }
+            }
+
+            if (itemImage != null)
+            {
+                itemImage.sprite = upgrade.icon;
+            }
+            if (itemText != null)
+            {
+                itemText.text = $"{upgrade.name}";
+            }
+            else
+            {
+                Debug.LogError("List item prefab is missing a TextMeshPro component!");
+            }
+        }
+    }
+    public void PopulateListWithFish(List<CaughtFish> fishTypes)
+    {
+        // Clear existing list items
+        foreach (Transform child in listContentArea)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Instantiate new list items based on the provided list of caught fish
+        foreach (CaughtFish caughtFish in fishTypes)
+        {
+            GameObject newItem = Instantiate(listItemPrefab, listContentArea);
+            TextMeshProUGUI itemText = newItem.GetComponentInChildren<TextMeshProUGUI>();
+            Image itemImage = null;
+            foreach (Image img in newItem.GetComponentsInChildren<Image>())
+            {
+                if (img.gameObject != newItem) // Ensure we don't accidentally grab the background image of the list item
+                {
+                    itemImage = img;
+                    break;
+                }
+            }
+
+            if (itemImage != null)
+            {
+                itemImage.sprite = caughtFish.fish.sprite;
+            }
+            if (itemText != null)
+            {
+                itemText.text = $"{caughtFish.fish.name}: Weight {caughtFish.weight} (Valued at {caughtFish.weight*10})";
+            }
+            else
+            {
+                Debug.LogError("List item prefab is missing a TextMeshPro component!");
+            }
+        }
+    }
+    public void PopulateListWithFishCount(Dictionary<string, int> items, List<CaughtFish> fishTypes = null)
     {
         // Clear existing list items
         foreach (Transform child in listContentArea)

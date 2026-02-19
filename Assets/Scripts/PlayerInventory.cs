@@ -7,18 +7,8 @@ public class PlayerInventory
     public List<CaughtFish> caughtFish = new List<CaughtFish>();
 
     // Variables
-    public int maxFishStorage = 6; // Maximum number of fish the player can store in their inventory
+    public int MaxFishStorage => (int)GameManager.GetPlayerStat(StatType.fishStorage);
 
-    public int MaxFishStorage => maxFishStorage * statFishStorage;
-
-    // Player stats
-    public int statFishStorage;
-
-    public void Init()
-    {
-        // Grab player stats from GameManager
-        statFishStorage = (int)GameManager.GetPlayerStat(StatType.fishStorage);
-    }
 
     // Methods
     public void AddFish(CaughtFish newCatch)

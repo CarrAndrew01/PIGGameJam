@@ -65,16 +65,11 @@ public class PlayerStats
         }
     }
 
-    public void ApplyUpgrades()
+    public void ReapplyUpgrades()
     {
-        if (hasAppliedUpgrades) return;
-
-        // Runs through all upgrades and applies them, used for applying all current upgrades at once (like on game start or when loading a save)
-        foreach (Upgrade upgrade in upgrades)
-        {
-            ApplyUpgrade(upgrade);
-        }
-        hasAppliedUpgrades = true;
+        // Resets stats back to base values, then reapplies all upgrades. Used for testing and if we want to implement stat respec or temporary stat changes in the future
+        ResetStats();
+        ApplyUpgrades();
     }
 
     public void AddUpgrade(Upgrade upgrade)
@@ -82,10 +77,56 @@ public class PlayerStats
         // Adds then applies the upgrade
         upgrades.Add(upgrade);
 
-        ApplyUpgrade(upgrade);
+        ReapplyUpgrades();
     }
 
-    public void ApplyUpgrade(Upgrade upgrade)
+    public void RemoveUpgrade(Upgrade upgrade)
+    {
+        // Remove then reverse the upgrade
+        if (!upgrades.Remove(upgrade))
+        {
+            Debug.LogWarning("Trying to remove an upgrade that isn't applied.");
+        }
+        ReverseUpgrade(upgrade);
+    }
+
+    private void ResetStats()
+    {
+        // Resets current stats back to base values, used for testing and if we want to implement stat respec or temporary stat changes in the future
+        foreach (KeyValuePair<StatType, float> entry in baseStats)
+        {
+            currentStats[entry.Key] = entry.Value;
+        }
+        hasAppliedUpgrades = false;
+    }
+
+    private void ApplyUpgrades()
+    {
+        if (hasAppliedUpgrades) return;
+
+        List<Upgrade> additiveUpgrades = new List<Upgrade>();
+        List<Upgrade> multiplicativeUpgrades = new List<Upgrade>();
+
+        // First apply all additive upgrades, then multiplicative upgrades
+        foreach (Upgrade upgrade in upgrades)
+        {
+            if (upgrade.modifierType == Upgrade.UpgradeModifierType.Additive)
+                additiveUpgrades.Add(upgrade);
+            else if (upgrade.modifierType == Upgrade.UpgradeModifierType.Multiplicative)
+                multiplicativeUpgrades.Add(upgrade);
+        }
+        foreach (Upgrade upgrade in additiveUpgrades)
+        {
+            ApplyUpgrade(upgrade);
+        }
+        foreach (Upgrade upgrade in multiplicativeUpgrades)
+        {
+            ApplyUpgrade(upgrade);
+        }
+        hasAppliedUpgrades = true;
+    }
+
+    private void ApplyUpgrade(Upgrade upgrade)
     {
         // If the stat doesn't exist in the current stats, warn and initialize
         if (!currentStats.ContainsKey(upgrade.type))
@@ -109,17 +150,7 @@ public class PlayerStats
         }
     }
 
-    public void RemoveUpgrade(Upgrade upgrade)
-    {
-        // Remove then reverse the upgrade
-        if (!upgrades.Remove(upgrade))
-        {
-            Debug.LogWarning("Trying to remove an upgrade that isn't applied.");
-        }
-        ReverseUpgrade(upgrade);
-    }
-
-    public void ReverseUpgrade(Upgrade upgrade)
+    private void ReverseUpgrade(Upgrade upgrade)
     {
         // Undo the upgrade effect
         if (!currentStats.ContainsKey(upgrade.type))

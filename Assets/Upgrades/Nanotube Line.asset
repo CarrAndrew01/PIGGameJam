@@ -9,19 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bd01e6a9424c254994564de0460e923, type: 3}
-  m_Name: BASE PLAYER STATS
+  m_Script: {fileID: 11500000, guid: a6850115a7fcc1b46b10a3206e760afa, type: 3}
+  m_Name: Nanotube Line
   m_EditorClassIdentifier: 
-  stats:
-  - type: 0
-    value: 1
-  - type: 1
-    value: 1
-  - type: 2
-    value: 1
-  - type: 3
-    value: 1
-  - type: 4
-    value: 1
-  - type: 5
-    value: 6
+  description: They wont break this one.
+  icon: {fileID: 0}
+  type: 1
+  modifierType: 1
+  amount: 1.3

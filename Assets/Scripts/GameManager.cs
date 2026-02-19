@@ -36,10 +36,15 @@ public class GameManager : MonoBehaviour
 
         // Setup
         playerStats.Init();
-        playerInventory.Init();
     }
 
     // Methods
+    [ContextMenu("Reapply Upgrades")]
+    public void ReapplyUpgrades()
+    {
+        // This method can be called whenever we want to reapply the effects of all upgrades
+        playerStats.ReapplyUpgrades();
+    }
 
     // Static methods
     public static List<Upgrade> GetPlayerUpgrades() => Instance.playerStats.upgrades;

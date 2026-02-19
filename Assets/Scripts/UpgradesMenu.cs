@@ -11,8 +11,7 @@ public class UpgradesMenu : MonoBehaviour
         Menu menuComponent = GameManager.MenuPopup.childCanvas.GetComponent<Menu>();
         if (menuComponent != null)
         {
-            // TODO: Do stuff here
-            menuComponent.PopulateList(new string[] { "Upgrade 1", "Upgrade 2", "Upgrade 3" });
+            menuComponent.PopulateListWithUpgrades(GameManager.Instance.playerStats.upgrades);
         }
     }
 }

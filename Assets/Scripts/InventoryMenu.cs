@@ -12,7 +12,7 @@ public class InventoryMenu : MonoBehaviour
         if (menuComponent != null)
         {
             // TODO: Do stuff here
-            menuComponent.PopulateList(GameManager.Instance.playerInventory.GetFishCountsByType(), GameManager.Instance.playerInventory.caughtFish);
+            menuComponent.PopulateListWithFishCount(GameManager.Instance.playerInventory.GetFishCountsByType(), GameManager.Instance.playerInventory.caughtFish);
         }
     }
 

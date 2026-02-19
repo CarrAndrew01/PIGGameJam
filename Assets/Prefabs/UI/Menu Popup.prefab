@@ -117,9 +117,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPoppedIn: 0
+  isAnimating: 0
+  isSwapping: 0
   destroyCanvasOnPopOut: 1
   popInDuration: 0.5
   popOutDuration: 0.5
+  swapOutDuration: 0.25
+  swapInDuration: 0.3
   fadeFinishPercent: 0.796
   windowRect: {fileID: 6676963861173588917}
   childCanvas: {fileID: 0}
