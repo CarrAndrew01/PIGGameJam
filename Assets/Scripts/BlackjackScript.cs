@@ -26,6 +26,8 @@ public class BlackjackScript : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
 
+    public delegate void OnCardsSpawn();
+    public static event OnCardsSpawn onCardsSpawn;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -66,12 +68,23 @@ public class BlackjackScript : MonoBehaviour
 
         newCard.GetComponentInChildren<TextMeshProUGUI>().text = newCardValue + newCardSuit;
 
+        // animates the cards via event (non-new cards wiggle)
+        onCardsSpawn?.Invoke();
+
+
+
+
         if (player)
         {
             currentPlayerValue += cardNumber;
             playerCards.Add(newCard);
             UpdateValues();
 
+
+            if (currentPlayerValue == BUSTNUMBER)
+            {
+                Debug.Log("you win");
+            }
             if (currentPlayerValue > BUSTNUMBER)
             {
                 Bust();
@@ -104,14 +117,14 @@ public class BlackjackScript : MonoBehaviour
         scoreText.text = textValue;
     }
 
-    void Hit()
+    public void Hit()
     {
         if (didStand) return;
         if (didBust) return;
         // IF CAN HIT
         CreateNewCard(true);
     }
-    void Stand()
+    public void Stand()
     {
         if (didStand) return;
         if (didBust) return;
