@@ -311,14 +311,14 @@ public class Stardew : MonoBehaviour
                 };
                 GameManager.AddFishToInventory(extraFish);
             }
-            Popup.TriggerPopOut();
+            GameManager.TriggerPopOut(GameManager.MinigamePopup);
         }
         else if (caughtProgress <= -1f)
         {
             fishState = FishState.Escaped;
             Debug.Log("Fish Escaped!");
             // Trigger any escape animations or logic here
-            Popup.TriggerPopOut();
+            GameManager.TriggerPopOut(GameManager.MinigamePopup);
         }
 
         // Finally, update the success slider to show how close the player is to catching the fish

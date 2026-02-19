@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 265501379514042007}
   m_Layer: 5
   m_Name: Minigame Popup
-  m_TagString: Untagged
+  m_TagString: Minigame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -245,8 +245,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e921a2909c154804fb8d7eaf0e00d0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPoppedIn: 0
+  destroyCanvasOnPopOut: 1
   popInDuration: 0.5
   popOutDuration: 0.5
   fadeFinishPercent: 0.796
   windowRect: {fileID: 1848725556626716169}
-  minigameCanvas: {fileID: 0}
+  childCanvas: {fileID: 0}

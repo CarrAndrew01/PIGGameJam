@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7170479494881826837}
   - component: {fileID: 8636186026593049818}
   - component: {fileID: 4609951706820462269}
+  - component: {fileID: 6562862576937119777}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -130,11 +131,23 @@ MonoBehaviour:
   bobbingAmplitude: 0.2
   bobbingFrequency: 1.69
   moveAction: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  fishAction: {fileID: -2099379676528639254, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   spriteTransform: {fileID: 3894113665723702125}
   spriteShadow: {fileID: 2059732930163746098}
   shadowMin: 0.9
   shadowMax: 1
+--- !u!114 &6562862576937119777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155156845450328795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f46f47c1980a534f980dfa4d8b4f7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishAction: {fileID: -2099379676528639254, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   fishingMinigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
 --- !u!1 &2627616015998451968
 GameObject:

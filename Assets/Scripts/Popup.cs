@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// Class to handle pop-up animations for minigames, etc.
@@ -8,17 +9,24 @@ using UnityEngine.UI;
 public class Popup : MonoBehaviour
 {
     // State
-    public static Popup Instance { get; private set; }
-    public bool isPoppedIn = false;
-
+    [Header("State")]
+    [ReadOnly] public bool isPoppedIn = false;
+    [ReadOnly] public bool isAnimating = false;
+    [ReadOnly] public bool isSwapping = false;
+    public bool ReadyForInput => !isAnimating && !isSwapping;
+    
     // Variables
+    [Header("Settings")]
     public bool destroyCanvasOnPopOut = true; // Whether to destroy the child canvas when popping out
     public float popInDuration = 1f; // Duration of the pop-in animation in seconds
     public float popOutDuration = 1f; // Duration of the pop-out animation in seconds
+    public float swapOutDuration = 0.25f; // Duration of the pop-out animation when swapping menus, in seconds
+    public float swapInDuration = 0.5f; // Duration of the pop-in animation when swapping menus, in seconds
     [Range(0f, 1f)]
     public float fadeFinishPercent = 0.5f; // Percentage of duration at which fade finishes
 
     // Components
+    [Header("Components")]
     public RectTransform windowRect; // The RectTransform of the popup window, used for scaling animations
     public Canvas childCanvas;
 
@@ -27,13 +35,19 @@ public class Popup : MonoBehaviour
 
     void Awake()
     {
-        // Singleton pattern
-        if (Instance != null && Instance != this)
+        // Send to GameManager
+        switch (gameObject.tag)
         {
-            Destroy(gameObject);
-            return;
+            case "Minigame":
+                GameManager.Instance.minigamePopup = this;
+                break;
+            case "Menu":
+                GameManager.Instance.menuPopup = this;
+                break;
+            default:
+                Debug.LogWarning($"Popup with name {gameObject.name} is not being assigned to a variable in GameManager! Make sure to add it to the switch statement in Popup.Awake().");
+                break;
         }
-        Instance = this;
 
         // Get components and setup
         if (windowRect == null)
@@ -56,31 +70,59 @@ public class Popup : MonoBehaviour
         windowCanvasGroup.alpha = 0f;
     }
 
-    void OnDestroy()
-    {
-        if (Instance == this)
-            Instance = null;
-    }
-
     // Methods
-    public static void TriggerPopIn(GameObject canvasPrefab)
+    public GameObject TriggerPopIn(GameObject canvasPrefab, float durationOverride = -1f)
     {
-        if (Instance.childCanvas != null || Instance.isPoppedIn)
-            return;
+        if (childCanvas != null || isPoppedIn || isAnimating)
+            return null;
         // Pops in the popup with the given prefab as a child canvas
-        Instance.StartCoroutine(Instance.ShowPopup(canvasPrefab));
+        isAnimating = true;
+        StartCoroutine(ShowPopup(canvasPrefab, durationOverride > 0f ? durationOverride : popInDuration));
+        return childCanvas.gameObject;
     }
 
-    public static void TriggerPopOut()
+    public void TriggerPopOut(float durationOverride = -1f)
     {
-        if (!Instance.isPoppedIn)
+        if (!isPoppedIn || isAnimating)
             return;
         // Pops out the popup, which will also destroy the child canvas if destroyCanvasOnPopOut is true
-        Instance.StartCoroutine(Instance.HidePopup());
+        isAnimating = true;
+        StartCoroutine(HidePopup(durationOverride > 0f ? durationOverride : popOutDuration));
+    }
+
+    public IEnumerator TriggerSwap(GameObject newMenuPrefab, System.Action<GameObject> onSwapComplete = null)
+    {
+        if (!isPoppedIn || !ReadyForInput)
+        {
+            onSwapComplete?.Invoke(null);
+            yield break;
+        }
+        isSwapping = true;
+        yield return StartCoroutine(SwapMenu(newMenuPrefab));
+        onSwapComplete?.Invoke(childCanvas != null ? childCanvas.gameObject : null);
+    }
+
+    // Coroutine to swap from the current menu to a new menu of the given type, by first popping out at a fast speed, then popping in the new menu at a fast speed
+    private IEnumerator SwapMenu(GameObject newMenuPrefab)
+    {
+        // Pop out at a fast speed
+        TriggerPopOut(swapOutDuration);
+        while (isAnimating)
+        {
+            yield return null; // Wait until the pop-out animation is finished
+        }
+
+        // Pop in the new menu at a fast speed
+        TriggerPopIn(newMenuPrefab);
+        while (isAnimating)
+        {
+            yield return null; // Wait until the pop-in animation is finished
+        }
+        isSwapping = false;
     }
 
     // Coroutines for showing and hiding the popup
-    private IEnumerator ShowPopup(GameObject canvasPrefab)
+    private IEnumerator ShowPopup(GameObject canvasPrefab, float duration)
     {
         // Instantiate the canvas prefab as a child of the popup canvas
         childCanvas = Instantiate(canvasPrefab, windowRect).GetComponent<Canvas>();
@@ -89,12 +131,12 @@ public class Popup : MonoBehaviour
         windowRect.localScale = new Vector3(0f, 1f, 1f);
         windowCanvasGroup.alpha = 0f;
 
-        float fadeDuration = popInDuration * fadeFinishPercent;
+        float fadeDuration = duration * fadeFinishPercent;
         float time = 0f;
-        while (time < popInDuration)
+        while (time < duration)
         {
             time += Time.deltaTime;
-            float progress = Mathf.Clamp01(time / popInDuration);
+            float progress = Mathf.Clamp01(time / duration);
             // Animate only the x scale from 0 to 1
             float x = Mathf.Lerp(0f, 1f, Mathf.Sin(progress * Mathf.PI * 0.5f));
             windowRect.localScale = new Vector3(x, 1f, 1f);
@@ -108,16 +150,44 @@ public class Popup : MonoBehaviour
         windowRect.localScale = new Vector3(1f, 1f, 1f); // Ensure it's fully stretched at the end
         windowCanvasGroup.alpha = 1f; // Ensure fully visible
         isPoppedIn = true;
+        isAnimating = false;
     }
-
-    private IEnumerator HidePopup()
+    [ContextMenu("Test Pop In")]
+    private void TestPopIn() => StartCoroutine(ShowPopup(popInDuration));
+    private IEnumerator ShowPopup(float duration)
     {
-        float fadeDuration = popOutDuration * fadeFinishPercent;
+        float fadeDuration = duration * fadeFinishPercent;
         float time = 0f;
-        while (time < popOutDuration)
+        while (time < duration)
         {
             time += Time.deltaTime;
-            float progress = Mathf.Clamp01(time / popOutDuration);
+            float progress = Mathf.Clamp01(time / duration);
+            // Animate only the x scale from 0 to 1
+            float x = Mathf.Lerp(0f, 1f, Mathf.Sin(progress * Mathf.PI * 0.5f));
+            windowRect.localScale = new Vector3(x, 1f, 1f);
+
+            // Fade in alpha, finishing at fadeDuration
+            float fadeProgress = Mathf.Clamp01(time / fadeDuration);
+            windowCanvasGroup.alpha = Mathf.Lerp(0f, 1f, fadeProgress);
+
+            yield return null;
+        }
+        windowRect.localScale = new Vector3(1f, 1f, 1f); // Ensure it's fully stretched at the end
+        windowCanvasGroup.alpha = 1f; // Ensure fully visible
+        isPoppedIn = true;
+        isAnimating = false;
+    }
+
+    [ContextMenu("Test Pop Out")]
+    private void TestPopOut() => StartCoroutine(HidePopup(popOutDuration));
+    private IEnumerator HidePopup(float duration)
+    {
+        float fadeDuration = duration * fadeFinishPercent;
+        float time = 0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float progress = Mathf.Clamp01(time / duration);
             float x = Mathf.Lerp(1f, 0f, 1f - Mathf.Cos(progress * Mathf.PI * 0.5f));
             windowRect.localScale = new Vector3(x, 1f, 1f);
 
@@ -136,5 +206,6 @@ public class Popup : MonoBehaviour
             childCanvas = null;
         }
         isPoppedIn = false;
+        isAnimating = false;
     }
 }

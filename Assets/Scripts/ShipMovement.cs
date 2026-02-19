@@ -25,7 +25,6 @@ public class ShipMovement : MonoBehaviour
 
     [Header("Input Actions")]
     public InputActionReference moveAction; // expects Vector2, only the x component is used for left/right movement
-    public InputActionReference fishAction; // expects Button
 
     [Header("Components")]
     public Transform spriteTransform; // Child object that bobs up and down
@@ -33,10 +32,6 @@ public class ShipMovement : MonoBehaviour
     [Header("Shadow")]
     public Transform spriteShadow; // Shadow
     public float shadowMin, shadowMax; // Min and max scale for the shadow based on bobbing
-
-    // Components
-    [Header("Components")]
-    public GameObject fishingMinigamePrefab; // Prefab for the fishing minigame popup
 
     private Rigidbody2D rb;
 
@@ -78,13 +73,6 @@ public class ShipMovement : MonoBehaviour
     private void GetInput()
     {
         inputDirection = moveAction.action.ReadValue<Vector2>();
-
-        if (fishAction.action.WasPressedThisFrame())
-        {
-            Debug.Log("Fish button pressed, triggering minigame popup");
-            // Trigger the fishing minigame popup
-            Popup.TriggerPopIn(fishingMinigamePrefab);
-        }
     }
 
     private void HandleMovement()
