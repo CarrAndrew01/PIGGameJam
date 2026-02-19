@@ -1,35 +1,19 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Sirenix.OdinInspector;
 
 /// <summary>
-/// Class to set base player stats to then grab from in other scripts.
+/// Yes I'm aware old way was more flexible. Jes complained.
 /// </summary>
-[CreateAssetMenu(fileName = "BASE PLAYER STATS", menuName = "Base Player Stats")]
-public class BasePlayerStats : ScriptableObject
+public enum StatType
 {
-    // Constants
-    public static readonly string RESOURCE_PATH = "BASE PLAYER STATS"; // The path in the Resources folder where the PlayerStats asset is
-    // Variables
-    public List<Stat> stats;
-
-    [Serializable]
-    public class Stat
-    {
-        public string type;
-        public float value = 1f;
-    }
-
-    // Static methods
-    public static BasePlayerStats LoadFromResources()
-    {
-        BasePlayerStats baseStats = Resources.Load<BasePlayerStats>(RESOURCE_PATH);
-        if (baseStats == null)
-        {
-            Debug.LogError($"PlayerStats resource not found at path {RESOURCE_PATH}! Make sure there's a PlayerStats asset in a Resources folder at that path.");
-        }
-        return baseStats;
-    }
+    catchSpeed,
+    catchArea,
+    fishWeight,
+    hookGravity,
+    fishEscapeChance,
+    fishStorage,
 }
 
 /// <summary>
@@ -39,9 +23,10 @@ public class BasePlayerStats : ScriptableObject
 public class PlayerStats
 {
     // State
+    [ReadOnly]
     public bool hasAppliedUpgrades = false;
-    public Dictionary<string, float> currentStats = new Dictionary<string, float>(); // Dictionary to hold the player's current stats
-    public Dictionary<string, float> baseStats = new Dictionary<string, float>(); // Dictionary to hold the base values of stats before upgrades, used for calculating the effects of upgrades
+    public Dictionary<StatType, float> currentStats = new Dictionary<StatType, float>(); // Dictionary to hold the player's current stats
+    public Dictionary<StatType, float> baseStats = new Dictionary<StatType, float>(); // Dictionary to hold the base values of stats before upgrades, used for calculating the effects of upgrades
     public List<Upgrade> upgrades = new List<Upgrade>();
 
     public void Init()
@@ -52,7 +37,7 @@ public class PlayerStats
     }
 
     // Methods
-    public float GetStat(string statType)
+    public float GetStat(StatType statType)
     {
         if (currentStats.TryGetValue(statType, out float value))
             return value;
@@ -62,7 +47,7 @@ public class PlayerStats
             return 0f;
         }
     }
-    
+
     public void InitializeBaseStats()
     {
         // Grabs the resource for base player stats
@@ -117,7 +102,7 @@ public class PlayerStats
                 currentStats[upgrade.type] += upgrade.amount;
                 break;
             case Upgrade.UpgradeModifierType.Multiplicative:
-                currentStats[upgrade.type] *= (1 + upgrade.amount);
+                currentStats[upgrade.type] *= (upgrade.amount);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -149,31 +134,10 @@ public class PlayerStats
                 currentStats[upgrade.type] -= upgrade.amount;
                 break;
             case Upgrade.UpgradeModifierType.Multiplicative:
-                currentStats[upgrade.type] /= (1 + upgrade.amount);
+                currentStats[upgrade.type] /= (upgrade.amount);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
-}
-
-/// <summary>
-/// Represents an upgrade that can be applied to the player, modifying their stats in some way.
-/// </summary>
-[CreateAssetMenu(fileName = "New Upgrade", menuName = "Upgrade")]
-public class Upgrade : ScriptableObject
-{
-    public enum UpgradeModifierType
-    {
-        Additive, // Adds a flat amount to the relevant stat
-        Multiplicative, // Multiplies the relevant stat by (1 + amount), so 0.5 would be +50% and -0.5 would be -50%
-    }
-
-    // Variables
-    public string description;
-    public Sprite icon;
-
-    public string type;
-    public UpgradeModifierType modifierType;
-    public float amount; // The amount the upgrade modifies the relevant stat by
 }

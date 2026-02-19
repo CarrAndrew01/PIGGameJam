@@ -9,17 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 4bd01e6a9424c254994564de0460e923, type: 3}
   m_Name: BASE PLAYER STATS
-  m_EditorClassIdentifier: Assembly-CSharp::BasePlayerStats
+  m_EditorClassIdentifier: 
   stats:
-  - type: catchSpeed
+  - type: 0
     value: 1
-  - type: catchArea
+  - type: 1
     value: 1
-  - type: fishWeight
+  - type: 2
     value: 1
-  - type: hookGravity
+  - type: 3
     value: 1
-  - type: fishEscapeRate
+  - type: 4
+    value: 1
+  - type: 5
     value: 1

@@ -33,7 +33,6 @@ public class ShipMovement : MonoBehaviour
     public Transform spriteShadow; // Shadow
     public float shadowMin, shadowMax; // Min and max scale for the shadow based on bobbing
 
-    // Components
     private Rigidbody2D rb;
 
     void Awake()

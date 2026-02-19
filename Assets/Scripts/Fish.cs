@@ -1,6 +1,17 @@
 using UnityEngine;
 
 /// <summary>
+/// Struct for holding a fish
+/// </summary>
+public struct CaughtFish
+{
+    public Fish fish;
+    public float weight;
+    public string planetOfOrigin;
+}
+
+
+/// <summary>
 /// Represents a type of fish.
 /// </summary>
 [CreateAssetMenu(fileName = "New Fish", menuName = "Fish")]
@@ -10,6 +21,7 @@ public class Fish : ScriptableObject
     [Header("General")]
     public Sprite sprite;
     public float minWeight, maxWeight; // Weight range for the fish, which will affect money earned I guess
+    public int minAmount = 1, maxAmount = 1; // Amount range for the fish, which will affect how many can be caught in one catch
 
     [Header("Stardew variables")]
     [Range(0f, 1f)]

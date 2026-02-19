@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 1951984762056548633}
   - component: {fileID: 1036754230894919713}
   - component: {fileID: 5068138538564706146}
+  - component: {fileID: 2423146871983470710}
   m_Layer: 5
-  m_Name: Border
+  m_Name: Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.99371064, g: 0.30311283, b: 0.30311283, a: 1}
+  m_Color: {r: 0.4528302, g: 0.40583834, b: 0.40583834, a: 0.7490196}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -104,10 +105,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 10
-    m_Right: 10
-    m_Top: 10
-    m_Bottom: 10
+    m_Left: -5
+    m_Right: -5
+    m_Top: -5
+    m_Bottom: -5
   m_ChildAlignment: 1
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
@@ -117,6 +118,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!225 &2423146871983470710
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189967398996265801}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2313959055358997638
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,9 +142,10 @@ GameObject:
   - component: {fileID: 2063156835208631715}
   - component: {fileID: 6045573085289487382}
   - component: {fileID: 2780195206814076723}
+  - component: {fileID: 265501379514042007}
   m_Layer: 5
   m_Name: Minigame Popup
-  m_TagString: Untagged
+  m_TagString: Minigame
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -219,3 +233,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 55
+--- !u!114 &265501379514042007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2313959055358997638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e921a2909c154804fb8d7eaf0e00d0c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPoppedIn: 0
+  destroyCanvasOnPopOut: 1
+  popInDuration: 0.5
+  popOutDuration: 0.5
+  fadeFinishPercent: 0.796
+  windowRect: {fileID: 1848725556626716169}
+  childCanvas: {fileID: 0}
