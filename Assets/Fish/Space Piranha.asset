@@ -17,6 +17,8 @@ MonoBehaviour:
   maxWeight: 1
   minAmount: 1
   maxAmount: 5
+  description: Is it really a piranha if it didn't come from Earth? Our scientists
+    seem to think no, but I say they're wrong.
   jumpiness: 1
   speed: 1
   stubbornness: 0.394

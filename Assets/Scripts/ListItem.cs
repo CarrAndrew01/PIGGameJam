@@ -32,6 +32,10 @@ public class ListItem : MonoBehaviour
 
         // Set icon visibility based on whether an icon was provided
         icon.gameObject.SetActive(iconSprite != null);
+
+        // Set the subtexts visibility based on whether they were provided
+        subtextField.gameObject.SetActive(!string.IsNullOrEmpty(subtext));
+        subtextField2.gameObject.SetActive(!string.IsNullOrEmpty(subtext2));
     }
 
     public void OnItemClicked()
