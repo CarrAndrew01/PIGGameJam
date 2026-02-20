@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2b3be135666a326d5a7234ed16d60feb
+guid: 0fd903cf4975920bd83f404b52f2284d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5185680922901729318
-    second: CloudPlanet_0
+      213: -7559995653518803251
+    second: WALEIsolated_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -24,7 +24,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 1
+  isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CloudPlanet_0
+      name: WALEIsolated_0
       rect:
         serializedVersion: 2
-        x: 152
-        y: 20
-        width: 126
-        height: 119
+        x: 2
+        y: 22
+        width: 55
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 620d310135d37f740800000000000000
-      internalID: 5185680922901729318
+      spriteID: dceb388f100851790800000000000000
+      internalID: -7559995653518803251
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CloudPlanet_0: 5185680922901729318
+      WALEIsolated_0: -7559995653518803251
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

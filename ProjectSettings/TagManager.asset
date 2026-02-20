@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Minigame
   - Menu
+  - CircleWhack
+  - BogWhack
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Water
   - UI
   - No Reflection
-  - 
+  - HoleStuff
   - 
   - 
   - 
@@ -45,6 +47,12 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: HoleLayer
+    uniqueID: 1489929729
+    locked: 0
+  - name: BogMonsterLayer
+    uniqueID: 2895320413
     locked: 0
   m_RenderingLayers:
   - Default
