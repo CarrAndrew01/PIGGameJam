@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
   m_Name: Space Piranha
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 8d8fcd591cdad453fb3c120cb0d3f43d, type: 3}
+  sprite: {fileID: 1684247888740680957, guid: 833e95a8a5190836aa1016dad0ac235b, type: 3}
   minWeight: 1
   maxWeight: 1
   minAmount: 1

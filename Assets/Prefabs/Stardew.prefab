@@ -808,7 +808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   catchSize: 75
   catchRate: 0.4
-  escapeRate: 0.4
+  escapeRate: 0.65
   hookAcceleration: 1
   hookGravity: 0.5
   hookMaxVelocity: 1

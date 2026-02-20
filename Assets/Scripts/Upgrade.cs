@@ -19,4 +19,11 @@ public class Upgrade : ScriptableObject
     public StatType type;
     public UpgradeModifierType modifierType;
     public float amount; // The amount the upgrade modifies the relevant stat by
+
+    // Methods
+    public string GetMechanicalDescription()
+    {
+        string modifierString = modifierType == UpgradeModifierType.Additive ? $"{amount:+0.##;-0.##;0}" : $"{(amount-1f):+0.##%;-0.##%;0%}";
+        return $"{type}: {modifierString}";
+    }
 }

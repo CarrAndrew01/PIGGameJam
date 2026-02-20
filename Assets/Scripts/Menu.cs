@@ -12,10 +12,13 @@ public class Menu : MonoBehaviour
     [Header("Components")]
     public RectTransform listContentArea; // Reference to the RectTransform for the list
     public GameObject listItemPrefab; // Prefab for the list items in the menu
+    public TextMeshProUGUI descriptionField; // Reference to the TextMeshProUGUI for the description field
+    public TextMeshProUGUI mechanicalDescriptionField; // Reference to the TextMeshProUGUI for the mechanical description field
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        descriptionField.text = "";
+        mechanicalDescriptionField.text = "Click on an item to see its description.";
     }
 
     // Methods
@@ -30,16 +33,7 @@ public class Menu : MonoBehaviour
         // Instantiate new list items based on the provided array of strings
         foreach (string item in items)
         {
-            GameObject newItem = Instantiate(listItemPrefab, listContentArea);
-            TextMeshProUGUI itemText = newItem.GetComponentInChildren<TextMeshProUGUI>();
-            if (itemText != null)
-            {
-                itemText.text = item;
-            }
-            else
-            {
-                Debug.LogError("List item prefab is missing a TextMeshPro component!");
-            }
+            CreateListItem(item, null);
         }
     }
 
@@ -54,30 +48,7 @@ public class Menu : MonoBehaviour
         // Instantiate new list items based on the provided list of upgrades
         foreach (Upgrade upgrade in upgrades)
         {
-            GameObject newItem = Instantiate(listItemPrefab, listContentArea);
-            TextMeshProUGUI itemText = newItem.GetComponentInChildren<TextMeshProUGUI>();
-            Image itemImage = null;
-            foreach (Image img in newItem.GetComponentsInChildren<Image>())
-            {
-                if (img.gameObject != newItem) // Ensure we don't accidentally grab the background image of the list item
-                {
-                    itemImage = img;
-                    break;
-                }
-            }
-
-            if (itemImage != null)
-            {
-                itemImage.sprite = upgrade.icon;
-            }
-            if (itemText != null)
-            {
-                itemText.text = $"{upgrade.name}";
-            }
-            else
-            {
-                Debug.LogError("List item prefab is missing a TextMeshPro component!");
-            }
+            CreateListItem(upgrade.name, upgrade.icon, description: upgrade.description, mechanicalDescription: upgrade.GetMechanicalDescription());
         }
     }
     public void PopulateListWithFish(List<CaughtFish> fishTypes)
@@ -91,33 +62,11 @@ public class Menu : MonoBehaviour
         // Instantiate new list items based on the provided list of caught fish
         foreach (CaughtFish caughtFish in fishTypes)
         {
-            GameObject newItem = Instantiate(listItemPrefab, listContentArea);
-            TextMeshProUGUI itemText = newItem.GetComponentInChildren<TextMeshProUGUI>();
-            Image itemImage = null;
-            foreach (Image img in newItem.GetComponentsInChildren<Image>())
-            {
-                if (img.gameObject != newItem) // Ensure we don't accidentally grab the background image of the list item
-                {
-                    itemImage = img;
-                    break;
-                }
-            }
-
-            if (itemImage != null)
-            {
-                itemImage.sprite = caughtFish.fish.sprite;
-            }
-            if (itemText != null)
-            {
-                itemText.text = $"{caughtFish.fish.name}: Weight {caughtFish.weight} (Valued at {caughtFish.weight*10})";
-            }
-            else
-            {
-                Debug.LogError("List item prefab is missing a TextMeshPro component!");
-            }
+            CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight}", subtext2: $"Value: {caughtFish.weight * 10}", description: caughtFish.fish.description);
         }
     }
-    public void PopulateListWithFishCount(Dictionary<string, int> items, List<CaughtFish> fishTypes = null)
+
+    public void PopulateListWithFishCount(Dictionary<string, int> fishCount, List<CaughtFish> fishTypes = null)
     {
         // Clear existing list items
         foreach (Transform child in listContentArea)
@@ -126,38 +75,35 @@ public class Menu : MonoBehaviour
         }
 
         // Instantiate new list items based on the provided dictionary of strings and ints
-        foreach (KeyValuePair<string, int> item in items)
+        foreach (KeyValuePair<string, int> fish in fishCount)
         {
-            GameObject newItem = Instantiate(listItemPrefab, listContentArea);
-            TextMeshProUGUI itemText = newItem.GetComponentInChildren<TextMeshProUGUI>();
-            Image itemImage = null;
-            foreach (Image img in newItem.GetComponentsInChildren<Image>())
+            // Find the corresponding fish type for the item
+            Sprite itemIcon = null;
+            string itemDescription = "";
+            if (fishTypes != null)
             {
-                if (img.gameObject != newItem) // Ensure we don't accidentally grab the background image of the list item
-                {
-                    itemImage = img;
-                    break;
-                }
+                CaughtFish caughtFish = fishTypes.Find(f => f.fish.name == fish.Key);
+                itemIcon = caughtFish.fish.sprite;
+                itemDescription = caughtFish.fish.description;
             }
-
-            // Check key against fish types in player inventory to extract sprite
-            if (fishTypes != null && fishTypes.Count > 0)
-            {
-                CaughtFish caughtFish = fishTypes.Find(f => f.fish.name == item.Key);
-                if (itemImage != null)
-                {
-                    itemImage.sprite = caughtFish.fish.sprite;
-                }
-            }
-
-            if (itemText != null)
-            {
-                itemText.text = $"{item.Key}: {item.Value}";
-            }
-            else
-            {
-                Debug.LogError("List item prefab is missing a TextMeshPro component!");
-            }
+            CreateListItem(fish.Key, itemIcon, subtext: $"Count: {fish.Value}", subtext2: $"Total Value: {fish.Value * 10 * fish.Value}", description: itemDescription);
         }
+    }
+
+    private ListItem CreateListItem(string itemName, Sprite itemIcon, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "")
+    {
+        GameObject newItem = Instantiate(listItemPrefab, listContentArea);
+        ListItem listItemComponent = newItem.GetComponent<ListItem>();
+
+        // Set the list item data
+        if (listItemComponent != null)
+        {
+            listItemComponent.Init(this, itemName, itemIcon, subtext, subtext2, description, mechanicalDescription);
+        }
+        else
+        {
+            Debug.LogError("List item prefab is missing a ListItem component!");
+        }
+        return listItemComponent;
     }
 }

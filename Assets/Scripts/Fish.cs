@@ -22,6 +22,7 @@ public class Fish : ScriptableObject
     public Sprite sprite;
     public float minWeight, maxWeight; // Weight range for the fish, which will affect money earned I guess
     public int minAmount = 1, maxAmount = 1; // Amount range for the fish, which will affect how many can be caught in one catch
+    public string description;
 
     [Header("Stardew variables")]
     [Range(0f, 1f)]
