@@ -1,24 +1,56 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Handles the inventory menu.
 /// </summary>
 public class InventoryMenu : MonoBehaviour
 {
+    // Variables
+    [Header("Settings")]
+    public Color groupSortOnColor = Color.green; // Color for the sort by group button when active
+    public Color groupSortOffColor = Color.white; // Color for the sort by group button
+
+    public static bool sortByGroup = false; // Whether sorting should be done in groups of the same type, or just by order caught
+
+    // Components
+    public Button sortByGroupButton; // Reference to the button used for sorting
+
+    private Menu menuComponent;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Menu menuComponent = GameManager.MenuPopup.childCanvas.GetComponent<Menu>();
-        if (menuComponent != null)
-        {
-            // TODO: Do stuff here
-            menuComponent.PopulateListWithFishCount(GameManager.Instance.playerInventory.GetFishCountsByType(), GameManager.Instance.playerInventory.caughtFish);
-        }
+        menuComponent = GameManager.MenuPopup.childCanvas.GetComponent<Menu>();
+        PopulateList();
+        ButtonColorUpdate();
     }
 
-    // Update is called once per frame
-    void Update()
+    // Methods
+    public void ToggleSortByGroup()
     {
-        
+        sortByGroup = !sortByGroup;
+
+        // Repopulate the list to reflect the new sorting method
+        PopulateList();
+        ButtonColorUpdate();
+    }
+
+    private void PopulateList()
+    {
+        if (menuComponent != null)
+        {
+            if (!sortByGroup)
+                menuComponent.PopulateListWithFish(GameManager.Instance.playerInventory.caughtFish);
+            else
+                menuComponent.PopulateListWithFishCount(GameManager.Instance.playerInventory.GetFishCountsByType(), GameManager.Instance.playerInventory.caughtFish);
+        }
+    }
+    private void ButtonColorUpdate()
+    {
+        if (sortByGroup)
+            sortByGroupButton.image.color = groupSortOnColor;
+        else
+            sortByGroupButton.image.color = groupSortOffColor;
     }
 }

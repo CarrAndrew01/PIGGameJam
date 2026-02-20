@@ -62,7 +62,7 @@ public class Menu : MonoBehaviour
         // Instantiate new list items based on the provided list of caught fish
         foreach (CaughtFish caughtFish in fishTypes)
         {
-            CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight}", subtext2: $"Value: {caughtFish.weight * 10}", description: caughtFish.fish.description);
+            CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {(caughtFish.weight * 10):F2}", description: caughtFish.fish.description);
         }
     }
 
@@ -86,7 +86,16 @@ public class Menu : MonoBehaviour
                 itemIcon = caughtFish.fish.sprite;
                 itemDescription = caughtFish.fish.description;
             }
-            CreateListItem(fish.Key, itemIcon, subtext: $"Count: {fish.Value}", subtext2: $"Total Value: {fish.Value * 10 * fish.Value}", description: itemDescription);
+            // Get total value by adding together the value of each fish
+            float totalValue = 0f;
+            foreach (CaughtFish caughtFish in fishTypes)
+            {
+                if (caughtFish.fish.name == fish.Key)
+                {
+                    totalValue += caughtFish.weight * 10;
+                }
+            }
+            CreateListItem(fish.Key, itemIcon, subtext: $"Count: {fish.Value:F2}", subtext2: $"Total Value: {totalValue:F2}", description: itemDescription);
         }
     }
 
