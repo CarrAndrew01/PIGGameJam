@@ -14,6 +14,7 @@ public enum StatType
     hookGravity,
     fishEscapeChance,
     fishStorage,
+    fishPreview,
 }
 
 /// <summary>

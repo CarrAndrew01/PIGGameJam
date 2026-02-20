@@ -36,6 +36,9 @@ public class Stardew : MonoBehaviour
     private float currentMaxMoveDistance = 0f; // Max distance the fish can travel in the current Up/Down state
     private float currentFishVelocity = 0f; // How quickly the fish slider is currently moving, positive is up, negative is down
     private float currentHookVelocity = 0f; // ^ but for the catch slider
+    private float wriggleTimer = 0f;
+    private float wriggleInterval = 0.3f;
+
 
     // Variables
     [Header("Catching Settings")]
@@ -49,6 +52,8 @@ public class Stardew : MonoBehaviour
     public Color catchNeutralColor = Color.cyan; // Color of the success slider when the catch is neutral (neither successful nor unsuccessful)
     public Color catchFailureColor = Color.red; // Color of the success slider when the catch is unsuccessful
     public Color hookColor = Color.gray; // Color of the catch slider handle (the hook)
+    public float hookEdgeOffset = 0.01f; // A slight nudge to make the hook stop at the edge (it wasn't perfectly flush for some reason)
+    public float bounceFactor = 0.5f; // 0 = no bounce, 1 = perfect bounce
 
     // Catch properties that take into account player stats and upgrades
     public float CatchRate => catchRate * statCatchSpeed;
@@ -89,6 +94,8 @@ public class Stardew : MonoBehaviour
     public Image fishImage; // Reference to the Image component of the slider handle
     public Image catchImage; // ^ but for the catch slider
     public Image successImage; // Reference to the fill area of the success slider, which changes color based on success
+    private RectTransform hookRect;
+    private RectTransform sliderRect;
     [HideInInspector] public Fish fish; // Reference to the fish ScriptableObject, set when we create the Stardew instance in the scene
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -100,9 +107,12 @@ public class Stardew : MonoBehaviour
         statFishWeight = GameManager.GetPlayerStat(StatType.fishWeight);
         statHookGravity = GameManager.GetPlayerStat(StatType.hookGravity);
         statFishEscapeRate = GameManager.GetPlayerStat(StatType.fishEscapeChance);
+        // Initialize wriggle burst interval
+        wriggleTimer = 0f;
+        wriggleInterval = Random.Range(0.15f, 0.5f);
 
-        // Grab a random fish from the current environment
-        fish = Environment.GetRandomFish();
+        // Grab the basic fish type from the current fish shadow
+        fish = Fishing.Instance.FishToCatch.fish;
         if (fish == null)
         {
             // Grab default fish from Resources if not set for some reason
@@ -114,16 +124,13 @@ public class Stardew : MonoBehaviour
         if (fishImage != null && fish != null)
             fishImage.sprite = fish.sprite;
 
-        // Initialize instance-specific values
-        caughtFish = new CaughtFish()
-        {
-            fish = fish,
-            weight = Random.Range(fish.minWeight, fish.maxWeight) * statFishWeight,
-            planetOfOrigin = Environment.Name
-        };
+        // Grab the full caught fish data for when we successfully catch the fish
+        caughtFish = Fishing.Instance.FishToCatch;
+
         amountInCatch = Random.Range(fish.minAmount, fish.maxAmount + 1); // +1 because Random.Range is exclusive of the upper bound
 
-        RectTransform hookRect = catchImage.GetComponent<RectTransform>();
+        hookRect = catchImage.GetComponent<RectTransform>();
+        sliderRect = catchSlider.GetComponent<RectTransform>();
         hookRect.sizeDelta = new Vector2(hookRect.sizeDelta.x, CatchAreaSize);
         catchImage.color = hookColor;
     }
@@ -159,9 +166,11 @@ public class Stardew : MonoBehaviour
     {
         isReeling = reelAction.action.IsPressed();
 
-        if (isReeling)
+        float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f + hookEdgeOffset;
+        bool atTop = catchSlider.value >= 1f - catchHalfSizeNormalized - 0.0001f;
+        // Only apply reeling (upward acceleration) if not at top
+        if (isReeling && !atTop)
         {
-            // Accelerate the hook upward
             currentHookVelocity += hookAcceleration * Time.deltaTime;
         }
     }
@@ -170,8 +179,13 @@ public class Stardew : MonoBehaviour
     {
         if (!isReeling)
         {
-            // Gravity decelerates / pulls hook downward
-            currentHookVelocity -= HookGravity * Time.deltaTime;
+            float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f + hookEdgeOffset;
+            bool atBottom = catchSlider.value <= catchHalfSizeNormalized + 0.0001f;
+            // Only apply gravity (downward acceleration) if not at bottom
+            if (!atBottom)
+            {
+                currentHookVelocity -= HookGravity * Time.deltaTime;
+            }
         }
     }
 
@@ -180,13 +194,23 @@ public class Stardew : MonoBehaviour
         currentHookVelocity = Mathf.Clamp(currentHookVelocity, -hookMaxVelocity, hookMaxVelocity);
         catchSlider.value += currentHookVelocity * Time.deltaTime;
 
-        // Stop velocity at slider bounds
-        if (catchSlider.value <= 0f || catchSlider.value >= 1f)
-        {
-            currentHookVelocity = 0f;
-        }
+        // Calculate the normalized half-size of the hook handle (using cached RectTransforms)
+        float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f + hookEdgeOffset;
 
-        catchSlider.value = Mathf.Clamp01(catchSlider.value);
+        // Clamp so the handle stays flush with the slider bounds
+        float prevValue = catchSlider.value;
+        catchSlider.value = Mathf.Clamp(catchSlider.value, catchHalfSizeNormalized, 1f - catchHalfSizeNormalized);
+
+        // If we hit the top, invert upward velocity with bounce
+        if (catchSlider.value >= 1f - catchHalfSizeNormalized - 0.0001f && currentHookVelocity > 0f)
+        {
+            currentHookVelocity = -currentHookVelocity * bounceFactor;
+        }
+        // If we hit the bottom, invert downward velocity with bounce
+        if (catchSlider.value <= catchHalfSizeNormalized + 0.0001f && currentHookVelocity < 0f)
+        {
+            currentHookVelocity = -currentHookVelocity * bounceFactor;
+        }
     }
 
     private FishState DecideFishState()
@@ -234,35 +258,56 @@ public class Stardew : MonoBehaviour
             }
         }
 
+        // Only use slider value for bounds
+        bool atTop = fishSlider.value >= 1f - 0.0001f;
+        bool atBottom = fishSlider.value <= 0f + 0.0001f;
+
         switch (fishState)
         {
             case FishState.Up:
-                currentFishVelocity += fishAcceleration * Time.deltaTime;
+                // Only accelerate up if not at top
+                if (!atTop)
+                    currentFishVelocity += fishAcceleration * Time.deltaTime;
                 break;
             case FishState.Down:
-                currentFishVelocity -= fishAcceleration * Time.deltaTime;
+                // Only accelerate down if not at bottom
+                if (!atBottom)
+                    currentFishVelocity -= fishAcceleration * Time.deltaTime;
                 break;
             case FishState.Struggling:
                 // Decelerate based on Weight (heavier fish slow down slower due to momentum)
                 float deceleration = fishAcceleration / (1f + Size);
                 currentFishVelocity = Mathf.MoveTowards(currentFishVelocity, 0f, deceleration * Time.deltaTime);
 
-                // Wriggle randomly based on Jumpiness
-                float wriggleStrength = fishMaxVelocity * 0.3f * Jumpiness;
-                currentFishVelocity += Random.Range(-wriggleStrength, wriggleStrength) * Time.deltaTime * 10f * Jumpiness;
+                // Bursty wriggle: occasionally apply a big random velocity burst
+                wriggleTimer += Time.deltaTime;
+                if (wriggleTimer >= wriggleInterval)
+                {
+                    float burstStrength = fishMaxVelocity * 0.7f * Jumpiness;
+                    currentFishVelocity += Random.Range(-burstStrength, burstStrength);
+                    wriggleTimer = 0f;
+                    wriggleInterval = Random.Range(0.15f, 0.5f);
+                }
                 break;
         }
 
         currentFishVelocity = Mathf.Clamp(currentFishVelocity, -fishMaxVelocity, fishMaxVelocity);
         fishSlider.value += currentFishVelocity * Time.deltaTime;
 
-        // Stop velocity at slider bounds
-        if (fishSlider.value <= 0f || fishSlider.value >= 1f)
-        {
-            currentFishVelocity = 0f;
-        }
-
+        // Clamp fishSlider value to [0,1]
+        float prevValue = fishSlider.value;
         fishSlider.value = Mathf.Clamp01(fishSlider.value);
+
+        // If we hit the top, invert upward velocity with bounce
+        if (fishSlider.value >= 1f - 0.0001f && currentFishVelocity > 0f)
+        {
+            currentFishVelocity = -currentFishVelocity * bounceFactor;
+        }
+        // If we hit the bottom, invert downward velocity with bounce
+        if (fishSlider.value <= 0f + 0.0001f && currentFishVelocity < 0f)
+        {
+            currentFishVelocity = -currentFishVelocity * bounceFactor;
+        }
     }
 
     private void IsInCatchArea()
@@ -270,8 +315,7 @@ public class Stardew : MonoBehaviour
         float fishValue = fishSlider.value;
         float catchValue = catchSlider.value;
 
-        RectTransform hookRect = catchImage.GetComponent<RectTransform>();
-        RectTransform sliderRect = catchSlider.GetComponent<RectTransform>();
+        // Use cached RectTransforms
         float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f;
 
         isCatching = Mathf.Abs(fishValue - catchValue) <= catchHalfSizeNormalized;
@@ -296,8 +340,10 @@ public class Stardew : MonoBehaviour
         if (caughtProgress >= 1f)
         {
             fishState = FishState.Caught;
-            Debug.Log("Fish Caught!");
-            
+
+            // Tell the shadow fish
+            Fishing.Instance.currentFishShadow.Catch();
+
             // Trigger any catch animations or logic here
             GameManager.AddFishToInventory(caughtFish);
             for (int i = 0; i < amountInCatch - 1; i++)
@@ -316,7 +362,11 @@ public class Stardew : MonoBehaviour
         else if (caughtProgress <= -1f)
         {
             fishState = FishState.Escaped;
-            Debug.Log("Fish Escaped!");
+
+            // Increment the fail count for the fish shadow and unpause its leave timer
+            Fishing.Instance.currentFishShadow.AddFail();
+            Fishing.Instance.currentFishShadow.EndFishing();
+
             // Trigger any escape animations or logic here
             GameManager.TriggerPopOut(GameManager.MinigamePopup);
         }
