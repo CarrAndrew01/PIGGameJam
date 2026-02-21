@@ -22,11 +22,12 @@ public class Fishing : MonoBehaviour
     [Header("Window Settings")]
     public Vector3 minigamePopupPosition = new Vector2(150f, 0f); // Offset for the minigame popup from the player's position
 
-    // Components
     [Header("Components")]
+    private Transform playerTransform;
+
+    [Header("Prefabs")]
     public GameObject fishingMinigamePrefab; // Prefab for the fishing minigame popup
 
-    private Transform playerTransform;
 
     void Awake()
     {

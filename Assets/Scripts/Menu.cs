@@ -11,9 +11,11 @@ public class Menu : MonoBehaviour
     // Components
     [Header("Components")]
     public RectTransform listContentArea; // Reference to the RectTransform for the list
-    public GameObject listItemPrefab; // Prefab for the list items in the menu
     public TextMeshProUGUI descriptionField; // Reference to the TextMeshProUGUI for the description field
     public TextMeshProUGUI mechanicalDescriptionField; // Reference to the TextMeshProUGUI for the mechanical description field
+
+    [Header("Prefabs")]
+    public GameObject listItemPrefab; // Prefab for the list items in the menu
 
     void Start()
     {

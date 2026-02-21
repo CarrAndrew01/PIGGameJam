@@ -25,6 +25,7 @@ public class Stardew : MonoBehaviour
 
     // State
     [Header("Fish State")]
+    [ShowInInspector,ReadOnly] private FishShadow currentFishShadow; // Reference to the current fish shadow we're trying to catch
     [ShowInInspector, ReadOnly] private bool isCatching = false;
     [ShowInInspector, ReadOnly] private bool isReeling = false; // whether the player is currently pressing the reel button to move the catch slider up
     [ShowInInspector, ReadOnly] private FishState fishState = FishState.Struggling; // Whether the fish is currently up, down, or struggling
@@ -97,6 +98,12 @@ public class Stardew : MonoBehaviour
     private RectTransform hookRect;
     private RectTransform sliderRect;
     [HideInInspector] public Fish fish; // Reference to the fish ScriptableObject, set when we create the Stardew instance in the scene
+
+    void Awake()
+    {
+        // Grab the current fish shadow from the Fishing singleton (because if it moves out of the player collider it will cause problems)
+        currentFishShadow = Fishing.Instance.currentFishShadow;
+    } 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -315,7 +322,7 @@ public class Stardew : MonoBehaviour
         float fishValue = fishSlider.value;
         float catchValue = catchSlider.value;
 
-        // Use cached RectTransforms
+        // Use cached RectTransforms to figure out the radius of the catch area in slider value
         float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f;
 
         isCatching = Mathf.Abs(fishValue - catchValue) <= catchHalfSizeNormalized;
@@ -342,7 +349,7 @@ public class Stardew : MonoBehaviour
             fishState = FishState.Caught;
 
             // Tell the shadow fish
-            Fishing.Instance.currentFishShadow.Catch();
+            currentFishShadow.Catch();
 
             // Trigger any catch animations or logic here
             GameManager.AddFishToInventory(caughtFish);
@@ -364,8 +371,8 @@ public class Stardew : MonoBehaviour
             fishState = FishState.Escaped;
 
             // Increment the fail count for the fish shadow and unpause its leave timer
-            Fishing.Instance.currentFishShadow.AddFail();
-            Fishing.Instance.currentFishShadow.EndFishing();
+            currentFishShadow.AddFail();
+            currentFishShadow.EndFishing();
 
             // Trigger any escape animations or logic here
             GameManager.TriggerPopOut(GameManager.MinigamePopup);

@@ -173,10 +173,14 @@ MonoBehaviour:
   initialPosition: {x: 0, y: 0}
   movementDirection: {x: 0, y: 0}
   failCount: 0
+  pauseTimer: 0
   numberOfFailsBeforeEscape: 2
+  timeUntilLeaving: 30
   movementRadius: 2
   movementSpeed: 0.1
   verticalMovementMax: 0.2
+  fishShrinkDuration: 0.5
+  fishGrowDuration: 2
   previewOffset: {x: 0, y: 1, z: 0}
   previewBobAmplitude: 0.1
   previewBobFrequency: 1

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +14,9 @@ public class InventoryMenu : MonoBehaviour
 
     public static bool sortByGroup = false; // Whether sorting should be done in groups of the same type, or just by order caught
 
-    // Components
+    [Header("Components")]
     public Button sortByGroupButton; // Reference to the button used for sorting
+    public TextMeshProUGUI capacityText; // Reference to the text displaying inventory capacity
 
     private Menu menuComponent;
 
@@ -24,6 +26,7 @@ public class InventoryMenu : MonoBehaviour
         menuComponent = GameManager.MenuPopup.childCanvas.GetComponent<Menu>();
         PopulateList();
         ButtonColorUpdate();
+        UpdateCapacityText();
     }
 
     // Methods
@@ -52,5 +55,10 @@ public class InventoryMenu : MonoBehaviour
             sortByGroupButton.image.color = groupSortOnColor;
         else
             sortByGroupButton.image.color = groupSortOffColor;
+    }
+    private void UpdateCapacityText()
+    {
+        float capacity = GameManager.GetPlayerStat(StatType.fishStorage);
+        capacityText.text = $"{GameManager.Instance.playerInventory.caughtFish.Count}/{capacity}";
     }
 }

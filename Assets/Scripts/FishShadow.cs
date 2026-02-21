@@ -1,8 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using System.Collections;
-using NUnit.Framework;
-using Unity.VisualScripting;
 
 /// <summary>
 /// Class for the fish moving in the planet scene. They will simply move around a little from their spawn and have a trigger to begin minigames.
@@ -17,7 +15,7 @@ public class FishShadow : MonoBehaviour
     [ReadOnly] public int failCount = 0; // How many times the player has failed to catch this fish so far, which will be used to determine if the fish should escape
     [ReadOnly] public bool IsEscaping { get; private set; } = false; // Whether the fish is currently escaping, which will trigger it to stop moving and start shrinking until it disappears
     [ReadOnly] public bool pauseTimer = false; // Whether the leave timer should be paused
-    [ShowInInspector, ReadOnly] private float leaveTimer = 0f; // Timer to track how long the fish has been present, which will be used to determine if it should leave on its own
+    [ShowInInspector, ReadOnly] private float leaveTimer = 0f; // Timer to track how long the fish has been present
 
     // Variables
     [Header("Settings")]
@@ -27,7 +25,9 @@ public class FishShadow : MonoBehaviour
     [Header("Movement")]
     public float movementRadius = 2f; // How far from its initial position the fish will move
     public float movementSpeed = 1f; // How fast the fish moves
-    public float verticalMovementMax = 0.2f; // The maximum vertical movement for the fish, which will make their movement less linear and more natural
+    public float verticalMovementMax = 0.2f; // The maximum vertical movement for the fish
+    public float fishShrinkDuration = 0.5f;
+    public float fishGrowDuration = 2f;
 
     [Header("Fish Preview")]
     public Vector3 previewOffset = new Vector3(0f, 0.5f, 0f); // Offset for the fish preview from the fish shadow's position
@@ -68,6 +68,9 @@ public class FishShadow : MonoBehaviour
                     previewTransform.gameObject.SetActive(false);
             }
         }
+
+        // Start the grow animation
+        StartCoroutine(GrowFromZero());
     }
 
     // Update is called once per frame
@@ -154,17 +157,33 @@ public class FishShadow : MonoBehaviour
     // Coroutine to shrink the fish shadow before destroying it
     private IEnumerator ShrinkAndDestroy()
     {
-        float shrinkDuration = 0.5f;
         Vector3 originalScale = transform.localScale;
         float elapsedTime = 0f;
 
-        while (elapsedTime < shrinkDuration)
+        while (elapsedTime < fishShrinkDuration)
         {
-            transform.localScale = Vector3.Lerp(originalScale, Vector3.zero, elapsedTime / shrinkDuration);
+            transform.localScale = Vector3.Lerp(originalScale, Vector3.zero, elapsedTime / fishShrinkDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         Destroy(gameObject);
+    }
+
+    // Coroutine to grow the fish shadow from zero to its original scale when it spawns
+    private IEnumerator GrowFromZero()
+    {
+        Vector3 targetScale = transform.localScale;
+        transform.localScale = Vector3.zero;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fishGrowDuration)
+        {
+            transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, elapsedTime / fishGrowDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localScale = targetScale; // Ensure it ends at the exact target scale
     }
 }

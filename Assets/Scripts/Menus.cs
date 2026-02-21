@@ -23,8 +23,7 @@ public class Menus : MonoBehaviour
     public InputActionReference upgradeMenuAction; // expects Button
     public InputActionReference inventoryMenuAction; // expects Button
 
-    // Components
-    [Header("Components")]
+    [Header("Prefabs")]
     public GameObject menuPrefab; // Prefab for the escape menu popup
     public GameObject upgradeMenuPrefab; // Prefab for the upgrade menu popup
     public GameObject inventoryMenuPrefab; // Prefab for the inventory menu popup

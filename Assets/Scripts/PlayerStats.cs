@@ -15,6 +15,7 @@ public enum StatType
     fishEscapeChance,
     fishStorage,
     fishPreview,
+    fishSpawnInterval,
 }
 
 /// <summary>
