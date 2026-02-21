@@ -76,7 +76,4 @@ public class Transition : MonoBehaviour
         gameObject.GetComponent<Animator>().SetBool("SettingsTransition", false);
         StartCoroutine(UnFadeTextCoroutine());
     }
-
-
-
 }
