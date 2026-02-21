@@ -15,22 +15,37 @@ public class Transition : MonoBehaviour
             foreach (TMP_Text textObject in TextObjects)
             {
                 //fade the text out
-                textObject.color = new Color(textObject.color.r, textObject.color.g, textObject.color.b, textObject.color.a - 0.08f);
-                yield return new WaitForFixedUpdate();
+                textObject.color = new Color(textObject.color.r, textObject.color.g, textObject.color.b, textObject.color.a - 0.04f);
+
+             }
+
+            //the text elements are all firing at the same time so this is safe
+            if(TextObjects[0].color.a <= 0f)
+            {   
+                break;
             }
+
+            yield return new WaitForFixedUpdate();
         }
     }
 
     IEnumerator UnFadeTextCoroutine()
     {
-        Debug.Log("ghtgrt");
         for(int i = 0; i < 255; i++){
             foreach (TMP_Text textObject in TextObjects)
             {
                 //fade the text in
-                textObject.color = new Color(textObject.color.r, textObject.color.g, textObject.color.b, textObject.color.a + 0.08f);
-                yield return new WaitForFixedUpdate();
+                //eh, good enough
+                textObject.color = new Color(textObject.color.r, textObject.color.g, textObject.color.b, textObject.color.a + 0.01f);
             }
+
+            //the text elements are all firing at the same time so this is safe
+            if(TextObjects[0].color.a >= 1f)
+            {
+                break;
+            }
+
+            yield return new WaitForFixedUpdate();
         }
     }
 
@@ -38,15 +53,12 @@ public class Transition : MonoBehaviour
 
     public void TransitionToPlanets()
     {
-        Debug.Log("GoingToPlanets");
         gameObject.GetComponent<Animator>().SetBool("PlanetTransition", true);
-
         StartCoroutine(FadeTextCoroutine());
     }
 
     public void TransitionToSettings()
     {
-        Debug.Log("GoingToSettings");
         gameObject.GetComponent<Animator>().SetBool("SettingsTransition", true);
         StartCoroutine(FadeTextCoroutine());
     }
@@ -54,7 +66,6 @@ public class Transition : MonoBehaviour
 
     public void TransitionToMainMenuFromPlanets()
     {
-        Debug.Log("GoingToMainMenu");
         gameObject.GetComponent<Animator>().SetBool("PlanetTransition", false);
         StartCoroutine(UnFadeTextCoroutine());
     }
@@ -62,7 +73,6 @@ public class Transition : MonoBehaviour
 
     public void TransitionToMainMenuFromSettings()
     {
-        Debug.Log("GoingToMainMenu");
         gameObject.GetComponent<Animator>().SetBool("SettingsTransition", false);
         StartCoroutine(UnFadeTextCoroutine());
     }
