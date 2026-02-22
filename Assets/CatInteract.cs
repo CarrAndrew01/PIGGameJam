@@ -44,7 +44,7 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         if (outlineImage != null)
         {
-            outlineImage.color = new Color(outlineImage.color.r, outlineImage.color.g, outlineImage.color.b, alpha);
+            outlineImage.color = new Color(startColour.r, startColour.g, startColour.b, alpha);
         }
     }
 }

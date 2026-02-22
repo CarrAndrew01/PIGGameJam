@@ -16,9 +16,10 @@ MonoBehaviour:
     isResettingTimeOnNewText: 1
     defaultEffectsMode: 0
     timeScale: 0
-    defaultBehaviorTags: []
+    defaultBehaviorTags:
+    - 
     defaultAppearanceTags:
-    - Wiggle
+    - wave
     defaultDisappearanceTags: []
     isAnimatingBehaviors: 1
     isAnimatingAppearances: 1
