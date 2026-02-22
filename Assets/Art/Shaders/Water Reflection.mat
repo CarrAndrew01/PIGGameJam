@@ -76,11 +76,11 @@ Material:
     m_Floats:
     - _Alpha: 0.5
     - _EnableExternalAlpha: 0
-    - _RefractionStrength: 0.3
-    - _WaterSpeed: 0.025
+    - _RefractionStrength: 0.35
+    - _WaterSpeed: 0.02
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.6179246, g: 1, b: 0.9811126, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
