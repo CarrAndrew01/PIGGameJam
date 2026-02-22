@@ -171,7 +171,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialPosition: {x: 0, y: 0}
-  movementDirection: {x: 0, y: 0}
+  xMovementDirection: 0
+  yMovementDirection: 0
   failCount: 0
   pauseTimer: 0
   numberOfFailsBeforeEscape: 2
@@ -185,6 +186,7 @@ MonoBehaviour:
   previewBobAmplitude: 0.1
   previewBobFrequency: 1
   previewTransform: {fileID: 4229889756064850405}
+  spriteTransform: {fileID: 9162294988675992924}
 --- !u!1 &5779337439755777493
 GameObject:
   m_ObjectHideFlags: 0

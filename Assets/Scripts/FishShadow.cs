@@ -16,6 +16,9 @@ public class FishShadow : MonoBehaviour
     [ReadOnly] public bool IsEscaping { get; private set; } = false; // Whether the fish is currently escaping, which will trigger it to stop moving and start shrinking until it disappears
     [ReadOnly] public bool pauseTimer = false; // Whether the leave timer should be paused
     [ShowInInspector, ReadOnly] private float leaveTimer = 0f; // Timer to track how long the fish has been present
+    private Vector2 targetDirection;
+    private float directionChangeTimer = 0f;
+
 
     // Variables
     [Header("Settings")]
@@ -28,6 +31,8 @@ public class FishShadow : MonoBehaviour
     public float verticalMovementMax = 0.2f; // The maximum vertical movement for the fish
     public float fishShrinkDuration = 0.5f;
     public float fishGrowDuration = 2f;
+    public float directionChangeInterval = 2f; // seconds between direction changes
+    public float directionLerpSpeed = 2f; // speed of interpolation
 
     [Header("Fish Preview")]
     public Vector3 previewOffset = new Vector3(0f, 0.5f, 0f); // Offset for the fish preview from the fish shadow's position
@@ -37,6 +42,7 @@ public class FishShadow : MonoBehaviour
     // Components
     [Header("Components")]
     public Transform previewTransform;
+    public Transform spriteTransform;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -71,6 +77,9 @@ public class FishShadow : MonoBehaviour
 
         // Start the grow animation
         StartCoroutine(GrowFromZero());
+
+        // Set the initial direction
+        targetDirection = movementDirection = Vector2.right;
     }
 
     // Update is called once per frame
@@ -79,8 +88,14 @@ public class FishShadow : MonoBehaviour
         if (IsEscaping) return; // If the fish is escaping, don't bother updating movement
 
         BobPreview();
-        DetermineMovementDirection();
-        transform.position += (Vector3)movementDirection * movementSpeed * Time.deltaTime;
+        HandleDirectionChange();
+        // Smoothly interpolate movementDirection toward targetDirection
+        movementDirection = Vector2.Lerp(movementDirection, targetDirection, directionLerpSpeed * Time.deltaTime);
+        Vector3 movementVector = (Vector3)movementDirection * movementSpeed * Time.deltaTime;
+        // Move fish horizontally
+        transform.position += new Vector3(movementVector.x, 0f, 0f);
+        // Move sprite vertically
+        spriteTransform.localPosition = new Vector3(0f, spriteTransform.localPosition.y + movementVector.y, 0f);
 
         // Count up the leave timer and check if the fish should leave on its own
         if (!pauseTimer)
@@ -140,17 +155,21 @@ public class FishShadow : MonoBehaviour
             previewTransform.localPosition = previewOffset + new Vector3(0f, bobbingOffset, 0f);
         }
     }
-    private void DetermineMovementDirection()
+    private void HandleDirectionChange()
     {
-        // Randomly change direction at intervals, and also ensure the fish generally stays within its movement radius
-        if (Vector2.Distance(transform.position, initialPosition) > movementRadius)
+        directionChangeTimer += Time.deltaTime;
+        if (directionChangeTimer >= directionChangeInterval)
         {
-            // If we're outside the movement radius, head back towards the initial position
-            movementDirection = (initialPosition - (Vector2)transform.position).normalized;
-        }
-        else if (Random.value < 0.01f) // Random chance to change direction
-        {
-            movementDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-verticalMovementMax, verticalMovementMax)).normalized;
+            directionChangeTimer = 0f;
+            // If outside movement radius, head back toward initial position
+            if (Vector2.Distance(transform.position, initialPosition) > movementRadius)
+            {
+                targetDirection = (initialPosition - (Vector2)transform.position).normalized;
+            }
+            else
+            {
+                targetDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(-verticalMovementMax, verticalMovementMax)).normalized;
+            }
         }
     }
 

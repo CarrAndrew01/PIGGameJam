@@ -13,7 +13,13 @@ public class Popup : MonoBehaviour
     [ReadOnly] public bool isAnimating = false;
     [ReadOnly] public bool isSwapping = false;
     public bool ReadyForInput => !isAnimating && !isSwapping;
-    
+
+    private bool isPoppingIn = false;
+    private bool isPoppingOut = false;
+    private bool willClose = false; // If pop-out has been triggered and we are waiting for the animation to finish before actually closing
+    private bool willOpen = false; // ^ same but for pop-in
+    private bool willSwap = false; // ^ same but for swapping menus
+
     // Variables
     [Header("Settings")]
     public bool destroyCanvasOnPopOut = true; // Whether to destroy the child canvas when popping out
@@ -30,6 +36,7 @@ public class Popup : MonoBehaviour
     public Canvas childCanvas;
 
     private CanvasGroup windowCanvasGroup;
+    private GameObject nextMenuPrefab; // Used when will open or will swap is true
 
 
     void Awake()
@@ -69,12 +76,42 @@ public class Popup : MonoBehaviour
         windowCanvasGroup.alpha = 0f;
     }
 
+    void Update()
+    {
+        if (!isAnimating && !isSwapping)
+        {
+            if (willClose)
+            {
+                willClose = false;
+                TriggerPopOut();
+            }
+            else if (willOpen)
+            {
+                willOpen = false;
+                TriggerPopIn(nextMenuPrefab);
+            }
+            else if (willSwap)
+            {
+                willSwap = false;
+                StartCoroutine(SwapMenu(nextMenuPrefab));
+            }
+        }
+    }
+
     // Methods
     public GameObject TriggerPopIn(GameObject canvasPrefab, float durationOverride = -1f)
     {
+        // First check if we are currently popping out or swapping, and if so, set a flag to pop in as soon as we are done
+        if (isAnimating && (isPoppingOut || isSwapping))
+        {
+            willOpen = true;
+            nextMenuPrefab = canvasPrefab;
+            return null;
+        }
         if (childCanvas != null || isPoppedIn || isAnimating)
             return null;
         // Pops in the popup with the given prefab as a child canvas
+        isPoppingIn = true;
         isAnimating = true;
         StartCoroutine(ShowPopup(canvasPrefab, durationOverride > 0f ? durationOverride : popInDuration));
         return childCanvas.gameObject;
@@ -82,9 +119,17 @@ public class Popup : MonoBehaviour
 
     public void TriggerPopOut(float durationOverride = -1f)
     {
+        // First check if we are currently popping in or swapping, and if so, set a flag to pop out as soon as we are done
+        if (isAnimating && (isPoppingIn || isSwapping))
+        {
+            willClose = true;
+            return;
+        }
+
         if (!isPoppedIn || isAnimating)
             return;
         // Pops out the popup, which will also destroy the child canvas if destroyCanvasOnPopOut is true
+        isPoppingOut = true;
         isAnimating = true;
         StartCoroutine(HidePopup(durationOverride > 0f ? durationOverride : popOutDuration));
     }
@@ -120,6 +165,15 @@ public class Popup : MonoBehaviour
         isSwapping = false;
     }
 
+    private void ResetAnchorPoints()
+    {
+        // Resets the anchor points of the window rect to be centered, so that scaling animations will work correctly
+        windowRect.anchorMin = new Vector2(0.5f, 0.5f);
+        windowRect.anchorMax = new Vector2(0.5f, 0.5f);
+        windowRect.pivot = new Vector2(0.5f, 0.5f);
+        windowRect.anchoredPosition = Vector2.zero;
+    }
+
     // Coroutines for showing and hiding the popup
     private IEnumerator ShowPopup(GameObject canvasPrefab, float duration)
     {
@@ -149,6 +203,7 @@ public class Popup : MonoBehaviour
         windowRect.localScale = new Vector3(1f, 1f, 1f); // Ensure it's fully stretched at the end
         windowCanvasGroup.alpha = 1f; // Ensure fully visible
         isPoppedIn = true;
+        isPoppingIn = false;
         isAnimating = false;
     }
     [ContextMenu("Test Pop In")]
@@ -174,6 +229,7 @@ public class Popup : MonoBehaviour
         windowRect.localScale = new Vector3(1f, 1f, 1f); // Ensure it's fully stretched at the end
         windowCanvasGroup.alpha = 1f; // Ensure fully visible
         isPoppedIn = true;
+        isPoppingIn = false;
         isAnimating = false;
     }
 
@@ -205,6 +261,9 @@ public class Popup : MonoBehaviour
             childCanvas = null;
         }
         isPoppedIn = false;
+        isPoppingOut = false;
         isAnimating = false;
+
+        ResetAnchorPoints();
     }
 }

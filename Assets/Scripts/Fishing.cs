@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 /// <summary>
 /// Lets the player trigger the fishing minigame for now.
@@ -11,23 +12,37 @@ public class Fishing : MonoBehaviour
 
     // State
     [Header("State")]
-    [ShowInInspector, ReadOnly] private bool playerInRange = false; // Whether the player is currently in range to fish
-    [ReadOnly] public FishShadow currentFishShadow; // The fish shadow the player is currently trying to catch, if any
-    public bool CanFish => playerInRange && currentFishShadow != null;
-    public CaughtFish FishToCatch => currentFishShadow.fishData;
+    public static bool CanFish => (IsMinigameActive == false || Instance.isCharging) && Instance.CurrentBobber == null;
+    public static bool IsFishing => Instance.CurrentBobber != null;
+    public static bool IsMinigameActive => GameManager.MinigamePopup.childCanvas != null;
+    public static FishShadow CurrentFishShadow => Instance.CurrentBobber != null ? Instance.CurrentBobber.currentFishShadow : null;
+    public static CaughtFish FishToCatch => Instance.CurrentBobber.FishToCatch;
+
+    private bool isCharging = false;
+
+    [Header("Variables")]
+    public float chargeSpeed = 1.5f; // How long it takes to fully charge the throw, in seconds
+    public float ThrowStrength { get; private set; } // How strong the player throws the bobber, which will affect how far it goes. TODO: Make this variable based on how long the player holds the button
+
 
     [Header("Input Actions")]
     public InputActionReference fishAction; // expects Button
 
     [Header("Window Settings")]
-    public Vector3 minigamePopupPosition = new Vector2(150f, 0f); // Offset for the minigame popup from the player's position
+    public Vector2 castingPopupPosition = new Vector2(0f, 0f);
+    public Vector2 minigamePopupPosition = new Vector2(150f, 0f); // Offset for the minigame popup from the player's position
 
     [Header("Components")]
+    public LineRenderer castLineRenderer; // Point from which the bobber is thrown
+    public Bobber CurrentBobber { get; private set; } = null; // The bobber that is currently in the water, if any
+
     private Transform playerTransform;
+    private Transform castPointTransform;
 
     [Header("Prefabs")]
+    public GameObject castingPrefab;
     public GameObject fishingMinigamePrefab; // Prefab for the fishing minigame popup
-
+    public GameObject bobberPrefab; // Prefab for the bobber that is thrown when fishing
 
     void Awake()
     {
@@ -40,63 +55,110 @@ public class Fishing : MonoBehaviour
         Instance = this;
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        castPointTransform = castLineRenderer.transform;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void Start()
     {
-        if (other.CompareTag("Fish"))
-        {
-            Debug.Log("Player entered fish trigger");
-            playerInRange = true;
-            currentFishShadow = other.GetComponent<FishShadow>();
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Fish"))
-        {
-            Debug.Log("Player exited fish trigger");
-            playerInRange = false;
-            currentFishShadow = null;
-        }
+        // Ensure the line renderer is initially disabled
+        castLineRenderer.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Start charging on press
         if (fishAction.action.WasPressedThisFrame())
         {
             if (CanFish)
             {
-                if (currentFishShadow.IsEscaping)
-                {
-                    Debug.Log("Tried to fish but the fish is already escaping");
-                    return;
-                }
+                isCharging = true;
+                ThrowStrength = 0f;
 
-                Debug.Log("Fish button pressed while within range, triggering minigame popup");
-                // Pause the fish's leave timer while the minigame is active
-                currentFishShadow.BeginFishing();
+                // Start casting in minigame popup while charging
+                GameManager.TriggerPopIn(GameManager.MinigamePopup, castingPrefab);
+            }
+        }
+        // Charging logic
+        if (isCharging)
+        {
+            ThrowStrength += Time.deltaTime / chargeSpeed;
+            if (ThrowStrength > 1f) ThrowStrength = 1f;
+        }
+        // Release to throw
+        if (isCharging && fishAction.action.WasReleasedThisFrame())
+        {
+            isCharging = false;
+            GameManager.TriggerPopOut(GameManager.MinigamePopup);
 
-                // Trigger the fishing minigame popup
-                GameManager.TriggerPopIn(GameManager.MinigamePopup, fishingMinigamePrefab);
-                FindScreenSide();
+            Debug.Log($"Fish button released, throwing bobber with strength {ThrowStrength}");
+            GameObject bobberObj = Instantiate(bobberPrefab, castPointTransform.position, Quaternion.identity);
+            CurrentBobber = bobberObj.GetComponent<Bobber>();
+            CurrentBobber.Init(castPointTransform, throwStrength: ThrowStrength);
+            castLineRenderer.enabled = true; // Enable the line renderer when the bobber is thrown
+
+            ThrowStrength = 0f;
+        }
+        else if (!CanFish && Instance.CurrentBobber != null && fishAction.action.WasPressedThisFrame())
+        {
+            Debug.Log("Fish button pressed while bobber is in water, trying to reel it in");
+            if (!IsMinigameActive)
+            {
+                ReelInCurrentBobber();
             }
             else
             {
-                Debug.Log("Fish button pressed but player is not in range or there is no fish shadow");
+                Debug.Log("Fish button pressed but minigame is already active.");
             }
+        }
+
+        // If the bobber is out, add point to line renderer
+        if (CurrentBobber != null)
+        {
+            castLineRenderer.SetPosition(0, castPointTransform.position);
+            castLineRenderer.SetPosition(1, CurrentBobber.lineAttachPoint.position);
         }
     }
 
-    void FindScreenSide()
+    // Static methods
+    public static void HideCastLine()
+    {
+        Instance.castLineRenderer.enabled = false;
+    }
+    public static void ReelInCurrentBobber()
+    {
+        if (Instance.CurrentBobber != null)
+        {
+            Instance.CurrentBobber.BeginReelIn();
+        }
+    }
+    public static void StartFishingMinigame()
+    {
+        if (CurrentFishShadow != null)
+        {
+            // Begin fishing
+            CurrentFishShadow.BeginFishing();
+
+            // Trigger the fishing minigame popup
+            GameManager.TriggerPopIn(GameManager.MinigamePopup, Instance.fishingMinigamePrefab);
+            FindScreenSide();
+        }
+    }
+    public static void EndFishingMinigame()
+    {
+        if (Instance.CurrentBobber != null)
+        {
+            Instance.CurrentBobber.isMinigameActive = false;
+        }
+    }
+
+    public static void FindScreenSide()
     {
         // Grab the rect of the minigame popup for later use
         RectTransform minigamePopupRectTransform = GameManager.MinigamePopup.windowRect;
 
         // Get the player's position on the screen
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(playerTransform.position);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(Instance.playerTransform.position);
         float screenWidth = Screen.width;
 
         // Determine which side of the screen the player is on
@@ -107,7 +169,7 @@ public class Fishing : MonoBehaviour
             minigamePopupRectTransform.anchorMin = new Vector2(1f, 0.5f);
             minigamePopupRectTransform.anchorMax = new Vector2(1f, 0.5f);
             minigamePopupRectTransform.pivot = new Vector2(1f, 0.5f); // Match pivot to anchor
-            minigamePopupRectTransform.anchoredPosition = new Vector2(-minigamePopupPosition.x, minigamePopupPosition.y);
+            minigamePopupRectTransform.anchoredPosition = new Vector2(-Instance.minigamePopupPosition.x, Instance.minigamePopupPosition.y);
         }
         else
         {
@@ -116,7 +178,7 @@ public class Fishing : MonoBehaviour
             minigamePopupRectTransform.anchorMin = new Vector2(0f, 0.5f);
             minigamePopupRectTransform.anchorMax = new Vector2(0f, 0.5f);
             minigamePopupRectTransform.pivot = new Vector2(0f, 0.5f); // Match pivot to anchor
-            minigamePopupRectTransform.anchoredPosition = minigamePopupPosition;
+            minigamePopupRectTransform.anchoredPosition = Instance.minigamePopupPosition;
         }
     }
 }

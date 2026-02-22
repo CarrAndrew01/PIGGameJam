@@ -102,7 +102,7 @@ public class Stardew : MonoBehaviour
     void Awake()
     {
         // Grab the current fish shadow from the Fishing singleton (because if it moves out of the player collider it will cause problems)
-        currentFishShadow = Fishing.Instance.currentFishShadow;
+        currentFishShadow = Fishing.CurrentFishShadow;
     } 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -119,7 +119,7 @@ public class Stardew : MonoBehaviour
         wriggleInterval = Random.Range(0.15f, 0.5f);
 
         // Grab the basic fish type from the current fish shadow
-        fish = Fishing.Instance.FishToCatch.fish;
+        fish = Fishing.FishToCatch.fish;
         if (fish == null)
         {
             // Grab default fish from Resources if not set for some reason
@@ -132,7 +132,7 @@ public class Stardew : MonoBehaviour
             fishImage.sprite = fish.sprite;
 
         // Grab the full caught fish data for when we successfully catch the fish
-        caughtFish = Fishing.Instance.FishToCatch;
+        caughtFish = Fishing.FishToCatch;
 
         amountInCatch = Random.Range(fish.minAmount, fish.maxAmount + 1); // +1 because Random.Range is exclusive of the upper bound
 
@@ -365,6 +365,9 @@ public class Stardew : MonoBehaviour
                 GameManager.AddFishToInventory(extraFish);
             }
             GameManager.TriggerPopOut(GameManager.MinigamePopup);
+
+            // Reel in bobber
+            Fishing.ReelInCurrentBobber();
         }
         else if (caughtProgress <= -1f)
         {
@@ -373,6 +376,7 @@ public class Stardew : MonoBehaviour
             // Increment the fail count for the fish shadow and unpause its leave timer
             currentFishShadow.AddFail();
             currentFishShadow.EndFishing();
+            Fishing.EndFishingMinigame();
 
             // Trigger any escape animations or logic here
             GameManager.TriggerPopOut(GameManager.MinigamePopup);

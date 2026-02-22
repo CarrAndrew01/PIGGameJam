@@ -22,12 +22,13 @@ public class Environment : MonoBehaviour
     public string environmentName;
     public List<FishCatchInfo> fishTypes; // List of different fish types that can be caught in this environment
     public bool doesSpawnFish = true; // Whether this environment should spawn fish shadows
+    public float waterHeight = -3.5f;
+
 
     [Header("Fish Spawn Settings")]
     public float minFishSpawnInterval = 30f; // Minimum time between fish spawns (seconds)
     public float maxFishSpawnInterval = 60f; // Maximum time between fish spawns (seconds)
     public float fishSpawnRadius = 5f; // Radius around the environment's position where fish shadows can spawn
-    public float fishSpawnHeight = -3.5f;
 
     [Header("Components")]
 
@@ -36,6 +37,7 @@ public class Environment : MonoBehaviour
 
     // Properties
     public static string Name => CurrentEnvironment != null ? CurrentEnvironment.environmentName : "Unknown Environment";
+    public static float WaterHeight => CurrentEnvironment != null ? CurrentEnvironment.waterHeight : 0f;
 
     void Awake()
     {
@@ -100,7 +102,7 @@ public class Environment : MonoBehaviour
     {
         // Just grabs a random x offset within spawn radius for spawning
         float randomX = Random.Range(-fishSpawnRadius, fishSpawnRadius);
-        return transform.position + new Vector3(randomX, fishSpawnHeight, 0f);
+        return transform.position + new Vector3(randomX, waterHeight, 0f);
     }
 
     // Static Methods
