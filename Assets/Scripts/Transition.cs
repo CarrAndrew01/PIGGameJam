@@ -50,7 +50,6 @@ public class Transition : MonoBehaviour
     }
 
 
-
     public void TransitionToPlanets()
     {
         gameObject.GetComponent<Animator>().SetBool("PlanetTransition", true);
@@ -63,13 +62,11 @@ public class Transition : MonoBehaviour
         StartCoroutine(FadeTextCoroutine());
     }
 
-
     public void TransitionToMainMenuFromPlanets()
     {
         gameObject.GetComponent<Animator>().SetBool("PlanetTransition", false);
         StartCoroutine(UnFadeTextCoroutine());
     }
-
 
     public void TransitionToMainMenuFromSettings()
     {

@@ -818,6 +818,8 @@ MonoBehaviour:
   hookColor: {r: 0.11764707, g: 0.16470589, b: 0.37254903, a: 1}
   hookEdgeOffset: -0.03
   bounceFactor: 0.5
+  pullForceRange: 1.5
+  pullForce: 1.5
   fishMaxVelocity: 0.4
   fishMinMoveDistance: 0.05
   fishMaxMoveDistance: 0.4
@@ -833,3 +835,5 @@ MonoBehaviour:
   catchImage: {fileID: 5857738689423441747}
   successImage: {fileID: 7645321926643288664}
   fish: {fileID: 11400000, guid: 3cc61a6697ba7d34f8b9bc2a60e7f425, type: 2}
+  canCatch: 1
+  canEscape: 1
