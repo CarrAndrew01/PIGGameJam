@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public Image outlineImage;
+    public Image pointerImage;
     Color startColour;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,6 +46,10 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         if (outlineImage != null)
         {
             outlineImage.color = new Color(startColour.r, startColour.g, startColour.b, alpha);
+        }
+        if (pointerImage != null)
+        {
+            pointerImage.color = new Color(startColour.r, startColour.g, startColour.b, alpha);
         }
     }
 }
