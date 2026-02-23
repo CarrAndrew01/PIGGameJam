@@ -291,6 +291,9 @@ MonoBehaviour:
   minThrowVelocity: {x: 4, y: 3}
   maxThrowVelocity: {x: 10, y: 5}
   throwAngle: 45
+  hookedVelocity: 1
+  distanceToRetrieve: 0.2
+  hookedOffset: -0.16
   drag: 0.1
   gravity: 9.8
   waterResistance: 0.5
@@ -299,6 +302,7 @@ MonoBehaviour:
   bobBeginWait: 0.5
   bobbingAmplitude: 0.04
   bobbingFrequency: 1
+  bobbingResetSpeed: 3
   spriteRenderer: {fileID: 3721615812453801434}
   waterMaskTransform: {fileID: 7018410947532441247}
   fishTrigger: {fileID: 4727599490044000982}
