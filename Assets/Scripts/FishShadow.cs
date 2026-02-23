@@ -18,6 +18,7 @@ public class FishShadow : MonoBehaviour
     [ShowInInspector, ReadOnly] private float leaveTimer = 0f; // Timer to track how long the fish has been present
     private Vector2 targetDirection;
     private float directionChangeTimer = 0f;
+    public bool IsHooked { get; private set; } = false; // Whether the fish is currently hooked by the bobber
 
 
     // Variables
@@ -29,10 +30,24 @@ public class FishShadow : MonoBehaviour
     public float movementRadius = 2f; // How far from its initial position the fish will move
     public float movementSpeed = 1f; // How fast the fish moves
     public float verticalMovementMax = 0.2f; // The maximum vertical movement for the fish
+
+    [Header("Vertical Limits")]
+    public float minHeight = float.NegativeInfinity; // Minimum world Y for the sprite
+    public float maxHeight = float.PositiveInfinity; // Maximum world Y for the sprite
+
+    [Header("Hooked Movement")]
+    public float hookedRadiusMult = 1.5f; // Multiplies movementRadius when hooked
+    public float hookedMovementSpeed = 4f;
+    public float hookedDirectionMult = 2f; // Multiplies the randomness of the direction changes when hooked to make it more erratic
+
+    [Header("Shrink/Grow")]
     public float fishShrinkDuration = 0.5f;
     public float fishGrowDuration = 2f;
+
+    [Header("Direction Change")]
     public float directionChangeInterval = 2f; // seconds between direction changes
     public float directionLerpSpeed = 2f; // speed of interpolation
+
 
     [Header("Fish Preview")]
     public Vector3 previewOffset = new Vector3(0f, 0.5f, 0f); // Offset for the fish preview from the fish shadow's position
@@ -44,11 +59,14 @@ public class FishShadow : MonoBehaviour
     public Transform previewTransform;
     public Transform spriteTransform;
 
+    private Transform shipTransform;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // Get the initial position
         initialPosition = transform.position;
+        shipTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         // Generate fish data for this shadow.
         Fish fish = Environment.GetRandomFish();
@@ -91,11 +109,18 @@ public class FishShadow : MonoBehaviour
         HandleDirectionChange();
         // Smoothly interpolate movementDirection toward targetDirection
         movementDirection = Vector2.Lerp(movementDirection, targetDirection, directionLerpSpeed * Time.deltaTime);
-        Vector3 movementVector = (Vector3)movementDirection * movementSpeed * Time.deltaTime;
+
+        float currentMovementSpeed = IsHooked ? hookedMovementSpeed : movementSpeed;
+        Vector3 movementVector = (Vector3)movementDirection * currentMovementSpeed * Time.deltaTime;
+
         // Move fish horizontally
         transform.position += new Vector3(movementVector.x, 0f, 0f);
-        // Move sprite vertically
-        spriteTransform.localPosition = new Vector3(0f, spriteTransform.localPosition.y + movementVector.y, 0f);
+        // Move sprite vertically and clamp to min/max world heights
+        float newLocalY = spriteTransform.localPosition.y + movementVector.y;
+        float worldY = transform.position.y + newLocalY;
+        float clampedWorldY = Mathf.Clamp(worldY, minHeight, maxHeight);
+        float clampedLocalY = clampedWorldY - transform.position.y;
+        spriteTransform.localPosition = new Vector3(0f, clampedLocalY, 0f);
 
         // Count up the leave timer and check if the fish should leave on its own
         if (!pauseTimer)
@@ -112,10 +137,12 @@ public class FishShadow : MonoBehaviour
     public void BeginFishing()
     {
         pauseTimer = true; // Pause the leave timer while the player is trying to catch the fish
+        IsHooked = true;
     }
     public void EndFishing()
     {
         pauseTimer = false; // Unpause the leave timer when the player is done trying to catch the fish
+        IsHooked = false;
     }
     public void ResetLeaveTimer()
     {
@@ -157,14 +184,26 @@ public class FishShadow : MonoBehaviour
     }
     private void HandleDirectionChange()
     {
+        // Shift the initial direction based on the position of the player ship when hooked, as well as decreasing the radius based on Fishing.reelInFactor
+        Vector2 radiusPoint = initialPosition;
+        float currentRadius = movementRadius;
+        if (IsHooked && shipTransform != null)
+        {
+            float reelInFactor = Fishing.reelInFactor;
+            radiusPoint = Vector2.Lerp(initialPosition, (Vector2)shipTransform.position, reelInFactor);
+            currentRadius = Mathf.Lerp(movementRadius * hookedRadiusMult, movementRadius * 0.5f, reelInFactor);
+        }
+        float currentDirectionChangeInterval = IsHooked ? directionChangeInterval / hookedDirectionMult : directionChangeInterval;
+
         directionChangeTimer += Time.deltaTime;
-        if (directionChangeTimer >= directionChangeInterval)
+        if (directionChangeTimer >= currentDirectionChangeInterval)
         {
             directionChangeTimer = 0f;
-            // If outside movement radius, head back toward initial position
-            if (Vector2.Distance(transform.position, initialPosition) > movementRadius)
+            // If either the object or its sprite are outside movement radius, head back toward initial position
+            if (Vector2.Distance(transform.position, radiusPoint) > currentRadius
+                || (spriteTransform != null && Vector2.Distance(spriteTransform.position, radiusPoint) > currentRadius))
             {
-                targetDirection = (initialPosition - (Vector2)transform.position).normalized;
+                targetDirection = (radiusPoint - (Vector2)transform.position).normalized;
             }
             else
             {
@@ -172,6 +211,43 @@ public class FishShadow : MonoBehaviour
             }
         }
     }
+
+#if UNITY_EDITOR
+    // Draw movement radius when selected in the editor
+    void OnDrawGizmosSelected()
+    {
+        // Use initialPosition when playing, otherwise use current transform position
+        Vector3 center = Application.isPlaying ? new Vector3(initialPosition.x, initialPosition.y, transform.position.z) : transform.position;
+
+        // Base radius
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(center, movementRadius);
+
+        // Show hooked radius if different
+        if (hookedRadiusMult != 1f)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(center, movementRadius * hookedRadiusMult);
+        }
+
+        // Draw min/max horizontal lines if finite
+        float currentRadius = movementRadius * (hookedRadiusMult != 0f ? hookedRadiusMult : 1f);
+        if (!float.IsInfinity(minHeight))
+        {
+            Vector3 left = new Vector3(center.x - currentRadius, minHeight, center.z);
+            Vector3 right = new Vector3(center.x + currentRadius, minHeight, center.z);
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(left, right);
+        }
+        if (!float.IsInfinity(maxHeight))
+        {
+            Vector3 left = new Vector3(center.x - currentRadius, maxHeight, center.z);
+            Vector3 right = new Vector3(center.x + currentRadius, maxHeight, center.z);
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(left, right);
+        }
+    }
+#endif
 
     // Coroutine to shrink the fish shadow before destroying it
     private IEnumerator ShrinkAndDestroy()

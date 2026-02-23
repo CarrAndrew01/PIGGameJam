@@ -17,10 +17,12 @@ public class Bobber : MonoBehaviour
     [ShowInInspector, ReadOnly]
     private bool isReelingIn = false;
     [ShowInInspector, ReadOnly]
+    private bool isHooked = false;
     private float timeInWater = 0f; // Tracks how long the bobber has been in water
     private float timeReelingIn = 0f;
+    private float currentWaterHeight = 0f; // The current height of the water, used for moving the water mask with fish shadows
+    private float currentSpriteOffset = 0f;
 
-    public CaughtFish FishToCatch => currentFishShadow.fishData;
     public bool isMinigameActive = false;
 
     // Variables
@@ -29,6 +31,7 @@ public class Bobber : MonoBehaviour
     public Vector2 maxThrowVelocity = new Vector2(1f, 3f); // Maximum velocity when throwing the bobber
     public float throwAngle = 45f; // Angle at which the bobber is thrown (degrees)
     // TODO: Maybe this should be changeable ^^^
+    public float hookedVelocity = 1f; // How fast the bobber moves towards the fish shadow when a fish is hooked
 
     [Header("Movement Settings")]
     public float drag = 0.1f; // How much the bobber slows down over time when in the air
@@ -50,6 +53,11 @@ public class Bobber : MonoBehaviour
 
     private Transform playerShipTransform;
 
+    void Start()
+    {
+        currentWaterHeight = Environment.WaterHeight;
+    }
+
     public void Init(Transform ship, float throwStrength, float direction = 1f)
     {
         playerShipTransform = ship;
@@ -68,10 +76,12 @@ public class Bobber : MonoBehaviour
                     timeInWater = bobBeginWait;
             }
             ApplyBobbing();
+            CheckHooked();
         }
         else
         {
             timeInWater = 0f;
+            ResetBobbing();
         }
     }
 
@@ -106,7 +116,7 @@ public class Bobber : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Fish"))
+        if (other.CompareTag("Fish") && Fishing.LastFishShadow == null)
         {
             Debug.Log("Bobber entered fish trigger");
             bobberInRange = true;
@@ -122,7 +132,7 @@ public class Bobber : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Fish"))
+        if (other.CompareTag("Fish") && other.GetComponent<FishShadow>() == currentFishShadow)
         {
             Debug.Log("Bobber exited fish trigger");
             bobberInRange = false;
@@ -141,6 +151,7 @@ public class Bobber : MonoBehaviour
         if (fishTrigger.enabled)
             fishTrigger.enabled = false;
 
+        isHooked = false; // Unhook the bobber when reeling in, so it doesn't get stuck on the water surface or something
         timeReelingIn += Time.fixedDeltaTime;
         // Move towards the player ship, and destroy when close enough
         Vector3 directionToShip = (playerShipTransform.position - transform.position).normalized;
@@ -165,6 +176,23 @@ public class Bobber : MonoBehaviour
         // Calculate the velocity vector based on the angle (I stole this from google)
         currentVelocity = new Vector2(Mathf.Cos(angleRad) * velocityX * direction, Mathf.Sin(angleRad) * velocityY);
     }
+    private void CheckHooked()
+    {
+        bool shouldBeHooked = Fishing.LastFishShadow != null && Fishing.LastFishShadow.IsHooked;
+        if (isHooked != shouldBeHooked)
+        {
+            if (shouldBeHooked)
+            {
+                isHooked = true;
+                // Snap bobber to water height
+                transform.position = new Vector3(transform.position.x, Environment.WaterHeight, transform.position.z);
+            }
+            else
+            {
+                isHooked = false;
+            }
+        }
+    }
     private void CheckIfInWater()
     {
         // Check if the bobber is below the water height of the current environment
@@ -183,12 +211,34 @@ public class Bobber : MonoBehaviour
         float lerpTime = Mathf.Clamp01(timeInWater / bobBeginWait);
         float currentAmplitude = Mathf.Lerp(0f, bobbingAmplitude, lerpTime);
         float bobbingOffset = Mathf.Sin(Time.time * bobbingFrequency) * currentAmplitude;
-        spriteRenderer.transform.localPosition = new Vector3(0f, bobbingOffset, 0f);
+        spriteRenderer.transform.localPosition = new Vector3(0f, bobbingOffset + currentSpriteOffset, 0f);
+    }
+    private void ResetBobbing()
+    {
+        // Simply begin lerping the sprite back to the usual position so it reeling in looks better
+        spriteRenderer.transform.localPosition = Vector3.Lerp(spriteRenderer.transform.localPosition, Vector3.zero, Time.deltaTime * 1f);
+
+        // Also lerp the current sprite and water heights back to the usual
+        currentSpriteOffset = Mathf.Lerp(currentSpriteOffset, 0f, Time.deltaTime * 1f);
+        currentWaterHeight = Mathf.Lerp(currentWaterHeight, Environment.WaterHeight, Time.deltaTime * 1f);
+
+        if (Vector3.Distance(spriteRenderer.transform.localPosition, Vector3.zero) < 0.01f)
+        {
+            spriteRenderer.transform.localPosition = Vector3.zero;
+            currentSpriteOffset = 0f;
+            currentWaterHeight = Environment.WaterHeight;
+        }
     }
     private void MoveWaterMask()
     {
         // Keep the water mask at the waterline
-        waterMaskTransform.position = new Vector3(waterMaskTransform.position.x, Environment.WaterHeight, waterMaskTransform.position.z);
+        if (isHooked && Fishing.LastFishShadow != null)
+        {
+            // If a fish is hooked, we want the water mask to follow the height of the fish shadow's sprite instead
+            currentWaterHeight = Fishing.LastFishShadow.spriteTransform.position.y;
+        }
+
+        waterMaskTransform.position = new Vector3(waterMaskTransform.position.x, currentWaterHeight, waterMaskTransform.position.z);
     }
     private void ApplyVelocity()
     {
@@ -210,7 +260,30 @@ public class Bobber : MonoBehaviour
     private void ApplyBuoyancy()
     {
         float targetY = Environment.WaterHeight;
-        float newY = Mathf.MoveTowards(transform.position.y, targetY, bouyancyVelocity * Time.fixedDeltaTime);
-        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+        float newX = transform.position.x, newY = transform.position.y;
+
+        if (isHooked && Fishing.LastFishShadow != null)
+        {
+            // If a fish is hooked, we want the bobber to be pulled towards the height of the fish shadow's sprite instead
+            targetY = Fishing.LastFishShadow.spriteTransform.localPosition.y;
+
+            // Move with hookedVelocity if hooked to simulate being pulled by the fish
+            newY = Mathf.MoveTowards(currentSpriteOffset, targetY, hookedVelocity * Time.fixedDeltaTime);
+
+            // Also move the whole bobber left or right with the fish shadow parent to simulate being pulled by the fish
+            newX = Mathf.MoveTowards(transform.position.x, Fishing.LastFishShadow.transform.position.x, hookedVelocity * Time.fixedDeltaTime);
+
+            transform.position = new Vector3(newX, transform.position.y, transform.position.z);
+            // Apply vertical offset to the sprite, making it follow the fish (visually)
+            currentSpriteOffset = newY;
+        }
+        else
+        {
+            // Usual bouyancy when not hooked
+            newY = Mathf.MoveTowards(transform.position.y, targetY, bouyancyVelocity * Time.fixedDeltaTime);
+
+            // Apply real vertical movement, to make the bobber go to actually touch the water and not just visually
+            transform.position = new Vector3(newX, newY, transform.position.z);
+        }
     }
 }

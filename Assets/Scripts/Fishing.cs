@@ -13,13 +13,14 @@ public class Fishing : MonoBehaviour
 
     // State
     [Header("State")]
-    public static bool CanFish => (IsMinigameActive == false || Instance.isCharging) && Instance.CurrentBobber == null;
+    public static bool CanFish => (IsMinigameActive == false || Instance.IsCharging) && Instance.CurrentBobber == null;
     public static bool IsFishing => Instance.CurrentBobber != null;
     public static bool IsMinigameActive => GameManager.MinigamePopup.childCanvas != null;
-    public static FishShadow CurrentFishShadow => Instance.CurrentBobber != null ? Instance.CurrentBobber.currentFishShadow : null;
-    public static CaughtFish FishToCatch => Instance.CurrentBobber.FishToCatch;
+    public static FishShadow LastFishShadow { get => Instance.lastFishShadow; set => Instance.lastFishShadow = value; }
+    public static float reelInFactor = 0f; // Set by the current minigame
+    public bool IsCharging { get; private set; } = false;
 
-    private bool isCharging = false;
+    private FishShadow lastFishShadow; // The last fish shadow that was hooked, used to prevent accidentally hooking a new fish shadow when reeling in the current one
 
     [Header("Variables")]
     public float chargeSpeed = 1.5f; // How long it takes to fully charge the throw, in seconds
@@ -75,7 +76,7 @@ public class Fishing : MonoBehaviour
         {
             if (CanFish)
             {
-                isCharging = true;
+                IsCharging = true;
                 ThrowStrength = 0f;
 
                 // Start casting in minigame popup while charging
@@ -83,15 +84,15 @@ public class Fishing : MonoBehaviour
             }
         }
         // Charging logic
-        if (isCharging)
+        if (IsCharging)
         {
             ThrowStrength += Time.deltaTime / chargeSpeed;
             if (ThrowStrength > 1f) ThrowStrength = 1f;
         }
         // Release to throw
-        if (isCharging && fishAction.action.WasReleasedThisFrame())
+        if (IsCharging && fishAction.action.WasReleasedThisFrame())
         {
-            isCharging = false;
+            IsCharging = false;
             GameManager.TriggerPopOut(GameManager.MinigamePopup);
 
             Debug.Log($"Fish button released, throwing bobber with strength {ThrowStrength}");
@@ -137,10 +138,11 @@ public class Fishing : MonoBehaviour
     }
     public static void StartFishingMinigame()
     {
-        if (CurrentFishShadow != null)
+        if (Instance.CurrentBobber.currentFishShadow != null)
         {
             // Begin fishing
-            CurrentFishShadow.BeginFishing();
+            LastFishShadow = Instance.CurrentBobber.currentFishShadow;
+            LastFishShadow.BeginFishing();
 
             // Trigger the fishing minigame popup
             GameManager.TriggerPopIn(GameManager.MinigamePopup, Instance.fishingMinigamePrefab);
@@ -149,10 +151,15 @@ public class Fishing : MonoBehaviour
     }
     public static void EndFishingMinigame()
     {
-        if (Instance.CurrentBobber != null)
+        // End fishing
+        if (LastFishShadow != null)
         {
             Instance.CurrentBobber.isMinigameActive = false;
+            LastFishShadow.EndFishing();
+            LastFishShadow = null;
         }
+
+        Fishing.reelInFactor = 0f; // Reset the reel in factor for the next catch
     }
 
     public static void FindScreenSide()

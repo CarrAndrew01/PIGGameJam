@@ -12,6 +12,7 @@ public class CastingSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        slider.value = Fishing.Instance.ThrowStrength;
+        if (Fishing.Instance.IsCharging)
+            slider.value = Fishing.Instance.ThrowStrength;
     }
 }

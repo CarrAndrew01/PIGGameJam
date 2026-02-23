@@ -25,7 +25,7 @@ public class Stardew : MonoBehaviour
 
     // State
     [Header("Fish State")]
-    [ShowInInspector,ReadOnly] private FishShadow currentFishShadow; // Reference to the current fish shadow we're trying to catch
+    [ShowInInspector,ReadOnly] private FishShadow stardewFishShadow; // Reference to the current fish shadow we're trying to catch
     [ShowInInspector, ReadOnly] private bool isCatching = false;
     [ShowInInspector, ReadOnly] private bool isReeling = false; // whether the player is currently pressing the reel button to move the catch slider up
     [ShowInInspector, ReadOnly] private FishState fishState = FishState.Struggling; // Whether the fish is currently up, down, or struggling
@@ -39,7 +39,6 @@ public class Stardew : MonoBehaviour
     private float currentHookVelocity = 0f; // ^ but for the catch slider
     private float wriggleTimer = 0f;
     private float wriggleInterval = 0.3f;
-
 
     // Variables
     [Header("Catching Settings")]
@@ -101,10 +100,14 @@ public class Stardew : MonoBehaviour
     private RectTransform sliderRect;
     [HideInInspector] public Fish fish; // Reference to the fish ScriptableObject, set when we create the Stardew instance in the scene
 
+    [Header("Debug")]
+    [SerializeField] private bool canCatch = true;
+    [SerializeField] private bool canEscape = true;
+
     void Awake()
     {
         // Grab the current fish shadow from the Fishing singleton (because if it moves out of the player collider it will cause problems)
-        currentFishShadow = Fishing.CurrentFishShadow;
+        stardewFishShadow = Fishing.LastFishShadow;
     } 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -122,7 +125,7 @@ public class Stardew : MonoBehaviour
         wriggleInterval = Random.Range(0.15f, 0.5f);
 
         // Grab the basic fish type from the current fish shadow
-        fish = Fishing.FishToCatch.fish;
+        fish = stardewFishShadow.fishData.fish;
         if (fish == null)
         {
             // Grab default fish from Resources if not set for some reason
@@ -135,7 +138,7 @@ public class Stardew : MonoBehaviour
             fishImage.sprite = fish.sprite;
 
         // Grab the full caught fish data for when we successfully catch the fish
-        caughtFish = Fishing.FishToCatch;
+        caughtFish = stardewFishShadow.fishData;
 
         amountInCatch = Random.Range(fish.minAmount, fish.maxAmount + 1); // +1 because Random.Range is exclusive of the upper bound
 
@@ -365,12 +368,12 @@ public class Stardew : MonoBehaviour
         caughtProgress = Mathf.Clamp(caughtProgress, -1f, 1f); // Clamp to either -1 (fully escaped) or 1 (fully caught)
 
         // Check for win/lose conditions
-        if (caughtProgress >= 1f)
+        if (caughtProgress >= 1f && canCatch)
         {
             fishState = FishState.Caught;
 
             // Tell the shadow fish
-            currentFishShadow.Catch();
+            stardewFishShadow.Catch();
 
             // Trigger any catch animations or logic here
             GameManager.AddFishToInventory(caughtFish);
@@ -390,13 +393,12 @@ public class Stardew : MonoBehaviour
             // Reel in bobber
             Fishing.ReelInCurrentBobber();
         }
-        else if (caughtProgress <= -1f)
+        else if (caughtProgress <= -1f && canEscape)
         {
             fishState = FishState.Escaped;
 
             // Increment the fail count for the fish shadow and unpause its leave timer
-            currentFishShadow.AddFail();
-            currentFishShadow.EndFishing();
+            stardewFishShadow.AddFail();
             Fishing.EndFishingMinigame();
 
             // Trigger any escape animations or logic here
@@ -406,6 +408,7 @@ public class Stardew : MonoBehaviour
         // Finally, update the success slider to show how close the player is to catching the fish
         float successValue = Mathf.InverseLerp(-1f, 1f, caughtProgress); // Convert caughtProgress to a 0-1 range for the slider
         successSlider.value = successValue;
+        Fishing.reelInFactor = successValue;
         if (caughtProgress > 0f)
             successImage.color = Color.Lerp(catchNeutralColor, catchSuccessColor, caughtProgress);
 
