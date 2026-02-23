@@ -10,6 +10,4 @@ public class PlanetSceneManager : MonoBehaviour
         //load the planet scene
         UnityEngine.SceneManagement.SceneManager.LoadScene(planetName);
     }
-
-    
 }
