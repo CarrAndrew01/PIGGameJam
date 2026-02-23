@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,9 @@ public class ShipMovement : MonoBehaviour
     // State
     public float currentVelocity = 0f; // Current speed of the ship, positive is right, negative is left
     private Vector2 inputDirection; // Direction of input, x is left/right, y is unused
+    public int LastDirection { get; private set; } = 1; // Either 1 (right) or -1 (left)
+    private Vector3 originalScale; // Original scale of the ship for flipping
+    private Coroutine spinCoroutine; // Reference to the current spin coroutine
 
     // Variables
     [Header("Movement Settings")]
@@ -18,6 +22,8 @@ public class ShipMovement : MonoBehaviour
     public float maxVelocity = 10f;
     [Range(0f, 1f)]
     public float bounceMultiplier = 0.5f; // How much velocity is kept when bouncing
+    public float spinDuration = 0.5f; // Duration of the spin animation when turning around
+    public float speedAffectSpinFactor = 0.02f; // (higher means faster spins at higher speeds)
 
     [Header("Bobbing Settings")]
     public float bobbingAmplitude = 0.1f;
@@ -38,6 +44,11 @@ public class ShipMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Start()
+    {
+        originalScale = spriteTransform.localScale;
     }
 
     // Update is called once per frame
@@ -73,6 +84,11 @@ public class ShipMovement : MonoBehaviour
     private void GetInput()
     {
         inputDirection = moveAction.action.ReadValue<Vector2>();
+        // If input direction changes from left to right or vice versa, start the spin animation
+        if (inputDirection.x > 0 && LastDirection == -1)
+            BeginSpin(1);
+        else if (inputDirection.x < 0 && LastDirection == 1)
+            BeginSpin(-1);
     }
 
     private void HandleMovement()
@@ -101,8 +117,38 @@ public class ShipMovement : MonoBehaviour
 
         // Scale shadow based on bobbing
         float shadowScale = Mathf.Lerp(shadowMax, shadowMin, (bobbingY + bobbingAmplitude) / (2 * bobbingAmplitude));
-        spriteShadow.localScale = new Vector3(shadowScale, .5f, 1f);
+        float shipScaleX = spriteTransform.localScale.x / originalScale.x; // Get the current horizontal scale factor (1 or -1)
+        spriteShadow.localScale = new Vector3(shadowScale * shipScaleX, .5f, 1f);
 
         spriteTransform.localPosition = new Vector3(0f, bobbingY, 0f);
+    }
+
+    private void BeginSpin(int direction)
+    {
+        LastDirection = direction;
+        if (spinCoroutine != null) StopCoroutine(spinCoroutine);
+        spinCoroutine = StartCoroutine(SpinShip());
+    }
+
+    // Coroutine to spin the ship around by scaling the x-axis to either -1 or 1
+    public IEnumerator SpinShip()
+    {
+        float affectedSpinDuration = spinDuration - (Mathf.Abs(currentVelocity) * speedAffectSpinFactor);
+        affectedSpinDuration = Mathf.Max(0f, affectedSpinDuration); // Ensure spin duration is not negative
+
+        float elapsed = 0f;
+        float startScaleX = spriteTransform.localScale.x;
+        float targetScaleX = originalScale.x * LastDirection; // Flip the scale to spin
+
+        while (elapsed < affectedSpinDuration)
+        {
+            elapsed += Time.deltaTime;
+            float newScaleX = Mathf.Lerp(startScaleX, targetScaleX, elapsed / affectedSpinDuration);
+            spriteTransform.localScale = new Vector3(newScaleX, spriteTransform.localScale.y, spriteTransform.localScale.z);
+            yield return null;
+        }
+
+        // Ensure final scale is set
+        spriteTransform.localScale = new Vector3(targetScaleX, spriteTransform.localScale.y, spriteTransform.localScale.z);
     }
 }

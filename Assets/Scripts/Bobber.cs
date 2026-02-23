@@ -50,10 +50,10 @@ public class Bobber : MonoBehaviour
 
     private Transform playerShipTransform;
 
-    public void Init(Transform ship, float throwStrength)
+    public void Init(Transform ship, float throwStrength, float direction = 1f)
     {
         playerShipTransform = ship;
-        ThrowBobber(throwStrength);
+        ThrowBobber(throwStrength, direction);
     }
 
     void Update()
@@ -152,7 +152,7 @@ public class Bobber : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void ThrowBobber(float throwStrength)
+    private void ThrowBobber(float throwStrength, float direction = 1f)
     {
         fishTrigger.enabled = false;
         // Lerp between min and max throw velocity based on strength
@@ -163,7 +163,7 @@ public class Bobber : MonoBehaviour
         float angleRad = throwAngle * Mathf.Deg2Rad;
 
         // Calculate the velocity vector based on the angle (I stole this from google)
-        currentVelocity = new Vector2(Mathf.Cos(angleRad) * velocityX, Mathf.Sin(angleRad) * velocityY);
+        currentVelocity = new Vector2(Mathf.Cos(angleRad) * velocityX * direction, Mathf.Sin(angleRad) * velocityY);
     }
     private void CheckIfInWater()
     {

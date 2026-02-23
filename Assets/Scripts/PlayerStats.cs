@@ -10,12 +10,13 @@ public enum StatType
 {
     catchSpeed,
     catchArea,
-    fishWeight,
-    hookGravity,
+    fishWeight,     // Mult for value effictively
+    hookGravity,    // Multiplier for down force of stardew game
     fishEscapeChance,
     fishStorage,
-    fishPreview,
+    fishPreview,    // Show fish over shadows
     fishSpawnInterval,
+    hookPullForce,   // Applies a blackhole-like effect to the hook -- this affects both the area and the force
 }
 
 /// <summary>

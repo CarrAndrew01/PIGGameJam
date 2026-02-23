@@ -818,6 +818,8 @@ MonoBehaviour:
   hookColor: {r: 0.11764707, g: 0.16470589, b: 0.37254903, a: 1}
   hookEdgeOffset: -0.03
   bounceFactor: 0.5
+  pullForceRange: 1.5
+  pullForce: 1.5
   fishMaxVelocity: 0.4
   fishMinMoveDistance: 0.05
   fishMaxMoveDistance: 0.4

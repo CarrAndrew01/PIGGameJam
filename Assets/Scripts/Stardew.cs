@@ -55,6 +55,8 @@ public class Stardew : MonoBehaviour
     public Color hookColor = Color.gray; // Color of the catch slider handle (the hook)
     public float hookEdgeOffset = 0.01f; // A slight nudge to make the hook stop at the edge (it wasn't perfectly flush for some reason)
     public float bounceFactor = 0.5f; // 0 = no bounce, 1 = perfect bounce
+    public float pullForceRange = 1.5f; // Multiplier for the range around the hook in which the blackhole effect applies
+    public float pullForce = 0.2f;
 
     // Catch properties that take into account player stats and upgrades
     public float CatchRate => catchRate * statCatchSpeed;
@@ -81,7 +83,7 @@ public class Stardew : MonoBehaviour
     private int amountInCatch = 1; // determines if extra fish are added if we successfully catch
 
     // Player stats that affect minigame
-    private float statCatchSpeed, statCatchArea, statFishWeight, statHookGravity, statFishEscapeRate;
+    private float statCatchSpeed, statCatchArea, statFishWeight, statHookGravity, statFishEscapeRate, statHookPullForce;
 
     // Input actions
     [Header("Input Actions")]
@@ -114,6 +116,7 @@ public class Stardew : MonoBehaviour
         statFishWeight = GameManager.GetPlayerStat(StatType.fishWeight);
         statHookGravity = GameManager.GetPlayerStat(StatType.hookGravity);
         statFishEscapeRate = GameManager.GetPlayerStat(StatType.fishEscapeChance);
+        statHookPullForce = GameManager.GetPlayerStat(StatType.hookPullForce);
         // Initialize wriggle burst interval
         wriggleTimer = 0f;
         wriggleInterval = Random.Range(0.15f, 0.5f);
@@ -163,7 +166,9 @@ public class Stardew : MonoBehaviour
             currentMaxMoveDistance = Random.Range(fishMinMoveDistance, fishMaxMoveDistance);
         }
 
+        // Fish movement based on state
         UpdateFishMovement();
+        ApplyHookPullForce(); // blackhole
 
         // Then, update the caught progress based on whether the player is currently filling the catch slider or not
         UpdateCaughtProgress();
@@ -220,6 +225,22 @@ public class Stardew : MonoBehaviour
         }
     }
 
+    private void ApplyHookPullForce()
+    {
+        // Apply a blackhole-like effect to the fish when within a certain range of the hook
+        // Range is based on the catch area size, multiplied by hookPullForce
+        float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f;
+        float pullRange = catchHalfSizeNormalized * pullForceRange * statHookPullForce;
+
+        float distanceToHook = Mathf.Abs(fishSlider.value - catchSlider.value);
+        if (distanceToHook < pullRange)
+        {
+            float direction = Mathf.Sign(catchSlider.value - fishSlider.value);
+            float pullStrength = (pullRange - distanceToHook) / pullRange * pullForce; // Normalize and scale the pull strength
+            currentFishVelocity += direction * pullStrength * Time.deltaTime;
+        }
+    }
+    
     private FishState DecideFishState()
     {
         timeSinceStateChange += Time.deltaTime;

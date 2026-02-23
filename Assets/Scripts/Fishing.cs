@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -38,6 +39,7 @@ public class Fishing : MonoBehaviour
 
     private Transform playerTransform;
     private Transform castPointTransform;
+    private ShipMovement shipMovement;
 
     [Header("Prefabs")]
     public GameObject castingPrefab;
@@ -55,6 +57,7 @@ public class Fishing : MonoBehaviour
         Instance = this;
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        shipMovement = playerTransform.GetComponent<ShipMovement>();
         castPointTransform = castLineRenderer.transform;
     }
 
@@ -94,7 +97,7 @@ public class Fishing : MonoBehaviour
             Debug.Log($"Fish button released, throwing bobber with strength {ThrowStrength}");
             GameObject bobberObj = Instantiate(bobberPrefab, castPointTransform.position, Quaternion.identity);
             CurrentBobber = bobberObj.GetComponent<Bobber>();
-            CurrentBobber.Init(castPointTransform, throwStrength: ThrowStrength);
+            CurrentBobber.Init(castPointTransform, throwStrength: ThrowStrength, direction: shipMovement.LastDirection);
             castLineRenderer.enabled = true; // Enable the line renderer when the bobber is thrown
 
             ThrowStrength = 0f;
