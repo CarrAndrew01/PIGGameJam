@@ -119,6 +119,16 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &10531983 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+  m_PrefabInstance: {fileID: 997789567}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &29955174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+  m_PrefabInstance: {fileID: 1649497890}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &45815255
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +687,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &545220432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+  m_PrefabInstance: {fileID: 1405396091017696855}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &599364798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,7 +1274,7 @@ PrefabInstance:
       objectReference: {fileID: 2088428522752285740, guid: 3819eb46d4f4f6d48a5bb56251af9fbb, type: 2}
     - target: {fileID: 2972131385351825044, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278979596
+      value: 3943435276
       objectReference: {fileID: 0}
     - target: {fileID: 2972131385351825044, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_VerticalAlignment
@@ -1787,7 +1802,7 @@ PrefabInstance:
       objectReference: {fileID: 2088428522752285740, guid: 3819eb46d4f4f6d48a5bb56251af9fbb, type: 2}
     - target: {fileID: 2972131385351825044, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4281353144
+      value: 3945808824
       objectReference: {fileID: 0}
     - target: {fileID: 2972131385351825044, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_VerticalAlignment
@@ -2164,6 +2179,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119987479}
   m_CullTransparentMesh: 1
+--- !u!1 &1138305825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+  m_PrefabInstance: {fileID: 868221377}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1300698881
 GameObject:
   m_ObjectHideFlags: 0
@@ -2470,7 +2490,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Total - 24
+  m_text: Total - 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3819eb46d4f4f6d48a5bb56251af9fbb, type: 2}
   m_sharedMaterial: {fileID: 2088428522752285740, guid: 3819eb46d4f4f6d48a5bb56251af9fbb, type: 2}
@@ -3026,7 +3046,7 @@ PrefabInstance:
       objectReference: {fileID: 2088428522752285740, guid: 3819eb46d4f4f6d48a5bb56251af9fbb, type: 2}
     - target: {fileID: 2972131385351825044, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4278190080
+      value: 3942645760
       objectReference: {fileID: 0}
     - target: {fileID: 2972131385351825044, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_VerticalAlignment
@@ -3137,6 +3157,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
   m_PrefabInstance: {fileID: 1649497890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1651981926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+  m_PrefabInstance: {fileID: 1702482240}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1665320724
 GameObject:
@@ -3531,7 +3556,7 @@ PrefabInstance:
       objectReference: {fileID: 2088428522752285740, guid: 3819eb46d4f4f6d48a5bb56251af9fbb, type: 2}
     - target: {fileID: 2972131385351825044, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 4281353144
+      value: 3945808824
       objectReference: {fileID: 0}
     - target: {fileID: 2972131385351825044, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_VerticalAlignment
@@ -3754,11 +3779,9 @@ MonoBehaviour:
   currentPlayerValue: 0
   currentDealerValue: 0
   cardPrefab: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
-  dealerCardsTransform: {fileID: 882887171}
-  playerCardsTransform: {fileID: 1072392445}
   playerCards: []
   dealerCards: []
-  scoreText: {fileID: 1998775525}
+  scoreText: {fileID: 0}
 --- !u!1 &1823801944
 GameObject:
   m_ObjectHideFlags: 0
@@ -4233,6 +4256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2015700434}
+  - component: {fileID: 2015700435}
   m_Layer: 0
   m_Name: POTENTIAL BLACKJACK VISUALS
   m_TagString: Untagged
@@ -4256,6 +4280,29 @@ Transform:
   - {fileID: 1510287857}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2015700435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015700433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb18590877de7d443b3f6ab6ddb25c72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPlayerValue: 0
+  currentDealerValue: 0
+  cardPrefab: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+  playerCards:
+  - {fileID: 545220432}
+  - {fileID: 1651981926}
+  - {fileID: 29955174}
+  - {fileID: 10531983}
+  - {fileID: 1138305825}
+  dealerCards: []
+  scoreText: {fileID: 1451493929}
 --- !u!1 &2019321022
 GameObject:
   m_ObjectHideFlags: 0
