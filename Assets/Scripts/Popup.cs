@@ -88,7 +88,7 @@ public class Popup : MonoBehaviour
             else if (willOpen)
             {
                 willOpen = false;
-                TriggerPopIn(nextMenuPrefab);
+                StartCoroutine(TriggerPopIn(nextMenuPrefab));
             }
             else if (willSwap)
             {
@@ -99,23 +99,43 @@ public class Popup : MonoBehaviour
     }
 
     // Methods
-    public GameObject TriggerPopIn(GameObject canvasPrefab, float durationOverride = -1f)
+    public IEnumerator TriggerPopIn(GameObject canvasPrefab, float durationOverride = -1f, bool forceSwap = false, System.Action<GameObject> onComplete = null, System.Action<GameObject> onBeforeShow = null)
     {
         // First check if we are currently popping out or swapping, and if so, set a flag to pop in as soon as we are done
         if (isAnimating && (isPoppingOut || isSwapping))
         {
             willOpen = true;
             nextMenuPrefab = canvasPrefab;
-            return null;
+            onComplete?.Invoke(null);
+            yield break;
         }
-        
-        if (childCanvas != null || isPoppedIn || isAnimating)
-            return null;
+
+        // Check for existing child canvas and instead swap if there is one
+        if (childCanvas != null)
+        {
+            if (forceSwap)
+            {
+                // Forced swap: perform swap immediately and return the result via onComplete
+                yield return StartCoroutine(TriggerSwap(canvasPrefab, onComplete));
+                yield break;
+            }
+
+            Debug.Log("Menu exists -- swapping menu after.");
+            yield return StartCoroutine(TriggerSwap(canvasPrefab, onComplete));
+            yield break;
+        }
+
+        if (isPoppedIn || isAnimating)
+        {
+            onComplete?.Invoke(null);
+            yield break;
+        }
+
         // Pops in the popup with the given prefab as a child canvas
         isPoppingIn = true;
         isAnimating = true;
-        StartCoroutine(ShowPopup(canvasPrefab, durationOverride > 0f ? durationOverride : popInDuration));
-        return childCanvas.gameObject;
+        yield return StartCoroutine(ShowPopup(canvasPrefab, durationOverride > 0f ? durationOverride : popInDuration, onBeforeShow));
+        onComplete?.Invoke(childCanvas != null ? childCanvas.gameObject : null);
     }
 
     public void TriggerPopOut(float durationOverride = -1f)
@@ -135,7 +155,7 @@ public class Popup : MonoBehaviour
         StartCoroutine(HidePopup(durationOverride > 0f ? durationOverride : popOutDuration));
     }
 
-    public IEnumerator TriggerSwap(GameObject newMenuPrefab, System.Action<GameObject> onSwapComplete = null)
+    private IEnumerator TriggerSwap(GameObject newMenuPrefab, System.Action<GameObject> onSwapComplete = null)
     {
         if (!isPoppedIn || !ReadyForInput)
         {
@@ -158,11 +178,7 @@ public class Popup : MonoBehaviour
         }
 
         // Pop in the new menu at a fast speed
-        TriggerPopIn(newMenuPrefab);
-        while (isAnimating)
-        {
-            yield return null; // Wait until the pop-in animation is finished
-        }
+        yield return StartCoroutine(TriggerPopIn(newMenuPrefab));
         isSwapping = false;
     }
 
@@ -176,10 +192,13 @@ public class Popup : MonoBehaviour
     }
 
     // Coroutines for showing and hiding the popup
-    private IEnumerator ShowPopup(GameObject canvasPrefab, float duration)
+    private IEnumerator ShowPopup(GameObject canvasPrefab, float duration, System.Action<GameObject> onBeforeShow = null)
     {
         // Instantiate the canvas prefab as a child of the popup canvas
         childCanvas = Instantiate(canvasPrefab, windowRect).GetComponent<Canvas>();
+
+        // Allow caller to position or modify the spawned canvas before animation starts
+        onBeforeShow?.Invoke(childCanvas != null ? childCanvas.gameObject : null);
 
         // Start with the canvas x scale at 0, y and z at 1, and fully transparent
         windowRect.localScale = new Vector3(0f, 1f, 1f);

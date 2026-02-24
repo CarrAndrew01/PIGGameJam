@@ -293,7 +293,8 @@ MonoBehaviour:
   throwAngle: 45
   hookedVelocity: 1
   distanceToRetrieve: 0.2
-  hookedOffset: -0.2
+  hookedOffset: -0.16
+  hookRange: 0.15
   drag: 0.1
   gravity: 9.8
   waterResistance: 0.5

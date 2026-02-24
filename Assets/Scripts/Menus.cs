@@ -1,13 +1,16 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections;
 
 /// <summary>
 /// Handles opening and closing various menus.
 /// </summary>
 public class Menus : MonoBehaviour
 {
+    public static Menus Instance { get; private set; }
+
+    public static bool IsAnyMenuOpen => Instance.currentMenu != null;
+
     public enum MenuType
     {
         None,
@@ -17,11 +20,11 @@ public class Menus : MonoBehaviour
         ShopMenu
     }
 
-
     [Header("Input Actions")]
     public InputActionReference menuAction; // expects Button
     public InputActionReference upgradeMenuAction; // expects Button
     public InputActionReference inventoryMenuAction; // expects Button
+    public InputActionReference shopMenuAction; // expects Button
 
     [Header("Prefabs")]
     public GameObject menuPrefab; // Prefab for the escape menu popup
@@ -30,28 +33,36 @@ public class Menus : MonoBehaviour
     public GameObject shopMenuPrefab; // Prefab for the shop menu popup
 
     [Header("Debug")]
-    [ShowInInspector,ReadOnly] private GameObject currentMenu; // Reference to the currently open menu, if any
-    [ShowInInspector,ReadOnly] private MenuType currentMenuType; // Type of the currently open menu, if any
+    [ShowInInspector, ReadOnly] private GameObject currentMenu; // Reference to the currently open menu, if any
+    [ShowInInspector, ReadOnly] private MenuType currentMenuType; // Type of the currently open menu, if any
+
+    void Awake()
+    {
+        // Singleton pattern
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     // Update is called once per frame
     void Update()
     {
         if (!GameManager.MenuPopup.ReadyForInput)
             return; // Don't allow menu input if the popup is currently animating or problems occur
-            
+
         if (menuAction.action.WasPressedThisFrame())
         {
             if (currentMenu != null)
             {
-                // If any menu is open, close it (never swap to main menu)
-                GameManager.TriggerPopOut(GameManager.MenuPopup);
-                currentMenu = null;
-                currentMenuType = MenuType.None;
+                CloseCurrentMenu();
             }
             else
             {
                 // Only open the main menu if no menu is currently open
-                OpenMenu(MenuType.MainMenu);
+                OpenMenu(MenuType.MainMenu, priority: true);
                 currentMenuType = MenuType.MainMenu;
             }
         }
@@ -59,14 +70,12 @@ public class Menus : MonoBehaviour
         {
             if (currentMenu != null && currentMenuType == MenuType.UpgradeMenu)
             {
-                // If the upgrade menu is already open, close it
-                GameManager.TriggerPopOut(GameManager.MenuPopup);
-                currentMenu = null;
+                CloseCurrentMenu();
             }
             else
             {
                 // Otherwise, open the upgrade menu
-                OpenMenu(MenuType.UpgradeMenu);
+                OpenMenu(MenuType.UpgradeMenu, priority: true);
                 currentMenuType = MenuType.UpgradeMenu;
             }
         }
@@ -74,15 +83,26 @@ public class Menus : MonoBehaviour
         {
             if (currentMenu != null && currentMenuType == MenuType.InventoryMenu)
             {
-                // If the inventory menu is already open, close it
-                GameManager.TriggerPopOut(GameManager.MenuPopup);
-                currentMenu = null;
+                CloseCurrentMenu();
             }
             else
             {
                 // Otherwise, open the inventory menu
-                OpenMenu(MenuType.InventoryMenu);
+                OpenMenu(MenuType.InventoryMenu, priority: true);
                 currentMenuType = MenuType.InventoryMenu;
+            }
+        }
+        else if (shopMenuAction.action.WasPressedThisFrame())
+        {
+            if (currentMenu != null && currentMenuType == MenuType.ShopMenu)
+            {
+                CloseCurrentMenu();
+            }
+            else
+            {
+                // Otherwise, open the shop menu
+                OpenMenu(MenuType.ShopMenu, priority: true);
+                currentMenuType = MenuType.ShopMenu;
             }
         }
     }
@@ -96,116 +116,56 @@ public class Menus : MonoBehaviour
         else
         {
             // Otherwise, open the shop menu
-            OpenMenu(MenuType.ShopMenu);
+            OpenMenu(MenuType.ShopMenu, priority: true);
             currentMenuType = MenuType.ShopMenu;
         }
     }
 
-    private void OpenMenu(MenuType menuType)
+    private void OpenMenu(MenuType menuType, bool priority = false)
     {
         if (!GameManager.MenuPopup.ReadyForInput)
             return; // Don't open a new menu if the popup is currently animating or problems occur
 
         // Helper method to open a menu of the given type
+        GameObject prefabToOpen = GetPrefabForMenuType(menuType);
+        if (prefabToOpen != null)
+        {
+            GameManager.TriggerPopIn(GameManager.MenuPopup, prefabToOpen, forceSwap: priority, onComplete: go =>
+            {
+                currentMenu = go;
+                if (currentMenu == null)
+                    Debug.Log($"Failed to trigger {menuType} popup - something may already be open.");
+            });
+        }
+    }
+
+    private void CloseCurrentMenu()
+    {
+        if (currentMenu != null)
+        {
+            GameManager.TriggerPopOut(GameManager.MenuPopup);
+            currentMenu = null;
+            currentMenuType = MenuType.None;
+        }
+    }
+
+    private GameObject GetPrefabForMenuType(MenuType menuType)
+    {
         switch (menuType)
         {
             case MenuType.None:
-                // Don't open any menu
-                break;
+                return null;
             case MenuType.MainMenu:
-                if (menuPrefab == null)
-                {
-                    Debug.LogError("Menu prefab reference is missing in Menus component!");
-                    return;
-                }
-                if (currentMenu != null)
-                {
-                    // If another menu is already open, swap to the new menu instead
-                    StartCoroutine(SwapMenu(menuType));
-                    return;
-                }
-                currentMenu = GameManager.TriggerPopIn(GameManager.MenuPopup, menuPrefab);
-                break;
+                return menuPrefab;
             case MenuType.UpgradeMenu:
-                if (upgradeMenuPrefab == null)
-                {
-                    Debug.LogError("Upgrade menu prefab reference is missing in Menus component!");
-                    return;
-                }
-                if (currentMenu != null)
-                {
-                    // If another menu is already open, swap to the new menu instead
-                    StartCoroutine(SwapMenu(menuType));
-                    return;
-                }
-                currentMenu = GameManager.TriggerPopIn(GameManager.MenuPopup, upgradeMenuPrefab);
-                break;
+                return upgradeMenuPrefab;
             case MenuType.InventoryMenu:
-                if (inventoryMenuPrefab == null)
-                {
-                    Debug.LogError("Inventory menu prefab reference is missing in Menus component!");
-                    return;
-                }
-                if (currentMenu != null)
-                {
-                    // If another menu is already open, swap to the new menu instead
-                    StartCoroutine(SwapMenu(menuType));
-                    return;
-                }
-                currentMenu = GameManager.TriggerPopIn(GameManager.MenuPopup, inventoryMenuPrefab);
-                break;
+                return inventoryMenuPrefab;
             case MenuType.ShopMenu:
-                if (shopMenuPrefab == null)
-                {
-                    Debug.LogError("Shop menu prefab reference is missing in Menus component!");
-                    return;
-                }
-                if (currentMenu != null)
-                {
-                    // If another menu is already open, swap to the new menu instead
-                    StartCoroutine(SwapMenu(menuType));
-                    return;
-                }
-                currentMenu = GameManager.TriggerPopIn(GameManager.MenuPopup, shopMenuPrefab);
-                break;
+                return shopMenuPrefab;
             default:
-                Debug.LogError($"Unhandled menu type {menuType} in OpenMenu!");
-                break;
+                Debug.LogError($"Unhandled menu type {menuType} in GetPrefabForMenuType!");
+                return null;
         }
-
-        if (currentMenu == null)
-            Debug.Log($"Failed to trigger {menuType} popup - something may already be open.");
-    }
-
-    private IEnumerator SwapMenu(MenuType newMenuType)
-    {
-        if (!GameManager.MenuPopup.ReadyForInput)
-            yield break; // Don't swap menus if the popup is currently animating or problems occur
-        Debug.Log($"Swapping from {currentMenuType} to {newMenuType} menu.");
-        GameObject menuPrefabToUse = null;
-        switch (newMenuType)
-        {
-            case MenuType.None:
-                Debug.LogWarning("Attempted to swap to None menu type, which is not a real menu. This is likely a bug.");
-                yield break;
-            case MenuType.MainMenu:
-                menuPrefabToUse = menuPrefab;
-                break;
-            case MenuType.UpgradeMenu:
-                menuPrefabToUse = upgradeMenuPrefab;
-                break;
-            case MenuType.InventoryMenu:
-                menuPrefabToUse = inventoryMenuPrefab;
-                break;
-            case MenuType.ShopMenu:
-                menuPrefabToUse = shopMenuPrefab;
-                break;
-            default:
-                Debug.LogError($"Unhandled menu type {newMenuType} in SwapMenu!");
-                yield break;
-        }
-        GameObject result = null;
-        yield return StartCoroutine(GameManager.TriggerSwap(GameManager.MenuPopup, menuPrefabToUse, go => result = go));
-        currentMenu = result;
     }
 }

@@ -11,13 +11,14 @@ public class Fishing : MonoBehaviour
 {
     public static Fishing Instance; // Singleton instance for easy access
 
-    // State
-    [Header("State")]
-    public static bool CanFish => (IsMinigameActive == false || Instance.IsCharging) && Instance.CurrentBobber == null;
+    public static bool CanFish => (IsMinigameActive == false || Instance.IsCharging) && Instance.CurrentBobber == null && !Menus.IsAnyMenuOpen;
     public static bool IsFishing => Instance.CurrentBobber != null;
     public static bool IsMinigameActive => GameManager.MinigamePopup.childCanvas != null;
     public static FishShadow LastFishShadow { get => Instance.lastFishShadow; set => Instance.lastFishShadow = value; }
     public static float reelInFactor = 0f; // Set by the current minigame
+
+    // State
+    [Header("State")]
     public bool IsCharging { get; private set; } = false;
 
     private FishShadow lastFishShadow; // The last fish shadow that was hooked, used to prevent accidentally hooking a new fish shadow when reeling in the current one
@@ -44,7 +45,7 @@ public class Fishing : MonoBehaviour
 
     [Header("Prefabs")]
     public GameObject castingPrefab;
-    public GameObject fishingMinigamePrefab; // Prefab for the fishing minigame popup
+    //public GameObject fishingMinigamePrefab; // Prefab for the fishing minigame popup
     public GameObject bobberPrefab; // Prefab for the bobber that is thrown when fishing
 
     void Awake()
@@ -80,7 +81,7 @@ public class Fishing : MonoBehaviour
                 ThrowStrength = 0f;
 
                 // Start casting in minigame popup while charging
-                GameManager.TriggerPopIn(GameManager.MinigamePopup, castingPrefab);
+                GameManager.TriggerPopIn(GameManager.MinigamePopup, castingPrefab, onComplete: go => { }, onBeforeShow: go => { /* no-op during show */ });
             }
         }
         // Charging logic
@@ -95,7 +96,7 @@ public class Fishing : MonoBehaviour
             IsCharging = false;
             GameManager.TriggerPopOut(GameManager.MinigamePopup);
 
-            Debug.Log($"Fish button released, throwing bobber with strength {ThrowStrength}");
+            // Debug.Log($"Fish button released, throwing bobber with strength {ThrowStrength}");
             GameObject bobberObj = Instantiate(bobberPrefab, castPointTransform.position, Quaternion.identity);
             CurrentBobber = bobberObj.GetComponent<Bobber>();
             CurrentBobber.Init(castPointTransform, throwStrength: ThrowStrength, direction: shipMovement.LastDirection);
@@ -105,14 +106,14 @@ public class Fishing : MonoBehaviour
         }
         else if (!CanFish && Instance.CurrentBobber != null && fishAction.action.WasPressedThisFrame())
         {
-            Debug.Log("Fish button pressed while bobber is in water, trying to reel it in");
+            // Debug.Log("Fish button pressed while bobber is in water, trying to reel it in");
             if (!IsMinigameActive)
             {
                 ReelInCurrentBobber();
             }
             else
             {
-                Debug.Log("Fish button pressed but minigame is already active.");
+                // Debug.Log("Fish button pressed but minigame is already active.");
             }
         }
 
@@ -136,17 +137,28 @@ public class Fishing : MonoBehaviour
             Instance.CurrentBobber.BeginReelIn();
         }
     }
-    public static void StartFishingMinigame()
+    public static void StartFishingMinigame(FishShadow fishShadow)
     {
-        if (Instance.CurrentBobber.currentFishShadow != null)
+        if (fishShadow != null)
         {
             // Begin fishing
-            LastFishShadow = Instance.CurrentBobber.currentFishShadow;
-            LastFishShadow.BeginFishing();
+            LastFishShadow = fishShadow;
 
             // Trigger the fishing minigame popup
-            GameManager.TriggerPopIn(GameManager.MinigamePopup, Instance.fishingMinigamePrefab);
-            FindScreenSide();
+            GameObject chosenMinigamePrefab = fishShadow.fishData.fish.minigamePrefab;
+            if (chosenMinigamePrefab != null)
+            {
+                GameManager.TriggerPopIn(GameManager.MinigamePopup, fishShadow.fishData.fish.minigamePrefab, forceSwap: true, onBeforeShow: go =>
+                {
+                    if (go != null)
+                        FindScreenSide();
+                });
+            }
+            else
+            {
+                // Automatically catch if no minigame prefab is assigned
+                LastFishShadow.EndFishing(caught: true);
+            }
         }
     }
     public static void EndFishingMinigame()
@@ -154,12 +166,14 @@ public class Fishing : MonoBehaviour
         // End fishing
         if (LastFishShadow != null)
         {
-            Instance.CurrentBobber.isMinigameActive = false;
-            LastFishShadow.EndFishing();
             LastFishShadow = null;
         }
 
-        Fishing.reelInFactor = 0f; // Reset the reel in factor for the next catch
+        ReelInCurrentBobber();
+        reelInFactor = 0f; // Reset the reel in factor for the next catch
+
+        if (IsMinigameActive)
+            GameManager.TriggerPopOut(GameManager.MinigamePopup);
     }
 
     public static void FindScreenSide()

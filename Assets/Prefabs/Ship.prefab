@@ -127,8 +127,8 @@ MonoBehaviour:
   deceleration: 3
   maxVelocity: 8
   bounceMultiplier: 0.5
-  spinDuration: 0.1
-  speedAffectSpinFactor: 0.024
+  spinDuration: 0.2
+  speedAffectSpinFactor: 0
   bobbingAmplitude: 0.2
   bobbingFrequency: 1.69
   moveAction: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
@@ -149,12 +149,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeSpeed: 1.5
-  fishAction: {fileID: -2099379676528639254, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  fishAction: {fileID: 1120369429361536294, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   castingPopupPosition: {x: 0, y: 0}
   minigamePopupPosition: {x: 120, y: 0}
   castLineRenderer: {fileID: 5234964400167045}
   castingPrefab: {fileID: 2941649925059469388, guid: cd09a98bce460004fb1c1cc23464ec33, type: 3}
-  fishingMinigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
   bobberPrefab: {fileID: 8260265438531314335, guid: 6f5b86d33f5b18f48b01394765360e54, type: 3}
 --- !u!1 &2456952315989850033
 GameObject:

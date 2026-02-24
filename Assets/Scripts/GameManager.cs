@@ -52,14 +52,9 @@ public class GameManager : MonoBehaviour
     // Static methods
     public static List<Upgrade> GetPlayerUpgrades() => Instance.playerStats.upgrades;
     public static float GetPlayerStat(StatType statType) => Instance.playerStats.GetStat(statType);
+    public static void AddUpgrade(Upgrade upgrade) => Instance.playerStats.AddUpgrade(upgrade);
     public static void AddFishToInventory(CaughtFish newCatch) => Instance.playerInventory.AddFish(newCatch);
-    public static GameObject TriggerPopIn(Popup popup, GameObject canvasPrefab) => popup.TriggerPopIn(canvasPrefab);
+    public static void TriggerPopIn(Popup popup, GameObject canvasPrefab, bool forceSwap = false, System.Action<GameObject> onComplete = null, System.Action<GameObject> onBeforeShow = null) => Instance.StartCoroutine(popup.TriggerPopIn(canvasPrefab, -1f, forceSwap, onComplete, onBeforeShow));
     public static void TriggerPopOut(Popup popup) => popup.TriggerPopOut();
     public static void AdjustMoney(int amount) => Instance.money += amount;
-
-    public static IEnumerator TriggerSwap(Popup popup, GameObject newMenuPrefab, System.Action<GameObject> onSwapComplete = null)
-    {
-        // This needs to be a coroutine because we need to wait for the pop-out animation to finish before starting the pop-in animation, otherwise they will conflict and cause bugs
-        yield return popup.StartCoroutine(popup.TriggerSwap(newMenuPrefab, onSwapComplete));
-    }
 }

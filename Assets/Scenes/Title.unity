@@ -281,6 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetName: Cat Ship
+  requiredEntryStat: 0
 --- !u!1 &31021033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1831,6 +1832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetName: PlanetLava
+  requiredEntryStat: 11
 --- !u!1 &475271975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3465,6 +3467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetName: PlanetIce
+  requiredEntryStat: 10
 --- !u!114 &855044187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7038,6 +7041,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527667965}
   m_CullTransparentMesh: 1
+--- !u!1001 &1545487083
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 209397260059208970, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209397260059208970, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209397260059208970, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209397260059208970, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 209397260059208970, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209397260059208970, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209397260059208970, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209397260059208970, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209397260059208970, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 209397260059208970, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077475692530973662, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: m_Name
+      value: GameManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
 --- !u!1 &1557250609
 GameObject:
   m_ObjectHideFlags: 0
@@ -8178,6 +8238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetName: PlanetBio
+  requiredEntryStat: 13
 --- !u!1 &1799483389
 GameObject:
   m_ObjectHideFlags: 0
@@ -9018,6 +9079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planetName: PlanetCloud
+  requiredEntryStat: 12
 --- !u!1 &1943554881
 GameObject:
   m_ObjectHideFlags: 0
@@ -10113,3 +10175,4 @@ SceneRoots:
   - {fileID: 691088278}
   - {fileID: 1745291843}
   - {fileID: 547219408}
+  - {fileID: 1545487083}

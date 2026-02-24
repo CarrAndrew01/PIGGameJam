@@ -16,10 +16,10 @@ public class FishShadow : MonoBehaviour
     [ReadOnly] public bool IsEscaping { get; private set; } = false; // Whether the fish is currently escaping, which will trigger it to stop moving and start shrinking until it disappears
     [ReadOnly] public bool pauseTimer = false; // Whether the leave timer should be paused
     [ShowInInspector, ReadOnly] private float leaveTimer = 0f; // Timer to track how long the fish has been present
-    private Vector2 targetDirection;
-    private float directionChangeTimer = 0f;
+    [ShowInInspector, ReadOnly] private Vector2 targetDirection;
+    [ShowInInspector, ReadOnly] private float directionChangeTimer = 0f;
     public bool IsHooked { get; private set; } = false; // Whether the fish is currently hooked by the bobber
-
+    [ReadOnly] public Bobber targetBobber;
 
     // Variables
     [Header("Settings")]
@@ -30,6 +30,7 @@ public class FishShadow : MonoBehaviour
     public float movementRadius = 2f; // How far from its initial position the fish will move
     public float movementSpeed = 1f; // How fast the fish moves
     public float verticalMovementMax = 0.2f; // The maximum vertical movement for the fish
+    public float investigateBaitSpeed = 1.4f;
 
     [Header("Vertical Limits")]
     public float minHeight = float.NegativeInfinity; // Minimum world Y for the sprite
@@ -48,11 +49,13 @@ public class FishShadow : MonoBehaviour
     public float directionChangeInterval = 2f; // seconds between direction changes
     public float directionLerpSpeed = 2f; // speed of interpolation
 
-
     [Header("Fish Preview")]
     public Vector3 previewOffset = new Vector3(0f, 0.5f, 0f); // Offset for the fish preview from the fish shadow's position
     public float previewBobAmplitude = 0.1f; // Amplitude of the bobbing motion for the fish preview
     public float previewBobFrequency = 1f; // Frequency of the bobbing motion for
+
+    private float statFishWeight;
+    private int amountInCatch = 1; // determines if extra fish are added if we successfully catch
 
     // Components
     [Header("Components")]
@@ -64,6 +67,9 @@ public class FishShadow : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Grab stats
+        statFishWeight = GameManager.GetPlayerStat(StatType.fishWeight);
+
         // Get the initial position
         initialPosition = transform.position;
         shipTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -73,9 +79,11 @@ public class FishShadow : MonoBehaviour
         fishData = new CaughtFish
         {
             fish = fish,
-            weight = Random.Range(fish.minWeight, fish.maxWeight),
+            weight = Random.Range(fish.minWeight, fish.maxWeight) * statFishWeight,
             planetOfOrigin = Environment.CurrentEnvironment.name
         };
+
+        amountInCatch = Random.Range(fish.minAmount, fish.maxAmount + 1); // +1 because Random.Range is exclusive of the upper bound
 
         // Set the preview sprite to match the fish type
         if (previewTransform != null && fish.sprite != null)
@@ -107,20 +115,7 @@ public class FishShadow : MonoBehaviour
 
         BobPreview();
         HandleDirectionChange();
-        // Smoothly interpolate movementDirection toward targetDirection
-        movementDirection = Vector2.Lerp(movementDirection, targetDirection, directionLerpSpeed * Time.deltaTime);
-
-        float currentMovementSpeed = IsHooked ? hookedMovementSpeed : movementSpeed;
-        Vector3 movementVector = (Vector3)movementDirection * currentMovementSpeed * Time.deltaTime;
-
-        // Move fish horizontally
-        transform.position += new Vector3(movementVector.x, 0f, 0f);
-        // Move sprite vertically and clamp to min/max world heights
-        float newLocalY = spriteTransform.localPosition.y + movementVector.y;
-        float worldY = transform.position.y + newLocalY;
-        float clampedWorldY = Mathf.Clamp(worldY, minHeight, maxHeight);
-        float clampedLocalY = clampedWorldY - transform.position.y;
-        spriteTransform.localPosition = new Vector3(0f, clampedLocalY, 0f);
+        Swim();
 
         // Count up the leave timer and check if the fish should leave on its own
         if (!pauseTimer)
@@ -138,11 +133,30 @@ public class FishShadow : MonoBehaviour
     {
         pauseTimer = true; // Pause the leave timer while the player is trying to catch the fish
         IsHooked = true;
+        targetBobber.isMinigameActive = true;
+
+        Fishing.StartFishingMinigame(this);
     }
-    public void EndFishing()
+    public void EndFishing(bool caught)
     {
         pauseTimer = false; // Unpause the leave timer when the player is done trying to catch the fish
         IsHooked = false;
+        if (targetBobber != null)
+        {
+            targetBobber.isMinigameActive = false;
+            targetBobber = null;
+        }
+
+        if (caught)
+        {
+            Catch();
+        }
+        else
+        {
+            AddFail();
+        }
+
+        Fishing.EndFishingMinigame();
     }
     public void ResetLeaveTimer()
     {
@@ -152,6 +166,23 @@ public class FishShadow : MonoBehaviour
     {
         // Trigger catch logic, such as playing an animation or sound effect
         Debug.Log("Fish Caught!");
+
+        // Add the fish to the player's inventory
+        GameManager.AddFishToInventory(fishData);
+
+        GameManager.AddFishToInventory(fishData);
+        for (int i = 0; i < amountInCatch - 1; i++)
+        {
+            // Create additional caught fish for any extra amount
+            CaughtFish extraFish = new CaughtFish()
+            {
+                fish = fishData.fish,
+                weight = Random.Range(fishData.fish.minWeight, fishData.fish.maxWeight) * statFishWeight,
+                planetOfOrigin = Environment.Name
+            };
+            GameManager.AddFishToInventory(extraFish);
+        }
+
 
         // Destroy the fish shadow since it's been caught
         Destroy(gameObject);
@@ -174,6 +205,27 @@ public class FishShadow : MonoBehaviour
         StartCoroutine(ShrinkAndDestroy());
     }
 
+    private void Swim()
+    {
+        // Smoothly interpolate movementDirection toward targetDirection
+        movementDirection = Vector2.Lerp(movementDirection, targetDirection, directionLerpSpeed * Time.deltaTime);
+
+        float currentMovementSpeed = movementSpeed;
+        if (IsHooked)
+            currentMovementSpeed = hookedMovementSpeed;
+        else if (targetBobber != null)
+            currentMovementSpeed = investigateBaitSpeed;
+        Vector3 movementVector = (Vector3)movementDirection * currentMovementSpeed * Time.deltaTime;
+
+        // Move fish horizontally
+        transform.position += new Vector3(movementVector.x, 0f, 0f);
+        // Move sprite vertically and clamp to min/max world heights
+        float newLocalY = spriteTransform.localPosition.y + movementVector.y;
+        float worldY = transform.position.y + newLocalY;
+        float clampedWorldY = Mathf.Clamp(worldY, minHeight, maxHeight);
+        float clampedLocalY = clampedWorldY - transform.position.y;
+        spriteTransform.localPosition = new Vector3(0f, clampedLocalY, 0f);
+    }
     private void BobPreview()
     {
         if (previewTransform != null && previewTransform.gameObject.activeSelf) // Only bob if the preview is active
@@ -199,6 +251,31 @@ public class FishShadow : MonoBehaviour
         if (directionChangeTimer >= currentDirectionChangeInterval)
         {
             directionChangeTimer = 0f;
+            // If there is a target bobber, go towards that instead of a random direction
+            if (targetBobber != null && !targetBobber.isMinigameActive)
+            {
+                targetDirection = ((Vector2)targetBobber.transform.position - (Vector2)spriteTransform.position).normalized;
+
+                // Check if in hook range (both the transform and the sprite, since sprite is vertically offset)
+                if (Vector2.Distance(targetBobber.transform.position, transform.position) < targetBobber.hookRange
+                    || Vector2.Distance(targetBobber.spriteRenderer.transform.position, spriteTransform.position) < targetBobber.hookRange)
+                {
+                    // If the fish is in hook range, hook it (if it likes the bait)
+                    if (!IsHooked && (fishData.fish.preferredBaitType == 0 || fishData.fish.preferredBaitType == GameManager.GetPlayerStat(StatType.baitType)))
+                    {
+                        IsHooked = true;
+                        BeginFishing();
+                    }
+                    else
+                    {
+                        targetBobber = null;
+                    }
+                }
+                return;
+            }
+            else
+                targetBobber = null;
+
             // If either the object or its sprite are outside movement radius, head back toward initial position
             if (Vector2.Distance(transform.position, radiusPoint) > currentRadius
                 || (spriteTransform != null && Vector2.Distance(spriteTransform.position, radiusPoint) > currentRadius))
