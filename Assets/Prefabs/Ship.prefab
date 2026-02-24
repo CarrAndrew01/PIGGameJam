@@ -127,7 +127,7 @@ MonoBehaviour:
   deceleration: 3
   maxVelocity: 8
   bounceMultiplier: 0.5
-  spinDuration: 0.6
+  spinDuration: 0.1
   speedAffectSpinFactor: 0.024
   bobbingAmplitude: 0.2
   bobbingFrequency: 1.69
