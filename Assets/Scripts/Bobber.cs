@@ -158,6 +158,12 @@ public class Bobber : MonoBehaviour
         Vector3 directionToShip = (playerShipTransform.position - transform.position).normalized;
         currentVelocity = directionToShip * (reelInAcceleration * timeReelingIn);
 
+        // Rotate the bobber until up faces the ship to make it look nicer when reeling in
+        float angleToShip = Mathf.Atan2(directionToShip.y, directionToShip.x) * Mathf.Rad2Deg;
+        // Sprite's top should face the ship; subtract 90 degrees to convert from right-facing default
+        float targetAngle = angleToShip - 90f;
+        spriteRenderer.transform.rotation = Quaternion.Lerp(spriteRenderer.transform.rotation, Quaternion.Euler(0f, 0f, targetAngle), Time.fixedDeltaTime * reelInAcceleration);
+
         if (Vector3.Distance(transform.position, playerShipTransform.position) < distanceToRetrieve)
         {
             Fishing.HideCastLine();

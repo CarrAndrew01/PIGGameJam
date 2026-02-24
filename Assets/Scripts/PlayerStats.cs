@@ -17,6 +17,7 @@ public enum StatType
     fishPreview,    // Show fish over shadows
     fishSpawnInterval,
     hookPullForce,   // Applies a blackhole-like effect to the hook -- this affects both the area and the force
+    baitType,        // A bait type stat should just be a specific number that corresponds to certain fish
 }
 
 /// <summary>
