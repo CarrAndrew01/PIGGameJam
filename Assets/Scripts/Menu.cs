@@ -39,6 +39,7 @@ public class Menu : MonoBehaviour
         }
     }
 
+
     public void PopulateListWithUpgrades(List<Upgrade> upgrades)
     {
         // Clear existing list items

@@ -21,7 +21,10 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Popup minigamePopup; // Reference to the Popup component for minigame pop-ups
     public static Popup MinigamePopup => Instance.minigamePopup; // Static accessor for the minigame popup
     [HideInInspector] public Popup menuPopup; // Reference to the Popup component for handling menus, etc.
+
     public static Popup MenuPopup => Instance.menuPopup; // Static accessor for the menu popup
+
+    public int money = 0; // Player's current money, 
 
     void Awake()
     {
@@ -52,6 +55,8 @@ public class GameManager : MonoBehaviour
     public static void AddFishToInventory(CaughtFish newCatch) => Instance.playerInventory.AddFish(newCatch);
     public static GameObject TriggerPopIn(Popup popup, GameObject canvasPrefab) => popup.TriggerPopIn(canvasPrefab);
     public static void TriggerPopOut(Popup popup) => popup.TriggerPopOut();
+    public static void AdjustMoney(int amount) => Instance.money += amount;
+
     public static IEnumerator TriggerSwap(Popup popup, GameObject newMenuPrefab, System.Action<GameObject> onSwapComplete = null)
     {
         // This needs to be a coroutine because we need to wait for the pop-out animation to finish before starting the pop-in animation, otherwise they will conflict and cause bugs

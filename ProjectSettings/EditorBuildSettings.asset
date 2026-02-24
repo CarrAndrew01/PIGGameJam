@@ -26,9 +26,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Planets/PlanetLava.unity
     guid: 5aa9f7bff1d838e7da0c77a0ef640e02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CatMerchants.unity
     guid: e9e3e449a23ff878fb655fb7c16403e8
+  - enabled: 1
+    path: Assets/Scenes/Cat Ship.unity
+    guid: c69dfb7b1e195f44eb07ccbaeef2e6c3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

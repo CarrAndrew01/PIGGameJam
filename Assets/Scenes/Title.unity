@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 211780}
   - component: {fileID: 211782}
   - component: {fileID: 211783}
+  - component: {fileID: 211784}
   m_Layer: 5
   m_Name: Cat
   m_TagString: Untagged
@@ -242,7 +243,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 691088281}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlanetSceneManager, Assembly-CSharp
         m_MethodName: GoToPlanetScene
         m_Mode: 5
@@ -267,6 +268,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alphaThreshold: 0.1
+--- !u!114 &211784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a0687e319b3e5e2b74b54c914fd188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planetName: Cat Ship
 --- !u!1 &31021033
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &31021034
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1337,7 +1351,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 214, y: -36.354004}
+  m_AnchoredPosition: {x: 300.2, y: -40}
   m_SizeDelta: {x: 682.3901, y: 770.629}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &328810560
@@ -1412,8 +1426,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -297.9089, y: 490.96466}
-  m_SizeDelta: {x: 481.0155, y: 195.2638}
+  m_AnchoredPosition: {x: -265.52, y: 496.36}
+  m_SizeDelta: {x: 534.88, y: 184.5176}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &372959910
 MonoBehaviour:
@@ -1606,7 +1620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &411099537
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1623,7 +1637,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19.921, y: 106.7}
+  m_AnchoredPosition: {x: 15.8, y: 106.7}
   m_SizeDelta: {x: 134.6536, y: 27.2705}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &411099538
@@ -1736,8 +1750,6 @@ GameObject:
   - component: {fileID: 447434038}
   - component: {fileID: 447434040}
   - component: {fileID: 447434039}
-  - component: {fileID: 447434041}
-  - component: {fileID: 447434042}
   - component: {fileID: 447434043}
   m_Layer: 5
   m_Name: LavaPlanet
@@ -1806,75 +1818,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 447434037}
   m_CullTransparentMesh: 1
---- !u!114 &447434041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 447434037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 447434039}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 691088281}
-        m_TargetAssemblyTypeName: PlanetSceneManager, Assembly-CSharp
-        m_MethodName: GoToPlanetScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: PlanetLava
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &447434042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 447434037}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cad1056687b4815a87f6fd9cfbb312e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alphaThreshold: 0.1
 --- !u!114 &447434043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1887,6 +1830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a0687e319b3e5e2b74b54c914fd188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetName: PlanetLava
 --- !u!1 &475271975
 GameObject:
   m_ObjectHideFlags: 0
@@ -2323,7 +2267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &558729305
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2398,7 +2342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &583744309
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2415,7 +2359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 19.921, y: 69.6}
+  m_AnchoredPosition: {x: 15.799967, y: 69.6}
   m_SizeDelta: {x: 39.8426, y: 35.6096}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &583744310
@@ -2438,7 +2382,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7e4fdea5b454640569ebe4b3ab3f49a3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2845,7 +2789,6 @@ GameObject:
   - component: {fileID: 691088275}
   - component: {fileID: 691088280}
   - component: {fileID: 691088279}
-  - component: {fileID: 691088281}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2980,18 +2923,6 @@ MonoBehaviour:
   - {fileID: 1009061382}
   - {fileID: 1431945855}
   - {fileID: 1285434067}
---- !u!114 &691088281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 691088274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c514ac5d3998bc83bca4eca285332a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &758309124
 GameObject:
   m_ObjectHideFlags: 0
@@ -3404,6 +3335,11 @@ MonoBehaviour:
     name: {fileID: 1661563091}
     highlight: {fileID: 1041648020}
   - planetSprites:
+    - {fileID: 211778}
+    arrow: {fileID: 583744308}
+    name: {fileID: 411099536}
+    highlight: {fileID: 583744308}
+  - planetSprites:
     - {fileID: 1928643034}
     arrow: {fileID: 1015046447}
     name: {fileID: 1722889283}
@@ -3419,7 +3355,7 @@ MonoBehaviour:
     name: {fileID: 31021033}
     highlight: {fileID: 1432609396}
   leftRight: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  Interact: {fileID: 0}
+  Interact: {fileID: 1781555164194001046, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!4 &844411843
 Transform:
   m_ObjectHideFlags: 0
@@ -3446,9 +3382,9 @@ GameObject:
   - component: {fileID: 855044181}
   - component: {fileID: 855044183}
   - component: {fileID: 855044182}
-  - component: {fileID: 855044184}
-  - component: {fileID: 855044185}
   - component: {fileID: 855044186}
+  - component: {fileID: 855044188}
+  - component: {fileID: 855044187}
   m_Layer: 5
   m_Name: IcePlanet
   m_TagString: Untagged
@@ -3516,75 +3452,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855044180}
   m_CullTransparentMesh: 1
---- !u!114 &855044184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 855044180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cad1056687b4815a87f6fd9cfbb312e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alphaThreshold: 0.1
---- !u!114 &855044185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 855044180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 3
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 855044182}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 691088281}
-        m_TargetAssemblyTypeName: PlanetSceneManager, Assembly-CSharp
-        m_MethodName: GoToPlanetScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: PlanetIce
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &855044186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3597,6 +3464,95 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a0687e319b3e5e2b74b54c914fd188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetName: PlanetIce
+--- !u!114 &855044187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855044180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+--- !u!108 &855044188
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855044180}
+  m_Enabled: 1
+  serializedVersion: 11
+  m_Type: 2
+  m_Color: {r: 0, g: 1, b: 0.9608457, a: 1}
+  m_Intensity: 500
+  m_Range: 216.8
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!1 &879360152
 GameObject:
   m_ObjectHideFlags: 0
@@ -4259,7 +4215,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1015046448
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6611,7 +6567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1432609397
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7896,7 +7852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1722889284
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8141,8 +8097,6 @@ GameObject:
   - component: {fileID: 1788392572}
   - component: {fileID: 1788392574}
   - component: {fileID: 1788392573}
-  - component: {fileID: 1788392575}
-  - component: {fileID: 1788392576}
   - component: {fileID: 1788392577}
   m_Layer: 5
   m_Name: BioPlanet
@@ -8211,75 +8165,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1788392571}
   m_CullTransparentMesh: 1
---- !u!114 &1788392575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1788392571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1788392573}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 691088281}
-        m_TargetAssemblyTypeName: PlanetSceneManager, Assembly-CSharp
-        m_MethodName: GoToPlanetScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: PlanetBio
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1788392576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1788392571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cad1056687b4815a87f6fd9cfbb312e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alphaThreshold: 0.1
 --- !u!114 &1788392577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8292,6 +8177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a0687e319b3e5e2b74b54c914fd188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetName: PlanetBio
 --- !u!1 &1799483389
 GameObject:
   m_ObjectHideFlags: 0
@@ -8309,7 +8195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1799483390
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8611,9 +8497,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1566611604}
-  - {fileID: 1943554882}
   - {fileID: 855044181}
   - {fileID: 1928643035}
+  - {fileID: 1943554882}
   - {fileID: 447434038}
   - {fileID: 211779}
   - {fileID: 372959909}
@@ -9051,8 +8937,6 @@ GameObject:
   - component: {fileID: 1928643035}
   - component: {fileID: 1928643037}
   - component: {fileID: 1928643036}
-  - component: {fileID: 1928643038}
-  - component: {fileID: 1928643039}
   - component: {fileID: 1928643040}
   m_Layer: 5
   m_Name: CloudPlanet
@@ -9121,75 +9005,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928643034}
   m_CullTransparentMesh: 1
---- !u!114 &1928643038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1928643034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1928643036}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 691088281}
-        m_TargetAssemblyTypeName: PlanetSceneManager, Assembly-CSharp
-        m_MethodName: GoToPlanetScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: PlanetCloud
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1928643039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1928643034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cad1056687b4815a87f6fd9cfbb312e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  alphaThreshold: 0.1
 --- !u!114 &1928643040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9202,6 +9017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12a0687e319b3e5e2b74b54c914fd188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetName: PlanetCloud
 --- !u!1 &1943554881
 GameObject:
   m_ObjectHideFlags: 0
@@ -9572,7 +9388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 84, y: -0.000048637}
+  m_AnchoredPosition: {x: 89, y: -0.000048637}
   m_SizeDelta: {x: 269.7464, y: 253.0148}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1984036194
@@ -9872,7 +9688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42.294, y: -0.0016837}
+  m_AnchoredPosition: {x: 15.183, y: -0.51853}
   m_SizeDelta: {x: 123.7997, y: 170.83}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2041345250

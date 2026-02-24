@@ -6,9 +6,9 @@ using TMPro;
 public class WhackAMole : MonoBehaviour
 {
 
-    List<GameObject> circles = new();
+    public List<GameObject> circles = new();
 
-    GameObject currentPopupTarget;
+    public GameObject currentPopupTarget;
     [SerializeField]
 
 
@@ -110,6 +110,5 @@ public class WhackAMole : MonoBehaviour
         currentPopupTarget.GetComponentInParent<Animator>().SetBool("PopUp", true);
         popDownTimer = 0f;
         currentTimeTarget = Random.Range(timerRange.x, timerRange.y);
-
     }
 }

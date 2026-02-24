@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlanetHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class HoleHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    public string planetName;
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        PlanetSelection.Instance.OnHoverNew(gameObject);
+        //PlanetSelection.Instance.OnHoverNew(gameObject);
+        Debug.Log("enter  " + eventData);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -18,6 +19,6 @@ public class PlanetHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     // onpointerclick is used here, somewhere else i will add button presses
     public void OnPointerClick(PointerEventData eventData)
     {
-        PlanetSelection.Instance.GoToPlanetScene(planetName);
+        Debug.Log("click  " + eventData);
     }
 }

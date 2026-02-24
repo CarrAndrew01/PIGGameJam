@@ -9,6 +9,8 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public Image pointerImage;
     Color startColour;
 
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,22 +22,23 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
 
     }
-    public void OnPointerEnter(PointerEventData eventData)
+
+    public virtual void OnPointerEnter(PointerEventData eventData)
     {
         OutlineCat(true);
     }
-    public void OnPointerExit(PointerEventData eventData)
+    public virtual void OnPointerExit(PointerEventData eventData)
     {
         OutlineCat(false);
     }
     // onpointerclick is used here, somewhere else i will add button presses
-    public void OnPointerClick(PointerEventData eventData)
+    public virtual void OnPointerClick(PointerEventData eventData)
     {
         InteractWithCat();
     }
-    public void InteractWithCat()
+    public virtual void InteractWithCat()
     {
-
+        
     }
 
     void OutlineCat(bool on)

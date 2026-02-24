@@ -108,6 +108,7 @@ public class Popup : MonoBehaviour
             nextMenuPrefab = canvasPrefab;
             return null;
         }
+        
         if (childCanvas != null || isPoppedIn || isAnimating)
             return null;
         // Pops in the popup with the given prefab as a child canvas

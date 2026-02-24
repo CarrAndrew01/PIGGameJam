@@ -23,7 +23,6 @@ public class Planet
         name.SetActive(enable);
         highlight.SetActive(enable);
     }
-
 }
 
 
@@ -75,10 +74,21 @@ public class PlanetSelection : MonoBehaviour
         }
     }
 
-    
+    public void GoToPlanetScene(string planetName)
+    {   
+        Debug.Log("Going to planet scene: " + planetName);
+        //load the planet scene
+        UnityEngine.SceneManagement.SceneManager.LoadScene(planetName);
+    }
 
     void Update()
     {
+
+        if(Interact.action.WasPressedThisFrame())
+        {
+            planets[currentPlanetIndex].planetSprites[0].GetComponent<PlanetHover>().OnPointerClick(null);
+        }
+
         if (leftRight.action.triggered)
         {
             Vector2 movement = leftRight.action.ReadValue<Vector2>();
@@ -86,7 +96,6 @@ public class PlanetSelection : MonoBehaviour
 
             if (movement.x > 0.5f)
             {
-
                 int previousIndex = currentPlanetIndex;
 
                 if(currentPlanetIndex + 1 < planets.Count)
@@ -107,12 +116,6 @@ public class PlanetSelection : MonoBehaviour
 
                 PlanetChange(previousIndex, currentPlanetIndex);
             }
-
         }
-
-        if(Interact.action.triggered)
-        { 
-            planets[currentPlanetIndex].planetSprites[0].GetComponent<Button>().onClick.Invoke();
-        }
-    }  
+    }
 }
