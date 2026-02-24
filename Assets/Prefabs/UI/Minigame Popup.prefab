@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1848725556626716169}
   - component: {fileID: 8443876707494502735}
-  - component: {fileID: 1951984762056548633}
   - component: {fileID: 1036754230894919713}
   - component: {fileID: 5068138538564706146}
   - component: {fileID: 2423146871983470710}
@@ -48,36 +47,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2189967398996265801}
   m_CullTransparentMesh: 1
---- !u!114 &1951984762056548633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2189967398996265801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.4528302, g: 0.40583834, b: 0.40583834, a: 0.7490196}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &1036754230894919713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,7 +177,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1600, y: 1200}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -249,10 +218,10 @@ MonoBehaviour:
   isAnimating: 0
   isSwapping: 0
   destroyCanvasOnPopOut: 1
-  popInDuration: 0.5
-  popOutDuration: 0.5
+  popInDuration: 0.35
+  popOutDuration: 0.35
   swapOutDuration: 0.25
   swapInDuration: 0.5
-  fadeFinishPercent: 0.796
+  fadeFinishPercent: 0.75
   windowRect: {fileID: 1848725556626716169}
   childCanvas: {fileID: 0}
