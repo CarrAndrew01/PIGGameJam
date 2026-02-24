@@ -222,6 +222,6 @@ MonoBehaviour:
   popOutDuration: 0.35
   swapOutDuration: 0.25
   swapInDuration: 0.5
-  fadeFinishPercent: 0.75
+  fadeFinishPercent: 0.6
   windowRect: {fileID: 1848725556626716169}
   childCanvas: {fileID: 0}
