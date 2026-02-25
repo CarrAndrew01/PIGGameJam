@@ -142,7 +142,8 @@ MonoBehaviour:
   menuAction: {fileID: 7417122882283802201, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   upgradeMenuAction: {fileID: -2308141821969077309, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   inventoryMenuAction: {fileID: 1287775752817895777, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  menuPrefab: {fileID: 2064331208104735627, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
+  shopMenuAction: {fileID: -7471211009204490832, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  menuPrefab: {fileID: 5994889511491456181, guid: a0864c37a86240e409b9fc1073e59805, type: 3}
   upgradeMenuPrefab: {fileID: 8273727319757726718, guid: e420b088386300248b9526869f035fcc, type: 3}
   inventoryMenuPrefab: {fileID: 2941574363715988928, guid: d4e5e35017dfa9e44bef6e72cb809966, type: 3}
   shopMenuPrefab: {fileID: 5550351864713613611, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
