@@ -92,19 +92,19 @@ public class Menus : MonoBehaviour
                 currentMenuType = MenuType.InventoryMenu;
             }
         }
-        else if (shopMenuAction.action.WasPressedThisFrame())
-        {
-            if (currentMenu != null && currentMenuType == MenuType.ShopMenu)
-            {
-                CloseCurrentMenu();
-            }
-            else
-            {
-                // Otherwise, open the shop menu
-                OpenMenu(MenuType.ShopMenu, priority: true);
-                currentMenuType = MenuType.ShopMenu;
-            }
-        }
+        // else if (shopMenuAction.action.WasPressedThisFrame())
+        // {
+        //     if (currentMenu != null && currentMenuType == MenuType.ShopMenu)
+        //     {
+        //         CloseCurrentMenu();
+        //     }
+        //     else
+        //     {
+        //         // Otherwise, open the shop menu
+        //         OpenMenu(MenuType.ShopMenu, priority: true);
+        //         currentMenuType = MenuType.ShopMenu;
+        //     }
+        // }
     }
 
     public void TriggerShopMenu()

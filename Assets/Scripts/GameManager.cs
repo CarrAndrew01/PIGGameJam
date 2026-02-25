@@ -29,13 +29,15 @@ public class GameManager : MonoBehaviour
     /*****
     Quest stuff here
     ********/
-    //master list containing every single quest. no information abotu completion is contained here sohis is NOT accessed directly except to find and copy quests to the other 2 lists 
-    // (if we need a list of inactive quests I'll make it)
-    public List<Quest> ActiveQuests = new(); //quests we've unlocked
-    public List<Quest> AllQuests = new(); 
-    public List<Quest> CompletedQuests = new(); 
+    //We just have 1 list of quests, as there won't be enough to be an issue, 
+    //if extended, you'd have different lists for completed and active quests, but as thered probably <30 total its much easier to just have one list
+    //and the completion information inside Quest.cs
+    
+    public List<Quest> AllQuests = new(
+        //temp assignments
+    ); 
 
-
+    public Fish TEMPFISH;
 
     void Awake()
     {
@@ -50,6 +52,11 @@ public class GameManager : MonoBehaviour
 
         // Setup
         playerStats.Init();
+        // AddFishToInventory(new CaughtFish(TEMPFISH, 10f, "123"));
+        // AddFishToInventory(new CaughtFish(TEMPFISH, 10f, "123"));
+        // AddFishToInventory(new CaughtFish(TEMPFISH, 10f, "123"));
+        // //TEMP REMOVE THIS LATER, JUST FOR TESTING
+        // AddFishToInventory(new CaughtFish(TEMPFISH, 10f, "123"));
     }
 
     // Methods
@@ -60,6 +67,7 @@ public class GameManager : MonoBehaviour
         playerStats.ReapplyUpgrades();
     }
 
+
     // Static methods
     public static List<Upgrade> GetPlayerUpgrades() => Instance.playerStats.upgrades;
     public static float GetPlayerStat(StatType statType) => Instance.playerStats.GetStat(statType);
@@ -68,4 +76,5 @@ public class GameManager : MonoBehaviour
     public static void TriggerPopIn(Popup popup, GameObject canvasPrefab, bool forceSwap = false, System.Action<GameObject> onComplete = null, System.Action<GameObject> onBeforeShow = null) => Instance.StartCoroutine(popup.TriggerPopIn(canvasPrefab, -1f, forceSwap, onComplete, onBeforeShow));
     public static void TriggerPopOut(Popup popup) => popup.TriggerPopOut();
     public static void AdjustMoney(int amount) => Instance.money += amount;
+    public static void FindQuest(string name) => Instance.AllQuests.Find(quest => quest.questName == name);
 }
