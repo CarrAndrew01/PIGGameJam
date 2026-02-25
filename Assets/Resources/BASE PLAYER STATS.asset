@@ -31,3 +31,11 @@ MonoBehaviour:
     value: 1
   - type: 8
     value: 0
+  - type: 10
+    value: 1
+  - type: 11
+    value: 0
+  - type: 12
+    value: 0
+  - type: 13
+    value: 0

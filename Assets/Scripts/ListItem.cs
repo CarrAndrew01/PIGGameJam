@@ -38,6 +38,10 @@ public class ListItem : MonoBehaviour
         subtextField2.gameObject.SetActive(!string.IsNullOrEmpty(subtext2));
     }
 
+
+
+
+
     public void OnItemClicked()
     {
         if (parentMenu != null)

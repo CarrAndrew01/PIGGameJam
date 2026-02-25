@@ -26,6 +26,17 @@ public class GameManager : MonoBehaviour
 
     public int money = 0; // Player's current money, 
 
+    /*****
+    Quest stuff here
+    ********/
+    //master list containing every single quest. no information abotu completion is contained here sohis is NOT accessed directly except to find and copy quests to the other 2 lists 
+    // (if we need a list of inactive quests I'll make it)
+    public List<Quest> ActiveQuests = new(); //quests we've unlocked
+    public List<Quest> AllQuests = new(); 
+    public List<Quest> CompletedQuests = new(); 
+
+
+
     void Awake()
     {
         // Singleton
@@ -52,14 +63,9 @@ public class GameManager : MonoBehaviour
     // Static methods
     public static List<Upgrade> GetPlayerUpgrades() => Instance.playerStats.upgrades;
     public static float GetPlayerStat(StatType statType) => Instance.playerStats.GetStat(statType);
+    public static void AddUpgrade(Upgrade upgrade) => Instance.playerStats.AddUpgrade(upgrade);
     public static void AddFishToInventory(CaughtFish newCatch) => Instance.playerInventory.AddFish(newCatch);
-    public static GameObject TriggerPopIn(Popup popup, GameObject canvasPrefab) => popup.TriggerPopIn(canvasPrefab);
+    public static void TriggerPopIn(Popup popup, GameObject canvasPrefab, bool forceSwap = false, System.Action<GameObject> onComplete = null, System.Action<GameObject> onBeforeShow = null) => Instance.StartCoroutine(popup.TriggerPopIn(canvasPrefab, -1f, forceSwap, onComplete, onBeforeShow));
     public static void TriggerPopOut(Popup popup) => popup.TriggerPopOut();
     public static void AdjustMoney(int amount) => Instance.money += amount;
-
-    public static IEnumerator TriggerSwap(Popup popup, GameObject newMenuPrefab, System.Action<GameObject> onSwapComplete = null)
-    {
-        // This needs to be a coroutine because we need to wait for the pop-out animation to finish before starting the pop-in animation, otherwise they will conflict and cause bugs
-        yield return popup.StartCoroutine(popup.TriggerSwap(newMenuPrefab, onSwapComplete));
-    }
 }

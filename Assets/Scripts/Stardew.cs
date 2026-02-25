@@ -25,7 +25,7 @@ public class Stardew : MonoBehaviour
 
     // State
     [Header("Fish State")]
-    [ShowInInspector,ReadOnly] private FishShadow stardewFishShadow; // Reference to the current fish shadow we're trying to catch
+    [ShowInInspector, ReadOnly] private FishShadow stardewFishShadow; // Reference to the current fish shadow we're trying to catch
     [ShowInInspector, ReadOnly] private bool isCatching = false;
     [ShowInInspector, ReadOnly] private bool isReeling = false; // whether the player is currently pressing the reel button to move the catch slider up
     [ShowInInspector, ReadOnly] private FishState fishState = FishState.Struggling; // Whether the fish is currently up, down, or struggling
@@ -78,11 +78,8 @@ public class Stardew : MonoBehaviour
     public float Stubbornness => fish.stubbornness * stubbornnessMult;
     public float Size => fish.size * sizeMult;
 
-    private CaughtFish caughtFish;
-    private int amountInCatch = 1; // determines if extra fish are added if we successfully catch
-
     // Player stats that affect minigame
-    private float statCatchSpeed, statCatchArea, statFishWeight, statHookGravity, statFishEscapeRate, statHookPullForce;
+    private float statCatchSpeed, statCatchArea, statHookGravity, statFishEscapeRate, statHookPullForce;
 
     // Input actions
     [Header("Input Actions")]
@@ -108,7 +105,7 @@ public class Stardew : MonoBehaviour
     {
         // Grab the current fish shadow from the Fishing singleton (because if it moves out of the player collider it will cause problems)
         stardewFishShadow = Fishing.LastFishShadow;
-    } 
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -116,7 +113,6 @@ public class Stardew : MonoBehaviour
         // Grab player stats from GameManager
         statCatchSpeed = GameManager.GetPlayerStat(StatType.catchSpeed);
         statCatchArea = GameManager.GetPlayerStat(StatType.catchArea);
-        statFishWeight = GameManager.GetPlayerStat(StatType.fishWeight);
         statHookGravity = GameManager.GetPlayerStat(StatType.hookGravity);
         statFishEscapeRate = GameManager.GetPlayerStat(StatType.fishEscapeChance);
         statHookPullForce = GameManager.GetPlayerStat(StatType.hookPullForce);
@@ -138,10 +134,6 @@ public class Stardew : MonoBehaviour
             fishImage.sprite = fish.sprite;
 
         // Grab the full caught fish data for when we successfully catch the fish
-        caughtFish = stardewFishShadow.fishData;
-
-        amountInCatch = Random.Range(fish.minAmount, fish.maxAmount + 1); // +1 because Random.Range is exclusive of the upper bound
-
         hookRect = catchImage.GetComponent<RectTransform>();
         sliderRect = catchSlider.GetComponent<RectTransform>();
         hookRect.sizeDelta = new Vector2(hookRect.sizeDelta.x, CatchAreaSize);
@@ -243,7 +235,7 @@ public class Stardew : MonoBehaviour
             currentFishVelocity += direction * pullStrength * Time.deltaTime;
         }
     }
-    
+
     private FishState DecideFishState()
     {
         timeSinceStateChange += Time.deltaTime;
@@ -373,36 +365,15 @@ public class Stardew : MonoBehaviour
             fishState = FishState.Caught;
 
             // Tell the shadow fish
-            stardewFishShadow.Catch();
-
-            // Trigger any catch animations or logic here
-            GameManager.AddFishToInventory(caughtFish);
-            for (int i = 0; i < amountInCatch - 1; i++)
-            {
-                // Create additional caught fish for any extra amount
-                CaughtFish extraFish = new CaughtFish()
-                {
-                    fish = fish,
-                    weight = Random.Range(fish.minWeight, fish.maxWeight) * statFishWeight,
-                    planetOfOrigin = Environment.Name
-                };
-                GameManager.AddFishToInventory(extraFish);
-            }
-            GameManager.TriggerPopOut(GameManager.MinigamePopup);
-
-            // Reel in bobber
-            Fishing.ReelInCurrentBobber();
+            stardewFishShadow.EndFishing(true);
+            
         }
         else if (caughtProgress <= -1f && canEscape)
         {
             fishState = FishState.Escaped;
 
             // Increment the fail count for the fish shadow and unpause its leave timer
-            stardewFishShadow.AddFail();
-            Fishing.EndFishingMinigame();
-
-            // Trigger any escape animations or logic here
-            GameManager.TriggerPopOut(GameManager.MinigamePopup);
+            stardewFishShadow.EndFishing(false);
         }
 
         // Finally, update the success slider to show how close the player is to catching the fish

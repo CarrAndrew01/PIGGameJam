@@ -2206,6 +2206,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7410456370226657384, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
+      propertyPath: shopMenuAction
+      value: 
+      objectReference: {fileID: -7471211009204490832, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
     - target: {fileID: 9100356463631806347, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
       propertyPath: m_Pivot.x
       value: 0

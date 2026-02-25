@@ -157,7 +157,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 1.2
 --- !u!114 &6263767466846855391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,11 +174,13 @@ MonoBehaviour:
   movementDirection: {x: 0, y: 0}
   failCount: 0
   pauseTimer: 0
+  targetBobber: {fileID: 0}
   numberOfFailsBeforeEscape: 2
   timeUntilLeaving: 30
   movementRadius: 1.4
   movementSpeed: 0.1
   verticalMovementMax: 0.2
+  investigateBaitSpeed: 0.3
   minHeight: -4.5
   maxHeight: -2
   hookedRadiusMult: 2

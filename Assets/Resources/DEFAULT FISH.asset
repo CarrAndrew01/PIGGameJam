@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: DEFAULT FISH
   m_EditorClassIdentifier: 
   sprite: {fileID: 6645427384175290001, guid: 4dffe6eab57ca4e4ba2f967307bd1c29, type: 3}
-  minWeight: 2
-  maxWeight: 3
+  minWeight: 1
+  maxWeight: 1
+  minAmount: 1
+  maxAmount: 1
+  description: How did you get this?
+  preferredBaitType: 0
+  value: 0
+  minigamePrefab: {fileID: 0}
   jumpiness: 0.5
   speed: 0.5
   stubbornness: 0.5

@@ -34,6 +34,7 @@ public class Bobber : MonoBehaviour
     public float hookedVelocity = 1f; // How fast the bobber moves towards the fish shadow when a fish is hooked
     public float distanceToRetrieve = 0.5f; // How close the bobber needs to be to the player to be retrieved when reeling in
     public float hookedOffset = -0.5f; // How far from the fish's shadow the bobber should be hooked
+    public float hookRange = 0.1f; // How far from the bobber the fish shadow needs to be to become hooked
 
     [Header("Movement Settings")]
     public float drag = 0.1f; // How much the bobber slows down over time when in the air
@@ -59,6 +60,8 @@ public class Bobber : MonoBehaviour
     void Start()
     {
         currentWaterHeight = Environment.WaterHeight;
+        // Default cached fish sprite world position to the water height so sprite offsets have a sensible target
+        cachedShadowSpritePosition = new Vector2(transform.position.x, Environment.WaterHeight);
     }
 
     public void Init(Transform ship, float throwStrength, float direction = 1f)
@@ -126,8 +129,7 @@ public class Bobber : MonoBehaviour
 
             if (!currentFishShadow.IsEscaping && !isMinigameActive)
             {
-                isMinigameActive = true;
-                Fishing.StartFishingMinigame();
+                currentFishShadow.targetBobber = this;
             }
         }
     }
@@ -137,6 +139,7 @@ public class Bobber : MonoBehaviour
         if (other.CompareTag("Fish") && other.GetComponent<FishShadow>() == currentFishShadow)
         {
             Debug.Log("Bobber exited fish trigger");
+            currentFishShadow.targetBobber = null;
             currentFishShadow = null;
         }
     }
@@ -276,16 +279,20 @@ public class Bobber : MonoBehaviour
 
         if (isHooked && Fishing.LastFishShadow != null)
         {
-            // If a fish is hooked, we want the bobber to be pulled towards the height of the fish shadow's sprite instead
-            cachedShadowSpritePosition = Fishing.LastFishShadow.spriteTransform.localPosition;
-            targetY = cachedShadowSpritePosition.y + hookedOffset;
+            // If a fish is hooked, we want the bobber sprite to follow the fish sprite's WORLD Y position
+            // Cache the fish sprite world position
+            cachedShadowSpritePosition = Fishing.LastFishShadow.spriteTransform.position;
 
-            // Move with hookedVelocity if hooked to simulate being pulled by the fish
-            newY = Mathf.MoveTowards(currentSpriteOffset, targetY, hookedVelocity * Time.fixedDeltaTime);
+            // Desired local sprite offset so the sprite aligns with the fish sprite world Y
+            float desiredLocalOffset = (cachedShadowSpritePosition.y - transform.position.y) + hookedOffset;
+
+            // Move the local sprite offset toward the desired offset to simulate being pulled
+            newY = Mathf.MoveTowards(currentSpriteOffset, desiredLocalOffset, hookedVelocity * Time.fixedDeltaTime);
 
             // Also move the whole bobber left or right with the fish shadow parent to simulate being pulled by the fish
             newX = Mathf.MoveTowards(transform.position.x, Fishing.LastFishShadow.transform.position.x, hookedVelocity * Time.fixedDeltaTime);
 
+            // Keep the bobber transform's vertical position unchanged (we animate the sprite local offset)
             transform.position = new Vector3(newX, transform.position.y, transform.position.z);
             // Apply vertical offset to the sprite, making it follow the fish (visually)
             currentSpriteOffset = newY;
@@ -298,8 +305,9 @@ public class Bobber : MonoBehaviour
             // Apply real vertical movement, to make the bobber go to actually touch the water and not just visually
             transform.position = new Vector3(newX, newY, transform.position.z);
 
-            // We still want vertical movement of the sprite, but only to the last fish's sprite location and without hooked offset
-            currentSpriteOffset = Mathf.MoveTowards(currentSpriteOffset, cachedShadowSpritePosition.y, bouyancyVelocity * Time.fixedDeltaTime);
+            // We still want vertical movement of the sprite, but target the cached fish sprite WORLD Y (defaults to water height)
+            float desiredLocal = cachedShadowSpritePosition.y - transform.position.y;
+            currentSpriteOffset = Mathf.MoveTowards(currentSpriteOffset, desiredLocal, bouyancyVelocity * Time.fixedDeltaTime);
         }
     }
 }
