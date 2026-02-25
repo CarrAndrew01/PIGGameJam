@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Quest : MonoBehaviour
+public class Quest
 {
     public string questName = "";
     public string description = "";
+
 
     public enum QuestType
     {
@@ -34,6 +35,5 @@ public class Quest : MonoBehaviour
     /*
     For linking to next quest
     */
-    public Quest nextQuest; // If this is not null, it will be given to the player after they complete this quest
-    
+    public Quest nextQuest; // If this is not null, it will be given to the player after they complete this quest    
 }

@@ -15,7 +15,6 @@ public class CardScript : MonoBehaviour
 
     public List<Sprite> SUITS = new List<Sprite>();
 
-
     public void SetCard()
     {
         suit = Random.Range(0, 3);
@@ -23,11 +22,7 @@ public class CardScript : MonoBehaviour
         string numString;
 
         suitTL.sprite = SUITS[suit];
-        // temporarily sets all suits to black
-        suitTL.color = Color.black;
         suitBR.sprite = SUITS[suit];
-        // temporarily sets all suits to black
-        suitBR.color = Color.black;
 
         switch (num)
         {
@@ -48,7 +43,17 @@ public class CardScript : MonoBehaviour
         {
             numberText.text = numString;
         }
-        numberText.color = Color.black;
+        // paw fish
+        if (suit <= 1)
+        {
+            numberText.color = new Color32(0, 0, 0, 235);
+
+        }
+        // cat heart
+        else
+        {
+            numberText.color = new Color32(184, 67, 48, 235);
+        }
     }
     public int GetCardValue()
     {
