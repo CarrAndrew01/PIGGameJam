@@ -16,7 +16,7 @@ public class BlackjackScript : MonoBehaviour
     bool didStand = false;
     bool didBust = false;
     // -1 means no cards placed
-    int cardIndex = 0;
+    int cardIndex = -1;
 
     public GameObject cardPrefab;
 
@@ -30,11 +30,12 @@ public class BlackjackScript : MonoBehaviour
 
     void CreateNewCard(bool player)
     {
-        if (cardIndex <= 4) // max of 5 cards (starts at 0)
+        if (cardIndex < 4) // max of 5 cards (starts at 0)
         {
-            playerCards[cardIndex].GetComponent<CardScript>().SetCard();
             // advances cards along index
             cardIndex += 1;
+            playerCards[cardIndex].GetComponent<CardScript>().SetCard();
+
         }
         // add animate card
 
