@@ -4,6 +4,7 @@ using NUnit.Framework.Internal;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using System.Collections;
 
 public class BlackjackScript : MonoBehaviour
 {
@@ -16,43 +17,89 @@ public class BlackjackScript : MonoBehaviour
     bool didStand = false;
     bool didBust = false;
     // -1 means no cards placed
-    int cardIndex = -1;
+    int playerCardIndex = -1;
+    int dealerCardIndex = -1;
 
     public GameObject cardPrefab;
 
     public List<GameObject> playerCards = new List<GameObject>();
     public List<GameObject> dealerCards = new List<GameObject>();
 
-    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI playerScoreText;
+    public TextMeshProUGUI dealerScoreText;
 
     public delegate void OnCardsSpawn();
     public static event OnCardsSpawn onCardsSpawn;
 
-    void CreateNewCard(bool player)
+    // TODO MAKE DEALER ALWAYS STAND ON 17 OR ABOVE 
+
+    private void Start()
+    {
+        // deals 2 cards for player + 1 card for dealer
+        CreateNewCard(true, ref playerCardIndex, ref playerCards);
+        CreateNewCard(true, ref playerCardIndex, ref playerCards);
+        CreateNewCard(false, ref dealerCardIndex, ref dealerCards);
+    }
+    public void Hit()
+    {
+        if (didBust) return;
+        if (didStand) return;
+        CreateNewCard(true, ref playerCardIndex, ref playerCards);
+    }
+    public void Stand()
+    {
+        didStand = true;
+        // if dealer < 17 OR beat player, hit
+        while (dealerCardIndex < 4)
+        {
+            // if dealer score >= 17, break
+            if (currentDealerValue >= 17) break;
+            CreateNewCard(false, ref dealerCardIndex, ref dealerCards);
+        }
+    }
+    public void CreateNewCard(bool player, ref int cardIndex, ref List<GameObject> cards)
     {
         if (cardIndex < 4) // max of 5 cards (starts at 0)
         {
             // advances cards along index
             cardIndex += 1;
-            playerCards[cardIndex].GetComponent<CardScript>().SetCard();
+            cards[cardIndex].GetComponent<CardScript>().SetCard();
 
         }
         // add animate card
 
         // recalculate score
-        var test = RecalculateScore(playerCards);
-        Debug.Log("Score: " + test);
-        scoreText.text = "Total - " + test.ToString();
+        var test = RecalculateScore(cards, cardIndex);
+        if (player)
+        {
+            playerScoreText.text = "Score: " + test.ToString();
+            currentPlayerValue = test;
+            if (currentPlayerValue > 21)
+            {
+                didBust = true;
+            }
+            else if (currentPlayerValue == 21)
+            {
+                didStand = true;
+            }
+        }
+        else
+        {
+            dealerScoreText.text = "Dealer Score: " + test.ToString();
+            currentDealerValue = test;
+        }
+        // scoreText.text = "Total - " + test.ToString();
+        // scoreText.text += "\nDealer Total - 0";
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            CreateNewCard(true);
+            // CreateNewCard(true);
         }
     }
 
-    public int RecalculateScore(List<GameObject> cards)
+    public int RecalculateScore(List<GameObject> cards, int cardIndex)
     {
         int scoreCounter = 0;
         int aceCount = 0;
