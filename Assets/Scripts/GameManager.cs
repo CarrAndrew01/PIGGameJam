@@ -26,6 +26,17 @@ public class GameManager : MonoBehaviour
 
     public int money = 0; // Player's current money, 
 
+    /*****
+    Quest stuff here
+    ********/
+    //master list containing every single quest. no information abotu completion is contained here sohis is NOT accessed directly except to find and copy quests to the other 2 lists 
+    // (if we need a list of inactive quests I'll make it)
+    public List<Quest> ActiveQuests = new(); //quests we've unlocked
+    public List<Quest> AllQuests = new(); 
+    public List<Quest> CompletedQuests = new(); 
+
+
+
     void Awake()
     {
         // Singleton
