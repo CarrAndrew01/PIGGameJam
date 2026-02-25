@@ -25,7 +25,6 @@ public class Planet
     }
 }
 
-
 public class PlanetSelection : MonoBehaviour
 {
     public static PlanetSelection Instance { get; private set; }
@@ -39,17 +38,21 @@ public class PlanetSelection : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
-
     }
 
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 
     public int currentPlanetIndex = 0; //index in the list of the planet
 
     [SerializeField]
-    public List<Planet> planets; 
+    public List<Planet> planets;
     //decided not to make an int that keeps track of all this
-    
 
     public InputActionReference leftRight; // button input to reel the hook upward
     public InputActionReference Interact; // button input to reel the hook upward
@@ -57,15 +60,15 @@ public class PlanetSelection : MonoBehaviour
 
     void PlanetChange(int disable, int enable)
     {
-        planets[disable].ExtraChange(false); 
-        planets[enable].ExtraChange(true); 
+        planets[disable].ExtraChange(false);
+        planets[enable].ExtraChange(true);
     }
 
     public void OnHoverNew(GameObject go)
     {
         //can we do gameobject comparison?
-        for(int i = 0; i < planets.Count; i++)
-        { 
+        for (int i = 0; i < planets.Count; i++)
+        {
             if (go == planets[i].planetSprites[0])
             {
                 PlanetChange(currentPlanetIndex, i);
@@ -75,7 +78,7 @@ public class PlanetSelection : MonoBehaviour
     }
 
     public void GoToPlanetScene(string planetName)
-    {   
+    {
         Debug.Log("Going to planet scene: " + planetName);
         //load the planet scene
         UnityEngine.SceneManagement.SceneManager.LoadScene(planetName);
@@ -84,7 +87,7 @@ public class PlanetSelection : MonoBehaviour
     void Update()
     {
 
-        if(Interact.action.WasPressedThisFrame())
+        if (Interact.action.WasPressedThisFrame())
         {
             planets[currentPlanetIndex].planetSprites[0].GetComponent<PlanetHover>().OnPointerClick(null);
         }
@@ -98,7 +101,7 @@ public class PlanetSelection : MonoBehaviour
             {
                 int previousIndex = currentPlanetIndex;
 
-                if(currentPlanetIndex + 1 < planets.Count)
+                if (currentPlanetIndex + 1 < planets.Count)
                 {
                     currentPlanetIndex++;
                 }
@@ -109,7 +112,7 @@ public class PlanetSelection : MonoBehaviour
             {
                 int previousIndex = currentPlanetIndex;
 
-                if(currentPlanetIndex - 1 >= 0)
+                if (currentPlanetIndex - 1 >= 0)
                 {
                     currentPlanetIndex--;
                 }

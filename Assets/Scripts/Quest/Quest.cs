@@ -1,11 +1,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//WHY
+//AREN"T
+//FICTIONARYS
+//FUCKING
+//SERIALIZABLE
+//AAAAAAAAAHHHHHHHHHH
+[System.Serializable]
+public class QuestSubtype
+{
+    public Fish fishType;
+    public int quantity;
+
+}
+
+[System.Serializable]
 public class Quest
 {
     public string questName = "";
     public string description = "";
+    
+    //I will have this here for conveniance, but we also have a seperate list of completed and active quests in GameManager. It's kind of doubling up,
+    //but it makes the code cleaner for populating
+    public enum Completed
+    {
+        Active,
+        Completed,
+        Hidden
 
+    }
+
+    public Completed completedStatus = Completed.Hidden;
 
     public enum QuestType
     {
@@ -15,25 +42,24 @@ public class Quest
 
     public QuestType type;
 
-    /*****
-    FOR QUANTITY OF FISH QUESTS:
-    *******/
-    public int quantity = 0; // For quantity fish quests, the amount of the specified fish the player needs to catch. Ignored for specific fish quests
-    
+
     /***
     For ALL QUESTS:
     *****/
-    public List<CaughtFish> fishType = new List<CaughtFish>(); // For quantity fish quests, the type of fish the player needs to catch. Ignored for specific fish quests
+    public List<QuestSubtype> questFish = new List<QuestSubtype>(); // For all quests, you need to provide a certain type of fish
+    //for unique fish (i.e. special or "unique" fish) the fish is just saved the same as a different species
+
 
     /*
     Rewards:
     */
-    public List<Upgrade> rewards = new List<Upgrade>(); //only a list just in case
+    public Upgrade rewardUpgrade; //only a list just in case
 
     public int moneyReward = 0; //if this is 0 it just wont do anything
 
     /*
     For linking to next quest
     */
-    public Quest nextQuest; // If this is not null, it will be given to the player after they complete this quest    
+    public List<string> nextQuest; // If this is not null, it will be given to the player after they complete this quest    
+    //its easier to keep string refs instead of a ref to the Quest 
 }

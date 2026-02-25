@@ -12,6 +12,7 @@ public class Upgrade : ScriptableObject
         Multiplicative, // Multiplies the relevant stat by (1 + amount), so 0.5 would be +50% and -0.5 would be -50%
     }
 
+
     // Variables
     public string description;
     public Sprite icon;

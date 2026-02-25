@@ -3,11 +3,20 @@ using UnityEngine;
 /// <summary>
 /// Struct for holding a fish
 /// </summary>
+/// 
 public struct CaughtFish
 {
     public Fish fish;
     public float weight;
     public string planetOfOrigin;
+
+    public CaughtFish(Fish fish, float weight, string planetOfOrigin)
+    {
+        this.fish = fish;
+        this.weight = weight;
+        this.planetOfOrigin = planetOfOrigin;
+    }
+
 }
 
 
