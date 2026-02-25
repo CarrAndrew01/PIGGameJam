@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Singleton manager for game state, progression, etc.
@@ -15,7 +14,10 @@ public class GameManager : MonoBehaviour
 
     public PlayerInventory playerInventory = new PlayerInventory(); // Manages player inventory
 
+    public Transition.IntendedScreen intendedScreen;
+
     // Variables
+    public const string TITLE_SCENE_NAME = "Title";
     
     // Components
     [HideInInspector] public Popup minigamePopup; // Reference to the Popup component for minigame pop-ups
@@ -57,4 +59,10 @@ public class GameManager : MonoBehaviour
     public static void TriggerPopIn(Popup popup, GameObject canvasPrefab, bool forceSwap = false, System.Action<GameObject> onComplete = null, System.Action<GameObject> onBeforeShow = null) => Instance.StartCoroutine(popup.TriggerPopIn(canvasPrefab, -1f, forceSwap, onComplete, onBeforeShow));
     public static void TriggerPopOut(Popup popup) => popup.TriggerPopOut();
     public static void AdjustMoney(int amount) => Instance.money += amount;
+
+    public static void GotoTitleScreen(Transition.IntendedScreen intendedScreen)
+    {
+        Instance.intendedScreen = intendedScreen;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(TITLE_SCENE_NAME);
+    }
 }

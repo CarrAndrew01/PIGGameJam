@@ -5,23 +5,46 @@ using UnityEngine;
 
 public class Transition : MonoBehaviour
 {
+    public enum IntendedScreen
+    {
+        Main,
+        Galaxy,
+        Settings
+    }
 
     public List<TMP_Text> TextObjects = new();
- 
+
+    private void Start()
+    {
+        switch (GameManager.Instance.intendedScreen)
+        {
+            case IntendedScreen.Main:
+                break;
+            case IntendedScreen.Galaxy:
+                TransitionToPlanets();
+                GameManager.Instance.intendedScreen = IntendedScreen.Main;
+                break;
+            case IntendedScreen.Settings:
+                TransitionToSettings();
+                GameManager.Instance.intendedScreen = IntendedScreen.Main;
+                break;
+        }
+    }
 
     IEnumerator FadeTextCoroutine()
     {
-        for(int i = 0; i < 255; i++){
+        for (int i = 0; i < 255; i++)
+        {
             foreach (TMP_Text textObject in TextObjects)
             {
                 //fade the text out
                 textObject.color = new Color(textObject.color.r, textObject.color.g, textObject.color.b, textObject.color.a - 0.04f);
 
-             }
+            }
 
             //the text elements are all firing at the same time so this is safe
-            if(TextObjects[0].color.a <= 0f)
-            {   
+            if (TextObjects[0].color.a <= 0f)
+            {
                 break;
             }
 
@@ -31,7 +54,8 @@ public class Transition : MonoBehaviour
 
     IEnumerator UnFadeTextCoroutine()
     {
-        for(int i = 0; i < 255; i++){
+        for (int i = 0; i < 255; i++)
+        {
             foreach (TMP_Text textObject in TextObjects)
             {
                 //fade the text in
@@ -40,7 +64,7 @@ public class Transition : MonoBehaviour
             }
 
             //the text elements are all firing at the same time so this is safe
-            if(TextObjects[0].color.a >= 1f)
+            if (TextObjects[0].color.a >= 1f)
             {
                 break;
             }
