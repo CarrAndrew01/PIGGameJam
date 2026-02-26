@@ -1,0 +1,1664 @@
+fileFormatVersion: 2
+guid: d2fb685fe990c1d478b717648e66622f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4372731859886280024
+    second: BIO (Big Tree Lum)_0
+  - first:
+      213: 4554995001249375777
+    second: BIO (Big Tree Lum)_1
+  - first:
+      213: 5351900533581338191
+    second: BIO (Big Tree Lum)_2
+  - first:
+      213: 526116309777712374
+    second: BIO (Big Tree Lum)_3
+  - first:
+      213: 2574483857605575784
+    second: BIO (Big Tree Lum)_4
+  - first:
+      213: 3939138764108407252
+    second: BIO (Big Tree Lum)_5
+  - first:
+      213: 8656014245103525131
+    second: BIO (Big Tree Lum)_6
+  - first:
+      213: 291274819138707811
+    second: BIO (Big Tree Lum)_7
+  - first:
+      213: 1848727564532624428
+    second: BIO (Big Tree Lum)_8
+  - first:
+      213: -6510681387667073063
+    second: BIO (Big Tree Lum)_9
+  - first:
+      213: -4556640241844570276
+    second: BIO (Big Tree Lum)_10
+  - first:
+      213: -2585834257082041219
+    second: BIO (Big Tree Lum)_11
+  - first:
+      213: -5508830460664624853
+    second: BIO (Big Tree Lum)_12
+  - first:
+      213: 7864965255912154290
+    second: BIO (Big Tree Lum)_13
+  - first:
+      213: 5528003543298613377
+    second: BIO (Big Tree Lum)_14
+  - first:
+      213: -3448015215913850504
+    second: BIO (Big Tree Lum)_15
+  - first:
+      213: -8031885483618481844
+    second: BIO (Big Tree Lum)_16
+  - first:
+      213: -1859803820627618189
+    second: BIO (Big Tree Lum)_17
+  - first:
+      213: 3534371161608404815
+    second: BIO (Big Tree Lum)_18
+  - first:
+      213: -8943452859857640408
+    second: BIO (Big Tree Lum)_19
+  - first:
+      213: 2328234247482160444
+    second: BIO (Big Tree Lum)_20
+  - first:
+      213: -3837527724409689643
+    second: BIO (Big Tree Lum)_21
+  - first:
+      213: -7150530099644520801
+    second: BIO (Big Tree Lum)_22
+  - first:
+      213: -1312929842902545745
+    second: BIO (Big Tree Lum)_23
+  - first:
+      213: 8357201770223357807
+    second: BIO (Big Tree Lum)_24
+  - first:
+      213: -3561946735317328178
+    second: BIO (Big Tree Lum)_25
+  - first:
+      213: 4711900265596182092
+    second: BIO (Big Tree Lum)_26
+  - first:
+      213: 4831609612576164357
+    second: BIO (Big Tree Lum)_27
+  - first:
+      213: -5812631222390319500
+    second: BIO (Big Tree Lum)_28
+  - first:
+      213: -609826664425151297
+    second: BIO (Big Tree Lum)_29
+  - first:
+      213: 2648837554360576179
+    second: BIO (Big Tree Lum)_30
+  - first:
+      213: -3732071393538875396
+    second: BIO (Big Tree Lum)_31
+  - first:
+      213: -2429483291395153741
+    second: BIO (Big Tree Lum)_32
+  - first:
+      213: -3027780135382192175
+    second: BIO (Big Tree Lum)_33
+  - first:
+      213: -8894208056094355305
+    second: BIO (Big Tree Lum)_34
+  - first:
+      213: 1333900126732809215
+    second: BIO (Big Tree Lum)_35
+  - first:
+      213: -1428105336976672347
+    second: BIO (Big Tree Lum)_36
+  - first:
+      213: 4293597337181716911
+    second: BIO (Big Tree Lum)_37
+  - first:
+      213: -3725258648374474835
+    second: BIO (Big Tree Lum)_38
+  - first:
+      213: 623886750024662312
+    second: BIO (Big Tree Lum)_39
+  - first:
+      213: 5067841876391173383
+    second: BIO (Big Tree Lum)_40
+  - first:
+      213: 7069838608582432802
+    second: BIO (Big Tree Lum)_41
+  - first:
+      213: 7046230782333538694
+    second: BIO (Big Tree Lum)_42
+  - first:
+      213: -4191224230630996428
+    second: BIO (Big Tree Lum)_43
+  - first:
+      213: 250521819087393415
+    second: BIO (Big Tree Lum)_44
+  - first:
+      213: -2788368189831733917
+    second: BIO (Big Tree Lum)_45
+  - first:
+      213: 3257772787940274149
+    second: BIO (Big Tree Lum)_46
+  - first:
+      213: 2874974540796500063
+    second: BIO (Big Tree Lum)_47
+  - first:
+      213: -2950937423601066399
+    second: BIO (Big Tree Lum)_48
+  - first:
+      213: 7083240691650946585
+    second: BIO (Big Tree Lum)_49
+  - first:
+      213: -6408149225032614474
+    second: BIO (Big Tree Lum)_50
+  - first:
+      213: 6711731303857933134
+    second: BIO (Big Tree Lum)_51
+  - first:
+      213: -7159599320892459811
+    second: BIO (Big Tree Lum)_52
+  - first:
+      213: 2869419460203438195
+    second: BIO (Big Tree Lum)_53
+  - first:
+      213: -711856953309012874
+    second: BIO (Big Tree Lum)_54
+  - first:
+      213: -8009847595129242207
+    second: BIO (Big Tree Lum)_55
+  - first:
+      213: 619879562406465232
+    second: BIO (Big Tree Lum)_56
+  - first:
+      213: 5333403299415577465
+    second: BIO (Big Tree Lum)_57
+  - first:
+      213: -6283978785300906919
+    second: BIO (Big Tree Lum)_58
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 24
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_0
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 204
+        width: 27
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a2f1798a8fe053c0800000000000000
+      internalID: -4372731859886280024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_1
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 223
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 126262bf1d7963f30800000000000000
+      internalID: 4554995001249375777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_2
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 222
+        width: 23
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f46d6510e25c54a40800000000000000
+      internalID: 5351900533581338191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_3
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 220
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f407da0ff32d4700800000000000000
+      internalID: 526116309777712374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_4
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 198
+        width: 6
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 864ce84ad676ab320800000000000000
+      internalID: 2574483857605575784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_5
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 208
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d127a3e5d1aaa630800000000000000
+      internalID: 3939138764108407252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_6
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 187
+        width: 46
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0ddd1a2817502870800000000000000
+      internalID: 8656014245103525131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_7
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 202
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36167ce97e0da0400800000000000000
+      internalID: 291274819138707811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_8
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 198
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2ca07acceff7a910800000000000000
+      internalID: 1848727564532624428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_9
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 189
+        width: 28
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d75b52e5c965a5a0800000000000000
+      internalID: -6510681387667073063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_10
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 199
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c57ba9797df83c0c0800000000000000
+      internalID: -4556640241844570276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_11
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 120
+        width: 68
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7cb69a81754d1cd0800000000000000
+      internalID: -2585834257082041219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_12
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 186
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b29cb3012e3bc83b0800000000000000
+      internalID: -5508830460664624853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_13
+      rect:
+        serializedVersion: 2
+        x: 547
+        y: 184
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b4ee69da38f52d60800000000000000
+      internalID: 7864965255912154290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_14
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 154
+        width: 62
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1802a6b1fe967bc40800000000000000
+      internalID: 5528003543298613377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_15
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 187
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8792053fd603620d0800000000000000
+      internalID: -3448015215913850504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_16
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 192
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c49cd4815b2098090800000000000000
+      internalID: -8031885483618481844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_17
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 136
+        width: 28
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 376939f5746a036e0800000000000000
+      internalID: -1859803820627618189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_18
+      rect:
+        serializedVersion: 2
+        x: 377
+        y: 169
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4fbd0878db9c0130800000000000000
+      internalID: 3534371161608404815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_19
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 172
+        width: 17
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 824ebb6220972e380800000000000000
+      internalID: -8943452859857640408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_20
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 148
+        width: 54
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c35b21b66bc8f4020800000000000000
+      internalID: 2328234247482160444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_21
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 162
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d9e8d2eddc5ebac0800000000000000
+      internalID: -3837527724409689643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_22
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 151
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9623fe62c634cc90800000000000000
+      internalID: -7150530099644520801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_23
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 145
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: faac8ca934987cde0800000000000000
+      internalID: -1312929842902545745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_24
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 151
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6fcd6e4bbebaf370800000000000000
+      internalID: 8357201770223357807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_25
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 148
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ece5c84f05c619ec0800000000000000
+      internalID: -3561946735317328178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_26
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 151
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4eddeba358046140800000000000000
+      internalID: 4711900265596182092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_27
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 145
+        width: 17
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50a07faf7535d0340800000000000000
+      internalID: 4831609612576164357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_28
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 145
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 476941b23b2655fa0800000000000000
+      internalID: -5812631222390319500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_29
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 144
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb4a06431e57987f0800000000000000
+      internalID: -609826664425151297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_30
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 145
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b86067b8bf82c420800000000000000
+      internalID: 2648837554360576179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_31
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 139
+        width: 8
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cffd7b747d4053cc0800000000000000
+      internalID: -3732071393538875396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_32
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 142
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b025a481ddb84ed0800000000000000
+      internalID: -2429483291395153741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_33
+      rect:
+        serializedVersion: 2
+        x: 468
+        y: 144
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1df6f8c320a2bf5d0800000000000000
+      internalID: -3027780135382192175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_34
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 138
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 790141285ec619480800000000000000
+      internalID: -8894208056094355305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_35
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 120
+        width: 10
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff3f1c31917f28210800000000000000
+      internalID: 1333900126732809215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_36
+      rect:
+        serializedVersion: 2
+        x: 419
+        y: 129
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a97aaf23c95e2ce0800000000000000
+      internalID: -1428105336976672347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_37
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 136
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa1874b970ce59b30800000000000000
+      internalID: 4293597337181716911
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_38
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 126
+        width: 20
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da7003f1ff83d4cc0800000000000000
+      internalID: -3725258648374474835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_39
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 135
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82dfa4391bd78a800800000000000000
+      internalID: 623886750024662312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_40
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 136
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70d15240657945640800000000000000
+      internalID: 5067841876391173383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_41
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 123
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 228d5e3c1cc1d1260800000000000000
+      internalID: 7069838608582432802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_42
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 123
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 681d962609d39c160800000000000000
+      internalID: 7046230782333538694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_43
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 125
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 436ca3fa4c7c5d5c0800000000000000
+      internalID: -4191224230630996428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_44
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 128
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 782503364480a7300800000000000000
+      internalID: 250521819087393415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_45
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 129
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36d941e97e9bd49d0800000000000000
+      internalID: -2788368189831733917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_46
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 120
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ef2d18171fe53d20800000000000000
+      internalID: 3257772787940274149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_47
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 114
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f589772dc16f5e720800000000000000
+      internalID: 2874974540796500063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_48
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 107
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16e1ad74c0a2c07d0800000000000000
+      internalID: -2950937423601066399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_49
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 111
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 916627461e9bc4260800000000000000
+      internalID: 7083240691650946585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_50
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 122
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bd7c3e4b3ea117a0800000000000000
+      internalID: -6408149225032614474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_51
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 120
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4b42528f0cd42d50800000000000000
+      internalID: 6711731303857933134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_52
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 112
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd4b310d95ef3ac90800000000000000
+      internalID: -7159599320892459811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_53
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 114
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 370e405dbc932d720800000000000000
+      internalID: 2869419460203438195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_54
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 108
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67cdf1f5fd9fe16f0800000000000000
+      internalID: -711856953309012874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_55
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 107
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1adfd4bdc0e47d090800000000000000
+      internalID: -8009847595129242207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_56
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 111
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0de03c08d214a9800800000000000000
+      internalID: 619879562406465232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_57
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 107
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 973df811b0e040a40800000000000000
+      internalID: 5333403299415577465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Big Tree Lum)_58
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 98
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95c7c06b692dac8a0800000000000000
+      internalID: -6283978785300906919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BIO (Big Tree Lum)_0: -4372731859886280024
+      BIO (Big Tree Lum)_1: 4554995001249375777
+      BIO (Big Tree Lum)_10: -4556640241844570276
+      BIO (Big Tree Lum)_11: -2585834257082041219
+      BIO (Big Tree Lum)_12: -5508830460664624853
+      BIO (Big Tree Lum)_13: 7864965255912154290
+      BIO (Big Tree Lum)_14: 5528003543298613377
+      BIO (Big Tree Lum)_15: -3448015215913850504
+      BIO (Big Tree Lum)_16: -8031885483618481844
+      BIO (Big Tree Lum)_17: -1859803820627618189
+      BIO (Big Tree Lum)_18: 3534371161608404815
+      BIO (Big Tree Lum)_19: -8943452859857640408
+      BIO (Big Tree Lum)_2: 5351900533581338191
+      BIO (Big Tree Lum)_20: 2328234247482160444
+      BIO (Big Tree Lum)_21: -3837527724409689643
+      BIO (Big Tree Lum)_22: -7150530099644520801
+      BIO (Big Tree Lum)_23: -1312929842902545745
+      BIO (Big Tree Lum)_24: 8357201770223357807
+      BIO (Big Tree Lum)_25: -3561946735317328178
+      BIO (Big Tree Lum)_26: 4711900265596182092
+      BIO (Big Tree Lum)_27: 4831609612576164357
+      BIO (Big Tree Lum)_28: -5812631222390319500
+      BIO (Big Tree Lum)_29: -609826664425151297
+      BIO (Big Tree Lum)_3: 526116309777712374
+      BIO (Big Tree Lum)_30: 2648837554360576179
+      BIO (Big Tree Lum)_31: -3732071393538875396
+      BIO (Big Tree Lum)_32: -2429483291395153741
+      BIO (Big Tree Lum)_33: -3027780135382192175
+      BIO (Big Tree Lum)_34: -8894208056094355305
+      BIO (Big Tree Lum)_35: 1333900126732809215
+      BIO (Big Tree Lum)_36: -1428105336976672347
+      BIO (Big Tree Lum)_37: 4293597337181716911
+      BIO (Big Tree Lum)_38: -3725258648374474835
+      BIO (Big Tree Lum)_39: 623886750024662312
+      BIO (Big Tree Lum)_4: 2574483857605575784
+      BIO (Big Tree Lum)_40: 5067841876391173383
+      BIO (Big Tree Lum)_41: 7069838608582432802
+      BIO (Big Tree Lum)_42: 7046230782333538694
+      BIO (Big Tree Lum)_43: -4191224230630996428
+      BIO (Big Tree Lum)_44: 250521819087393415
+      BIO (Big Tree Lum)_45: -2788368189831733917
+      BIO (Big Tree Lum)_46: 3257772787940274149
+      BIO (Big Tree Lum)_47: 2874974540796500063
+      BIO (Big Tree Lum)_48: -2950937423601066399
+      BIO (Big Tree Lum)_49: 7083240691650946585
+      BIO (Big Tree Lum)_5: 3939138764108407252
+      BIO (Big Tree Lum)_50: -6408149225032614474
+      BIO (Big Tree Lum)_51: 6711731303857933134
+      BIO (Big Tree Lum)_52: -7159599320892459811
+      BIO (Big Tree Lum)_53: 2869419460203438195
+      BIO (Big Tree Lum)_54: -711856953309012874
+      BIO (Big Tree Lum)_55: -8009847595129242207
+      BIO (Big Tree Lum)_56: 619879562406465232
+      BIO (Big Tree Lum)_57: 5333403299415577465
+      BIO (Big Tree Lum)_58: -6283978785300906919
+      BIO (Big Tree Lum)_6: 8656014245103525131
+      BIO (Big Tree Lum)_7: 291274819138707811
+      BIO (Big Tree Lum)_8: 1848727564532624428
+      BIO (Big Tree Lum)_9: -6510681387667073063
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

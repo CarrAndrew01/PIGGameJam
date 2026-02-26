@@ -58,5 +58,8 @@ TagManager:
   - name: BogMonsterLayer
     uniqueID: 2895320413
     locked: 0
+  - name: Bioluminescence
+    uniqueID: 4066596585
+    locked: 0
   m_RenderingLayers:
   - Default
