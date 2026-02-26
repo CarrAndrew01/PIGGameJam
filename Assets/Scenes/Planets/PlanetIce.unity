@@ -3288,6 +3288,54 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5234964400167045, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Positions.Array.data[0].x
+      value: -48.799408
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234964400167045, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Positions.Array.data[0].y
+      value: -1.924685
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234964400167045, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: -53.407166
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234964400167045, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Positions.Array.data[1].y
+      value: -3.4192615
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234964400167045, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.6792453
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234964400167045, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.6792453
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234964400167045, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0.6792453
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234964400167045, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0.26415092
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234964400167045, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.26415092
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234964400167045, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0.26415092
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234964400167045, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0.014971588
+      objectReference: {fileID: 0}
+    - target: {fileID: 5234964400167045, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.00974666
+      objectReference: {fileID: 0}
     - target: {fileID: 155156845450328795, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
       propertyPath: m_Name
       value: Ship
