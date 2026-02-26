@@ -127,7 +127,7 @@ public class PlayerInventory
 
     public void SellFish(int index)
     {
-        RemoveFish(index);
+        RemoveFishAt(index);
         GameManager.Instance.money += caughtFish[index].weight * 10; // Example: sell price based on weight
 
     }
