@@ -22,7 +22,7 @@ public class Stardew : MonoBehaviour
     }
 
     // Constants
-    public static readonly string DEFAULT_FISH_RESOURCE_PATH = "DEFAULT FISH"; // The path in the Resources folder where the default Fish is
+    public static readonly string DEFAULT_FISH_RESOURCE_PATH = "Fish/DEFAULT FISH"; // The path in the Resources folder where the default Fish is
 
     // State
     [Header("Fish State")]

@@ -183,4 +183,77 @@ public class PlayerInventory
         }
         return num;
     }
+
+    // Persistence
+    public void SaveToPlayerPrefs()
+    {
+        InventorySave save = new InventorySave();
+
+        foreach (var cf in caughtFish)
+        {
+            save.caughtFish.Add(new SavedFish
+            {
+                fishTypeName = cf.fish != null ? cf.fish.name : "",
+                weight = cf.weight,
+                planetOfOrigin = cf.planetOfOrigin
+            });
+        }
+
+        foreach (var b in baits)
+        {
+            save.baits.Add(new SavedBait
+            {
+                upgradeName = b.baitUpgrade != null ? b.baitUpgrade.name : "",
+                uses = b.numberOfUses,
+                mechanicalDescription = b.mechanicalDescription
+            });
+        }
+
+        save.currentBaitUpgradeName = currentBaitUpgrade != null ? currentBaitUpgrade.name : "";
+
+        string json = save.ToJson();
+        PlayerPrefs.SetString("Manager_Inventory", json);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadFromPlayerPrefs()
+    {
+        if (!PlayerPrefs.HasKey("Manager_Inventory")) return;
+
+        string json = PlayerPrefs.GetString("Manager_Inventory");
+        InventorySave save = InventorySave.FromJson(json);
+        if (save == null) return;
+
+        caughtFish.Clear();
+        baits.Clear();
+
+        foreach (var sf in save.caughtFish)
+        {
+            if (string.IsNullOrEmpty(sf.fishTypeName)) continue;
+            Fish fishType = GameManager.FindFishTypeByName(sf.fishTypeName);
+            if (fishType == null)
+            {
+                Debug.LogWarning($"Saved fish type not found: {sf.fishTypeName}");
+                continue;
+            }
+            CaughtFish cf = new CaughtFish(fishType, sf.weight, sf.planetOfOrigin);
+            caughtFish.Add(cf);
+        }
+
+        foreach (var sb in save.baits)
+        {
+            if (string.IsNullOrEmpty(sb.upgradeName)) continue;
+            Upgrade up = GameManager.FindUpgradeByName(sb.upgradeName);
+            if (up == null)
+            {
+                Debug.LogWarning($"Saved bait upgrade not found: {sb.upgradeName}");
+                continue;
+            }
+            baits.Add(new Bait(up, sb.uses, sb.mechanicalDescription));
+        }
+
+        currentBaitUpgrade = !string.IsNullOrEmpty(save.currentBaitUpgradeName)
+            ? GameManager.FindUpgradeByName(save.currentBaitUpgradeName)
+            : null;
+    }
 }

@@ -60,6 +60,7 @@ public class Quest : ScriptableObject
     /*
     For linking to next quest
     */
-    public List<string> nextQuest; // If this is not null, it will be given to the player after they complete this quest    
-    //its easier to keep string refs instead of a ref to the Quest 
+    public List<Quest> nextQuest; // If this is not null, it will be given to the player after they complete this quest    
+    //its easier to keep string refs instead of a ref to the Quest
+    // NOTE: P.S. It wasn't bozo - I fixed it for you lmao
 }

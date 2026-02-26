@@ -22,4 +22,4 @@ MonoBehaviour:
   rewardUpgrade: {fileID: 0}
   moneyReward: 100
   nextQuest:
-  - Quest 2
+  - {fileID: 11400000, guid: 5bfd6f40a38ce5740a228a828482d59f, type: 2}

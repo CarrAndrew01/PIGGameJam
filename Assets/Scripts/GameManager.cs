@@ -45,8 +45,20 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // Setup
+        // Load persisted player data (upgrades) before applying base stats
+        playerStats.LoadUpgradesFromPrefs();
         playerStats.Init();
+
+        // Load inventory after stats and registries are initialized
+        playerInventory.LoadFromPlayerPrefs();
+        // playerInventory.Init();
+    }
+
+    void OnApplicationQuit()
+    {
+        // This is called when the application is quitting. It just saves the player's inventory and upgrades to PlayerPrefs.
+        playerInventory.SaveToPlayerPrefs();
+        playerStats.SaveUpgradesToPrefs();
     }
 
     // Methods
@@ -85,4 +97,25 @@ public class GameManager : MonoBehaviour
     // Other    
     public static void AdjustMoney(int amount) => Instance.money += amount;
     public static void FindQuest(string name) => Instance.AllQuests.Find(quest => quest.questName == name);
+
+    // Asset lookup helpers (search Resources for ScriptableObjects by name)
+    public static Fish FindFishTypeByName(string name)
+    {
+        // Prefer a dedicated Resources subfolder to avoid scanning unrelated assets
+        Fish[] all = Resources.LoadAll<Fish>("Fish");
+        foreach (var f in all)
+            if (f != null && f.name == name)
+                return f;
+        return null;
+    }
+
+    public static Upgrade FindUpgradeByName(string name)
+    {
+        // Prefer a dedicated Resources subfolder for upgrades; adjust if your assets live elsewhere
+        Upgrade[] all = Resources.LoadAll<Upgrade>("Upgrades");
+        foreach (var u in all)
+            if (u != null && u.name == name)
+                return u;
+        return null;
+    }
 }
