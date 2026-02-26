@@ -119,44 +119,54 @@ public class QuestMenu : MonoBehaviour
     */
     public void FillInField(Quest quest)
     {
-
-        if (quest.questFish.Count <= 0)
-        {
-            return;
-        }
-
+        // Always update basic fields
         Quest.Completed displayStatus = GetCachedStatusForQuest(quest);
 
         NameField.text = quest.questName;
         DescriptionField.text = quest.description;
-        //depending on what requirements are needed
 
-        GameObject go = requirementObjects[quest.questFish.Count - 1];
-
-        go.SetActive(true); //turn on the correct number of requirement objects, we have 3 so if its 2 we want to turn on index 0 and 1, if its 3 we want to turn on all of them, etc
-
-        TextMeshProUGUI[] labels = go.GetComponentsInChildren<TextMeshProUGUI>();
-        Image[] images = go.GetComponentsInChildren<Image>();
-
-
-        for (int i = 0; i < quest.questFish.Count; i++)
+        // Ensure requirement UI is reset first
+        for (int ri = 0; ri < requirementObjects.Count; ri++)
         {
-            labels[i].text = $"{quest.questFish[i].quantity} X {quest.questFish[i].fishType.name}";
-            images[i].sprite = quest.questFish[i].fishType.sprite;
+            requirementObjects[ri].SetActive(false);
         }
 
-        rewardText.transform.parent.gameObject.SetActive(true); //turn on the reward text, just in case it was turned off for a quest with no reward
+        // Pick specific requirement objects to show based on which quest it is
+        if (quest.questFish != null && quest.questFish.Count > 0 && requirementObjects.Count > 0)
+        {
+            int reqIndex = Mathf.Clamp(quest.questFish.Count - 1, 0, requirementObjects.Count - 1);
+            GameObject gameObj = requirementObjects[reqIndex];
+            gameObj.SetActive(true);
 
-        if (quest.moneyReward > 0)
+            TextMeshProUGUI[] labels = gameObj.GetComponentsInChildren<TextMeshProUGUI>();
+            Image[] images = gameObj.GetComponentsInChildren<Image>();
+
+            for (int i = 0; i < quest.questFish.Count && i < labels.Length && i < images.Length; i++)
+            {
+                labels[i].text = $"{quest.questFish[i].quantity} X {quest.questFish[i].fishType.name}";
+                images[i].sprite = quest.questFish[i].fishType.sprite;
+            }
+        }
+
+        // Always show/hide reward text and set its value (even when there are no fish requirements)
+        rewardText.transform.parent.gameObject.SetActive(true);
+
+        if (quest.moneyReward > 0 && quest.rewardUpgrade == null)
         {
             rewardText.text = $"Money: {quest.moneyReward} ";
         }
-        else
+        else if (quest.rewardUpgrade != null && quest.moneyReward == 0)
         {
             rewardText.text = quest.rewardUpgrade.name;
         }
-
-
+        else if (quest.rewardUpgrade != null && quest.moneyReward > 0)
+        {
+            rewardText.text = $"Two rewards set? Don't know if you want this, Andrew.";
+        }
+        else
+        {
+            rewardText.text = "No reward set?";
+        }
 
         // Use cached/player-prefs status for UI decisions
         if (displayStatus == Quest.Completed.Active)
@@ -176,7 +186,6 @@ public class QuestMenu : MonoBehaviour
         }
         else
         {
-            Debug.Log("123");
             finishQuestAvailable.SetActive(false);
             finishQuestUnavailable.SetActive(false);
             questComplete.SetActive(true); //hidden dont show up so just do this
@@ -234,19 +243,27 @@ public class QuestMenu : MonoBehaviour
     */
     public void OnQuestCompletion()
     {
+        // Use a local reference to the completed quest so UI refreshes don't change which quest is being completed
         finishQuestAvailable.SetActive(false); //hide the button, just in case
         questComplete.SetActive(true); //show the quest complete text
 
-        currentlyDisplayedQuestItem.completedField.text = "Completed"; //update the text on the list item, just in case
+        QuestListItem completedItem = currentlyDisplayedQuestItem;
+        if (completedItem != null)
+            completedItem.completedField.text = "Completed"; //update the text on the list item, just in case
 
-        //this all seems terrible, there's certainly a better way to do this, maybe by using direct comparison instead of strings for names
-        //but I'm not sure if thats safe so I'm just gonna use strings
+        if (completedItem == null || completedItem.quest == null)
+        {
+            Debug.LogError("No quest selected for completion.");
+            return;
+        }
+
+        Quest completedQuest = completedItem.quest;
+
         // Find and mark the completed quest in-memory and in prefs
-        string completedName = currentlyDisplayedQuestItem.quest.questName;
         for (int i = 0; i < GameManager.Instance.AllQuests.Count; i++)
         {
             Quest q = GameManager.Instance.AllQuests[i];
-            if (q.questName == completedName)
+            if (q.questName == completedQuest.questName)
             {
                 // Do NOT modify the scriptable asset. Update the cache + prefs instead.
                 if (cachedQuestStatuses != null && i < cachedQuestStatuses.Length)
@@ -263,30 +280,35 @@ public class QuestMenu : MonoBehaviour
         }
 
         // Unlock next quests listed on the completed quest
-        foreach (string nextQuestName in currentlyDisplayedQuestItem.quest.nextQuest)
+        if (completedQuest.nextQuest != null && completedQuest.nextQuest.Count > 0)
         {
-            for (int j = 0; j < GameManager.Instance.AllQuests.Count; j++)
+            foreach (Quest quest in completedQuest.nextQuest)
             {
-                Quest nq = GameManager.Instance.AllQuests[j];
-                if (nq.questName == nextQuestName)
+                for (int j = 0; j < GameManager.Instance.AllQuests.Count; j++)
                 {
-                    // activate via cache + prefs only
-                    if (cachedQuestStatuses != null && j < cachedQuestStatuses.Length)
-                        cachedQuestStatuses[j] = Quest.Completed.Active;
-                    SaveQuestStatus(nq.questName, Quest.Completed.Active);
+                    Quest nq = GameManager.Instance.AllQuests[j];
+                    if (nq.questName == quest.questName)
+                    {
+                        // activate via cache + prefs only
+                        if (cachedQuestStatuses != null && j < cachedQuestStatuses.Length)
+                            cachedQuestStatuses[j] = Quest.Completed.Active;
+                        SaveQuestStatus(nq.questName, Quest.Completed.Active);
+                    }
                 }
             }
+
+            // Refresh the menu if there were any next quests to unlock
+            PopulateQuestList();
         }
 
-        //give the player the reward
-
-        if (currentlyDisplayedQuestItem.quest.moneyReward > 0)
+        // Give the player the reward for the completed quest (use completedQuest directly)
+        if (completedQuest.moneyReward > 0)
         {
-            GameManager.AdjustMoney(currentlyDisplayedQuestItem.quest.moneyReward);
+            GameManager.AdjustMoney(completedQuest.moneyReward);
         }
-        else
+        else if (completedQuest.rewardUpgrade != null)
         {
-            GameManager.AddUpgrade(currentlyDisplayedQuestItem.quest.rewardUpgrade);
+            GameManager.AddUpgrade(completedQuest.rewardUpgrade);
         }
     }
 

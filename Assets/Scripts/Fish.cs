@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 /// <summary>
 /// Struct for holding a fish
 /// </summary>
-/// 
+[Serializable]
 public struct CaughtFish
 {
     public Fish fish;

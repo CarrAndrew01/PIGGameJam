@@ -44,6 +44,42 @@ public class PlayerStats
         ApplyUpgrades();
     }
 
+    // Persistence
+    public void SaveUpgradesToPrefs()
+    {
+        PlayerStatsSave save = new PlayerStatsSave();
+        foreach (var up in upgrades)
+        {
+            if (up != null) save.appliedUpgradeNames.Add(up.name);
+        }
+        string json = save.ToJson();
+        PlayerPrefs.SetString("Manager_Stats", json);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadUpgradesFromPrefs()
+    {
+        if (!PlayerPrefs.HasKey("Manager_Stats")) return;
+        string json = PlayerPrefs.GetString("Manager_Stats");
+        PlayerStatsSave save = PlayerStatsSave.FromJson(json);
+        if (save == null) return;
+
+        upgrades.Clear();
+        foreach (var name in save.appliedUpgradeNames)
+        {
+            if (string.IsNullOrEmpty(name)) continue;
+            Upgrade up = GameManager.FindUpgradeByName(name);
+            if (up == null)
+            {
+                Debug.LogWarning($"Saved upgrade not found: {name}");
+                continue;
+            }
+            upgrades.Add(up);
+        }
+        // Defer applying upgrades to Init/Reapply path to avoid double-application
+        hasAppliedUpgrades = false;
+    }
+
     // Methods
     public float GetStat(StatType statType)
     {

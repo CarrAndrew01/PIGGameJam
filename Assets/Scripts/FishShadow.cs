@@ -9,7 +9,7 @@ public class FishShadow : MonoBehaviour
 {
     // State
     [Header("State")]
-    [ReadOnly] public CaughtFish fishData; // The data for the fish this shadow represents
+    public CaughtFish fishData; // The data for the fish this shadow represents
     [ReadOnly] public Vector2 initialPosition; // The position the fish spawned at, which it will move around
     [ReadOnly] public Vector2 movementDirection; // The direction the fish is currently moving in
     [ReadOnly] public int failCount = 0; // How many times the player has failed to catch this fish so far, which will be used to determine if the fish should escape
@@ -168,18 +168,18 @@ public class FishShadow : MonoBehaviour
         // Trigger catch logic, such as playing an animation or sound effect
         Debug.Log("Fish Caught!");
 
-        // Add the fish to the player's inventory
+        // Add the primary fish to the player's inventory
         GameManager.AddFishToInventory(fishData);
 
-        GameManager.AddFishToInventory(fishData);
-        for (int i = 0; i < amountInCatch - 1; i++)
+        // Add any additional fish if amountInCatch > 1
+        for (int i = 1; i < amountInCatch; i++)
         {
             // Create additional caught fish for any extra amount
             CaughtFish extraFish = new CaughtFish()
             {
                 fish = fishData.fish,
                 weight = Random.Range(fishData.fish.minWeight, fishData.fish.maxWeight) * statFishWeight,
-                planetOfOrigin = Environment.Name
+                planetOfOrigin = Environment.CurrentEnvironment != null ? Environment.CurrentEnvironment.name : fishData.planetOfOrigin
             };
             GameManager.AddFishToInventory(extraFish);
         }
