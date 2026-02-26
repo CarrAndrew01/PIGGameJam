@@ -93,10 +93,21 @@ public class Menus : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        // Hook into transition events to close menus when transitioning between screens
+        Transition.onTransition += CloseCurrentMenu;
+    }
+
+    void OnDisable()
+    {
+        Transition.onTransition -= CloseCurrentMenu;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.MenuPopup.ReadyForInput)
+        if (!GameManager.MenuPopup.ReadyForInput || Transition.CurrentScreen == Transition.Screen.Main)
             return; // Don't allow menu input if the popup is currently animating or problems occur
 
         if (menuAction != null && menuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.MainMenu))

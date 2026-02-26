@@ -16,6 +16,7 @@ public class FishShadow : MonoBehaviour
     [ReadOnly] public bool IsEscaping { get; private set; } = false; // Whether the fish is currently escaping, which will trigger it to stop moving and start shrinking until it disappears
     [ReadOnly] public bool pauseTimer = false; // Whether the leave timer should be paused
     [ShowInInspector, ReadOnly] private float leaveTimer = 0f; // Timer to track how long the fish has been present
+    [ShowInInspector, ReadOnly] private float timeToLeave = 60f;
     [ShowInInspector, ReadOnly] private Vector2 targetDirection;
     [ShowInInspector, ReadOnly] private float directionChangeTimer = 0f;
     public bool IsHooked { get; private set; } = false; // Whether the fish is currently hooked by the bobber
@@ -67,6 +68,8 @@ public class FishShadow : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Set time to leave based on timeUntilLeaving with some random variance so not all fish leave at the same time
+        timeToLeave = timeUntilLeaving + Random.Range(-timeUntilLeaving * 0.5f, timeUntilLeaving * 0.5f); // Add some random variance to the leave time
         // Grab stats
         statFishWeight = GameManager.GetPlayerStat(StatType.fishWeight);
 
@@ -122,7 +125,7 @@ public class FishShadow : MonoBehaviour
         if (!pauseTimer && targetBobber == null)
         {
             leaveTimer += Time.deltaTime;
-            if (leaveTimer > timeUntilLeaving)
+            if (leaveTimer > timeToLeave)
             {
                 Escape();
             }
@@ -186,6 +189,7 @@ public class FishShadow : MonoBehaviour
 
 
         // Destroy the fish shadow since it's been caught
+        Environment.OnFishShadowDestroyed();
         Destroy(gameObject);
     }
     public void AddFail()
@@ -340,6 +344,7 @@ public class FishShadow : MonoBehaviour
             yield return null;
         }
 
+        Environment.OnFishShadowDestroyed();
         Destroy(gameObject);
     }
 

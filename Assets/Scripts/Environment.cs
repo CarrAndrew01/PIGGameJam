@@ -14,6 +14,8 @@ public class Environment : MonoBehaviour
     // State
     public static Environment CurrentEnvironment { get; private set; }
 
+    public int FishShadowsInScene { get; private set; } = 0;
+
     [ShowInInspector, ReadOnly] private float nextFishSpawnTime = 0f; // Time at which the next fish should spawn
     [ShowInInspector, ReadOnly] private float fishSpawnTimer = 0f; // Timer to track time since last fish spawn
 
@@ -29,6 +31,8 @@ public class Environment : MonoBehaviour
     public float minFishSpawnInterval = 30f; // Minimum time between fish spawns (seconds)
     public float maxFishSpawnInterval = 60f; // Maximum time between fish spawns (seconds)
     public float fishSpawnRadius = 5f; // Radius around the environment's position where fish shadows can spawn
+    public int maxFishShadows = 50; // Maximum number of fish shadows that can exist at once
+    public int initialFishShadows = 10; // Number of fish shadows to spawn when the environment is first loaded
 
     [Header("Components")]
 
@@ -53,6 +57,18 @@ public class Environment : MonoBehaviour
         GetNextSpawnTime(); // Initialize the next spawn time
     }
 
+    void Start()
+    {
+        // Spawn some initial fish shadows to populate the environment
+        if (doesSpawnFish)
+        {
+            for (int i = 0; i < initialFishShadows; i++)
+            {
+                SpawnFishShadow();
+            }
+        }
+    }
+
     void OnDestroy()
     {
         if (CurrentEnvironment == this)
@@ -66,10 +82,19 @@ public class Environment : MonoBehaviour
         CheckSpawnFish();
     }
 
+    // Static Methods
+    public static void OnFishShadowDestroyed()
+    {
+        if (CurrentEnvironment != null)
+        {
+            CurrentEnvironment.FishShadowsInScene = Mathf.Max(0, CurrentEnvironment.FishShadowsInScene - 1);
+        }
+    }
+
     // Methods
     private void CheckSpawnFish()
     {
-        if (!doesSpawnFish)
+        if (!doesSpawnFish || FishShadowsInScene >= maxFishShadows)
             return;
 
         fishSpawnTimer += Time.deltaTime;
@@ -95,7 +120,8 @@ public class Environment : MonoBehaviour
         {
             // Instantiate the fish shadow prefab at a random position within the environment
             Vector3 spawnPosition = GetRandomSpawnPosition();
-            GameObject fishShadowObj = Instantiate(fishShadowPrefab, spawnPosition, Quaternion.identity);
+            GameObject fishShadowObj = Instantiate(fishShadowPrefab, spawnPosition, Quaternion.identity, transform);
+            FishShadowsInScene++;
         }
     }
     private Vector3 GetRandomSpawnPosition()

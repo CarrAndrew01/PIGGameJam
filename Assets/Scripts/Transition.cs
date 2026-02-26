@@ -1,33 +1,72 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
 public class Transition : MonoBehaviour
 {
-    public enum IntendedScreen
+    public static Transition Instance { get; private set; }
+
+    public static event Action onTransition;
+
+    public enum Screen
     {
         Main,
         Galaxy,
-        Settings
+        Settings,
+        None
     }
 
     public List<TMP_Text> TextObjects = new();
+
+    [ShowInInspector, ReadOnly] private Screen currentScreen = Screen.Main;
+    public static Screen CurrentScreen => Instance != null ? Instance.currentScreen : Screen.None;
+
+    private void Awake()
+    {
+        // Singleton pattern
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
 
     private void Start()
     {
         switch (GameManager.Instance.intendedScreen)
         {
-            case IntendedScreen.Main:
+            case Screen.Main:
                 break;
-            case IntendedScreen.Galaxy:
-                TransitionToPlanets();
-                GameManager.Instance.intendedScreen = IntendedScreen.Main;
+            case Screen.Galaxy:
+                TransitionToPlanets(false);
+                GameManager.Instance.intendedScreen = Screen.Main;
                 break;
-            case IntendedScreen.Settings:
-                TransitionToSettings();
-                GameManager.Instance.intendedScreen = IntendedScreen.Main;
+            case Screen.Settings:
+                TransitionToSettings(false);
+                GameManager.Instance.intendedScreen = Screen.Main;
                 break;
+        }
+    }
+
+    private void HideAllText()
+    {
+        foreach (TMP_Text textObject in TextObjects)
+        {
+            textObject.color = new Color(textObject.color.r, textObject.color.g, textObject.color.b, 0f);
         }
     }
 
@@ -74,27 +113,37 @@ public class Transition : MonoBehaviour
     }
 
 
-    public void TransitionToPlanets()
+    public void TransitionToPlanets(bool fadeText = true)
     {
         gameObject.GetComponent<Animator>().SetBool("PlanetTransition", true);
-        StartCoroutine(FadeTextCoroutine());
+        currentScreen = Screen.Galaxy;
+        onTransition?.Invoke();
+        if (fadeText) StartCoroutine(FadeTextCoroutine());
+        else HideAllText();
     }
 
-    public void TransitionToSettings()
+    public void TransitionToSettings(bool fadeText = true)
     {
         gameObject.GetComponent<Animator>().SetBool("SettingsTransition", true);
-        StartCoroutine(FadeTextCoroutine());
+        currentScreen = Screen.Settings;
+        onTransition?.Invoke();
+        if (fadeText) StartCoroutine(FadeTextCoroutine());
+        else HideAllText();
     }
 
     public void TransitionToMainMenuFromPlanets()
     {
         gameObject.GetComponent<Animator>().SetBool("PlanetTransition", false);
+        currentScreen = Screen.Main;
+        onTransition?.Invoke();
         StartCoroutine(UnFadeTextCoroutine());
     }
 
     public void TransitionToMainMenuFromSettings()
     {
         gameObject.GetComponent<Animator>().SetBool("SettingsTransition", false);
+        currentScreen = Screen.Main;
+        onTransition?.Invoke();
         StartCoroutine(UnFadeTextCoroutine());
     }
 }

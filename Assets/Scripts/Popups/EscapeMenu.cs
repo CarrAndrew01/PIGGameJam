@@ -4,16 +4,16 @@ public class EscapeMenu : MonoBehaviour
 {
     public void GotoGalaxy()
     {
-        GameManager.GotoTitleScreen(Transition.IntendedScreen.Galaxy);
+        GameManager.GotoTitleScreen(Transition.Screen.Galaxy);
     }
 
     public void GotoSettings()
     {
-        GameManager.GotoTitleScreen(Transition.IntendedScreen.Settings);
+        GameManager.GotoTitleScreen(Transition.Screen.Settings);
     }
 
     public void ExitGame()
     {
-        GameManager.GotoTitleScreen(Transition.IntendedScreen.Main);
+        GameManager.GotoTitleScreen(Transition.Screen.Main);
     }
 }

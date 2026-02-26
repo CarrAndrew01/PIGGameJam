@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public float money = 0; // Player's current money, 
 
     [Header("Screen Transitions")]
-    public Transition.IntendedScreen intendedScreen;
+    public Transition.Screen intendedScreen;
 
     [Header("Quests")]
     public List<Quest> AllQuests = new(
@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
     // Popups and Menus
     public static void TriggerPopIn(Popup popup, GameObject canvasPrefab, bool forceSwap = false, System.Action<GameObject> onComplete = null, System.Action<GameObject> onBeforeShow = null) => Instance.StartCoroutine(popup.TriggerPopIn(canvasPrefab, -1f, forceSwap, onComplete, onBeforeShow));
     public static void TriggerPopOut(Popup popup) => popup.TriggerPopOut();
-    public static void GotoTitleScreen(Transition.IntendedScreen intendedScreen)
+    public static void GotoTitleScreen(Transition.Screen intendedScreen)
     {
         Instance.intendedScreen = intendedScreen;
         UnityEngine.SceneManagement.SceneManager.LoadScene(TITLE_SCENE_NAME);

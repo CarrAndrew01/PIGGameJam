@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Quest 5
   m_EditorClassIdentifier: 
   questName: Quest 5
-  description: 
+  description: The most ever!
   completedStatus: 2
   type: 0
-  questFish: []
-  rewardUpgrade: {fileID: 0}
+  questFish:
+  - fishType: {fileID: 11400000, guid: 4f6273dc86366c44a8cd501cc194beda, type: 2}
+    quantity: 10
+  rewardUpgrade: {fileID: 11400000, guid: eb5112db3af8bf243adb44f8b133c806, type: 2}
   moneyReward: 0
   nextQuest: []

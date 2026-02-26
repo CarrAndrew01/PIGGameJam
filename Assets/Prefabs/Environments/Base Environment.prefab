@@ -47,8 +47,10 @@ MonoBehaviour:
   environmentName: 
   fishTypes: []
   doesSpawnFish: 1
-  minFishSpawnInterval: 20
-  maxFishSpawnInterval: 40
-  fishSpawnRadius: 5
-  fishSpawnHeight: -3.5
+  waterHeight: -3.5
+  minFishSpawnInterval: 5
+  maxFishSpawnInterval: 10
+  fishSpawnRadius: 95
+  maxFishShadows: 50
+  initialFishShadows: 10
   fishShadowPrefab: {fileID: 4962663810375177257, guid: 0dcc5d066a7be6a4498054ec0c108733, type: 3}

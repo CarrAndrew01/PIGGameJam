@@ -47,3 +47,18 @@ MonoBehaviour:
   playerStats:
     hasAppliedUpgrades: 0
     upgrades: []
+  playerInventory:
+    caughtFish: []
+    baits: []
+    currentBaitUpgrade: {fileID: 0}
+  money: 0
+  intendedScreen: 0
+  AllQuests:
+  - {fileID: 11400000, guid: 8f008ddff1cb0784598e1ed1f2d6444f, type: 2}
+  - {fileID: 11400000, guid: 5bfd6f40a38ce5740a228a828482d59f, type: 2}
+  - {fileID: 11400000, guid: abfb86474c985f64f9fc93daf139f987, type: 2}
+  - {fileID: 11400000, guid: b8bc67a08bf291c42b9381076de98e65, type: 2}
+  - {fileID: 11400000, guid: 1d3d9846fc632c04088ac726c2b87fa9, type: 2}
+  TEMPFISH: {fileID: 11400000, guid: 4f6273dc86366c44a8cd501cc194beda, type: 2}
+  minigamePopup: {fileID: 0}
+  menuPopup: {fileID: 0}
