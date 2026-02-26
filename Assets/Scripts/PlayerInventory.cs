@@ -2,17 +2,91 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
+/// <summary>
+/// Represents a number of bait items in the inventory.
+/// </summary>
+[Serializable]
+public struct Bait
+{
+    public Upgrade baitUpgrade;
+    public int numberOfUses;
+    public string mechanicalDescription;
+
+    public Bait(Upgrade upgrade, int uses, string description)
+    {
+        baitUpgrade = upgrade;
+        numberOfUses = uses;
+        mechanicalDescription = description;
+    }
+}
+
+/// <summary>
+/// Manages the player's inventory. Mostly just fish and bait.
+/// </summary>
+[Serializable]
 public class PlayerInventory
 {
     // State
     public List<CaughtFish> caughtFish = new List<CaughtFish>();
+    public List<Bait> baits = new List<Bait>();
+    public Upgrade currentBaitUpgrade; // Reference to the currently equipped bait upgrade, if any
 
     // Variables
     public int MaxFishStorage => (int)GameManager.GetPlayerStat(StatType.fishStorage);
 
-
-
     // Methods
+    public void AddBait(Upgrade baitUpgrade, int uses, string description)
+    {
+        int existingIndex = baits.FindIndex(b => b.baitUpgrade == baitUpgrade);
+
+        if (existingIndex != -1)
+        {
+            // If the bait already exists, update its uses
+            baits[existingIndex] = new Bait(baitUpgrade, baits[existingIndex].numberOfUses + uses, description);
+        }
+        else
+        {
+            baits.Add(new Bait(baitUpgrade, uses, description));
+        }
+    }
+
+    public void RemoveBait(Upgrade baitUpgrade, int uses)
+    {
+        int existingIndex = baits.FindIndex(b => b.baitUpgrade == baitUpgrade);
+
+        if (existingIndex != -1)
+        {
+            Bait existingBait = baits[existingIndex];
+            int newUses = existingBait.numberOfUses - uses;
+
+            if (newUses > 0)
+            {
+                // As long as we still have some uses left, update the bait
+                baits[existingIndex] = new Bait(baitUpgrade, newUses, existingBait.mechanicalDescription);
+            }
+            else
+            {
+                // Otherwise, remove the bait from the inventory
+                baits.RemoveAt(existingIndex);
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Attempted to remove bait {baitUpgrade.name} which is not in inventory.");
+        }
+    }
+
+    public void SelectBait(Upgrade baitUpgrade)
+    {
+        if (baits.Exists(b => b.baitUpgrade == baitUpgrade))
+        {
+            currentBaitUpgrade = baitUpgrade;
+        }
+        else
+        {
+            Debug.LogWarning($"Attempted to select bait {baitUpgrade.name} which is not in inventory.");
+        }
+    }
 
 
     public void AddFish(CaughtFish newCatch)
@@ -20,16 +94,14 @@ public class PlayerInventory
         if (caughtFish.Count < MaxFishStorage)
         {
             caughtFish.Add(newCatch);
-          //  Debug.Log($"Added {newCatch.fish.name} to inventory! Current count: {caughtFish.Count}/{MaxFishStorage}");
         }
         else
         {
-        //    Debug.Log("Cannot add fish to inventory, storage is full!");
             // TODO: UI feedback for full inventory
         }
     }
 
-    public void RemoveFish(int index)
+    public void RemoveFishAt(int index)
     {
         if (index >= 0 && index < caughtFish.Count)
         {
@@ -41,25 +113,36 @@ public class PlayerInventory
             Debug.LogError($"Invalid index {index} for removing fish from inventory!");
         }
     }
+    public void RemoveFish(CaughtFish catchToRemove)
+    {
+        if (caughtFish.Remove(catchToRemove))
+        {
+            Debug.Log($"Removed {catchToRemove.fish.name} from inventory. Current count: {caughtFish.Count}/{MaxFishStorage}");
+        }
+        else
+        {
+            Debug.LogError($"Attempted to remove {catchToRemove.fish.name} which is not in inventory!");
+        }
+    }
 
     public void RemoveFishQuest(string fishName, int quantity)
     {
         List<int> indexes = new();
-        
+
         //go through our inventory
-        for(int i = 0; i < caughtFish.Count;i++)
+        for (int i = 0; i < caughtFish.Count; i++)
         {
-            if(caughtFish[i].fish.name == fishName)
+            if (caughtFish[i].fish.name == fishName)
             {
                 indexes.Add(i);
-                if(indexes.Count >= quantity)
+                if (indexes.Count >= quantity)
                 {
                     break;
                 }
             }
         }
         //the reason I'm doing it like this is so it removes it from the front of the total list, just because I like the look of it more tbh
-        for(int i = indexes.Count - 1; i >= 0; i--)
+        for (int i = indexes.Count - 1; i >= 0; i--)
         {
             caughtFish.RemoveAt(indexes[i]);
         }
@@ -82,10 +165,10 @@ public class PlayerInventory
     public int NumberOfFish(string fishName)
     {
         int num = 0;
- 
-        foreach(CaughtFish cf in caughtFish)
+
+        foreach (CaughtFish cf in caughtFish)
         {
-            if(cf.fish.name == fishName)
+            if (cf.fish.name == fishName)
             {
                 num++;
             }

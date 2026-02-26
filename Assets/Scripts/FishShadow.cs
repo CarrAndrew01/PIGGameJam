@@ -118,7 +118,8 @@ public class FishShadow : MonoBehaviour
         Swim();
 
         // Count up the leave timer and check if the fish should leave on its own
-        if (!pauseTimer)
+        // If theres a target bobber, we don't want the fish to leave on its own
+        if (!pauseTimer && targetBobber == null)
         {
             leaveTimer += Time.deltaTime;
             if (leaveTimer > timeUntilLeaving)

@@ -31,15 +31,17 @@ public class QuestMenu : MonoBehaviour
     public TextMeshProUGUI rewardText;
 
 
-
+    public void Start()
+    {
+        PopulateQuestList();
+    }
 
     // Methods
-    public GameObject DisableEverything; //whatev
     public void CloseMenu()
     {
-        DisableEverything.SetActive(false);
+        GameManager.MenuPopup.TriggerPopOut();
     }
-    
+
     public void PopulateQuestList()
     {
         // Clear existing list items
@@ -53,7 +55,7 @@ public class QuestMenu : MonoBehaviour
         // Instantiate new list items based on the provided array of strings
         foreach (Quest quest in GameManager.Instance.AllQuests)
         {
-            if(quest.completedStatus != Quest.Completed.Active)
+            if (quest.completedStatus != Quest.Completed.Active)
             {
                 continue;
             }
@@ -65,7 +67,7 @@ public class QuestMenu : MonoBehaviour
         // Instantiate new list items based on the provided array of strings
         foreach (Quest quest in GameManager.Instance.AllQuests)
         {
-            if(quest.completedStatus != Quest.Completed.Completed)
+            if (quest.completedStatus != Quest.Completed.Completed)
             {
                 continue;
             }
@@ -82,24 +84,24 @@ public class QuestMenu : MonoBehaviour
     public void FillInField(Quest quest)
     {
 
-        if(quest.questFish.Count <= 0)
+        if (quest.questFish.Count <= 0)
         {
             return;
         }
 
         NameField.text = quest.questName;
-        DescriptionField.text = quest.description; 
+        DescriptionField.text = quest.description;
         //depending on what requirements are needed
 
         GameObject go = requirementObjects[quest.questFish.Count - 1];
 
         go.SetActive(true); //turn on the correct number of requirement objects, we have 3 so if its 2 we want to turn on index 0 and 1, if its 3 we want to turn on all of them, etc
 
-        TextMeshProUGUI[] labels =  go.GetComponentsInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI[] labels = go.GetComponentsInChildren<TextMeshProUGUI>();
         Image[] images = go.GetComponentsInChildren<Image>();
 
 
-        for(int i = 0; i < quest.questFish.Count; i++)
+        for (int i = 0; i < quest.questFish.Count; i++)
         {
             labels[i].text = $"{quest.questFish[i].quantity} X {quest.questFish[i].fishType.name}";
             images[i].sprite = quest.questFish[i].fishType.sprite;
@@ -107,17 +109,20 @@ public class QuestMenu : MonoBehaviour
 
         rewardText.transform.parent.gameObject.SetActive(true); //turn on the reward text, just in case it was turned off for a quest with no reward
 
-        if(quest.moneyReward > 0)
+        if (quest.moneyReward > 0)
         {
             rewardText.text = $"Money: {quest.moneyReward} ";
-        }else{
+        }
+        else
+        {
             rewardText.text = quest.rewardUpgrade.name;
         }
 
 
 
         //no no this is actually the best way to do this actually seriously dude
-        if(quest.completedStatus == Quest.Completed.Active){
+        if (quest.completedStatus == Quest.Completed.Active)
+        {
             if (CheckCompletion(quest))
             {
                 finishQuestAvailable.SetActive(true);
@@ -126,14 +131,16 @@ public class QuestMenu : MonoBehaviour
             else
             {
                 finishQuestAvailable.SetActive(false);
-                finishQuestUnavailable.SetActive(true); 
+                finishQuestUnavailable.SetActive(true);
             }
             questComplete.SetActive(false); //hidden dont show up so just do this
 
-        }else{
+        }
+        else
+        {
             Debug.Log("123");
             finishQuestAvailable.SetActive(false);
-            finishQuestUnavailable.SetActive(false); 
+            finishQuestUnavailable.SetActive(false);
             questComplete.SetActive(true); //hidden dont show up so just do this
         }
     }
@@ -158,9 +165,9 @@ public class QuestMenu : MonoBehaviour
     public static bool CheckCompletion(Quest quest)
     {
         //check if the player has caught enough of the required fish
-        foreach(QuestSubtype fish in quest.questFish)
+        foreach (QuestSubtype fish in quest.questFish)
         {
-            if(!(GameManager.Instance.playerInventory.NumberOfFish(fish.fishType.name) >= fish.quantity))
+            if (!(GameManager.Instance.playerInventory.NumberOfFish(fish.fishType.name) >= fish.quantity))
             {
                 return false;
             }
@@ -178,26 +185,26 @@ public class QuestMenu : MonoBehaviour
         questComplete.SetActive(true); //show the quest complete text
 
         currentlyDisplayedQuestItem.completedField.text = "Completed"; //update the text on the list item, just in case
-         
+
         //this all seems terrible, there's certainly a better way to do this, maybe by using direct comparison instead of strings for names
         //but I'm not sure if thats safe so I'm just gonna use strings
-        foreach(Quest q in GameManager.Instance.AllQuests)
+        foreach (Quest q in GameManager.Instance.AllQuests)
         {
-            if(q.questName == currentlyDisplayedQuestItem.quest.questName)
+            if (q.questName == currentlyDisplayedQuestItem.quest.questName)
             {
                 q.completedStatus = Quest.Completed.Completed;
 
                 //now we need to remove the fish from our inventory
-                foreach(QuestSubtype fish in q.questFish)
+                foreach (QuestSubtype fish in q.questFish)
                 {
                     GameManager.Instance.playerInventory.RemoveFishQuest(fish.fishType.name, fish.quantity);
                 }
             }
 
             //unlock the next quests
-            foreach(string nextQuest in q.nextQuest)
+            foreach (string nextQuest in q.nextQuest)
             {
-                if(q.questName == nextQuest)
+                if (q.questName == nextQuest)
                 {
                     q.completedStatus = Quest.Completed.Active;
                 }
@@ -206,7 +213,7 @@ public class QuestMenu : MonoBehaviour
 
         //give the player the reward
 
-        if(currentlyDisplayedQuestItem.quest.moneyReward > 0)
+        if (currentlyDisplayedQuestItem.quest.moneyReward > 0)
         {
             GameManager.AdjustMoney(currentlyDisplayedQuestItem.quest.moneyReward);
         }

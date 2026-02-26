@@ -1,13 +1,20 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
-using UnityEngine.UI;
+using UnityEngine.Events;
 
 /// <summary>
 /// Generic menu class used for various menus with a list of items.
 /// </summary>
 public class Menu : MonoBehaviour
 {
+    // State
+    public List<ListItem> listItems = new List<ListItem>(); // List of the current list items in the menu
+    public int selectedIndex = -1; // Index of the currently selected item, -1 if none selected
+
+    [Header("Events")]
+    public UnityEvent<int> onItemSelected; // Event that gets triggered when an item is selected, passing the index of the selected item
+
     // Components
     [Header("Components")]
     public RectTransform listContentArea; // Reference to the RectTransform for the list
@@ -24,6 +31,18 @@ public class Menu : MonoBehaviour
     }
 
     // Methods
+    public void OnListItemSelected(int index)
+    {
+        selectedIndex = index;
+        onItemSelected?.Invoke(index);
+
+        // Update selection highlight for all list items
+        foreach (ListItem item in listItems)
+        {
+            item.UpdateSelectionHighlight();
+        }
+    }
+
     public void PopulateList(string[] items)
     {
         // Clear existing list items
@@ -49,9 +68,25 @@ public class Menu : MonoBehaviour
         }
 
         // Instantiate new list items based on the provided list of upgrades
-        foreach (Upgrade upgrade in upgrades)
+        for (int i = 0; i < upgrades.Count; i++)
         {
-            CreateListItem(upgrade.name, upgrade.icon, description: upgrade.description, mechanicalDescription: upgrade.GetMechanicalDescription());
+            Upgrade upgrade = upgrades[i];
+            CreateListItem(upgrade.name, upgrade.icon, description: upgrade.description, mechanicalDescription: upgrade.GetMechanicalDescription(), index: i);
+        }
+    }
+    public void PopulateListWithBaits(List<Bait> baits)
+    {
+        // Clear existing list items
+        foreach (Transform child in listContentArea)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Instantiate new list items based on the provided list of baits
+        for (int i = 0; i < baits.Count; i++)
+        {
+            Bait bait = baits[i];
+            CreateListItem(bait.baitUpgrade.name, bait.baitUpgrade.icon, subtext: $"Uses: {bait.numberOfUses}", description: bait.baitUpgrade.description, mechanicalDescription: bait.mechanicalDescription, index: i);
         }
     }
     public void PopulateListWithFish(List<CaughtFish> fishTypes)
@@ -63,9 +98,10 @@ public class Menu : MonoBehaviour
         }
 
         // Instantiate new list items based on the provided list of caught fish
-        foreach (CaughtFish caughtFish in fishTypes)
+        for (int i = 0; i < fishTypes.Count; i++)
         {
-            CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {(caughtFish.weight * 10):F2}", description: caughtFish.fish.description);
+            CaughtFish caughtFish = fishTypes[i];
+            CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {(caughtFish.weight * 10):F2}", description: caughtFish.fish.description, index: i);
         }
     }
 
@@ -102,7 +138,7 @@ public class Menu : MonoBehaviour
         }
     }
 
-    private ListItem CreateListItem(string itemName, Sprite itemIcon, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "")
+    private ListItem CreateListItem(string itemName, Sprite itemIcon, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "", int index = -1)
     {
         GameObject newItem = Instantiate(listItemPrefab, listContentArea);
         ListItem listItemComponent = newItem.GetComponent<ListItem>();
@@ -110,7 +146,8 @@ public class Menu : MonoBehaviour
         // Set the list item data
         if (listItemComponent != null)
         {
-            listItemComponent.Init(this, itemName, itemIcon, subtext, subtext2, description, mechanicalDescription);
+            listItemComponent.Init(this, itemName, itemIcon, subtext, subtext2, description, mechanicalDescription, index);
+            listItems.Add(listItemComponent);
         }
         else
         {
