@@ -27,10 +27,10 @@ public class Menu : MonoBehaviour
     
 
 
-    void Start()
+    void Awake()
     {
-      //  descriptionField.text = "";
-        //mechanicalDescriptionField.text = "Click on an item to see its description.";
+        descriptionField.text = "";
+        mechanicalDescriptionField.text = "Click on an item to see its description.";
     }
 
     // Methods

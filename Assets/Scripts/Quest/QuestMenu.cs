@@ -9,7 +9,7 @@ public class QuestMenu : MonoBehaviour
 
     public TextMeshProUGUI NameField;
     public TextMeshProUGUI DescriptionField;
-  
+
 
     public GameObject finishQuestUnavailable;
     public GameObject finishQuestAvailable;
@@ -29,6 +29,9 @@ public class QuestMenu : MonoBehaviour
     public List<GameObject> requirementObjects;
 
     public TextMeshProUGUI rewardText;
+
+    [Header("Cache")]
+    public Quest.Completed[] cachedQuestStatuses; // Cache for quest statuses loaded from player prefs, indexed to match the order of quests in GameManager.Instance.AllQuests
 
 
     public void Start()
@@ -52,30 +55,63 @@ public class QuestMenu : MonoBehaviour
 
         List<Quest> questDisplayed = new();
 
-        // Instantiate new list items based on the provided array of strings
-        foreach (Quest quest in GameManager.Instance.AllQuests)
-        {
-            if (quest.completedStatus != Quest.Completed.Active)
-            {
-                continue;
-            }
+        // Grab the cached quest statuses from player prefs
+        cachedQuestStatuses = CacheAllQuestStatuses(GameManager.Instance.AllQuests);
 
-            questDisplayed.Add(quest);
-            CreateListItem(quest, false);
+        // Temporary lists to combine in andrew's preferred order (active quests first, then completed quests)
+        List<Quest> activeQuests = new();
+        List<Quest> completedQuests = new();
+
+        // Build lists based solely on the cached statuses (do not modify the scriptable assets)
+        for (int i = 0; i < GameManager.Instance.AllQuests.Count; i++)
+        {
+            Quest quest = GameManager.Instance.AllQuests[i];
+
+            if (cachedQuestStatuses[i] == Quest.Completed.Active)
+            {
+                activeQuests.Add(quest);
+            }
+            else if (cachedQuestStatuses[i] == Quest.Completed.Completed)
+            {
+                completedQuests.Add(quest);
+            }
         }
 
-        // Instantiate new list items based on the provided array of strings
-        foreach (Quest quest in GameManager.Instance.AllQuests)
+        // Combine active quests and completed quests into the final display list
+        questDisplayed.AddRange(activeQuests);
+        questDisplayed.AddRange(completedQuests);
+
+        for (int i = 0; i < questDisplayed.Count; i++)
         {
-            if (quest.completedStatus != Quest.Completed.Completed)
+            Quest quest = questDisplayed[i];
+
+            int origIndex = GameManager.Instance.AllQuests.IndexOf(quest);
+            bool isCompleted = origIndex >= 0 && cachedQuestStatuses[origIndex] == Quest.Completed.Completed;
+
+            QuestListItem created = CreateListItem(quest, isCompleted);
+            if (i == 0 && created != null)
             {
-                continue;
+                currentlyDisplayedQuestItem = created;
             }
-            questDisplayed.Add(quest);
-            CreateListItem(quest, true);
         }
 
-        FillInField(questDisplayed[0]);
+        if (questDisplayed.Count > 0)
+        {
+            FillInField(questDisplayed[0]);
+        }
+        else
+        {
+            NameField.text = "No Quests";
+            DescriptionField.text = "Who knows why.";
+            rewardText.transform.parent.gameObject.SetActive(false); //turn off the reward text, just in case
+            foreach (GameObject go in requirementObjects)
+            {
+                go.SetActive(false);
+            }
+            finishQuestAvailable.SetActive(false);
+            finishQuestUnavailable.SetActive(false);
+            questComplete.SetActive(false);
+        }
     }
 
     /**
@@ -88,6 +124,8 @@ public class QuestMenu : MonoBehaviour
         {
             return;
         }
+
+        Quest.Completed displayStatus = GetCachedStatusForQuest(quest);
 
         NameField.text = quest.questName;
         DescriptionField.text = quest.description;
@@ -120,8 +158,8 @@ public class QuestMenu : MonoBehaviour
 
 
 
-        //no no this is actually the best way to do this actually seriously dude
-        if (quest.completedStatus == Quest.Completed.Active)
+        // Use cached/player-prefs status for UI decisions
+        if (displayStatus == Quest.Completed.Active)
         {
             if (CheckCompletion(quest))
             {
@@ -145,7 +183,20 @@ public class QuestMenu : MonoBehaviour
         }
     }
 
-    private void CreateListItem(Quest quest, bool completed)
+    // Helper to read the status for a quest from the cache (or fall back to the asset default)
+    private Quest.Completed GetCachedStatusForQuest(Quest quest)
+    {
+        if (cachedQuestStatuses == null || GameManager.Instance == null)
+            return quest.completedStatus;
+
+        int idx = GameManager.Instance.AllQuests.IndexOf(quest);
+        if (idx < 0 || idx >= cachedQuestStatuses.Length)
+            return quest.completedStatus;
+
+        return cachedQuestStatuses[idx];
+    }
+
+    private QuestListItem CreateListItem(Quest quest, bool completed)
     {
         GameObject newItem = Instantiate(listItemPrefab, listContentArea);
         QuestListItem listItemComponent = newItem.GetComponent<QuestListItem>();
@@ -154,10 +205,12 @@ public class QuestMenu : MonoBehaviour
         if (listItemComponent != null)
         {
             listItemComponent.Init(this, quest, completed);
+            return listItemComponent;
         }
         else
         {
             Debug.LogError("List item prefab is missing a ListItem component!");
+            return null;
         }
     }
 
@@ -188,25 +241,39 @@ public class QuestMenu : MonoBehaviour
 
         //this all seems terrible, there's certainly a better way to do this, maybe by using direct comparison instead of strings for names
         //but I'm not sure if thats safe so I'm just gonna use strings
-        foreach (Quest q in GameManager.Instance.AllQuests)
+        // Find and mark the completed quest in-memory and in prefs
+        string completedName = currentlyDisplayedQuestItem.quest.questName;
+        for (int i = 0; i < GameManager.Instance.AllQuests.Count; i++)
         {
-            if (q.questName == currentlyDisplayedQuestItem.quest.questName)
+            Quest q = GameManager.Instance.AllQuests[i];
+            if (q.questName == completedName)
             {
-                q.completedStatus = Quest.Completed.Completed;
+                // Do NOT modify the scriptable asset. Update the cache + prefs instead.
+                if (cachedQuestStatuses != null && i < cachedQuestStatuses.Length)
+                    cachedQuestStatuses[i] = Quest.Completed.Completed;
+                SaveQuestStatus(q.questName, Quest.Completed.Completed);
 
-                //now we need to remove the fish from our inventory
+                // remove the fish from our inventory for this quest
                 foreach (QuestSubtype fish in q.questFish)
                 {
                     GameManager.Instance.playerInventory.RemoveFishQuest(fish.fishType.name, fish.quantity);
                 }
+                break;
             }
+        }
 
-            //unlock the next quests
-            foreach (string nextQuest in q.nextQuest)
+        // Unlock next quests listed on the completed quest
+        foreach (string nextQuestName in currentlyDisplayedQuestItem.quest.nextQuest)
+        {
+            for (int j = 0; j < GameManager.Instance.AllQuests.Count; j++)
             {
-                if (q.questName == nextQuest)
+                Quest nq = GameManager.Instance.AllQuests[j];
+                if (nq.questName == nextQuestName)
                 {
-                    q.completedStatus = Quest.Completed.Active;
+                    // activate via cache + prefs only
+                    if (cachedQuestStatuses != null && j < cachedQuestStatuses.Length)
+                        cachedQuestStatuses[j] = Quest.Completed.Active;
+                    SaveQuestStatus(nq.questName, Quest.Completed.Active);
                 }
             }
         }
@@ -221,5 +288,35 @@ public class QuestMenu : MonoBehaviour
         {
             GameManager.AddUpgrade(currentlyDisplayedQuestItem.quest.rewardUpgrade);
         }
+    }
+
+    // NOTE: Added these to store completion data into player prefs -- it will persist across sessions unless you reset it
+    public static void SaveQuestStatus(string questName, Quest.Completed status)
+    {
+        PlayerPrefs.SetInt($"Quest_{questName}_Status", (int)status);
+        PlayerPrefs.Save();
+    }
+    public static Quest.Completed LoadQuestStatus(string questName)
+    {
+        int statusInt = PlayerPrefs.GetInt($"Quest_{questName}_Status", (int)Quest.Completed.Hidden);
+        return (Quest.Completed)statusInt;
+    }
+    public static Quest.Completed[] CacheAllQuestStatuses(List<Quest> quests)
+    {
+        Quest.Completed[] statuses = new Quest.Completed[quests.Count];
+        for (int i = 0; i < quests.Count; i++)
+        {
+            string key = $"Quest_{quests[i].questName}_Status";
+            if (PlayerPrefs.HasKey(key))
+            {
+                statuses[i] = LoadQuestStatus(quests[i].questName);
+            }
+            else
+            {
+                // If there's no saved value yet, keep the scriptable asset's default status
+                statuses[i] = quests[i].completedStatus;
+            }
+        }
+        return statuses;
     }
 }
