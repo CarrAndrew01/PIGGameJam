@@ -7093,6 +7093,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6300131083065144623, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: AllQuests.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300131083065144623, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
+      propertyPath: AllQuests.Array.data[0].completedStatus
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
