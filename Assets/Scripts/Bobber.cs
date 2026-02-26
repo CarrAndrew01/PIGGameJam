@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -56,6 +57,12 @@ public class Bobber : MonoBehaviour
     public Transform lineAttachPoint;
 
     private Transform playerShipTransform;
+
+
+    // ANIMATION
+    public static Action<string> BobberReturning;
+    public static Action<string> BobberReturned;
+
 
     void Start()
     {
@@ -148,6 +155,7 @@ public class Bobber : MonoBehaviour
     public void BeginReelIn()
     {
         isReelingIn = true;
+        BobberReturning.Invoke("Reel");
     }
 
     private void ReelInBobber()
@@ -169,11 +177,15 @@ public class Bobber : MonoBehaviour
 
         if (Vector3.Distance(transform.position, playerShipTransform.position) < distanceToRetrieve)
         {
+            BobberReturned.Invoke("Unequip");
+
             Fishing.HideCastLine();
             Destroy(gameObject);
         }
         else if (timeReelingIn > 5f) // Just in case something goes wrong and we don't get close enough to the ship, we don't want the bobber to fly around forever
         {
+            BobberReturned.Invoke("Unequip");
+
             Fishing.HideCastLine();
             Destroy(gameObject);
         }

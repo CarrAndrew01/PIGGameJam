@@ -2346,6 +2346,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ship
       objectReference: {fileID: 0}
+    - target: {fileID: 2627616015998451968, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_Name
+      value: Ship
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617099780307043426, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.196
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617099780307043426, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.481
+      objectReference: {fileID: 0}
     - target: {fileID: 8638799503715786187, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2385,6 +2397,14 @@ PrefabInstance:
     - target: {fileID: 8638799503715786187, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923579229346624445, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.705
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923579229346624445, guid: 8ea0e10d3b9ea234895e1af61bf6d108, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.207
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

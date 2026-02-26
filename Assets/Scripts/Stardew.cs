@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -101,6 +102,14 @@ public class Stardew : MonoBehaviour
     [SerializeField] private bool canCatch = true;
     [SerializeField] private bool canEscape = true;
 
+    // ANIMATION
+
+    public static Action<string>  OnCatching;
+
+    // SFX
+    //public static Action<> OnCaught;
+    //public static Action<string> OnEscaped;
+
     void Awake()
     {
         // Grab the current fish shadow from the Fishing singleton (because if it moves out of the player collider it will cause problems)
@@ -118,7 +127,7 @@ public class Stardew : MonoBehaviour
         statHookPullForce = GameManager.GetPlayerStat(StatType.hookPullForce);
         // Initialize wriggle burst interval
         wriggleTimer = 0f;
-        wriggleInterval = Random.Range(0.15f, 0.5f);
+        wriggleInterval = UnityEngine.Random.Range(0.15f, 0.5f);
 
         // Grab the basic fish type from the current fish shadow
         fish = stardewFishShadow.fishData.fish;
@@ -138,6 +147,9 @@ public class Stardew : MonoBehaviour
         sliderRect = catchSlider.GetComponent<RectTransform>();
         hookRect.sizeDelta = new Vector2(hookRect.sizeDelta.x, CatchAreaSize);
         catchImage.color = hookColor;
+
+        Debug.Log("Reeln in fish");
+        OnCatching.Invoke("Reel");
     }
 
     // Update is called once per frame
@@ -156,9 +168,9 @@ public class Stardew : MonoBehaviour
         { // If state has changed, set the new state and begin a new timer
             this.fishState = newFishState;
             timeSinceStateChange = 0f;
-            currentStateDuration = Random.Range(1f, 3f) * (1f + Stubbornness);
+            currentStateDuration = UnityEngine.Random.Range(1f, 3f) * (1f + Stubbornness);
             fishStateStartPosition = fishSlider.value;
-            currentMaxMoveDistance = Random.Range(fishMinMoveDistance, fishMaxMoveDistance);
+            currentMaxMoveDistance = UnityEngine.Random.Range(fishMinMoveDistance, fishMaxMoveDistance);
         }
 
         // Fish movement based on state
@@ -252,7 +264,7 @@ public class Stardew : MonoBehaviour
             float struggleWeight = 1f;
 
             float total = upWeight + downWeight + struggleWeight;
-            float roll = Random.Range(0f, total);
+            float roll = UnityEngine.Random.Range(0f, total);
 
             if (roll < upWeight)
                 return FishState.Up;
@@ -277,7 +289,7 @@ public class Stardew : MonoBehaviour
             {
                 fishState = FishState.Struggling;
                 timeSinceStateChange = 0f;
-                currentStateDuration = Random.Range(0.5f, 1.5f) * (1f + Stubbornness);
+                currentStateDuration = UnityEngine.Random.Range(0.5f, 1.5f) * (1f + Stubbornness);
             }
         }
 
@@ -307,9 +319,9 @@ public class Stardew : MonoBehaviour
                 if (wriggleTimer >= wriggleInterval)
                 {
                     float burstStrength = fishMaxVelocity * 0.7f * Jumpiness;
-                    currentFishVelocity += Random.Range(-burstStrength, burstStrength);
+                    currentFishVelocity += UnityEngine.Random.Range(-burstStrength, burstStrength);
                     wriggleTimer = 0f;
-                    wriggleInterval = Random.Range(0.15f, 0.5f);
+                    wriggleInterval = UnityEngine.Random.Range(0.15f, 0.5f);
                 }
                 break;
         }
@@ -362,6 +374,7 @@ public class Stardew : MonoBehaviour
         // Check for win/lose conditions
         if (caughtProgress >= 1f && canCatch)
         {
+            // FISH CAUGHT
             fishState = FishState.Caught;
 
             // Tell the shadow fish
@@ -370,6 +383,8 @@ public class Stardew : MonoBehaviour
         }
         else if (caughtProgress <= -1f && canEscape)
         {
+            // FISH ESCAPED
+            Debug.Log("Fish Escaped");
             fishState = FishState.Escaped;
 
             // Increment the fail count for the fish shadow and unpause its leave timer

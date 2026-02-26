@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -48,6 +49,11 @@ public class Fishing : MonoBehaviour
     //public GameObject fishingMinigamePrefab; // Prefab for the fishing minigame popup
     public GameObject bobberPrefab; // Prefab for the bobber that is thrown when fishing
 
+
+    // ANIMATION
+    public static Action<string> OnCast;
+    public static Action<string> OnEquip;
+
     void Awake()
     {
         // Singleton pattern
@@ -77,6 +83,9 @@ public class Fishing : MonoBehaviour
         {
             if (CanFish)
             {
+                // TRIGGER EQUIP ANIMATION
+                OnEquip.Invoke("Equip");
+
                 IsCharging = true;
                 ThrowStrength = 0f;
 
@@ -93,6 +102,9 @@ public class Fishing : MonoBehaviour
         // Release to throw
         if (IsCharging && fishAction.action.WasReleasedThisFrame())
         {
+            // TRIGGER CAST ANIMATION
+            OnCast.Invoke("Cast");
+
             IsCharging = false;
             GameManager.TriggerPopOut(GameManager.MinigamePopup);
 
