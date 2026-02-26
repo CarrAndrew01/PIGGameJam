@@ -46,6 +46,9 @@ TagManager:
   - name: Background
     uniqueID: 3007318211
     locked: 0
+  - name: Stars
+    uniqueID: 3922648245
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
