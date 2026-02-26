@@ -32,6 +32,7 @@ public class Menus : MonoBehaviour
     public GameObject inventoryMenuPrefab; // Prefab for the inventory menu popup
     public GameObject shopMenuPrefab; // Prefab for the shop menu popup
 
+ 
     [Header("Debug")]
     [ShowInInspector, ReadOnly] private GameObject currentMenu; // Reference to the currently open menu, if any
     [ShowInInspector, ReadOnly] private MenuType currentMenuType; // Type of the currently open menu, if any

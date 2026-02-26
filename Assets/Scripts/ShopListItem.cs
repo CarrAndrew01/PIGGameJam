@@ -5,7 +5,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Class representing a single item in a list, such as an upgrade or inventory item.
 /// </summary>
-public class ListItem : MonoBehaviour
+public class ShopListItem : MonoBehaviour
 {
     // Components
     [Header("Data")]
@@ -17,12 +17,15 @@ public class ListItem : MonoBehaviour
     public TextMeshProUGUI subtextField;
     public TextMeshProUGUI subtextField2;
     public Image icon;
-    private Menu parentMenu;
+    private ShopMenu parentMenu;
     
-    public void Init(Menu parent, string name, Sprite iconSprite = null, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "")
+    private int fishIndex; //testing if this works
+
+    public void Init(ShopMenu parent, string name, int index, Sprite iconSprite = null, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "")
     {
         parentMenu = parent;
         nameField.text = name;
+        fishIndex = index;
         subtextField.text = subtext;
         subtextField2.text = subtext2;
         icon.sprite = iconSprite;
@@ -35,20 +38,32 @@ public class ListItem : MonoBehaviour
         // Set the subtexts visibility based on whether they were provided
         subtextField.gameObject.SetActive(!string.IsNullOrEmpty(subtext));
         subtextField2.gameObject.SetActive(!string.IsNullOrEmpty(subtext2));
+    }
+
+    public void OnSellClicked()
+    {
+
+        //handle the rest of the logic
+        GameManager.Instance.playerInventory.SellFish(fishIndex);
+        parentMenu.AdjustMenuIndexes(fishIndex);
+
+        Destroy(gameObject);
+
 
     }
 
 
-
-
-
+    public void AdjustDown(int amount)
+    {
+        fishIndex -= amount; //usually 1 but just in case
+    }
 
     public void OnItemClicked()
     {
         if (parentMenu != null)
         {
             parentMenu.descriptionField.text = description;
-            parentMenu.mechanicalDescriptionField.text = mechanicalDescription;
+           // parentMenu.mechanicalDescriptionField.text = mechanicalDescription;
         }
     }
 }

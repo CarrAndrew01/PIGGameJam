@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public static Popup MenuPopup => Instance.menuPopup; // Static accessor for the menu popup
 
-    public int money = 0; // Player's current money, 
+    public float money = 0; // Player's current money, 
 
     /*****
     Quest stuff here
@@ -54,11 +54,18 @@ public class GameManager : MonoBehaviour
 
         // Setup
         playerStats.Init();
-        // AddFishToInventory(new CaughtFish(TEMPFISH, 10f, "123"));
-        // AddFishToInventory(new CaughtFish(TEMPFISH, 10f, "123"));
-        // AddFishToInventory(new CaughtFish(TEMPFISH, 10f, "123"));
-        // //TEMP REMOVE THIS LATER, JUST FOR TESTING
-        // AddFishToInventory(new CaughtFish(TEMPFISH, 10f, "123"));
+        AddFishToInventory(new CaughtFish(TEMPFISH, 1, "123"));
+        AddFishToInventory(new CaughtFish(TEMPFISH, 2, "123"));
+        AddFishToInventory(new CaughtFish(TEMPFISH, 3, "123"));
+        //TEMP REMOVE THIS LATER, JUST FOR TESTING
+        AddFishToInventory(new CaughtFish(TEMPFISH, 4, "123"));
+        AddFishToInventory(new CaughtFish(TEMPFISH, 5, "123"));
+        AddFishToInventory(new CaughtFish(TEMPFISH, 6, "123"));
+        AddFishToInventory(new CaughtFish(TEMPFISH, 7, "123"));
+        AddFishToInventory(new CaughtFish(TEMPFISH, 8, "123"));
+
+
+
     }
 
     // Methods

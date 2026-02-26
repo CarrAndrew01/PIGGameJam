@@ -17,10 +17,13 @@ public class Menu : MonoBehaviour
     [Header("Prefabs")]
     public GameObject listItemPrefab; // Prefab for the list items in the menu
 
+    
+
+
     void Start()
     {
-        descriptionField.text = "";
-        mechanicalDescriptionField.text = "Click on an item to see its description.";
+      //  descriptionField.text = "";
+        //mechanicalDescriptionField.text = "Click on an item to see its description.";
     }
 
     // Methods
@@ -65,9 +68,10 @@ public class Menu : MonoBehaviour
         // Instantiate new list items based on the provided list of caught fish
         foreach (CaughtFish caughtFish in fishTypes)
         {
-            CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {(caughtFish.weight * 10):F2}", description: caughtFish.fish.description);
+            CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {(caughtFish.weight * caughtFish.fish.value):F2}", description: caughtFish.fish.description);
         }
     }
+ 
 
     public void PopulateListWithFishCount(Dictionary<string, int> fishCount, List<CaughtFish> fishTypes = null)
     {
@@ -95,7 +99,7 @@ public class Menu : MonoBehaviour
             {
                 if (caughtFish.fish.name == fish.Key)
                 {
-                    totalValue += caughtFish.weight * 10;
+                    totalValue += caughtFish.weight * caughtFish.fish.value;
                 }
             }
             CreateListItem(fish.Key, itemIcon, subtext: $"Count: {fish.Value:F2}", subtext2: $"Total Value: {totalValue:F2}", description: itemDescription);
