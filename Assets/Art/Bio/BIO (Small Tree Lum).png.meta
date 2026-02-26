@@ -1,0 +1,1534 @@
+fileFormatVersion: 2
+guid: f6bea0d2c72991f489f2a6339f43af3e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7404945890357058178
+    second: BIO (Small Tree Lum)_0
+  - first:
+      213: 2380090262643143536
+    second: BIO (Small Tree Lum)_1
+  - first:
+      213: 746826927591210708
+    second: BIO (Small Tree Lum)_2
+  - first:
+      213: 2116161539608771045
+    second: BIO (Small Tree Lum)_3
+  - first:
+      213: 7477543149888025282
+    second: BIO (Small Tree Lum)_4
+  - first:
+      213: 8124761750383737573
+    second: BIO (Small Tree Lum)_5
+  - first:
+      213: 7202770049600673286
+    second: BIO (Small Tree Lum)_6
+  - first:
+      213: -7753719760960756725
+    second: BIO (Small Tree Lum)_7
+  - first:
+      213: 6002291690389685391
+    second: BIO (Small Tree Lum)_8
+  - first:
+      213: 9210367963997891452
+    second: BIO (Small Tree Lum)_9
+  - first:
+      213: -1207051821364398443
+    second: BIO (Small Tree Lum)_10
+  - first:
+      213: 3052184619152378926
+    second: BIO (Small Tree Lum)_11
+  - first:
+      213: -7063210303458254306
+    second: BIO (Small Tree Lum)_12
+  - first:
+      213: 6341092821444446385
+    second: BIO (Small Tree Lum)_13
+  - first:
+      213: 5490640312567898032
+    second: BIO (Small Tree Lum)_14
+  - first:
+      213: 4980396977214569436
+    second: BIO (Small Tree Lum)_15
+  - first:
+      213: -3351704557060629098
+    second: BIO (Small Tree Lum)_16
+  - first:
+      213: 7211137202844349784
+    second: BIO (Small Tree Lum)_17
+  - first:
+      213: 3800719424073922750
+    second: BIO (Small Tree Lum)_18
+  - first:
+      213: -8155246318213800463
+    second: BIO (Small Tree Lum)_19
+  - first:
+      213: -5808722748876053946
+    second: BIO (Small Tree Lum)_20
+  - first:
+      213: 788468349111807800
+    second: BIO (Small Tree Lum)_21
+  - first:
+      213: -5343434943883523867
+    second: BIO (Small Tree Lum)_22
+  - first:
+      213: 3580301452409042821
+    second: BIO (Small Tree Lum)_23
+  - first:
+      213: 5449892840874140436
+    second: BIO (Small Tree Lum)_24
+  - first:
+      213: 8370897592930351814
+    second: BIO (Small Tree Lum)_25
+  - first:
+      213: -2228203268771044415
+    second: BIO (Small Tree Lum)_26
+  - first:
+      213: -8440503268444469919
+    second: BIO (Small Tree Lum)_27
+  - first:
+      213: -741565322530566272
+    second: BIO (Small Tree Lum)_28
+  - first:
+      213: -1918544263706887527
+    second: BIO (Small Tree Lum)_29
+  - first:
+      213: -5543397082808928568
+    second: BIO (Small Tree Lum)_30
+  - first:
+      213: 7456300486587774468
+    second: BIO (Small Tree Lum)_31
+  - first:
+      213: -7423949170080838761
+    second: BIO (Small Tree Lum)_32
+  - first:
+      213: -3601689878951949859
+    second: BIO (Small Tree Lum)_33
+  - first:
+      213: -6438302563441632711
+    second: BIO (Small Tree Lum)_34
+  - first:
+      213: -1761319148008217486
+    second: BIO (Small Tree Lum)_35
+  - first:
+      213: 449968194723736758
+    second: BIO (Small Tree Lum)_36
+  - first:
+      213: -6596540982676339393
+    second: BIO (Small Tree Lum)_37
+  - first:
+      213: -5918404151585998648
+    second: BIO (Small Tree Lum)_38
+  - first:
+      213: 5072490838342679871
+    second: BIO (Small Tree Lum)_39
+  - first:
+      213: -2264629474473577880
+    second: BIO (Small Tree Lum)_40
+  - first:
+      213: -3516769109436820050
+    second: BIO (Small Tree Lum)_41
+  - first:
+      213: 5826865794751670957
+    second: BIO (Small Tree Lum)_42
+  - first:
+      213: -1568653202407518362
+    second: BIO (Small Tree Lum)_43
+  - first:
+      213: 4520353047077641736
+    second: BIO (Small Tree Lum)_44
+  - first:
+      213: 6919904160955592939
+    second: BIO (Small Tree Lum)_45
+  - first:
+      213: -6750168753904664797
+    second: BIO (Small Tree Lum)_46
+  - first:
+      213: -5640044884436884961
+    second: BIO (Small Tree Lum)_47
+  - first:
+      213: -5158588658859028181
+    second: BIO (Small Tree Lum)_48
+  - first:
+      213: 7953995149988889420
+    second: BIO (Small Tree Lum)_49
+  - first:
+      213: 4056102089355044531
+    second: BIO (Small Tree Lum)_50
+  - first:
+      213: 1772245385360130314
+    second: BIO (Small Tree Lum)_51
+  - first:
+      213: -3985399129994774898
+    second: BIO (Small Tree Lum)_52
+  - first:
+      213: -4844157224815863750
+    second: BIO (Small Tree Lum)_53
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 24
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_0
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 177
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28a98bfdd07a3c660800000000000000
+      internalID: 7404945890357058178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_1
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 170
+        width: 39
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 073f53ecb77c70120800000000000000
+      internalID: 2380090262643143536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_2
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 194
+        width: 24
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4de35cf32234d5a00800000000000000
+      internalID: 746826927591210708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_3
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 192
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e979b755bd1e5d10800000000000000
+      internalID: 2116161539608771045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_4
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 171
+        width: 19
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c23bb980e195c760800000000000000
+      internalID: 7477543149888025282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_5
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 180
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5eabd40e3c3f0c070800000000000000
+      internalID: 8124761750383737573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_6
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 169
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 606554db23165f360800000000000000
+      internalID: 7202770049600673286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_7
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 177
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b04e10855f0456490800000000000000
+      internalID: -7753719760960756725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_8
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 168
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f84c4fbad7c6c4350800000000000000
+      internalID: 6002291690389685391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_9
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 158
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7b6bb85ddcc1df70800000000000000
+      internalID: 9210367963997891452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_10
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 148
+        width: 42
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 596361283c0bf3fe0800000000000000
+      internalID: -1207051821364398443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_11
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 170
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2c0d7d6db98b5a20800000000000000
+      internalID: 3052184619152378926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_12
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 160
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e12ed78c6af6afd90800000000000000
+      internalID: -7063210303458254306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_13
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 125
+        width: 52
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b8c9f51356100850800000000000000
+      internalID: 6341092821444446385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_14
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 136
+        width: 17
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bf9c0c064ca23c40800000000000000
+      internalID: 5490640312567898032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_15
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 146
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdbbd4bd9aced1540800000000000000
+      internalID: 4980396977214569436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_16
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 131
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69dd754a67a5c71d0800000000000000
+      internalID: -3351704557060629098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_17
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 144
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 855342a641b131460800000000000000
+      internalID: 7211137202844349784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_18
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 146
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb87adadd2edeb430800000000000000
+      internalID: 3800719424073922750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_19
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 142
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fddd039eaeb2de80800000000000000
+      internalID: -8155246318213800463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_20
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 144
+        width: 39
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64223829f65436fa0800000000000000
+      internalID: -5808722748876053946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_21
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 141
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83fa27939c331fa00800000000000000
+      internalID: 788468349111807800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_22
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 137
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e8c961ba3e48d5b0800000000000000
+      internalID: -5343434943883523867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_23
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 136
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 587f7a3a339cfa130800000000000000
+      internalID: 3580301452409042821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_24
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 117
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4136f3cf9a8e1ab40800000000000000
+      internalID: 5449892840874140436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_25
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 128
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ca39c582076b2470800000000000000
+      internalID: 8370897592930351814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_26
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 129
+        width: 18
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c3a98dbee4d311e0800000000000000
+      internalID: -2228203268771044415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_27
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 130
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16508de3ffe4dda80800000000000000
+      internalID: -8440503268444469919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_28
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 135
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08f41d4a44e65b5f0800000000000000
+      internalID: -741565322530566272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_29
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 125
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99a33e33826ff55e0800000000000000
+      internalID: -1918544263706887527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_30
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 100
+        width: 14
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c6bc3e29b5e113b0800000000000000
+      internalID: -5543397082808928568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_31
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 101
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 406f2a199c91a7760800000000000000
+      internalID: 7456300486587774468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_32
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 119
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79b86c64095d8f890800000000000000
+      internalID: -7423949170080838761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_33
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 108
+        width: 15
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd903fd332a340ec0800000000000000
+      internalID: -3601689878951949859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_34
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 111
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93a139d1eed86a6a0800000000000000
+      internalID: -6438302563441632711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_35
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 119
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27460e611998e87e0800000000000000
+      internalID: -1761319148008217486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_36
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 86
+        width: 14
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bc6bb660bb9e3600800000000000000
+      internalID: 449968194723736758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_37
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 109
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f35454d1de06474a0800000000000000
+      internalID: -6596540982676339393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_38
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 116
+        width: 8
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c8f48bf7ca9ddda0800000000000000
+      internalID: -5918404151585998648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_39
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 81
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3db6d1da8b156640800000000000000
+      internalID: 5072490838342679871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_40
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 93
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8627f12dd7b6290e0800000000000000
+      internalID: -2264629474473577880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_41
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 99
+        width: 11
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea593faa02de13fc0800000000000000
+      internalID: -3516769109436820050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_42
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 84
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daa2c0a719f2dd050800000000000000
+      internalID: 5826865794751670957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_43
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 95
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66f88b639360b3ae0800000000000000
+      internalID: -1568653202407518362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_44
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 89
+        width: 11
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80eda6e75258bbe30800000000000000
+      internalID: 4520353047077641736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_45
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 93
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be07181db20780060800000000000000
+      internalID: 6919904160955592939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_46
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 100
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32f329148459252a0800000000000000
+      internalID: -6750168753904664797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_47
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 88
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1261e15f098ab1b0800000000000000
+      internalID: -5640044884436884961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_48
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 74
+        width: 10
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b21595632f20968b0800000000000000
+      internalID: -5158588658859028181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_49
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 90
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4384446274426e60800000000000000
+      internalID: 7953995149988889420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_50
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 83
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b62ab03c5b2a4830800000000000000
+      internalID: 4056102089355044531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_51
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 80
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a014739c9c7489810800000000000000
+      internalID: 1772245385360130314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_52
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 75
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e86b2885b9401b8c0800000000000000
+      internalID: -3985399129994774898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BIO (Small Tree Lum)_53
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 73
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3855b26ba816ccb0800000000000000
+      internalID: -4844157224815863750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BIO (Small Tree Lum)_0: 7404945890357058178
+      BIO (Small Tree Lum)_1: 2380090262643143536
+      BIO (Small Tree Lum)_10: -1207051821364398443
+      BIO (Small Tree Lum)_11: 3052184619152378926
+      BIO (Small Tree Lum)_12: -7063210303458254306
+      BIO (Small Tree Lum)_13: 6341092821444446385
+      BIO (Small Tree Lum)_14: 5490640312567898032
+      BIO (Small Tree Lum)_15: 4980396977214569436
+      BIO (Small Tree Lum)_16: -3351704557060629098
+      BIO (Small Tree Lum)_17: 7211137202844349784
+      BIO (Small Tree Lum)_18: 3800719424073922750
+      BIO (Small Tree Lum)_19: -8155246318213800463
+      BIO (Small Tree Lum)_2: 746826927591210708
+      BIO (Small Tree Lum)_20: -5808722748876053946
+      BIO (Small Tree Lum)_21: 788468349111807800
+      BIO (Small Tree Lum)_22: -5343434943883523867
+      BIO (Small Tree Lum)_23: 3580301452409042821
+      BIO (Small Tree Lum)_24: 5449892840874140436
+      BIO (Small Tree Lum)_25: 8370897592930351814
+      BIO (Small Tree Lum)_26: -2228203268771044415
+      BIO (Small Tree Lum)_27: -8440503268444469919
+      BIO (Small Tree Lum)_28: -741565322530566272
+      BIO (Small Tree Lum)_29: -1918544263706887527
+      BIO (Small Tree Lum)_3: 2116161539608771045
+      BIO (Small Tree Lum)_30: -5543397082808928568
+      BIO (Small Tree Lum)_31: 7456300486587774468
+      BIO (Small Tree Lum)_32: -7423949170080838761
+      BIO (Small Tree Lum)_33: -3601689878951949859
+      BIO (Small Tree Lum)_34: -6438302563441632711
+      BIO (Small Tree Lum)_35: -1761319148008217486
+      BIO (Small Tree Lum)_36: 449968194723736758
+      BIO (Small Tree Lum)_37: -6596540982676339393
+      BIO (Small Tree Lum)_38: -5918404151585998648
+      BIO (Small Tree Lum)_39: 5072490838342679871
+      BIO (Small Tree Lum)_4: 7477543149888025282
+      BIO (Small Tree Lum)_40: -2264629474473577880
+      BIO (Small Tree Lum)_41: -3516769109436820050
+      BIO (Small Tree Lum)_42: 5826865794751670957
+      BIO (Small Tree Lum)_43: -1568653202407518362
+      BIO (Small Tree Lum)_44: 4520353047077641736
+      BIO (Small Tree Lum)_45: 6919904160955592939
+      BIO (Small Tree Lum)_46: -6750168753904664797
+      BIO (Small Tree Lum)_47: -5640044884436884961
+      BIO (Small Tree Lum)_48: -5158588658859028181
+      BIO (Small Tree Lum)_49: 7953995149988889420
+      BIO (Small Tree Lum)_5: 8124761750383737573
+      BIO (Small Tree Lum)_50: 4056102089355044531
+      BIO (Small Tree Lum)_51: 1772245385360130314
+      BIO (Small Tree Lum)_52: -3985399129994774898
+      BIO (Small Tree Lum)_53: -4844157224815863750
+      BIO (Small Tree Lum)_6: 7202770049600673286
+      BIO (Small Tree Lum)_7: -7753719760960756725
+      BIO (Small Tree Lum)_8: 6002291690389685391
+      BIO (Small Tree Lum)_9: 9210367963997891452
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
