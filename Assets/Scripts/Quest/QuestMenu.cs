@@ -318,11 +318,13 @@ public class QuestMenu : MonoBehaviour
         PlayerPrefs.SetInt($"Quest_{questName}_Status", (int)status);
         PlayerPrefs.Save();
     }
+
     public static Quest.Completed LoadQuestStatus(string questName)
     {
         int statusInt = PlayerPrefs.GetInt($"Quest_{questName}_Status", (int)Quest.Completed.Hidden);
         return (Quest.Completed)statusInt;
     }
+    
     public static Quest.Completed[] CacheAllQuestStatuses(List<Quest> quests)
     {
         Quest.Completed[] statuses = new Quest.Completed[quests.Count];

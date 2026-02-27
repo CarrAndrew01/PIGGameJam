@@ -5,7 +5,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Class representing a single item in a list, such as an upgrade or inventory item.
 /// </summary>
-public class ShopListItem : MonoBehaviour
+public class SellListItem : MonoBehaviour
 {
     // Components
     [Header("Data")]
@@ -19,13 +19,13 @@ public class ShopListItem : MonoBehaviour
     public Image icon;
     private ShopMenu parentMenu;
     
-    private int fishIndex; //testing if this works
-
-    public void Init(ShopMenu parent, string name, int index, Sprite iconSprite = null, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "")
+    public CaughtFish fishRef; //the fish that this list item is referencing
+    
+    public void Init(CaughtFish fish, ShopMenu parent, string name, Sprite iconSprite = null, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "")
     {
+        fishRef = fish;
         parentMenu = parent;
         nameField.text = name;
-        fishIndex = index;
         subtextField.text = subtext;
         subtextField2.text = subtext2;
         icon.sprite = iconSprite;
@@ -42,26 +42,22 @@ public class ShopListItem : MonoBehaviour
 
     public void OnSellClicked()
     {
-
         //handle the rest of the logic
-        GameManager.Instance.playerInventory.SellFish(fishIndex);
-        parentMenu.AdjustMenuIndexes(fishIndex);
+
+
+        GameManager.Instance.playerInventory.RemoveFishByID(fishRef.id);
+        GameManager.Instance.money += fishRef.fish.value * fishRef.weight;
 
         Destroy(gameObject);
-
-
     }
 
 
-    public void AdjustDown(int amount)
-    {
-        fishIndex -= amount; //usually 1 but just in case
-    }
 
     public void OnItemClicked()
     {
         if (parentMenu != null)
         {
+            parentMenu.nameField.text = fishRef.fish.name;
             parentMenu.descriptionField.text = description;
            // parentMenu.mechanicalDescriptionField.text = mechanicalDescription;
         }

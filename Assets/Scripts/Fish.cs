@@ -7,12 +7,14 @@ using UnityEngine;
 [Serializable]
 public struct CaughtFish
 {
+    public int id;
     public Fish fish;
     public float weight;
     public string planetOfOrigin;
 
     public CaughtFish(Fish fish, float weight, string planetOfOrigin)
     {
+        this.id = GameManager.Instance.playerInventory.NewID();
         this.fish = fish;
         this.weight = weight;
         this.planetOfOrigin = planetOfOrigin;

@@ -17,7 +17,7 @@ public class Fishing : MonoBehaviour
 
     public static bool CanFish => (IsMinigameActive == false || Instance.IsCharging) && Instance.CurrentBobber == null && !Menus.IsAnyMenuOpen;
     public static bool IsFishing => Instance.CurrentBobber != null;
-    public static bool IsMinigameActive => GameManager.MinigamePopup.childCanvas != null;
+    public static bool IsMinigameActive => GameManager.MinigamePopup != null && GameManager.MinigamePopup.childCanvas != null;
     public static FishShadow LastFishShadow { get => Instance.lastFishShadow; set => Instance.lastFishShadow = value; }
     public static float reelInFactor = 0f; // Set by the current minigame
 

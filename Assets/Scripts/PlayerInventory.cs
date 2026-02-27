@@ -11,12 +11,14 @@ public struct Bait
     public Upgrade baitUpgrade;
     public int numberOfUses;
     public string mechanicalDescription;
+    public int cost;
 
-    public Bait(Upgrade upgrade, int uses, string description)
+    public Bait(Upgrade upgrade, int uses, string description, int cost = 0)
     {
         baitUpgrade = upgrade;
         numberOfUses = uses;
         mechanicalDescription = description;
+        this.cost = cost;
     }
 }
 
@@ -30,10 +32,18 @@ public class PlayerInventory
     public List<CaughtFish> caughtFish = new List<CaughtFish>();
     public List<Bait> baits = new List<Bait>();
     public Upgrade currentBaitUpgrade; // Reference to the currently equipped bait upgrade, if any
-    public float money = 0; // Player's current money, 
 
     // Variables
     public int MaxFishStorage => (int)GameManager.GetPlayerStat(StatType.fishStorage);
+
+    public int maxInt = 0;
+
+    public int NewID()
+    {
+        maxInt++;
+        return maxInt;
+    }
+
 
     // Methods
     public void AddBait(Upgrade baitUpgrade, int uses, string description)
@@ -126,12 +136,17 @@ public class PlayerInventory
         }
     }
 
-    public void SellFish(int index)
+    public void RemoveFishByID(int id)
     {
-        RemoveFishAt(index);
-        money += caughtFish[index].weight * 10; // Example: sell price based on weight
-    }
 
+        for(int i = 0; i < caughtFish.Count;i++)
+        {
+            if(caughtFish[i].id == id)
+            {
+                RemoveFishAt(i);       
+            }
+        }
+    }
 
     public void RemoveFishQuest(string fishName, int quantity)
     {
@@ -210,7 +225,6 @@ public class PlayerInventory
         }
 
         save.currentBaitUpgradeName = currentBaitUpgrade != null ? currentBaitUpgrade.name : "";
-        save.money = money;
 
         string json = save.ToJson();
         PlayerPrefs.SetString("Manager_Inventory", json);
@@ -256,6 +270,5 @@ public class PlayerInventory
         currentBaitUpgrade = !string.IsNullOrEmpty(save.currentBaitUpgradeName)
             ? GameManager.FindUpgradeByName(save.currentBaitUpgradeName)
             : null;
-        money = save.money;
     }
 }

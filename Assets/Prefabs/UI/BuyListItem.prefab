@@ -258,7 +258,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4452509319479142236}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShopListItem, Assembly-CSharp
         m_MethodName: OnSellClicked
         m_Mode: 1
@@ -590,9 +590,8 @@ GameObject:
   - component: {fileID: 421176137644693022}
   - component: {fileID: 8597412811779376052}
   - component: {fileID: 5748933204169075183}
-  - component: {fileID: 4452509319479142236}
   m_Layer: 5
-  m_Name: List Item Shop
+  m_Name: BuyListItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -712,7 +711,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4452509319479142236}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ShopListItem, Assembly-CSharp
         m_MethodName: OnItemClicked
         m_Mode: 1
@@ -724,29 +723,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4452509319479142236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3847822284047299910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef2a9a623307f01d4a4bcc74d8c7996f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  description: 
-  mechanicalDescription: 
-  nameField: {fileID: 7461877093015054369}
-  subtextField: {fileID: 912141177404342101}
-  subtextField2: {fileID: 3580315996757718985}
-  icon: {fileID: 2732296862212856554}
-  fishRef:
-    id: 0
-    fish: {fileID: 0}
-    weight: 0
-    planetOfOrigin: 
 --- !u!1 &4148687426945054519
 GameObject:
   m_ObjectHideFlags: 0

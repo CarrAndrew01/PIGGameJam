@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("Player Stats and Inventory")]
     public PlayerStats playerStats = new PlayerStats(); // Manages player upgrades and stats
     public PlayerInventory playerInventory = new PlayerInventory(); // Manages player inventory
+    public float money = 0; // Player's current money, 
 
     [Header("Screen Transitions")]
     public Transition.Screen intendedScreen;
@@ -51,6 +52,8 @@ public class GameManager : MonoBehaviour
         // Load inventory after stats and registries are initialized
         playerInventory.LoadFromPlayerPrefs();
         // playerInventory.Init();
+
+        DEBUG_FISH_ADDITION(6);
     }
 
     void OnApplicationQuit()
@@ -58,6 +61,20 @@ public class GameManager : MonoBehaviour
         // This is called when the application is quitting. It just saves the player's inventory and upgrades to PlayerPrefs.
         playerInventory.SaveToPlayerPrefs();
         playerStats.SaveUpgradesToPrefs();
+    }
+
+    void DEBUG_FISH_ADDITION(int amount)
+    {
+
+        for(int i = 0; i < amount; i ++){
+            CaughtFish newCatch = new CaughtFish
+            {
+                fish = TEMPFISH,
+                weight = Random.Range(TEMPFISH.minWeight, TEMPFISH.maxWeight),
+            };
+            AddFishToInventory(newCatch);
+
+        }
     }
 
     // Methods
@@ -94,7 +111,7 @@ public class GameManager : MonoBehaviour
     }
 
     // Other    
-    public static void AdjustMoney(int amount) => Instance.playerInventory.money += amount;
+    public static void AdjustMoney(int amount) => Instance.money += amount;
     public static void FindQuest(string name) => Instance.AllQuests.Find(quest => quest.questName == name);
 
     // Asset lookup helpers (search Resources for ScriptableObjects by name)
