@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fa1bd15f9e51464daaa74f6767ff8bab
+guid: 1658c1bc092ffdd3e871c9de0ec61495
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6575632591311876742
-    second: CrabIce_0
+      213: 1907370706717288651
+    second: Moonfish_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CrabIce_0
+      name: Moonfish_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 2
-        width: 51
-        height: 54
+        x: 16
+        y: 14
+        width: 42
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a7dcf555ff8aeb4a0800000000000000
-      internalID: -6575632591311876742
+      spriteID: bc8aed45d87587a10800000000000000
+      internalID: 1907370706717288651
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CrabIce_0: -6575632591311876742
+      Moonfish_0: 1907370706717288651
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

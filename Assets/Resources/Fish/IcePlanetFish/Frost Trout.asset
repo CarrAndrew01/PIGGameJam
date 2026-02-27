@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
+  m_Name: Frost Trout
+  m_EditorClassIdentifier: 
+  sprite: {fileID: -1060274179321268171, guid: cc1046d54f86a4d33b7889e39424f56a, type: 3}
+  WithBackground: {fileID: 0}
+  background: {fileID: 0}
+  minWeight: 4
+  maxWeight: 9
+  minAmount: 1
+  maxAmount: 1
+  description: 
+  preferredBaitType: 0
+  value: 3
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  jumpiness: 0.135
+  speed: 0.314
+  stubbornness: 0.116
+  size: 1

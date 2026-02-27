@@ -2824,27 +2824,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1772509435340831383, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1772509435340831383, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1772509435340831383, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1772509435340831383, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 1772509435340831383, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1772509435340831383, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 5047442030517462171, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_IsActive
@@ -2860,51 +2860,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6902075134169239040, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 7253554786821913455, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7253554786821913455, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7253554786821913455, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7556911913039070446, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7556911913039070446, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8496694483996281451, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8496694483996281451, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8496694483996281451, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 8496694483996281451, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 8496694483996281451, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 8496694483996281451, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 8633025000659262716, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
       propertyPath: m_IsActive
@@ -3281,7 +3281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4205601295895667163
 RectTransform:
   m_ObjectHideFlags: 0

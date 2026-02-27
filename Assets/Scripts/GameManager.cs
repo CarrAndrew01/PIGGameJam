@@ -87,6 +87,21 @@ public class GameManager : MonoBehaviour
         // This method can be called whenever we want to reapply the effects of all upgrades
         playerStats.ReapplyUpgrades();
     }
+    /*
+        Sorry for putting this here nathan
+    */
+    public static float GetNormalizedWeight(float currentWeight, float minWeight, float maxWeight)
+    {
+        if (maxWeight <= minWeight)
+        {
+            return 0f; // or throw new ArgumentException("max must be greater than min")
+        }
+
+        float normalized = (currentWeight - minWeight) / (maxWeight - minWeight);
+        
+        // Optional: clamp to [0, 1] to handle values outside the range safely
+        return Mathf.Clamp01(normalized);
+    }
 
 
     // Static methods
@@ -100,7 +115,7 @@ public class GameManager : MonoBehaviour
     public static void AddFishToInventory(CaughtFish newCatch) => Instance.playerInventory.AddFish(newCatch);
     public static void RemoveFishFromInventory(CaughtFish catchToRemove) => Instance.playerInventory.RemoveFish(catchToRemove);
     public static void RemoveFishFromInventoryIndex(int index) => Instance.playerInventory.RemoveFishAt(index);
-    public static float CalculateFishValue(CaughtFish fish) => fish.weight * fish.fish.value;
+    public static float CalculateFishValue(CaughtFish fish) => fish.fish.value + (fish.fish.value * GetNormalizedWeight(fish.weight, fish.fish.minWeight, fish.fish.maxWeight));
     public static void AddBaitToInventory(Upgrade baitUpgrade, int uses, string description) => Instance.playerInventory.AddBait(baitUpgrade, uses, description);
     public static void RemoveBaitFromInventory(Upgrade baitUpgrade, int uses) => Instance.playerInventory.RemoveBait(baitUpgrade, uses);
     public static void SelectBaitUpgrade(Upgrade baitUpgrade) => Instance.playerInventory.SelectBait(baitUpgrade);

@@ -14,7 +14,7 @@ public struct CaughtFish
 
     public CaughtFish(Fish fish, float weight, string planetOfOrigin)
     {
-        this.id = GameManager.Instance.playerInventory.NewID();
+        id = GameManager.Instance.playerInventory.NewID();
         this.fish = fish;
         this.weight = weight;
         this.planetOfOrigin = planetOfOrigin;
@@ -32,6 +32,9 @@ public class Fish : ScriptableObject
     // Variables
     [Header("General")]
     public Sprite sprite;
+    public Sprite WithBackground; //sprites with an in-built background
+    public Sprite background; //background sprite if it doesn't come with one (if we use this idk)
+
     public float minWeight, maxWeight; // Weight range for the fish, which will affect money earned I guess
     public int minAmount = 1, maxAmount = 1; // Amount range for the fish, which will affect how many can be caught in one catch
     public string description;
