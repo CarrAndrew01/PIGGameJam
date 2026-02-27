@@ -46,7 +46,7 @@ public class SellListItem : MonoBehaviour
 
 
         GameManager.Instance.playerInventory.RemoveFishByID(fishRef.id);
-        GameManager.Instance.money += fishRef.fish.value * fishRef.weight;
+        GameManager.Instance.money += GameManager.CalculateFishValue(fishRef);
 
         Destroy(gameObject);
     }

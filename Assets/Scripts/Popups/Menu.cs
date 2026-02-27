@@ -104,7 +104,7 @@ public class Menu : MonoBehaviour
         for (int i = 0; i < fishTypes.Count; i++)
         {
             CaughtFish caughtFish = fishTypes[i];
-            CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {(caughtFish.weight * 10):F2}", description: caughtFish.fish.description, index: i);
+            CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description, index: i);
         }
     }
  
@@ -135,7 +135,7 @@ public class Menu : MonoBehaviour
             {
                 if (caughtFish.fish.name == fish.Key)
                 {
-                    totalValue += caughtFish.weight * caughtFish.fish.value;
+                    totalValue += GameManager.CalculateFishValue(caughtFish);
                 }
             }
             CreateListItem(fish.Key, itemIcon, subtext: $"Count: {fish.Value:F2}", subtext2: $"Total Value: {totalValue:F2}", description: itemDescription);

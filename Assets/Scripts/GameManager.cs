@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 /// <summary>
@@ -6,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
+
+
     // State
     public static GameManager Instance { get; private set; }
 
@@ -97,6 +100,7 @@ public class GameManager : MonoBehaviour
     public static void AddFishToInventory(CaughtFish newCatch) => Instance.playerInventory.AddFish(newCatch);
     public static void RemoveFishFromInventory(CaughtFish catchToRemove) => Instance.playerInventory.RemoveFish(catchToRemove);
     public static void RemoveFishFromInventoryIndex(int index) => Instance.playerInventory.RemoveFishAt(index);
+    public static float CalculateFishValue(CaughtFish fish) => fish.weight * fish.fish.value;
     public static void AddBaitToInventory(Upgrade baitUpgrade, int uses, string description) => Instance.playerInventory.AddBait(baitUpgrade, uses, description);
     public static void RemoveBaitFromInventory(Upgrade baitUpgrade, int uses) => Instance.playerInventory.RemoveBait(baitUpgrade, uses);
     public static void SelectBaitUpgrade(Upgrade baitUpgrade) => Instance.playerInventory.SelectBait(baitUpgrade);

@@ -117,7 +117,7 @@ public class ShopMenu : MonoBehaviour
             
 
             listItemComponent.Init(caughtFish, this, caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", 
-            subtext2: $"Value: {(caughtFish.weight * caughtFish.fish.value):F2}", description: caughtFish.fish.description);
+            subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description);
         }
     }
 
