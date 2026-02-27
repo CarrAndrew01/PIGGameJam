@@ -12,6 +12,9 @@ public class Fishing : MonoBehaviour
 {
     public static Fishing Instance; // Singleton instance for easy access
 
+    public static event Action MinigameStarted;
+    public static event Action MinigameEnded;
+
     public static bool CanFish => (IsMinigameActive == false || Instance.IsCharging) && Instance.CurrentBobber == null && !Menus.IsAnyMenuOpen;
     public static bool IsFishing => Instance.CurrentBobber != null;
     public static bool IsMinigameActive => GameManager.MinigamePopup.childCanvas != null;
@@ -171,6 +174,8 @@ public class Fishing : MonoBehaviour
                 // Automatically catch if no minigame prefab is assigned
                 LastFishShadow.EndFishing(caught: true);
             }
+
+            MinigameStarted?.Invoke();
         }
     }
     public static void EndFishingMinigame()
@@ -186,6 +191,8 @@ public class Fishing : MonoBehaviour
 
         if (IsMinigameActive)
             GameManager.TriggerPopOut(GameManager.MinigamePopup);
+
+        MinigameEnded?.Invoke();
     }
 
     public static void FindScreenSide()

@@ -9,7 +9,7 @@ public class Transition : MonoBehaviour
 {
     public static Transition Instance { get; private set; }
 
-    public static event Action onTransition;
+    public static event Action OnTransition;
 
     public enum Screen
     {
@@ -117,7 +117,7 @@ public class Transition : MonoBehaviour
     {
         gameObject.GetComponent<Animator>().SetBool("PlanetTransition", true);
         currentScreen = Screen.Galaxy;
-        onTransition?.Invoke();
+        OnTransition?.Invoke();
         if (fadeText) StartCoroutine(FadeTextCoroutine());
         else HideAllText();
     }
@@ -126,7 +126,7 @@ public class Transition : MonoBehaviour
     {
         gameObject.GetComponent<Animator>().SetBool("SettingsTransition", true);
         currentScreen = Screen.Settings;
-        onTransition?.Invoke();
+        OnTransition?.Invoke();
         if (fadeText) StartCoroutine(FadeTextCoroutine());
         else HideAllText();
     }
@@ -135,7 +135,7 @@ public class Transition : MonoBehaviour
     {
         gameObject.GetComponent<Animator>().SetBool("PlanetTransition", false);
         currentScreen = Screen.Main;
-        onTransition?.Invoke();
+        OnTransition?.Invoke();
         StartCoroutine(UnFadeTextCoroutine());
     }
 
@@ -143,7 +143,7 @@ public class Transition : MonoBehaviour
     {
         gameObject.GetComponent<Animator>().SetBool("SettingsTransition", false);
         currentScreen = Screen.Main;
-        onTransition?.Invoke();
+        OnTransition?.Invoke();
         StartCoroutine(UnFadeTextCoroutine());
     }
 }
