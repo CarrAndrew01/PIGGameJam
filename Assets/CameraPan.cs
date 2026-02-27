@@ -21,8 +21,8 @@ public class PlayerCamera : MonoBehaviour
     {
         if (target == null)
         {
-            Debug.LogWarning("[PlayerCamera] No target assigned!", this);
-            return;
+            // Grab player by tag if not set in inspector
+            target = GameObject.FindGameObjectWithTag("Player").transform;
         }
 
         _anchorX = target.position.x + offsetX;

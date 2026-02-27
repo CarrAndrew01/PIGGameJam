@@ -30,6 +30,7 @@ public class PlayerInventory
     public List<CaughtFish> caughtFish = new List<CaughtFish>();
     public List<Bait> baits = new List<Bait>();
     public Upgrade currentBaitUpgrade; // Reference to the currently equipped bait upgrade, if any
+    public float money = 0; // Player's current money, 
 
     // Variables
     public int MaxFishStorage => (int)GameManager.GetPlayerStat(StatType.fishStorage);
@@ -128,8 +129,7 @@ public class PlayerInventory
     public void SellFish(int index)
     {
         RemoveFishAt(index);
-        GameManager.Instance.money += caughtFish[index].weight * 10; // Example: sell price based on weight
-
+        money += caughtFish[index].weight * 10; // Example: sell price based on weight
     }
 
 
@@ -210,6 +210,7 @@ public class PlayerInventory
         }
 
         save.currentBaitUpgradeName = currentBaitUpgrade != null ? currentBaitUpgrade.name : "";
+        save.money = money;
 
         string json = save.ToJson();
         PlayerPrefs.SetString("Manager_Inventory", json);
@@ -255,5 +256,6 @@ public class PlayerInventory
         currentBaitUpgrade = !string.IsNullOrEmpty(save.currentBaitUpgradeName)
             ? GameManager.FindUpgradeByName(save.currentBaitUpgradeName)
             : null;
+        money = save.money;
     }
 }
