@@ -49,6 +49,18 @@ TagManager:
   - name: Stars
     uniqueID: 3922648245
     locked: 0
+  - name: Halo
+    uniqueID: 1058815403
+    locked: 0
+  - name: Sun
+    uniqueID: 3893785049
+    locked: 0
+  - name: Terrain
+    uniqueID: 2461076823
+    locked: 0
+  - name: Lava
+    uniqueID: 12061587
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -60,6 +72,9 @@ TagManager:
     locked: 0
   - name: Bioluminescence
     uniqueID: 4066596585
+    locked: 0
+  - name: Foreground
+    uniqueID: 1217790485
     locked: 0
   m_RenderingLayers:
   - Default

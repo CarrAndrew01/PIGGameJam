@@ -465,7 +465,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 278847480}
   parllax: 0.4
 --- !u!1 &252111904
 GameObject:
@@ -567,7 +566,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 278847480}
   parllax: 0.8
 --- !u!1 &278847480
 GameObject:
@@ -866,7 +864,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 278847480}
   parllax: 1
 --- !u!1 &436097886
 GameObject:
@@ -968,7 +965,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 278847480}
   parllax: 0.1
 --- !u!1 &450049476
 GameObject:
@@ -1017,7 +1013,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 278847480}
   parllax: 0.85
 --- !u!1 &542230609
 GameObject:
@@ -1456,7 +1451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 278847480}
   parllax: 0.35
 --- !u!1 &966290336
 GameObject:
@@ -1558,7 +1552,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 278847480}
   parllax: 0.3
 --- !u!1 &1052278472
 GameObject:
@@ -1993,7 +1986,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 278847480}
   parllax: 0.6
 --- !u!1 &1334469055
 GameObject:
@@ -2144,7 +2136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 278847480}
   parllax: 0.4
 --- !u!1 &1689064022
 GameObject:
@@ -2246,7 +2237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 278847480}
   parllax: 0.3
 --- !u!1 &1838084829
 GameObject:
@@ -2493,7 +2483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 278847480}
   parllax: 0.35
 --- !u!1 &2102659611
 GameObject:
@@ -2595,7 +2584,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 278847480}
   parllax: 0
 --- !u!1001 &425868799155583960
 PrefabInstance:

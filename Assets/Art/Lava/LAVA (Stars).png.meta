@@ -1,0 +1,1352 @@
+fileFormatVersion: 2
+guid: f387622b1dfd1744fbdac22513bebb1e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1698912123497107981
+    second: LAVA (Stars)_0
+  - first:
+      213: -5567657068682376170
+    second: LAVA (Stars)_1
+  - first:
+      213: 5106738569802601819
+    second: LAVA (Stars)_2
+  - first:
+      213: 5781378889365261605
+    second: LAVA (Stars)_3
+  - first:
+      213: 7150036514360180138
+    second: LAVA (Stars)_4
+  - first:
+      213: -1260174554793093612
+    second: LAVA (Stars)_5
+  - first:
+      213: -6388768130526264945
+    second: LAVA (Stars)_6
+  - first:
+      213: 6743039408961314917
+    second: LAVA (Stars)_7
+  - first:
+      213: 691770672917677779
+    second: LAVA (Stars)_8
+  - first:
+      213: 4408514178565796324
+    second: LAVA (Stars)_9
+  - first:
+      213: -4361434685616391071
+    second: LAVA (Stars)_10
+  - first:
+      213: 8326738124044490282
+    second: LAVA (Stars)_11
+  - first:
+      213: 6967932320517435455
+    second: LAVA (Stars)_12
+  - first:
+      213: -8137039382121193659
+    second: LAVA (Stars)_13
+  - first:
+      213: -8260591849144779069
+    second: LAVA (Stars)_14
+  - first:
+      213: 7025403887027072975
+    second: LAVA (Stars)_15
+  - first:
+      213: 5546418745188431870
+    second: LAVA (Stars)_16
+  - first:
+      213: -8904931872533385071
+    second: LAVA (Stars)_17
+  - first:
+      213: -5500316307208802602
+    second: LAVA (Stars)_18
+  - first:
+      213: -4459830978996987791
+    second: LAVA (Stars)_19
+  - first:
+      213: 6226128442791106533
+    second: LAVA (Stars)_20
+  - first:
+      213: 7043599088953764361
+    second: LAVA (Stars)_21
+  - first:
+      213: -1305868669824930371
+    second: LAVA (Stars)_22
+  - first:
+      213: -2265949233224379369
+    second: LAVA (Stars)_23
+  - first:
+      213: -8215418658603874607
+    second: LAVA (Stars)_24
+  - first:
+      213: 4469605484874335910
+    second: LAVA (Stars)_25
+  - first:
+      213: 2450281293644359040
+    second: LAVA (Stars)_26
+  - first:
+      213: -5244025622345675845
+    second: LAVA (Stars)_27
+  - first:
+      213: 5265062501052939916
+    second: LAVA (Stars)_28
+  - first:
+      213: -2461731679365900905
+    second: LAVA (Stars)_29
+  - first:
+      213: 1665927306710634354
+    second: LAVA (Stars)_30
+  - first:
+      213: 9187002153769592401
+    second: LAVA (Stars)_31
+  - first:
+      213: -9125220100452590247
+    second: LAVA (Stars)_32
+  - first:
+      213: -3629110352093592315
+    second: LAVA (Stars)_33
+  - first:
+      213: -4873753277354416563
+    second: LAVA (Stars)_34
+  - first:
+      213: -7316583563228916628
+    second: LAVA (Stars)_35
+  - first:
+      213: 5398848319664551910
+    second: LAVA (Stars)_36
+  - first:
+      213: 7587259852276676010
+    second: LAVA (Stars)_37
+  - first:
+      213: 5787703546990863927
+    second: LAVA (Stars)_38
+  - first:
+      213: 6153643252080903381
+    second: LAVA (Stars)_39
+  - first:
+      213: -8216063040926524010
+    second: LAVA (Stars)_40
+  - first:
+      213: -12490140933546936
+    second: LAVA (Stars)_41
+  - first:
+      213: 1646811778128809136
+    second: LAVA (Stars)_42
+  - first:
+      213: -4695770698084228695
+    second: LAVA (Stars)_43
+  - first:
+      213: 400968407589858137
+    second: LAVA (Stars)_44
+  - first:
+      213: 4762554277825178956
+    second: LAVA (Stars)_45
+  - first:
+      213: 2034063725006971290
+    second: LAVA (Stars)_46
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 24
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: LAVA (Stars)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 132
+        width: 59
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fda956cc604c68e0800000000000000
+      internalID: -1698912123497107981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_1
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 95
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61c8efd0565bbb2b0800000000000000
+      internalID: -5567657068682376170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_2
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 177
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b55dedd2ca7ced640800000000000000
+      internalID: 5106738569802601819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_3
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 145
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52d0f8408759b3050800000000000000
+      internalID: 5781378889365261605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_4
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 116
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aadb289c3580a3360800000000000000
+      internalID: 7150036514360180138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_5
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 170
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 416529a4be5f28ee0800000000000000
+      internalID: -1260174554793093612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_6
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 136
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8145a30c398657a0800000000000000
+      internalID: -6388768130526264945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_7
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 140
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5606995cd96149d50800000000000000
+      internalID: 6743039408961314917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_8
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 166
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d68a4903c9a99900800000000000000
+      internalID: 691770672917677779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_9
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 104
+        width: 89
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e1ffa0c9403e2d30800000000000000
+      internalID: 4408514178565796324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_10
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 204
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16c74c4e2421973c0800000000000000
+      internalID: -4361434685616391071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_11
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 164
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a26df55f4348e8370800000000000000
+      internalID: 8326738124044490282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_12
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 177
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f30b76f178113b060800000000000000
+      internalID: 6967932320517435455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_13
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 172
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54f5d493bcd631f80800000000000000
+      internalID: -8137039382121193659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_14
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 176
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cefc3dca7b7c5d80800000000000000
+      internalID: -8260591849144779069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_15
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 186
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcfa5e1fc9f3f7160800000000000000
+      internalID: 7025403887027072975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_16
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 177
+        width: 85
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef7368a6676d8fc40800000000000000
+      internalID: 5546418745188431870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_17
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 110
+        width: 35
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 190f79c64a35b6480800000000000000
+      internalID: -8904931872533385071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_18
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 87
+        width: 43
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dee784e573faa3b0800000000000000
+      internalID: -5500316307208802602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_19
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 167
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1781a929a5f7b12c0800000000000000
+      internalID: -4459830978996987791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_20
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 160
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e7158ec4d6a76650800000000000000
+      internalID: 6226128442791106533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_21
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 171
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90aaa558d04efb160800000000000000
+      internalID: 7043599088953764361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_22
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 141
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbde5c31d5f90ede0800000000000000
+      internalID: -1305868669824930371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_23
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 118
+        width: 85
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 714979a8d2bbd80e0800000000000000
+      internalID: -2265949233224379369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_24
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 166
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d6ccc4d148fcfd80800000000000000
+      internalID: -8215418658603874607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_25
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 100
+        width: 24
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a6821ce18a370e30800000000000000
+      internalID: 4469605484874335910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_26
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 174
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 085e47bbad5210220800000000000000
+      internalID: 2450281293644359040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_27
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 162
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbb0a030b7a7937b0800000000000000
+      internalID: -5244025622345675845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_28
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 126
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8e7d7ff272411940800000000000000
+      internalID: 5265062501052939916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_29
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 129
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 795d117941c26ddd0800000000000000
+      internalID: -2461731679365900905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_30
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 145
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27f4c1a1f009e1710800000000000000
+      internalID: 1665927306710634354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_31
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 141
+        width: 111
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1566f26b8c9ce7f70800000000000000
+      internalID: 9187002153769592401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_32
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 213
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95dd4478aa4bc5180800000000000000
+      internalID: -9125220100452590247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_33
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 197
+        width: 24
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 505c4c4dc5fc2adc0800000000000000
+      internalID: -3629110352093592315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_34
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 173
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d46e46c6733fc5cb0800000000000000
+      internalID: -4873753277354416563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_35
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 105
+        width: 153
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c645740a306467a90800000000000000
+      internalID: -7316583563228916628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_36
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 152
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e7f1d141ff8cea40800000000000000
+      internalID: 5398848319664551910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_37
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 146
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa5b889f2ac5b4960800000000000000
+      internalID: 7587259852276676010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_38
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 147
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 736a8af16bd025050800000000000000
+      internalID: 5787703546990863927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_39
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 182
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d403c23fe1266550800000000000000
+      internalID: 6153643252080903381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_40
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 189
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69ddb51e13eaafd80800000000000000
+      internalID: -8216063040926524010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_41
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 151
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84c16727840a3dff0800000000000000
+      internalID: -12490140933546936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_42
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 195
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bc0c474696aad610800000000000000
+      internalID: 1646811778128809136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_43
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 188
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a1600aed6545deb0800000000000000
+      internalID: -4695770698084228695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_44
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 121
+        width: 90
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95b2c8c64a6809500800000000000000
+      internalID: 400968407589858137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_45
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 129
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4d6941f1edf71240800000000000000
+      internalID: 4762554277825178956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LAVA (Stars)_46
+      rect:
+        serializedVersion: 2
+        x: 596
+        y: 216
+        width: 40
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a916c835e227a3c10800000000000000
+      internalID: 2034063725006971290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      LAVA (Stars)_0: -1698912123497107981
+      LAVA (Stars)_1: -5567657068682376170
+      LAVA (Stars)_10: -4361434685616391071
+      LAVA (Stars)_11: 8326738124044490282
+      LAVA (Stars)_12: 6967932320517435455
+      LAVA (Stars)_13: -8137039382121193659
+      LAVA (Stars)_14: -8260591849144779069
+      LAVA (Stars)_15: 7025403887027072975
+      LAVA (Stars)_16: 5546418745188431870
+      LAVA (Stars)_17: -8904931872533385071
+      LAVA (Stars)_18: -5500316307208802602
+      LAVA (Stars)_19: -4459830978996987791
+      LAVA (Stars)_2: 5106738569802601819
+      LAVA (Stars)_20: 6226128442791106533
+      LAVA (Stars)_21: 7043599088953764361
+      LAVA (Stars)_22: -1305868669824930371
+      LAVA (Stars)_23: -2265949233224379369
+      LAVA (Stars)_24: -8215418658603874607
+      LAVA (Stars)_25: 4469605484874335910
+      LAVA (Stars)_26: 2450281293644359040
+      LAVA (Stars)_27: -5244025622345675845
+      LAVA (Stars)_28: 5265062501052939916
+      LAVA (Stars)_29: -2461731679365900905
+      LAVA (Stars)_3: 5781378889365261605
+      LAVA (Stars)_30: 1665927306710634354
+      LAVA (Stars)_31: 9187002153769592401
+      LAVA (Stars)_32: -9125220100452590247
+      LAVA (Stars)_33: -3629110352093592315
+      LAVA (Stars)_34: -4873753277354416563
+      LAVA (Stars)_35: -7316583563228916628
+      LAVA (Stars)_36: 5398848319664551910
+      LAVA (Stars)_37: 7587259852276676010
+      LAVA (Stars)_38: 5787703546990863927
+      LAVA (Stars)_39: 6153643252080903381
+      LAVA (Stars)_4: 7150036514360180138
+      LAVA (Stars)_40: -8216063040926524010
+      LAVA (Stars)_41: -12490140933546936
+      LAVA (Stars)_42: 1646811778128809136
+      LAVA (Stars)_43: -4695770698084228695
+      LAVA (Stars)_44: 400968407589858137
+      LAVA (Stars)_45: 4762554277825178956
+      LAVA (Stars)_46: 2034063725006971290
+      LAVA (Stars)_5: -1260174554793093612
+      LAVA (Stars)_6: -6388768130526264945
+      LAVA (Stars)_7: 6743039408961314917
+      LAVA (Stars)_8: 691770672917677779
+      LAVA (Stars)_9: 4408514178565796324
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
