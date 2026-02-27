@@ -7,8 +7,6 @@ using UnityEngine;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-
-
     // State
     public static GameManager Instance { get; private set; }
 
@@ -56,7 +54,8 @@ public class GameManager : MonoBehaviour
         playerInventory.LoadFromPlayerPrefs();
         // playerInventory.Init();
 
-        DEBUG_FISH_ADDITION(6);
+        // NOTE: I swear to god, Andrew -- don't leave debug things in and make me think there are bugs.
+        // DEBUG_FISH_ADDITION(6);
     }
 
     void OnApplicationQuit()
@@ -69,14 +68,10 @@ public class GameManager : MonoBehaviour
     void DEBUG_FISH_ADDITION(int amount)
     {
 
-        for(int i = 0; i < amount; i ++){
-            CaughtFish newCatch = new CaughtFish
-            {
-                fish = TEMPFISH,
-                weight = Random.Range(TEMPFISH.minWeight, TEMPFISH.maxWeight),
-            };
+        for (int i = 0; i < amount; i++)
+        {
+            CaughtFish newCatch = new CaughtFish(TEMPFISH, Random.Range(TEMPFISH.minWeight, TEMPFISH.maxWeight), "Debug");
             AddFishToInventory(newCatch);
-
         }
     }
 
@@ -116,9 +111,10 @@ public class GameManager : MonoBehaviour
     public static void RemoveFishFromInventory(CaughtFish catchToRemove) => Instance.playerInventory.RemoveFish(catchToRemove);
     public static void RemoveFishFromInventoryIndex(int index) => Instance.playerInventory.RemoveFishAt(index);
     public static float CalculateFishValue(CaughtFish fish) => fish.fish.value + (fish.fish.value * GetNormalizedWeight(fish.weight, fish.fish.minWeight, fish.fish.maxWeight));
-    public static void AddBaitToInventory(Upgrade baitUpgrade, int uses, string description) => Instance.playerInventory.AddBait(baitUpgrade, uses, description);
+    public static void AddBaitToInventory(Upgrade baitUpgrade, int uses) => Instance.playerInventory.AddBait(baitUpgrade, uses);
     public static void RemoveBaitFromInventory(Upgrade baitUpgrade, int uses) => Instance.playerInventory.RemoveBait(baitUpgrade, uses);
     public static void SelectBaitUpgrade(Upgrade baitUpgrade) => Instance.playerInventory.SelectBait(baitUpgrade);
+    public static void DeselectBaitUpgrade() => Instance.playerInventory.DeselectBait();
 
     // Popups and Menus
     public static void TriggerPopIn(Popup popup, GameObject canvasPrefab, bool forceSwap = false, System.Action<GameObject> onComplete = null, System.Action<GameObject> onBeforeShow = null) => Instance.StartCoroutine(popup.TriggerPopIn(canvasPrefab, -1f, forceSwap, onComplete, onBeforeShow));

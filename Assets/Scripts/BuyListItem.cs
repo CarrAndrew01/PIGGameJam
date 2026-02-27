@@ -15,9 +15,9 @@ public class BuyListItem : MonoBehaviour
     public TextMeshProUGUI nameField;
     public TextMeshProUGUI price;
 
-     private ShopMenu parentMenu;
+    private ShopMenu parentMenu;
     public Bait baitRef; //the fish that this list item is referencing
-    
+
 
     public void Init(Bait fish, ShopMenu parent, string name, int price)
     {
@@ -33,11 +33,11 @@ public class BuyListItem : MonoBehaviour
         {
             parentMenu.currentlySelectedBait = baitRef;
             parentMenu.nameField.text = baitRef.baitUpgrade.name;
-            parentMenu.priceFieldBuy.text = $"Price: { baitRef.cost}";
-            
+            parentMenu.priceFieldBuy.text = $"Price: {baitRef.cost}";
 
-          //  parentMenu.descriptionField.text = baitRef.;
-            parentMenu.mechanicalDescriptionField.text = baitRef.mechanicalDescription;
+
+            //  parentMenu.descriptionField.text = baitRef.;
+            parentMenu.mechanicalDescriptionField.text = baitRef.baitUpgrade.GetMechanicalDescription();
         }
     }
 }

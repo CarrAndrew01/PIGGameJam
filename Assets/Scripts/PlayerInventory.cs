@@ -10,14 +10,12 @@ public struct Bait
 {
     public Upgrade baitUpgrade;
     public int numberOfUses;
-    public string mechanicalDescription;
     public int cost;
 
-    public Bait(Upgrade upgrade, int uses, string description, int cost = 0)
+    public Bait(Upgrade upgrade, int uses, int cost = 0)
     {
         baitUpgrade = upgrade;
         numberOfUses = uses;
-        mechanicalDescription = description;
         this.cost = cost;
     }
 }
@@ -46,18 +44,18 @@ public class PlayerInventory
 
 
     // Methods
-    public void AddBait(Upgrade baitUpgrade, int uses, string description)
+    public void AddBait(Upgrade baitUpgrade, int uses)
     {
         int existingIndex = baits.FindIndex(b => b.baitUpgrade == baitUpgrade);
 
         if (existingIndex != -1)
         {
             // If the bait already exists, update its uses
-            baits[existingIndex] = new Bait(baitUpgrade, baits[existingIndex].numberOfUses + uses, description);
+            baits[existingIndex] = new Bait(baitUpgrade, baits[existingIndex].numberOfUses + uses);
         }
         else
         {
-            baits.Add(new Bait(baitUpgrade, uses, description));
+            baits.Add(new Bait(baitUpgrade, uses));
         }
     }
 
@@ -73,7 +71,7 @@ public class PlayerInventory
             if (newUses > 0)
             {
                 // As long as we still have some uses left, update the bait
-                baits[existingIndex] = new Bait(baitUpgrade, newUses, existingBait.mechanicalDescription);
+                baits[existingIndex] = new Bait(baitUpgrade, newUses);
             }
             else
             {
@@ -91,11 +89,28 @@ public class PlayerInventory
     {
         if (baits.Exists(b => b.baitUpgrade == baitUpgrade))
         {
+            if (currentBaitUpgrade != null)
+            {
+                // If we already have a bait selected, remove its upgrade effects before switching
+                GameManager.RemoveUpgrade(currentBaitUpgrade);
+            }
+            
             currentBaitUpgrade = baitUpgrade;
+            // Apply the bait as an active upgrade
+            GameManager.AddUpgrade(baitUpgrade);
         }
         else
         {
             Debug.LogWarning($"Attempted to select bait {baitUpgrade.name} which is not in inventory.");
+        }
+    }
+
+    public void DeselectBait()
+    {
+        if (currentBaitUpgrade != null)
+        {
+            GameManager.RemoveUpgrade(currentBaitUpgrade);
+            currentBaitUpgrade = null;
         }
     }
 
@@ -104,6 +119,8 @@ public class PlayerInventory
     {
         if (caughtFish.Count < MaxFishStorage)
         {
+            // Assign a unique ID when the fish is actually added to inventory
+            newCatch.id = NewID();
             caughtFish.Add(newCatch);
         }
         else
@@ -139,13 +156,15 @@ public class PlayerInventory
     public void RemoveFishByID(int id)
     {
 
-        for(int i = 0; i < caughtFish.Count;i++)
+        for (int i = 0; i < caughtFish.Count; i++)
         {
-            if(caughtFish[i].id == id)
+            if (caughtFish[i].id == id)
             {
-                RemoveFishAt(i);       
+                RemoveFishAt(i);
+                return; // stop after removing the matched fish
             }
         }
+        Debug.LogWarning($"Attempted to remove fish with id {id}, but none was found.");
     }
 
     public void RemoveFishQuest(string fishName, int quantity)
@@ -219,8 +238,7 @@ public class PlayerInventory
             save.baits.Add(new SavedBait
             {
                 upgradeName = b.baitUpgrade != null ? b.baitUpgrade.name : "",
-                uses = b.numberOfUses,
-                mechanicalDescription = b.mechanicalDescription
+                uses = b.numberOfUses
             });
         }
 
@@ -252,7 +270,8 @@ public class PlayerInventory
                 continue;
             }
             CaughtFish cf = new CaughtFish(fishType, sf.weight, sf.planetOfOrigin);
-            caughtFish.Add(cf);
+            // Use AddFish so IDs are assigned consistently and storage limits are respected
+            AddFish(cf);
         }
 
         foreach (var sb in save.baits)
@@ -264,11 +283,24 @@ public class PlayerInventory
                 Debug.LogWarning($"Saved bait upgrade not found: {sb.upgradeName}");
                 continue;
             }
-            baits.Add(new Bait(up, sb.uses, sb.mechanicalDescription));
+            baits.Add(new Bait(up, sb.uses));
         }
 
         currentBaitUpgrade = !string.IsNullOrEmpty(save.currentBaitUpgradeName)
             ? GameManager.FindUpgradeByName(save.currentBaitUpgradeName)
             : null;
+
+        // Ensure maxInt reflects the highest assigned ID in the inventory so
+        // subsequent calls to NewID() generate unique IDs above existing ones.
+        int highestId = 0;
+        for (int i = 0; i < caughtFish.Count; i++)
+        {
+            if (caughtFish[i].id > highestId) highestId = caughtFish[i].id;
+        }
+        // If IDs were never assigned (all zeros), fall back to using the current count
+        if (highestId == 0)
+            maxInt = caughtFish.Count;
+        else
+            maxInt = highestId;
     }
 }

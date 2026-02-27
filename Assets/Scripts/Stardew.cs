@@ -148,7 +148,6 @@ public class Stardew : MonoBehaviour
         hookRect.sizeDelta = new Vector2(hookRect.sizeDelta.x, CatchAreaSize);
         catchImage.color = hookColor;
 
-        Debug.Log("Reeln in fish");
         OnCatching.Invoke("Reel");
     }
 

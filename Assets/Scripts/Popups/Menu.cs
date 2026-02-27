@@ -89,7 +89,7 @@ public class Menu : MonoBehaviour
         for (int i = 0; i < baits.Count; i++)
         {
             Bait bait = baits[i];
-            CreateListItem(bait.baitUpgrade.name, bait.baitUpgrade.icon, subtext: $"Uses: {bait.numberOfUses}", description: bait.baitUpgrade.description, mechanicalDescription: bait.mechanicalDescription, index: i);
+            CreateListItem(bait.baitUpgrade.name, bait.baitUpgrade.icon, subtext: $"Uses: {bait.numberOfUses}", description: bait.baitUpgrade.description, mechanicalDescription: bait.baitUpgrade.GetMechanicalDescription(), index: i);
         }
     }
     public void PopulateListWithFish(List<CaughtFish> fishTypes)

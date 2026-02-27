@@ -37,14 +37,14 @@ public class ShopMenu : MonoBehaviour
         BuySwitch();
 
         // For testing, add some fish to the inventory
-        GameManager.Instance.playerInventory.caughtFish.Add(
-            new CaughtFish(GameManager.Instance.TEMPFISH, 1f, "Earth"));
-        GameManager.Instance.playerInventory.caughtFish.Add(
-            new CaughtFish(GameManager.Instance.TEMPFISH, 2f, "Water"));
-        GameManager.Instance.playerInventory.caughtFish.Add(
-            new CaughtFish(GameManager.Instance.TEMPFISH, 3f, "Fire"));
-        GameManager.Instance.playerInventory.caughtFish.Add(
-            new CaughtFish(GameManager.Instance.TEMPFISH, 4f, "Air"));
+        // GameManager.Instance.playerInventory.caughtFish.Add(
+        //     new CaughtFish(GameManager.Instance.TEMPFISH, 1f, "Earth"));
+        // GameManager.Instance.playerInventory.caughtFish.Add(
+        //     new CaughtFish(GameManager.Instance.TEMPFISH, 2f, "Water"));
+        // GameManager.Instance.playerInventory.caughtFish.Add(
+        //     new CaughtFish(GameManager.Instance.TEMPFISH, 3f, "Fire"));
+        // GameManager.Instance.playerInventory.caughtFish.Add(
+        //     new CaughtFish(GameManager.Instance.TEMPFISH, 4f, "Air"));
 
     }
 
@@ -80,7 +80,7 @@ public class ShopMenu : MonoBehaviour
         if (GameManager.Instance.money >= price)
         {
             GameManager.Instance.money -= price;
-            GameManager.Instance.playerInventory.AddBait(currentlySelectedBait.baitUpgrade, 1, currentlySelectedBait.baitUpgrade.description);
+            GameManager.Instance.playerInventory.AddBait(currentlySelectedBait.baitUpgrade, 1);
         }
     }
 

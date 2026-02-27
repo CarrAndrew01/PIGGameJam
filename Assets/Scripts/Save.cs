@@ -16,7 +16,6 @@ public class SavedBait
 {
     public string upgradeName;
     public int uses;
-    public string mechanicalDescription;
 }
 
 [Serializable]

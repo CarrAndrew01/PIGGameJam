@@ -43,17 +43,17 @@ public class ListItem : MonoBehaviour
         UpdateSelectionHighlight();
     }
 
-
-
-
-
+    public void SetDescriptionFields()
+    {
+        parentMenu.descriptionField.text = description;
+        parentMenu.mechanicalDescriptionField.text = mechanicalDescription;
+    }
 
     public void OnItemClicked()
     {
         if (parentMenu != null)
         {
-            parentMenu.descriptionField.text = description;
-            parentMenu.mechanicalDescriptionField.text = mechanicalDescription;
+            SetDescriptionFields();
             if (listIndex != -1)
                 parentMenu.OnListItemSelected(listIndex);
         }

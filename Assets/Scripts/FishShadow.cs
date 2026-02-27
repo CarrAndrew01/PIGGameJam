@@ -79,12 +79,7 @@ public class FishShadow : MonoBehaviour
 
         // Generate fish data for this shadow.
         Fish fish = Environment.GetRandomFish();
-        fishData = new CaughtFish
-        {
-            fish = fish,
-            weight = Random.Range(fish.minWeight, fish.maxWeight) * statFishWeight,
-            planetOfOrigin = Environment.CurrentEnvironment.name
-        };
+        fishData = new CaughtFish(fish, Random.Range(fish.minWeight, fish.maxWeight) * statFishWeight, Environment.CurrentEnvironment != null ? Environment.CurrentEnvironment.name : "Unknown");
 
         amountInCatch = Random.Range(fish.minAmount, fish.maxAmount + 1); // +1 because Random.Range is exclusive of the upper bound
 
@@ -178,15 +173,9 @@ public class FishShadow : MonoBehaviour
         for (int i = 1; i < amountInCatch; i++)
         {
             // Create additional caught fish for any extra amount
-            CaughtFish extraFish = new CaughtFish()
-            {
-                fish = fishData.fish,
-                weight = Random.Range(fishData.fish.minWeight, fishData.fish.maxWeight) * statFishWeight,
-                planetOfOrigin = Environment.CurrentEnvironment != null ? Environment.CurrentEnvironment.name : fishData.planetOfOrigin
-            };
+            CaughtFish extraFish = new CaughtFish(fishData.fish, Random.Range(fishData.fish.minWeight, fishData.fish.maxWeight) * statFishWeight, Environment.CurrentEnvironment != null ? Environment.CurrentEnvironment.name : fishData.planetOfOrigin);
             GameManager.AddFishToInventory(extraFish);
         }
-
 
         // Destroy the fish shadow since it's been caught
         Environment.OnFishShadowDestroyed();
@@ -202,9 +191,6 @@ public class FishShadow : MonoBehaviour
     }
     public void Escape()
     {
-        // Trigger escape logic, such as playing an animation or sound effect
-        Debug.Log("Fish Escaped!");
-
         // Start the shrink and destroy coroutine
         IsEscaping = true;
         StartCoroutine(ShrinkAndDestroy());

@@ -14,7 +14,11 @@ public class Upgrade : ScriptableObject
 
 
     // Variables
+    [TextArea(2, 5)]
     public string description;
+    [TextArea(2, 5)]
+    [Tooltip("Left empty, it will use the function description instead.")]
+    public string mechDescriptionOverride; // Optional field
     public Sprite icon;
 
     public StatType type;
@@ -24,7 +28,11 @@ public class Upgrade : ScriptableObject
     // Methods
     public string GetMechanicalDescription()
     {
-        string modifierString = modifierType == UpgradeModifierType.Additive ? $"{amount:+0.##;-0.##;0}" : $"{(amount-1f):+0.##%;-0.##%;0%}";
+        if (!string.IsNullOrEmpty(mechDescriptionOverride))
+        {
+            return mechDescriptionOverride;
+        }
+        string modifierString = modifierType == UpgradeModifierType.Additive ? $"{amount:+0.##;-0.##;0}" : $"{(amount - 1f):+0.##%;-0.##%;0%}";
         return $"{type}: {modifierString}";
     }
 }

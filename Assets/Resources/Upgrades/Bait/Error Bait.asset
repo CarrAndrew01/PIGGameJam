@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Error Bait
   m_EditorClassIdentifier: 
   description: What is this stuff, anyway?
+  mechDescriptionOverride: 'Allows catching: NOTHING'
   icon: {fileID: 0}
   type: 9
   modifierType: 0
-  amount: 1
+  amount: 0

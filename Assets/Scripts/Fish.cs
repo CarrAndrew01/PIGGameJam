@@ -14,7 +14,9 @@ public struct CaughtFish
 
     public CaughtFish(Fish fish, float weight, string planetOfOrigin)
     {
-        id = GameManager.Instance.playerInventory.NewID();
+        // Do not assign an inventory ID here. IDs are assigned when a fish is added to inventory
+        // Otherwise we count really high just with shadows
+        id = 0;
         this.fish = fish;
         this.weight = weight;
         this.planetOfOrigin = planetOfOrigin;
