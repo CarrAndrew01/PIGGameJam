@@ -23,7 +23,7 @@ public class ShopMenu : MonoBehaviour
     public GameObject leftButton;
     public GameObject rightButton;
 
-     public RectTransform listContentArea; // Reference to the RectTransform for the list
+    public RectTransform listContentArea; // Reference to the RectTransform for the list
     public GameObject listFishPrefab; // Prefab for the list items in the menu
 
     public GameObject listBaitPrefab; // Prefab for the list items in the menu
@@ -31,7 +31,22 @@ public class ShopMenu : MonoBehaviour
     public Bait currentlySelectedBait;
 
     public List<Bait> allBait = new();
- 
+
+    public void Start()
+    {
+        BuySwitch();
+
+        // For testing, add some fish to the inventory
+        GameManager.Instance.playerInventory.caughtFish.Add(
+            new CaughtFish(GameManager.Instance.TEMPFISH, 1f, "Earth"));
+        GameManager.Instance.playerInventory.caughtFish.Add(
+            new CaughtFish(GameManager.Instance.TEMPFISH, 2f, "Water"));
+        GameManager.Instance.playerInventory.caughtFish.Add(
+            new CaughtFish(GameManager.Instance.TEMPFISH, 3f, "Fire"));
+        GameManager.Instance.playerInventory.caughtFish.Add(
+            new CaughtFish(GameManager.Instance.TEMPFISH, 4f, "Air"));
+
+    }
 
     public void BuySwitch()
     {
@@ -62,7 +77,8 @@ public class ShopMenu : MonoBehaviour
     {
         int price = currentlySelectedBait.cost;
 
-        if(GameManager.Instance.money >= price){
+        if (GameManager.Instance.money >= price)
+        {
             GameManager.Instance.money -= price;
             GameManager.Instance.playerInventory.AddBait(currentlySelectedBait.baitUpgrade, 1, currentlySelectedBait.baitUpgrade.description);
         }
@@ -74,23 +90,23 @@ public class ShopMenu : MonoBehaviour
         //make the bait list
 
         //so loop
-        
-        
-        // Clear existing list items
-        foreach (Transform child in listContentArea)
+
+
+        // Clear existing list items (iterate backwards to avoid skipping when destroying)
+        for (int i = listContentArea.childCount - 1; i >= 0; i--)
         {
-            Destroy(child.gameObject);
+            Destroy(listContentArea.GetChild(i).gameObject);
         }
-        
+
         // Instantiate new list items based on the provided list of caught fish
         for (int i = 0; i < allBait.Count; i++)
         {
             Bait currentBait = allBait[i];
             //CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {(caughtFish.weight * 10):F2}", description: caughtFish.fish.description);
-        
+
             GameObject newItem = Instantiate(listBaitPrefab, listContentArea);
             BuyListItem listItemComponent = newItem.GetComponent<BuyListItem>();
-            
+
 
             listItemComponent.Init(currentBait, this, currentBait.baitUpgrade.name, currentBait.cost);
 
@@ -100,31 +116,24 @@ public class ShopMenu : MonoBehaviour
 
     public void PopulateListWithFish(List<CaughtFish> fishTypes)
     {
-        // Clear existing list items
-        foreach (Transform child in listContentArea)
+        // Clear existing list items (iterate backwards to avoid skipping when destroying)
+        for (int i = listContentArea.childCount - 1; i >= 0; i--)
         {
-            Destroy(child.gameObject);
+            Destroy(listContentArea.GetChild(i).gameObject);
         }
- 
+
         // Instantiate new list items based on the provided list of caught fish
-        for (int i = 0; i < GameManager.Instance.playerInventory.caughtFish.Count;i++)
+        for (int i = 0; i < GameManager.Instance.playerInventory.caughtFish.Count; i++)
         {
             CaughtFish caughtFish = GameManager.Instance.playerInventory.caughtFish[i];
             //CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {(caughtFish.weight * 10):F2}", description: caughtFish.fish.description);
-        
+
             GameObject newItem = Instantiate(listFishPrefab, listContentArea);
             SellListItem listItemComponent = newItem.GetComponent<SellListItem>();
-            
 
-            listItemComponent.Init(caughtFish, this, caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", 
+
+            listItemComponent.Init(caughtFish, this, caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}",
             subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description);
         }
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        // TODO: Do stuff here
-        //PopulateListWithFish(GameManager.Instance.playerInventory.caughtFish);
-     }
 }

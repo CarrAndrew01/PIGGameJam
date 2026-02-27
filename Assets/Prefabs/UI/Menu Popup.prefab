@@ -150,7 +150,7 @@ MonoBehaviour:
   menuPrefab: {fileID: 5994889511491456181, guid: a0864c37a86240e409b9fc1073e59805, type: 3}
   upgradeMenuPrefab: {fileID: 8273727319757726718, guid: e420b088386300248b9526869f035fcc, type: 3}
   inventoryMenuPrefab: {fileID: 2941574363715988928, guid: d4e5e35017dfa9e44bef6e72cb809966, type: 3}
-  shopMenuPrefab: {fileID: 5550351864713613611, guid: 97862cc3a7a07e54f98ec52de60cb483, type: 3}
+  shopMenuPrefab: {fileID: 5035805929647250512, guid: b44f7f71e1d2690439c337f255e8f7bd, type: 3}
   questMenuPrefab: {fileID: 2023403836221292693, guid: 8a70a4589874ba9d88834ae018ec0e50, type: 3}
   baitMenuPrefab: {fileID: 7455361148895797063, guid: 9bd363825ddb567498d8fc501d9f9528, type: 3}
 --- !u!1 &1767058702102833871
