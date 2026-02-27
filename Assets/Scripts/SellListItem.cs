@@ -45,10 +45,15 @@ public class SellListItem : MonoBehaviour
         //handle the rest of the logic
 
 
+        // Remove from inventory and add money
         GameManager.Instance.playerInventory.RemoveFishByID(fishRef.id);
         GameManager.Instance.money += GameManager.CalculateFishValue(fishRef);
 
-        Destroy(gameObject);
+        // Refresh the parent menu to ensure UI matches inventory (safer than relying on Destroy timing)
+        if (parentMenu != null)
+        {
+            parentMenu.PopulateListWithFish(GameManager.Instance.playerInventory.caughtFish);
+        }
     }
 
 
