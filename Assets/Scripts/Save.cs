@@ -26,6 +26,7 @@ public class InventorySave
     public List<SavedFish> caughtFish = new List<SavedFish>();
     public List<SavedBait> baits = new List<SavedBait>();
     public string currentBaitUpgradeName;
+    public float money = 0;
 
     public string ToJson()
     {
