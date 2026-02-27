@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1a151a6523b870749bd9352704a6faf8
+guid: 2a8197c105c928a41963fa388b37a354
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5134908957359558770
-    second: BIO (Background)_0
+      213: -6452464213810935469
+    second: BIO (Foliage)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 24
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BIO (Background)_0
+      name: BIO (Foliage)_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 168
         width: 640
-        height: 240
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e8fac9a52832db8b0800000000000000
-      internalID: -5134908957359558770
+      spriteID: 35901e1fbfd3476a0800000000000000
+      internalID: -6452464213810935469
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BIO (Background)_0: -5134908957359558770
+      BIO (Foliage)_0: -6452464213810935469
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
