@@ -15,6 +15,12 @@ public class CardScript : MonoBehaviour
 
     public List<Sprite> SUITS = new List<Sprite>();
 
+    public Animator cardAnimator;
+
+    private void Start()
+    {
+        cardAnimator = GetComponent<Animator>();
+    }
     public void SetCard()
     {
         suit = Random.Range(0, 3);
@@ -54,6 +60,7 @@ public class CardScript : MonoBehaviour
         {
             numberText.color = new Color32(184, 67, 48, 235);
         }
+        cardAnimator.SetTrigger("Flip");
     }
     public int GetCardValue()
     {
