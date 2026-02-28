@@ -92,6 +92,11 @@ public class PlayerStats
         }
     }
 
+    public bool HasUpgrade(Upgrade upgrade)
+    {
+        return upgrades.Contains(upgrade);
+    }
+
     public void InitializeBaseStats()
     {
         // Grabs the resource for base player stats

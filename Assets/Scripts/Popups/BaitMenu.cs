@@ -44,6 +44,7 @@ public class BaitMenu : MonoBehaviour
             if (GameManager.Instance.playerInventory.baits.Count > 0 && menuComponent.selectedIndex != -1)
             {
                 menuComponent.listItems[menuComponent.selectedIndex].SetDescriptionFields();
+                menuComponent.listItems[menuComponent.selectedIndex].SetSelected(true);
             }
         }
 

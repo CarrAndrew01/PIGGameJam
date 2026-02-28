@@ -41,10 +41,10 @@ public class Menu : MonoBehaviour
         selectedIndex = index;
         onItemSelected?.Invoke(index);
 
-        // Update selection highlight for all list items
-        foreach (ListItem item in listItems)
+        // Update selection highlight for all list items using the new SetSelected API
+        for (int i = 0; i < listItems.Count; i++)
         {
-            item.UpdateSelectionHighlight();
+            listItems[i].SetSelected(i == selectedIndex);
         }
     }
 

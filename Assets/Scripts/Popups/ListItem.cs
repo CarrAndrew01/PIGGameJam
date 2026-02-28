@@ -30,20 +30,26 @@ public class ListItem : MonoBehaviour
     public Image icon;
     public Image selectHightlight;
     public Image stampIcon;
-    private Menu parentMenu;
+    private Menu parentMenuBase;
 
     public void Init(Menu parent, string name, Sprite iconSprite = null, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "", int index = -1)
     {
-        parentMenu = parent;
+        parentMenuBase = parent;
         nameField.text = name;
-        subtextField.text = subtext;
-        subtextField2.text = subtext2;
         listIndex = index;
-        icon.sprite = iconSprite;
         this.description = description;
         this.mechanicalDescription = mechanicalDescription;
+        SetupComponents(iconSprite, subtext, subtext2);
+    }
+
+    public void SetupComponents(Sprite iconSprite = null, string subtext = "", string subtext2 = "")
+    {
+        // Subtext
+        subtextField.text = subtext;
+        subtextField2.text = subtext2;
 
         // Set icon visibility based on whether an icon was provided
+        icon.sprite = iconSprite;
         icon.transform.parent.gameObject.SetActive(iconSprite != null);
 
         // Set stamp visibility based on whether the item is stamped
@@ -53,32 +59,45 @@ public class ListItem : MonoBehaviour
         subtextField.gameObject.SetActive(!string.IsNullOrEmpty(subtext));
         subtextField2.gameObject.SetActive(!string.IsNullOrEmpty(subtext2));
 
-        // Enable the select object
-        UpdateSelectionHighlight();
+        // Disable the select object by default, it will be enabled when selected
+        if (selectHightlight != null) selectHightlight.gameObject.SetActive(false);
     }
 
     public void SetDescriptionFields()
     {
-        parentMenu.descriptionField.text = description;
-        parentMenu.mechanicalDescriptionField.text = mechanicalDescription;
+        parentMenuBase.descriptionField.text = description;
+        parentMenuBase.mechanicalDescriptionField.text = mechanicalDescription;
     }
 
     public void OnItemClicked()
     {
-        if (parentMenu != null)
+        if (parentMenuBase != null)
         {
             SetDescriptionFields();
             if (listIndex != -1)
-                parentMenu.OnListItemSelected(listIndex);
+                parentMenuBase.OnListItemSelected(listIndex);
         }
+
+        UpdateSelectionHighlight();
     }
 
     public void UpdateSelectionHighlight()
     {
-        if (parentMenu != null && parentMenu.selectedIndex == listIndex)
-            selectHightlight.gameObject.SetActive(true);
-        else
-            selectHightlight.gameObject.SetActive(false);
+        Transform parent = transform.parent;
+        if (parent != null)
+        {
+            foreach (Transform child in parent)
+            {
+                ListItem li = child.GetComponent<ListItem>();
+                if (li != null)
+                    li.SetSelected(li == this);
+            }
+        }
+    }
+
+    public void SetSelected(bool selected)
+    {
+        selectHightlight.gameObject.SetActive(selected);
     }
 
     public void Stamp()

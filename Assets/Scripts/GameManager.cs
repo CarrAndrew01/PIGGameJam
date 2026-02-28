@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
     // Static methods
     // Upgrades and stats
     public static List<Upgrade> GetPlayerUpgrades() => Instance.playerStats.upgrades;
+    public static bool PlayerHasUpgrade(Upgrade upgrade) => Instance.playerStats.HasUpgrade(upgrade);
     public static float GetPlayerStat(StatType statType) => Instance.playerStats.GetStat(statType);
     public static void AddUpgrade(Upgrade upgrade) => Instance.playerStats.AddUpgrade(upgrade);
     public static void RemoveUpgrade(Upgrade upgrade) => Instance.playerStats.RemoveUpgrade(upgrade);
@@ -114,6 +115,7 @@ public class GameManager : MonoBehaviour
     public static void RemoveBaitFromInventory(Upgrade baitUpgrade, int uses) => Instance.playerInventory.RemoveBait(baitUpgrade, uses);
     public static void SelectBaitUpgrade(Upgrade baitUpgrade) => Instance.playerInventory.SelectBait(baitUpgrade);
     public static void DeselectBaitUpgrade() => Instance.playerInventory.DeselectBait();
+    public static bool IsInventoryFull() => Instance.playerInventory.caughtFish.Count >= Instance.playerInventory.MaxFishStorage;
 
     // Popups and Menus
     public static void TriggerPopIn(Popup popup, GameObject canvasPrefab, bool forceSwap = false, System.Action<GameObject> onComplete = null, System.Action<GameObject> onBeforeShow = null) => Instance.StartCoroutine(popup.TriggerPopIn(canvasPrefab, -1f, forceSwap, onComplete, onBeforeShow));
