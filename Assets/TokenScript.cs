@@ -19,6 +19,8 @@ public class TokenScript : MonoBehaviour
         rb.AddRelativeForce(transform.up * 50000);
 
         image.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);
+
+        AudioManager.playSound("Poker_Chip");
     }
 
     // Update is called once per frame

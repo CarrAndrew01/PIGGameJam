@@ -61,6 +61,8 @@ public class CardScript : MonoBehaviour
             numberText.color = new Color32(184, 67, 48, 235);
         }
         cardAnimator.SetTrigger("Flip");
+        string flipSound = "Card_Flip" + Random.Range(1, 3).ToString();
+        AudioManager.playSound(flipSound);
     }
     public int GetCardValue()
     {

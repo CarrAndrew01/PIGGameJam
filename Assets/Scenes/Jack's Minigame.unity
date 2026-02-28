@@ -229,7 +229,6 @@ GameObject:
   - component: {fileID: 84524982}
   - component: {fileID: 84524985}
   - component: {fileID: 84524984}
-  - component: {fileID: 84524983}
   - component: {fileID: 84524986}
   m_Layer: 5
   m_Name: BidText
@@ -257,21 +256,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.0000035762787, y: 477}
   m_SizeDelta: {x: 600, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &84524983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 84524981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e1df4a7709681f42abe306c5c6ad839, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonTarget:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &84524984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1619,7 +1603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &584823414
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2679,6 +2663,81 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1074081264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1074081266}
+  - component: {fileID: 1074081265}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1074081265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074081264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b4146de674ddd46888bf31be2e4885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Water
+    clip: {fileID: 8300000, guid: b245a15f23ed61c4bbd591cffdc5621c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Poker_Chip
+    clip: {fileID: 8300000, guid: 5423f5e12c4cafd47be403326bb44a0f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Card_Flip1
+    clip: {fileID: 8300000, guid: bcf2e7481ee3ed148a8da86ce5f021c7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Card_Flip2
+    clip: {fileID: 8300000, guid: 805fd4c69ac8f0c4fb5ddd88e710485b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Card_Flip3
+    clip: {fileID: 8300000, guid: 7b5a8664eb5486048b2faf790d1aefa8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+--- !u!4 &1074081266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074081264}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1119987479
 GameObject:
   m_ObjectHideFlags: 0
@@ -4302,7 +4361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1730383781
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5346,6 +5405,7 @@ GameObject:
   - component: {fileID: 2015700434}
   - component: {fileID: 2015700435}
   - component: {fileID: 2015700436}
+  - component: {fileID: 2015700437}
   m_Layer: 0
   m_Name: POTENTIAL BLACKJACK VISUALS
   m_TagString: Untagged
@@ -5408,6 +5468,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac5cb65218665c640abf7181fef6e121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2015700437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015700433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213d0b91fc3cffc4fb706aa8bc56ae29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2019321022
@@ -6003,6 +6075,7 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1074081266}
   - {fileID: 2019321025}
   - {fileID: 2069295554}
   - {fileID: 2055840232}
