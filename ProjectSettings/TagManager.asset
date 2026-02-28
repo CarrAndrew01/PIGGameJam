@@ -61,6 +61,9 @@ TagManager:
   - name: Lava
     uniqueID: 12061587
     locked: 0
+  - name: Fish
+    uniqueID: 1853861793
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
