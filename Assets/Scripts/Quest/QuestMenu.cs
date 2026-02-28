@@ -42,7 +42,7 @@ public class QuestMenu : MonoBehaviour
     // Methods
     public void CloseMenu()
     {
-        GameManager.MenuPopup.TriggerPopOut();
+        GameManager.TriggerPopOut(GameManager.MenuPopup);
     }
 
     public void PopulateQuestList()

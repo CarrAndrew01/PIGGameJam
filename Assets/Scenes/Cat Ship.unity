@@ -1161,6 +1161,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu Popup
       objectReference: {fileID: 0}
+    - target: {fileID: 842915824428752365, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 842915824428752365, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6676963861173588917, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0

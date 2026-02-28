@@ -28,6 +28,7 @@ public class PlanetHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         else
         {
             Debug.Log("Player does not have the required stat to enter " + planetName);
+            Toast.ShowToast($"Your ship can't go there yet!");
         }
     }
 }

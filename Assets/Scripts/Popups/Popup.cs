@@ -14,11 +14,11 @@ public class Popup : MonoBehaviour
     [ReadOnly] public bool isSwapping = false;
     public bool ReadyForInput => !isAnimating && !isSwapping;
 
-    private bool isPoppingIn = false;
-    private bool isPoppingOut = false;
-    private bool willClose = false; // If pop-out has been triggered and we are waiting for the animation to finish before actually closing
-    private bool willOpen = false; // ^ same but for pop-in
-    private bool willSwap = false; // ^ same but for swapping menus
+    protected bool isPoppingIn = false;
+    protected bool isPoppingOut = false;
+    protected bool willClose = false; // If pop-out has been triggered and we are waiting for the animation to finish before actually closing
+    protected bool willOpen = false; // ^ same but for pop-in
+    protected bool willSwap = false; // ^ same but for swapping menus
 
     // Variables
     [Header("Settings")]
@@ -33,10 +33,10 @@ public class Popup : MonoBehaviour
     // Components
     [Header("Components")]
     public RectTransform windowRect; // The RectTransform of the popup window, used for scaling animations
-    public Canvas childCanvas;
+    [ShowInInspector, ReadOnly]public Canvas childCanvas;
 
-    private CanvasGroup windowCanvasGroup;
-    private GameObject nextMenuPrefab; // Used when will open or will swap is true
+    protected CanvasGroup windowCanvasGroup;
+    protected GameObject nextMenuPrefab; // Used when will open or will swap is true
 
 
     void Awake()
@@ -69,21 +69,21 @@ public class Popup : MonoBehaviour
         }
     }
 
-    void Start()
+    protected virtual void Start()
     {
         // Ensure the popup starts hidden
         windowRect.localScale = new Vector3(0f, 1f, 1f);
         windowCanvasGroup.alpha = 0f;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (!isAnimating && !isSwapping)
         {
             if (willClose)
             {
                 willClose = false;
-                TriggerPopOut();
+                StartCoroutine(TriggerPopOut());
             }
             else if (willOpen)
             {
@@ -138,24 +138,35 @@ public class Popup : MonoBehaviour
         onComplete?.Invoke(childCanvas != null ? childCanvas.gameObject : null);
     }
 
-    public void TriggerPopOut(float durationOverride = -1f)
+    public IEnumerator TriggerPopOut(float durationOverride = -1f, System.Action<GameObject> onAfter = null, System.Action<GameObject> onBefore = null)
     {
-        // First check if we are currently popping in or swapping, and if so, set a flag to pop out as soon as we are done
+        // If we're currently popping in or swapping, schedule a close for later and return
         if (isAnimating && (isPoppingIn || isSwapping))
         {
             willClose = true;
-            return;
+            onAfter?.Invoke(null);
+            yield break;
         }
 
         if (!isPoppedIn || isAnimating)
-            return;
-        // Pops out the popup, which will also destroy the child canvas if destroyCanvasOnPopOut is true
+        {
+            onAfter?.Invoke(null);
+            yield break;
+        }
+
+        // Prepare to pop out
         isPoppingOut = true;
         isAnimating = true;
-        StartCoroutine(HidePopup(durationOverride > 0f ? durationOverride : popOutDuration));
+
+        GameObject canvasObj = childCanvas != null ? childCanvas.gameObject : null;
+        onBefore?.Invoke(canvasObj);
+
+        yield return StartCoroutine(HidePopup(durationOverride > 0f ? durationOverride : popOutDuration));
+
+        onAfter?.Invoke(canvasObj);
     }
 
-    private IEnumerator TriggerSwap(GameObject newMenuPrefab, System.Action<GameObject> onSwapComplete = null)
+    protected IEnumerator TriggerSwap(GameObject newMenuPrefab, System.Action<GameObject> onSwapComplete = null)
     {
         if (!isPoppedIn || !ReadyForInput)
         {
@@ -168,10 +179,10 @@ public class Popup : MonoBehaviour
     }
 
     // Coroutine to swap from the current menu to a new menu of the given type, by first popping out at a fast speed, then popping in the new menu at a fast speed
-    private IEnumerator SwapMenu(GameObject newMenuPrefab)
+    protected IEnumerator SwapMenu(GameObject newMenuPrefab)
     {
         // Pop out at a fast speed
-        TriggerPopOut(swapOutDuration);
+        StartCoroutine(TriggerPopOut(swapOutDuration));
         while (isAnimating)
         {
             yield return null; // Wait until the pop-out animation is finished
@@ -182,7 +193,7 @@ public class Popup : MonoBehaviour
         isSwapping = false;
     }
 
-    private void ResetAnchorPoints()
+    protected void ResetAnchorPoints()
     {
         // Resets the anchor points of the window rect to be centered, so that scaling animations will work correctly
         windowRect.anchorMin = new Vector2(0.5f, 0.5f);
@@ -192,7 +203,7 @@ public class Popup : MonoBehaviour
     }
 
     // Coroutines for showing and hiding the popup
-    private IEnumerator ShowPopup(GameObject canvasPrefab, float duration, System.Action<GameObject> onBeforeShow = null)
+    protected IEnumerator ShowPopup(GameObject canvasPrefab, float duration, System.Action<GameObject> onBeforeShow = null)
     {
         // Instantiate the canvas prefab as a child of the popup canvas
         childCanvas = Instantiate(canvasPrefab, windowRect).GetComponent<Canvas>();
@@ -227,8 +238,8 @@ public class Popup : MonoBehaviour
         isAnimating = false;
     }
     [ContextMenu("Test Pop In")]
-    private void TestPopIn() => StartCoroutine(ShowPopup(popInDuration));
-    private IEnumerator ShowPopup(float duration)
+    protected void TestPopIn() => StartCoroutine(ShowPopup(popInDuration));
+    protected IEnumerator ShowPopup(float duration)
     {
         float fadeDuration = duration * fadeFinishPercent;
         float time = 0f;
@@ -254,8 +265,8 @@ public class Popup : MonoBehaviour
     }
 
     [ContextMenu("Test Pop Out")]
-    private void TestPopOut() => StartCoroutine(HidePopup(popOutDuration));
-    private IEnumerator HidePopup(float duration)
+    protected void TestPopOut() => StartCoroutine(HidePopup(popOutDuration));
+    protected IEnumerator HidePopup(float duration)
     {
         float fadeDuration = duration * fadeFinishPercent;
         float time = 0f;

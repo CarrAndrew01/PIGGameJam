@@ -181,6 +181,10 @@ public class ShopMenu : MonoBehaviour
                     {
                         GameManager.AdjustMoney(-price);
                         GameManager.Instance.playerInventory.AddBait(bait.baitUpgrade, 1);
+                        Toast.ShowToast($"Purchased #{bait.numberOfUses} {bait.baitUpgrade.name} for ${price:F2}!", icon: bait.baitUpgrade.icon);
+                    } else
+                    {
+                        Toast.ShowToast($"Cannot purchase {bait.baitUpgrade.name}: Not enough money!");
                     }
                 }
                 UpdateMoneyDisplay();
@@ -194,6 +198,7 @@ public class ShopMenu : MonoBehaviour
                     {
                         GameManager.AdjustMoney(-price);
                         GameManager.AddUpgrade(purchUp.upgrade);
+                        Toast.ShowToast($"Purchased {purchUp.upgrade.name} for ${price:F2}!", icon: purchUp.upgrade.icon);
 
                         // stamp the matching UI item so it shows purchased immediately
                         foreach (Transform child in listContentArea)
@@ -205,6 +210,13 @@ public class ShopMenu : MonoBehaviour
                                 break;
                             }
                         }
+                    } else if (GameManager.PlayerHasUpgrade(purchUp.upgrade))
+                    {
+                        Toast.ShowToast($"Cannot purchase {purchUp.upgrade.name}: Upgrade already owned!");
+                    }
+                    else
+                    {
+                        Toast.ShowToast($"Cannot purchase {purchUp.upgrade.name}: Not enough money!");
                     }
                 }
                 UpdateMoneyDisplay();
@@ -218,6 +230,13 @@ public class ShopMenu : MonoBehaviour
                     {
                         GameManager.AdjustMoney(-price);
                         GameManager.AddFishToInventory(fish);
+                        Toast.ShowToast($"Purchased {fish.fish.name} for ${price:F2}!", icon: fish.fish.sprite);
+                    } else if (GameManager.IsInventoryFull())
+                    {
+                        Toast.ShowToast($"Cannot purchase {fish.fish.name}: Inventory is full!");
+                    } else
+                    {
+                        Toast.ShowToast($"Cannot purchase {fish.fish.name}: Not enough money!");
                     }
                 }
                 UpdateMoneyDisplay();

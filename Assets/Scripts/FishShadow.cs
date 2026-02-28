@@ -166,6 +166,8 @@ public class FishShadow : MonoBehaviour
         // Trigger catch logic, such as playing an animation or sound effect
         Debug.Log("Fish Caught!");
 
+        bool inventoryFull = GameManager.IsInventoryFull();
+
         // Add the primary fish to the player's inventory
         GameManager.AddFishToInventory(fishData);
 
@@ -182,6 +184,13 @@ public class FishShadow : MonoBehaviour
         {
             GameManager.RemoveBaitFromInventory(GameManager.Instance.playerInventory.currentBaitUpgrade, 1);
         }
+        
+        if (inventoryFull)
+            Toast.ShowToast($"Caught {fishData.fish.name} but inventory is full!", icon: fishData.fish.sprite);
+        else if (amountInCatch > 1)
+            Toast.ShowToast($"+{amountInCatch} X {fishData.fish.name}!", icon: fishData.fish.sprite);
+        else
+            Toast.ShowToast(fishData.fish.name + " caught!", substring1: $"Weight: {fishData.weight}", icon: fishData.fish.sprite);
 
         // Destroy the fish shadow since it's been caught
         Environment.OnFishShadowDestroyed();
@@ -266,6 +275,7 @@ public class FishShadow : MonoBehaviour
                     else
                     {
                         targetBobber = null;
+                        Toast.ShowToast($"The fish is not interested in that bait!");
                     }
                 }
                 return;

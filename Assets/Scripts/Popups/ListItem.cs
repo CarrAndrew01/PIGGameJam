@@ -30,9 +30,9 @@ public class ListItem : MonoBehaviour
     public Image icon;
     public Image selectHightlight;
     public Image stampIcon;
-    private Menu parentMenuBase;
+    protected Menu parentMenuBase;
 
-    public void Init(Menu parent, string name, Sprite iconSprite = null, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "", int index = -1)
+    public virtual void Init(Menu parent, string name, Sprite iconSprite = null, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "", int index = -1)
     {
         parentMenuBase = parent;
         nameField.text = name;
@@ -69,7 +69,7 @@ public class ListItem : MonoBehaviour
         parentMenuBase.mechanicalDescriptionField.text = mechanicalDescription;
     }
 
-    public void OnItemClicked()
+    public virtual void OnItemClicked()
     {
         if (parentMenuBase != null)
         {
@@ -95,7 +95,7 @@ public class ListItem : MonoBehaviour
         }
     }
 
-    public void SetSelected(bool selected)
+    public virtual void SetSelected(bool selected)
     {
         selectHightlight.gameObject.SetActive(selected);
     }

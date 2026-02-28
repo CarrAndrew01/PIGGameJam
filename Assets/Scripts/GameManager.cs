@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
         }
 
         float normalized = (currentWeight - minWeight) / (maxWeight - minWeight);
-        
+
         // Optional: clamp to [0, 1] to handle values outside the range safely
         return Mathf.Clamp01(normalized);
     }
@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
 
     // Popups and Menus
     public static void TriggerPopIn(Popup popup, GameObject canvasPrefab, bool forceSwap = false, System.Action<GameObject> onComplete = null, System.Action<GameObject> onBeforeShow = null) => Instance.StartCoroutine(popup.TriggerPopIn(canvasPrefab, -1f, forceSwap, onComplete, onBeforeShow));
-    public static void TriggerPopOut(Popup popup) => popup.TriggerPopOut();
+    public static void TriggerPopOut(Popup popup, System.Action<GameObject> onAfter = null, System.Action<GameObject> onBefore = null, float durationOverride = -1f) => Instance.StartCoroutine(popup.TriggerPopOut(durationOverride, onAfter, onBefore));
     public static void GotoTitleScreen(Transition.Screen intendedScreen)
     {
         Instance.intendedScreen = intendedScreen;
