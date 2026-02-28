@@ -541,7 +541,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1287649085
-  m_SortingLayer: -2
+  m_SortingLayer: -6
   m_SortingOrder: -9
   m_Sprite: {fileID: 4863829037013807766, guid: 3de6510abd05c344898084de796b1c36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -641,7 +641,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1287649085
-  m_SortingLayer: -2
+  m_SortingLayer: -6
   m_SortingOrder: -10
   m_Sprite: {fileID: -3408889633231767321, guid: 3de6510abd05c344898084de796b1c36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2520,7 +2520,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1287649085
-  m_SortingLayer: -2
+  m_SortingLayer: -6
   m_SortingOrder: -3
   m_Sprite: {fileID: 4182594877228355238, guid: f71abc530df30f245ba235618a259647, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2849,7 +2849,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -372319051
-  m_SortingLayer: -1
+  m_SortingLayer: -5
   m_SortingOrder: -8
   m_Sprite: {fileID: -6609568996702751603, guid: 3de6510abd05c344898084de796b1c36, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3251,30 +3251,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6300131083065144623, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
-      propertyPath: playerInventory.caughtFish.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6300131083065144623, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
-      propertyPath: playerInventory.caughtFish.Array.data[1].id
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6300131083065144623, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
-      propertyPath: playerInventory.caughtFish.Array.data[0].fish
-      value: 
-      objectReference: {fileID: 11400000, guid: f313a96d1f6d8bac7b75a26e0460a881, type: 2}
-    - target: {fileID: 6300131083065144623, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
-      propertyPath: playerInventory.caughtFish.Array.data[1].fish
-      value: 
-      objectReference: {fileID: 11400000, guid: f313a96d1f6d8bac7b75a26e0460a881, type: 2}
-    - target: {fileID: 6300131083065144623, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
-      propertyPath: playerInventory.caughtFish.Array.data[0].weight
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6300131083065144623, guid: 292070bba55c90744a5e5bc4bff65566, type: 3}
-      propertyPath: playerInventory.caughtFish.Array.data[1].weight
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3332,54 +3308,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
-      propertyPath: fishTypes.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
-      propertyPath: fishTypes.Array.data[0].fish
-      value: 
-      objectReference: {fileID: 11400000, guid: f313a96d1f6d8bac7b75a26e0460a881, type: 2}
-    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
-      propertyPath: fishTypes.Array.data[1].fish
-      value: 
-      objectReference: {fileID: 11400000, guid: 7668650b99818b3af8a2a0b93b59c358, type: 2}
-    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
-      propertyPath: fishTypes.Array.data[2].fish
-      value: 
-      objectReference: {fileID: 11400000, guid: 902095158271bed2d9120bbea819e7c3, type: 2}
-    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
-      propertyPath: fishTypes.Array.data[3].fish
-      value: 
-      objectReference: {fileID: 11400000, guid: 55a4b96962e5da0889d512f67af63823, type: 2}
-    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
-      propertyPath: fishTypes.Array.data[4].fish
-      value: 
-      objectReference: {fileID: 11400000, guid: fdc201654ffeda5919d8ef4c1af3232c, type: 2}
-    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
-      propertyPath: fishTypes.Array.data[5].fish
-      value: 
-      objectReference: {fileID: 11400000, guid: fdc201654ffeda5919d8ef4c1af3232c, type: 2}
-    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
-      propertyPath: fishTypes.Array.data[0].chance
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
-      propertyPath: fishTypes.Array.data[1].chance
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
-      propertyPath: fishTypes.Array.data[2].chance
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
-      propertyPath: fishTypes.Array.data[3].chance
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
-      propertyPath: fishTypes.Array.data[4].chance
-      value: 0.05
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3397,6 +3325,6 @@ SceneRoots:
   - {fileID: 3829927713653925251}
   - {fileID: 316603904}
   - {fileID: 1901510342}
-  - {fileID: 8992616306300617441}
   - {fileID: 542230612}
+  - {fileID: 8992616306300617441}
   - {fileID: 1292300920}
