@@ -34,6 +34,7 @@ public class Environment : MonoBehaviour
     public int maxFishShadows = 50; // Maximum number of fish shadows that can exist at once
     public int initialFishShadows = 10; // Number of fish shadows to spawn when the environment is first loaded
 
+
     [Header("Components")]
 
     [Header("Prefabs")]
