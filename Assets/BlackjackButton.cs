@@ -11,15 +11,10 @@ public class BlackjackButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     Color32 textDefaultColor = new Color32(247, 150, 23, 166);
     Color32 textHoverColor = new Color32(255, 255, 255, 166);
 
-    public BlackjackScript blackjackScript;
-    // true = hit, false = stand. THIS IS STUPID CODE THAT NEEDS TO BE FIXED
-    public bool buttonType;
-
-
+    public UnityEvent buttonTarget;
     private void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
-        blackjackScript = GetComponentInParent<BlackjackScript>();
     }
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
@@ -33,14 +28,9 @@ public class BlackjackButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public virtual void OnPointerClick(PointerEventData eventData)
     {
         // do stuff
-        if (blackjackScript == null) return;
-        if (buttonType)
+        if (buttonTarget != null)
         {
-            blackjackScript.Hit();
-        }
-        else
-        {
-            blackjackScript.Stand();
+            buttonTarget.Invoke();
         }
     }
 }
