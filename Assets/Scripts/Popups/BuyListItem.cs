@@ -74,6 +74,7 @@ public class BuyListItem : MonoBehaviour
             parentMenu.selectedShopItem = new ShopItem(fishRef, priceValue);
             parentMenu.nameField.text = fishRef.fish.name;
             parentMenu.descriptionField.text = fishRef.fish.description;
+            parentMenu.mechanicalDescriptionField.text = "It's a fish!";
 
             // Enable only the description for fish
             parentMenu.descriptionField.gameObject.SetActive(!string.IsNullOrEmpty(parentMenu.descriptionField.text));

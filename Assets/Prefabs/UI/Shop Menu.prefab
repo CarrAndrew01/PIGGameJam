@@ -268,8 +268,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 486.9, y: 7}
-  m_SizeDelta: {x: 187.2802, y: 49.415}
+  m_AnchoredPosition: {x: 486.4, y: 7.223206}
+  m_SizeDelta: {x: 188, y: 50.0864}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3044733541311149164
 CanvasRenderer:
@@ -747,8 +747,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1.9169922, y: 15}
-  m_SizeDelta: {x: 187.2802, y: 49.415}
+  m_AnchoredPosition: {x: 6, y: 15}
+  m_SizeDelta: {x: 188, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &786820688382668675
 CanvasRenderer:
@@ -824,8 +824,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 296.2, y: 7}
-  m_SizeDelta: {x: 187.2802, y: 49.415}
+  m_AnchoredPosition: {x: 296.5, y: 7.2232056}
+  m_SizeDelta: {x: 188, y: 50.0864}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8066746355288041196
 CanvasRenderer:
@@ -1582,7 +1582,7 @@ MonoBehaviour:
     numberOfUses: 1
     cost: 2
   - baitUpgrade: {fileID: 11400000, guid: 94e11d9ac5cdd99458e39d7067913ba3, type: 2}
-    numberOfUses: 1
+    numberOfUses: 2
     cost: 6
   purchasableFish:
   - id: 0
@@ -1596,6 +1596,8 @@ MonoBehaviour:
     price: 12
   - upgrade: {fileID: 11400000, guid: d38b5293740419043b66f9985dfa7c36, type: 2}
     price: 20
+  - upgrade: {fileID: 11400000, guid: 990978738cf441e42af6a59a2e60677c, type: 2}
+    price: 6
 --- !u!1 &5121032914887953710
 GameObject:
   m_ObjectHideFlags: 0

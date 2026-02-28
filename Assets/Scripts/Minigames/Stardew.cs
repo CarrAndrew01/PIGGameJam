@@ -123,7 +123,7 @@ public class Stardew : MonoBehaviour
         statCatchSpeed = GameManager.GetPlayerStat(StatType.catchSpeed);
         statCatchArea = GameManager.GetPlayerStat(StatType.catchArea);
         statHookGravity = GameManager.GetPlayerStat(StatType.hookGravity);
-        statFishEscapeRate = GameManager.GetPlayerStat(StatType.fishEscapeChance);
+        statFishEscapeRate = GameManager.GetPlayerStat(StatType.fishEscapeRate);
         statHookPullForce = GameManager.GetPlayerStat(StatType.hookPullForce);
         // Initialize wriggle burst interval
         wriggleTimer = 0f;

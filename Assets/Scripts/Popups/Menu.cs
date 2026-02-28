@@ -20,17 +20,19 @@ public class Menu : MonoBehaviour
     public RectTransform listContentArea; // Reference to the RectTransform for the list
     public TextMeshProUGUI descriptionField; // Reference to the TextMeshProUGUI for the description field
     public TextMeshProUGUI mechanicalDescriptionField; // Reference to the TextMeshProUGUI for the mechanical description field
+    public TextMeshProUGUI moneyField;
 
     [Header("Prefabs")]
     public GameObject listItemPrefab; // Prefab for the list items in the menu
 
-    
+
 
 
     void Awake()
     {
         descriptionField.text = "";
         mechanicalDescriptionField.text = "Click on an item to see its description.";
+        UpdateMoneyDisplay();
     }
 
     // Methods
@@ -59,6 +61,11 @@ public class Menu : MonoBehaviour
         {
             CreateListItem(item, null);
         }
+    }
+
+    public void UpdateMoneyDisplay()
+    {
+        if (moneyField != null) moneyField.text = $"${GameManager.Money:F2}";
     }
 
 
@@ -107,7 +114,7 @@ public class Menu : MonoBehaviour
             CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description, index: i);
         }
     }
- 
+
 
     public void PopulateListWithFishCount(Dictionary<string, int> fishCount, List<CaughtFish> fishTypes = null)
     {

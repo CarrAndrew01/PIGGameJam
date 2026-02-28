@@ -216,7 +216,7 @@ public class ShopMenu : MonoBehaviour
 
     public void UpdateMoneyDisplay()
     {
-        moneyField.text = $"${GameManager.Money}";
+        moneyField.text = $"${GameManager.Money:F2}";
     }
 
     private void CombineShopItems()
