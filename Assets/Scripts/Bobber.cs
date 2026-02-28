@@ -156,6 +156,8 @@ public class Bobber : MonoBehaviour
     {
         isReelingIn = true;
         BobberReturning.Invoke("Reel");
+        // plays the reeling sound.
+        AudioManager.playSound("Reeling");
     }
 
     private void ReelInBobber()
@@ -178,14 +180,14 @@ public class Bobber : MonoBehaviour
         if (Vector3.Distance(transform.position, playerShipTransform.position) < distanceToRetrieve)
         {
             BobberReturned.Invoke("Unequip");
-
+            AudioManager.stopSound("Reeling");
             Fishing.HideCastLine();
             Destroy(gameObject);
         }
         else if (timeReelingIn > 7f) // Just in case something goes wrong and we don't get close enough to the ship, we don't want the bobber to fly around forever
         {
             BobberReturned.Invoke("Unequip");
-
+            AudioManager.stopSound("Reeling");
             Fishing.HideCastLine();
             Destroy(gameObject);
         }
@@ -230,6 +232,11 @@ public class Bobber : MonoBehaviour
         {
             timeInWater = 0f;
             fishTrigger.enabled = true; // Enable the fish trigger when we hit the water so we can start catching fish
+
+
+            // code to randomly play a sound out of the bobber options
+            int num = UnityEngine.Random.Range(1, 3);
+            AudioManager.playSound("Bobber" + num.ToString());
         }
     }
     private void ApplyBobbing()
