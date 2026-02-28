@@ -43,11 +43,11 @@ public class ShipMovement : MonoBehaviour
 
     void Awake()
     {
-
         rb = GetComponent<Rigidbody2D>();
     }
     private void OnEnable()
     {
+        // NOTE: This can throw an error if the audio manager isn't initialized first
         AudioManager.playSound.Invoke("Ship_Hover");
     }
     private void OnDisable()

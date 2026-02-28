@@ -136,3 +136,5 @@ MonoBehaviour:
     loop: 0
     audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
     source: {fileID: 0}
+  musicMixerGroup: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+  sfxMixerGroup: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}

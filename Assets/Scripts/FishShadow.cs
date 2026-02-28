@@ -185,13 +185,14 @@ public class FishShadow : MonoBehaviour
         {
             GameManager.RemoveBaitFromInventory(GameManager.Instance.playerInventory.currentBaitUpgrade, 1);
         }
-        
-        if (inventoryFull)
-            Toast.ShowToast($"Caught {fishData.fish.name} but inventory is full!", icon: fishData.fish.sprite);
-        else if (amountInCatch > 1)
-            Toast.ShowToast($"+{amountInCatch} X {fishData.fish.name}!", icon: fishData.fish.sprite);
-        else
-            Toast.ShowToast(fishData.fish.name + " caught!", substring1: $"Weight: {fishData.weight}", icon: fishData.fish.sprite);
+
+        if (!inventoryFull)
+        {
+            if (amountInCatch > 1)
+                Toast.ShowToast($"+{amountInCatch} X {fishData.fish.name}!", icon: fishData.fish.sprite);
+            else
+                Toast.ShowToast(fishData.fish.name + " caught!", substring1: $"Weight: {fishData.weight}", icon: fishData.fish.sprite);
+        }
 
         // Destroy the fish shadow since it's been caught
         Environment.OnFishShadowDestroyed();

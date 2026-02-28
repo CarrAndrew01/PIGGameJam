@@ -2509,10 +2509,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: sounds.Array.data[12].volume
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8848270691227238726, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -3096,6 +3092,14 @@ PrefabInstance:
     - target: {fileID: 369713310263396807, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
       propertyPath: m_Name
       value: Menu Popup
+      objectReference: {fileID: 0}
+    - target: {fileID: 842915824428752365, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 842915824428752365, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6676963861173588917, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
       propertyPath: m_SizeDelta.x

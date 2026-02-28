@@ -131,7 +131,7 @@ public class PlayerInventory
         }
         else
         {
-            // TODO: UI feedback for full inventory
+            Toast.ShowToast("Inventory Full! Cannot add fish.");
         }
     }
 

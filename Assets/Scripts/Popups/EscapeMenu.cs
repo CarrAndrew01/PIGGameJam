@@ -9,7 +9,7 @@ public class EscapeMenu : MonoBehaviour
 
     public void GotoSettings()
     {
-        GameManager.GotoTitleScreen(Transition.Screen.Settings);
+        Menus.Instance.TriggerSettingsMenu();
     }
 
     public void ExitGame()

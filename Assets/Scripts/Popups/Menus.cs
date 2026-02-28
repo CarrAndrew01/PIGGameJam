@@ -19,7 +19,8 @@ public class Menus : MonoBehaviour
         InventoryMenu,
         ShopMenu,
         QuestMenu,
-        BaitMenu
+        BaitMenu,
+        SettingsMenu
     }
 
     /// <summary>
@@ -35,6 +36,7 @@ public class Menus : MonoBehaviour
         ShopMenu = 1 << 3,
         QuestMenu = 1 << 4,
         BaitMenu = 1 << 5,
+        SettingsMenu = 1 << 6,
         All = ~0
     }
 
@@ -61,6 +63,7 @@ public class Menus : MonoBehaviour
 
     public InputActionReference shopMenuAction; // expects Button
     public InputActionReference questMenuAction; // expects Button
+    public InputActionReference settingsMenuAction; // expects Button
 
     [Header("Prefabs")]
     public GameObject menuPrefab; // Prefab for the escape menu popup
@@ -69,6 +72,7 @@ public class Menus : MonoBehaviour
     public GameObject shopMenuPrefab; // Prefab for the shop menu popup
     public GameObject questMenuPrefab; // Prefab for the quest menu popup
     public GameObject baitMenuPrefab; // Prefab for the bait menu popup
+    public GameObject settingsMenuPrefab; // Prefab for the settings menu popup
 
     [Header("Debug")]
     public GameObject CurrentMenu { get; private set; } = null; // Reference to the currently open menu, if any
@@ -191,6 +195,19 @@ public class Menus : MonoBehaviour
                 CurrentMenuType = MenuType.BaitMenu;
             }
         }
+        else if (settingsMenuAction != null && settingsMenuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.SettingsMenu))
+        {
+            if (CurrentMenu != null && CurrentMenuType == MenuType.SettingsMenu)
+            {
+                CloseCurrentMenu();
+            }
+            else
+            {
+                // Otherwise, open the settings menu
+                OpenMenu(MenuType.SettingsMenu, priority: true);
+                CurrentMenuType = MenuType.SettingsMenu;
+            }
+        }
     }
 
     public void TriggerShopMenu()
@@ -213,6 +230,16 @@ public class Menus : MonoBehaviour
         }
     }
 
+    public void TriggerSettingsMenu()
+    {
+        if (CurrentMenuType != MenuType.SettingsMenu)
+        {
+            // Open the settings menu, regardless of what is open
+            OpenMenu(MenuType.SettingsMenu, priority: true);
+            CurrentMenuType = MenuType.SettingsMenu;
+        }
+    }
+
     private bool IsMenuOpenable(MenuType menuType)
     {
         switch (menuType)
@@ -224,6 +251,7 @@ public class Menus : MonoBehaviour
             case MenuType.ShopMenu: return OpenableMenus.HasFlag(MenuOpenableFlags.ShopMenu);
             case MenuType.QuestMenu: return OpenableMenus.HasFlag(MenuOpenableFlags.QuestMenu);
             case MenuType.BaitMenu: return OpenableMenus.HasFlag(MenuOpenableFlags.BaitMenu);
+            case MenuType.SettingsMenu: return OpenableMenus.HasFlag(MenuOpenableFlags.SettingsMenu);
             default: Debug.LogError($"Unhandled menu type {menuType} in IsMenuOpenable!"); return false;
         }
     }
@@ -246,7 +274,7 @@ public class Menus : MonoBehaviour
         }
     }
 
-    private void CloseCurrentMenu()
+    public void CloseCurrentMenu()
     {
         if (CurrentMenu != null)
         {
@@ -267,6 +295,7 @@ public class Menus : MonoBehaviour
             case MenuType.ShopMenu: return shopMenuPrefab;
             case MenuType.QuestMenu: return questMenuPrefab;
             case MenuType.BaitMenu: return baitMenuPrefab;
+            case MenuType.SettingsMenu: return settingsMenuPrefab;
             default: Debug.LogError($"Unhandled menu type {menuType} in GetPrefabForMenuType!"); return null;
         }
     }
