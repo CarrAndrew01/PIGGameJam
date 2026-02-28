@@ -163,6 +163,7 @@ public class FishShadow : MonoBehaviour
     }
     public void Catch()
     {
+        AudioManager.playSound("Fish_Caught");
         // Trigger catch logic, such as playing an animation or sound effect
         Debug.Log("Fish Caught!");
 

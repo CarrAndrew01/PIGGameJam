@@ -7,6 +7,7 @@ public class AmbientSoundGenerator : MonoBehaviour
     void Start()
     {
         AudioManager.playSound?.Invoke("Water");
+        AudioManager.playSound?.Invoke("Ice_Planet_Music");
     }
 
     // Update is called once per frame
