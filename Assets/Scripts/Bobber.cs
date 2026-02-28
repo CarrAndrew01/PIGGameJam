@@ -182,7 +182,7 @@ public class Bobber : MonoBehaviour
             Fishing.HideCastLine();
             Destroy(gameObject);
         }
-        else if (timeReelingIn > 5f) // Just in case something goes wrong and we don't get close enough to the ship, we don't want the bobber to fly around forever
+        else if (timeReelingIn > 7f) // Just in case something goes wrong and we don't get close enough to the ship, we don't want the bobber to fly around forever
         {
             BobberReturned.Invoke("Unequip");
 
