@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class BaitMenu : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class BaitMenu : MonoBehaviour
 
     private Image selectButtonImage;
     private TextMeshProUGUI selectButtonText;
+    private ListItem selectedListItem;
 
     void Awake()
     {
@@ -29,7 +31,6 @@ public class BaitMenu : MonoBehaviour
         // Default to the currently selected bait in the inventory when the menu opens
         menuComponent.selectedIndex = GameManager.Instance.playerInventory.baits.FindIndex(b => b.baitUpgrade == GameManager.Instance.playerInventory.currentBaitUpgrade);
         CheckButtonState();
-
     }
 
 
@@ -45,6 +46,8 @@ public class BaitMenu : MonoBehaviour
                 menuComponent.listItems[menuComponent.selectedIndex].SetDescriptionFields();
             }
         }
+
+        CheckStampState();
     }
 
     public void OnListItemSelected()
@@ -62,16 +65,46 @@ public class BaitMenu : MonoBehaviour
             if (selectedBait.baitUpgrade == GameManager.Instance.playerInventory.currentBaitUpgrade)
             {
                 GameManager.DeselectBaitUpgrade();
+
+                CheckStampState();
             }
             else
             {
                 GameManager.SelectBaitUpgrade(selectedBait.baitUpgrade);
+
+                CheckStampState();
             }
             CheckButtonState();
         }
         else
         {
             Debug.LogWarning("Invalid bait index selected.");
+        }
+    }
+
+    private void CheckStampState()
+    {
+        if (menuComponent.selectedIndex != -1 && menuComponent.selectedIndex < GameManager.Instance.playerInventory.baits.Count)
+        {
+            Bait selectedBait = GameManager.Instance.playerInventory.baits[menuComponent.selectedIndex];
+            bool isCurrentlySelected = selectedBait.baitUpgrade == GameManager.Instance.playerInventory.currentBaitUpgrade;
+
+            // Update stamp state based on whether the bait is currently selected
+            if (isCurrentlySelected)
+            {
+                if (selectedListItem != null)
+                {
+                    selectedListItem.Unstamp();
+                }
+
+                menuComponent.listItems[menuComponent.selectedIndex].Stamp();
+                selectedListItem = menuComponent.listItems[menuComponent.selectedIndex];
+            }
+            else if (!isCurrentlySelected)
+            {
+                menuComponent.listItems[menuComponent.selectedIndex].Unstamp();
+                selectedListItem = null;
+            }
         }
     }
 

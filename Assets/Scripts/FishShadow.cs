@@ -177,6 +177,12 @@ public class FishShadow : MonoBehaviour
             GameManager.AddFishToInventory(extraFish);
         }
 
+        // If the fish was caught with bait, remove 1 from the player's inventory
+        if (GameManager.Instance.playerInventory.currentBaitUpgrade != null)
+        {
+            GameManager.RemoveBaitFromInventory(GameManager.Instance.playerInventory.currentBaitUpgrade, 1);
+        }
+
         // Destroy the fish shadow since it's been caught
         Environment.OnFishShadowDestroyed();
         Destroy(gameObject);
@@ -252,7 +258,7 @@ public class FishShadow : MonoBehaviour
                     || Vector2.Distance(targetBobber.spriteRenderer.transform.position, spriteTransform.position) < targetBobber.hookRange)
                 {
                     // If the fish is in hook range, hook it (if it likes the bait)
-                    if (!IsHooked && (fishData.fish.preferredBaitType == 0 || fishData.fish.preferredBaitType == GameManager.GetPlayerStat(StatType.baitType)))
+                    if (!IsHooked && (/*fishData.fish.preferredBaitType == 0 || */fishData.fish.preferredBaitType == GameManager.GetPlayerStat(StatType.baitType)))
                     {
                         IsHooked = true;
                         BeginFishing();

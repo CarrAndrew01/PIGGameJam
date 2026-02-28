@@ -77,6 +77,11 @@ public class PlayerInventory
             {
                 // Otherwise, remove the bait from the inventory
                 baits.RemoveAt(existingIndex);
+                // If the removed bait was currently selected, deselect it
+                if (currentBaitUpgrade == baitUpgrade)
+                {
+                    DeselectBait();
+                }
             }
         }
         else
