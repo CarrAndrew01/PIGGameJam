@@ -106,10 +106,10 @@ public class ShopMenu : MonoBehaviour
 
 
     public RectTransform listContentArea; // Reference to the RectTransform for the list
-    public GameObject listFishPrefab; // Prefab for the list items in the menu
+    public GameObject listSellPrefab; // Prefab for the list items in the menu
 
-    public GameObject listBaitPrefab; // Prefab for the list items in the menu
-    public GameObject listUpgradePrefab; // optional prefab for upgrades (can be null)
+    public GameObject listBuyPrefab; // Prefab for the list items in the menu
+    public GameObject dividerPrefab; // optional prefab for dividers (can be null)
 
     // Selection state now uses ShopItem
     public ShopItem selectedShopItem;
@@ -187,14 +187,25 @@ public class ShopMenu : MonoBehaviour
                 break;
 
             case ShopItem.ShopItemType.Upgrade:
-                    if (item.TryGetUpgrade(out var purchUp) && purchUp.upgrade != null)
+                if (item.TryGetUpgrade(out var purchUp) && purchUp.upgrade != null)
                 {
-                        float price = item.price;
-                        if (GameManager.Money >= price)
+                    float price = item.price;
+                    if (GameManager.Money >= price && !GameManager.PlayerHasUpgrade(purchUp.upgrade)) // Prevent buying the same upgrade multiple times
+                    {
+                        GameManager.AdjustMoney(-price);
+                        GameManager.AddUpgrade(purchUp.upgrade);
+
+                        // stamp the matching UI item so it shows purchased immediately
+                        foreach (Transform child in listContentArea)
                         {
-                            GameManager.AdjustMoney(-price);
-                            GameManager.AddUpgrade(purchUp.upgrade);
+                            var buyItem = child.GetComponent<BuyListItem>();
+                            if (buyItem != null && buyItem.upgradeRef.upgrade == purchUp.upgrade)
+                            {
+                                buyItem.Stamp();
+                                break;
+                            }
                         }
+                    }
                 }
                 UpdateMoneyDisplay();
                 break;
@@ -203,7 +214,7 @@ public class ShopMenu : MonoBehaviour
                 if (item.TryGetFish(out var fish))
                 {
                     float price = item.price;
-                    if (GameManager.Money >= price)
+                    if (GameManager.Money >= price && !GameManager.IsInventoryFull())
                     {
                         GameManager.AdjustMoney(-price);
                         GameManager.AddFishToInventory(fish);
@@ -261,40 +272,67 @@ public class ShopMenu : MonoBehaviour
             Destroy(listContentArea.GetChild(i).gameObject);
         }
 
-        // Instantiate UI entries from the combined shopItems list. For types we don't have
-        // a dedicated prefab for, we try to reuse available prefabs where possible.
+        // Instantiate dividers between item types
+        ShopItem.ShopItemType lastType = ShopItem.ShopItemType.None;
         foreach (var item in shopItems)
         {
-            if (item.Type == ShopItem.ShopItemType.Bait && item.TryGetBait(out var bait))
-            {
-                GameObject newItem = Instantiate(listBaitPrefab, listContentArea);
-                BuyListItem listItemComponent = newItem.GetComponent<BuyListItem>();
-                listItemComponent.Init(bait, this, bait.baitUpgrade.name, item.price);
-            }
-            else if (item.Type == ShopItem.ShopItemType.Fish && item.TryGetFish(out var fish))
-            {
-                // Use the buy-style prefab for purchasable fish so it doesn't include sell controls
-                GameObject newItem = Instantiate(listBaitPrefab, listContentArea);
-                BuyListItem listItemComponent = newItem.GetComponent<BuyListItem>();
-                if (listItemComponent != null)
-                {
-                    listItemComponent.Init(fish, this, fish.fish.name, item.price);
-                }
-            }
-            else if (item.Type == ShopItem.ShopItemType.Upgrade && item.TryGetUpgrade(out var upgrade))
-            {
-                // If an upgrade prefab is provided, use it; otherwise reuse the bait prefab and the new Upgrade Init overload
-                GameObject newItem = null;
-                if (listUpgradePrefab != null)
-                    newItem = Instantiate(listUpgradePrefab, listContentArea);
-                else
-                    newItem = Instantiate(listBaitPrefab, listContentArea);
+            var type = item.Type;
 
+            // If we hit a new type, insert a divider (if provided) with the appropriate label
+            if (type != lastType)
+            {
+                if (dividerPrefab != null)
+                {
+                    GameObject divider = Instantiate(dividerPrefab, listContentArea);
+                    TextMeshProUGUI label = divider.GetComponentInChildren<TextMeshProUGUI>();
+                    if (label != null)
+                    {
+                        switch (type)
+                        {
+                            case ShopItem.ShopItemType.Bait:
+                                label.text = "Bait";
+                                break;
+                            case ShopItem.ShopItemType.Fish:
+                                label.text = "Fish";
+                                break;
+                            case ShopItem.ShopItemType.Upgrade:
+                                label.text = "Upgrades";
+                                break;
+                            default:
+                                label.text = "";
+                                break;
+                        }
+                    }
+                }
+                lastType = type;
+            }
+
+            if (type == ShopItem.ShopItemType.Bait && item.TryGetBait(out var bait))
+            {
+                GameObject newItem = Instantiate(listBuyPrefab, listContentArea);
                 BuyListItem listItemComponent = newItem.GetComponent<BuyListItem>();
                 if (listItemComponent != null)
-                {
-                    // 'upgrade' is a PurchasableUpgrade wrapper; pass the wrapper so the list item has both upgrade and price
+                    listItemComponent.Init(bait, this, bait.baitUpgrade.name, item.price);
+            }
+            else if (type == ShopItem.ShopItemType.Fish && item.TryGetFish(out var fish))
+            {
+                GameObject newItem = Instantiate(listBuyPrefab, listContentArea);
+                BuyListItem listItemComponent = newItem.GetComponent<BuyListItem>();
+                if (listItemComponent != null)
+                    listItemComponent.Init(fish, this, fish.fish.name, item.price);
+            }
+            else if (type == ShopItem.ShopItemType.Upgrade && item.TryGetUpgrade(out var upgrade))
+            {
+                GameObject newItem = Instantiate(listBuyPrefab, listContentArea);
+                BuyListItem listItemComponent = newItem.GetComponent<BuyListItem>();
+                if (listItemComponent != null)
                     listItemComponent.Init(upgrade, this, upgrade.upgrade.name, item.price);
+
+                // If the player already owns this upgrade, visually stamp the item
+                var playerUps = GameManager.GetPlayerUpgrades();
+                if (playerUps != null && playerUps.Contains(upgrade.upgrade))
+                {
+                    listItemComponent.Stamp();
                 }
             }
         }
@@ -315,7 +353,7 @@ public class ShopMenu : MonoBehaviour
             CaughtFish caughtFish = GameManager.Instance.playerInventory.caughtFish[i];
             //CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {(caughtFish.weight * 10):F2}", description: caughtFish.fish.description);
 
-            GameObject newItem = Instantiate(listFishPrefab, listContentArea);
+            GameObject newItem = Instantiate(listSellPrefab, listContentArea);
             SellListItem listItemComponent = newItem.GetComponent<SellListItem>();
 
 

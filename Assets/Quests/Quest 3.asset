@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Quest 3
   m_EditorClassIdentifier: 
   questName: Quest 3
-  description: No bozo.
-  completedStatus: 1
+  description: If you want to get off that frozen rock...
+  completedStatus: 2
   type: 0
   questFish:
-  - fishType: {fileID: 11400000, guid: 3cc61a6697ba7d34f8b9bc2a60e7f425, type: 2}
-    quantity: 100
-  rewardUpgrade: {fileID: 11400000, guid: 397f8efc7be98fc4e9e8b2dc7312bccc, type: 2}
+  - fishType: {fileID: 11400000, guid: 902095158271bed2d9120bbea819e7c3, type: 2}
+    quantity: 1
+  rewardUpgrade: {fileID: 11400000, guid: 252e558c526e0df488f5e606adfaa5d4, type: 2}
   moneyReward: 0
-  nextQuest: []
+  nextQuest:
+  - {fileID: 11400000, guid: b8bc67a08bf291c42b9381076de98e65, type: 2}

@@ -132,8 +132,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 68.46667, y: -86}
-  m_SizeDelta: {x: 53.6, y: 14.4}
+  m_AnchoredPosition: {x: 105, y: -86}
+  m_SizeDelta: {x: 80, y: 24}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &7228269382773652529
 CanvasRenderer:
@@ -190,10 +190,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6
+  m_fontSize: 10
   m_fontSizeBase: 6
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 6
   m_fontSizeMax: 10
   m_fontStyle: 0
@@ -248,9 +248,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: 14.4
+  m_MinHeight: 18
   m_PreferredWidth: -1
-  m_PreferredHeight: 14.4
+  m_PreferredHeight: 24
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -365,8 +365,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 68.46667, y: -71.6}
-  m_SizeDelta: {x: 53.6, y: 14.4}
+  m_AnchoredPosition: {x: 105, y: -62}
+  m_SizeDelta: {x: 80, y: 24}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &7824039187576390003
 CanvasRenderer:
@@ -423,10 +423,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6
+  m_fontSize: 10
   m_fontSizeBase: 6
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 6
   m_fontSizeMax: 10
   m_fontStyle: 0
@@ -481,9 +481,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: 14.4
+  m_MinHeight: 18
   m_PreferredWidth: -1
-  m_PreferredHeight: 14.4
+  m_PreferredHeight: 24
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -1260,11 +1260,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 12
+  m_fontSize: 16
   m_fontSizeBase: 12
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 10
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 8
   m_fontSizeMax: 16
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -1318,9 +1318,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: 90
-  m_MinHeight: 40
+  m_MinHeight: 24
   m_PreferredWidth: -1
-  m_PreferredHeight: -1
+  m_PreferredHeight: 24
   m_FlexibleWidth: -1
   m_FlexibleHeight: 1
   m_LayoutPriority: 1

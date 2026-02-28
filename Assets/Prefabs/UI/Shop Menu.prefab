@@ -1572,9 +1572,9 @@ MonoBehaviour:
   leftButton: {fileID: 3248708061008924471}
   rightButton: {fileID: 1809750584197848981}
   listContentArea: {fileID: 706908567548331625}
-  listFishPrefab: {fileID: 3847822284047299910, guid: ddb131cf48932b8088747b3fbc2049ff, type: 3}
-  listBaitPrefab: {fileID: 3847822284047299910, guid: cbc2b33e46899a84eb6bf45d42755c2c, type: 3}
-  listUpgradePrefab: {fileID: 3847822284047299910, guid: cbc2b33e46899a84eb6bf45d42755c2c, type: 3}
+  listSellPrefab: {fileID: 7340073339813450577, guid: 28501b02e61c47749b83dac36cbb20d3, type: 3}
+  listBuyPrefab: {fileID: 5328000772481157963, guid: 338ff86bab58970418dd1196240d6152, type: 3}
+  dividerPrefab: {fileID: 9010777057105141058, guid: c52395b8ae5783440b3ceb383bc00a19, type: 3}
   selectedShopItem:
     price: 0
   purchasableBait:

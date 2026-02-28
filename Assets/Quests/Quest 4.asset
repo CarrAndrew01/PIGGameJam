@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Quest 4
   m_EditorClassIdentifier: 
   questName: Quest 4
-  description: More fish, please.
+  description: Welcome to the clouds.
   completedStatus: 2
   type: 0
   questFish:
-  - fishType: {fileID: 11400000, guid: 4f6273dc86366c44a8cd501cc194beda, type: 2}
-    quantity: 6
-  rewardUpgrade: {fileID: 11400000, guid: c071263f36043704486fb05fd11ab7ca, type: 2}
-  moneyReward: 0
+  - fishType: {fileID: 11400000, guid: fdc201654ffeda5919d8ef4c1af3232c, type: 2}
+    quantity: 2
+  rewardUpgrade: {fileID: 0}
+  moneyReward: 100
   nextQuest:
   - {fileID: 11400000, guid: 1d3d9846fc632c04088ac726c2b87fa9, type: 2}

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9499bf2fb1d0e9219990631173add5c7, type: 3}
-  m_Name: Quest 1
+  m_Name: Storage 1
   m_EditorClassIdentifier: 
-  questName: Quest 1
-  description: A simple quest.
-  completedStatus: 0
+  questName: A little storage
+  description: You'll need to hold more fish.
+  completedStatus: 2
   type: 0
   questFish:
   - fishType: {fileID: 11400000, guid: f313a96d1f6d8bac7b75a26e0460a881, type: 2}
-    quantity: 2
-  rewardUpgrade: {fileID: 0}
-  moneyReward: 30
+    quantity: 6
+  rewardUpgrade: {fileID: 11400000, guid: c071263f36043704486fb05fd11ab7ca, type: 2}
+  moneyReward: 0
   nextQuest:
-  - {fileID: 11400000, guid: 5bfd6f40a38ce5740a228a828482d59f, type: 2}
+  - {fileID: 11400000, guid: 8fcff6f907360734facc8df268922ea9, type: 2}
