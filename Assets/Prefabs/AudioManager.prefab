@@ -115,3 +115,24 @@ MonoBehaviour:
     loop: 0
     audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
     source: {fileID: 0}
+  - name: Throw_Rod
+    clip: {fileID: 8300000, guid: c50dc0f52fc4e964395ec3ee81a36ad7, type: 3}
+    volume: 0.41
+    pitch: 0.8
+    loop: 0
+    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+    source: {fileID: 0}
+  - name: Fish_Caught
+    clip: {fileID: 8300000, guid: 4137b0a0a4a359a4983e509ff5832247, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+    source: {fileID: 0}
+  - name: Ice_Planet_Music
+    clip: {fileID: 8300000, guid: dcd5d287f2dc16d4b8b390a5c53b6018, type: 3}
+    volume: 0.49
+    pitch: 1
+    loop: 0
+    audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+    source: {fileID: 0}

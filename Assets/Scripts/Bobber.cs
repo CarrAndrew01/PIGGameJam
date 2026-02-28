@@ -66,6 +66,7 @@ public class Bobber : MonoBehaviour
 
     void Start()
     {
+        AudioManager.playSound("Throw_Rod");
         currentWaterHeight = Environment.WaterHeight;
         // Default cached fish sprite world position to the water height so sprite offsets have a sensible target
         cachedShadowSpritePosition = new Vector2(transform.position.x, Environment.WaterHeight);
