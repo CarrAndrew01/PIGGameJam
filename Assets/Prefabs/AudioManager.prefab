@@ -101,3 +101,17 @@ MonoBehaviour:
     loop: 1
     audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
     source: {fileID: 0}
+  - name: Ship_Hover
+    clip: {fileID: 8300000, guid: 7066f11ac24197f4a8394a4936039fe9, type: 3}
+    volume: 0.33
+    pitch: 1
+    loop: 1
+    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+    source: {fileID: 0}
+  - name: Ship_Spin
+    clip: {fileID: 8300000, guid: f055e14ebf79ff24084092d5afc033f9, type: 3}
+    volume: 0.44
+    pitch: 1
+    loop: 0
+    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+    source: {fileID: 0}

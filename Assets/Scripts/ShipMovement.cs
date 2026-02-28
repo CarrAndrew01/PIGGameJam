@@ -43,7 +43,16 @@ public class ShipMovement : MonoBehaviour
 
     void Awake()
     {
+
         rb = GetComponent<Rigidbody2D>();
+    }
+    private void OnEnable()
+    {
+        AudioManager.playSound("Ship_Hover");
+    }
+    private void OnDisable()
+    {
+        AudioManager.stopSound("Ship_Hover");
     }
 
     void Start()
@@ -95,11 +104,14 @@ public class ShipMovement : MonoBehaviour
     {
         // Accelerate based on input
         if (inputDirection.x != 0)
+        {
             currentVelocity += inputDirection.x * acceleration * Time.fixedDeltaTime;
+        }
         // If no input, decelerate towards 0
         else
+        {
             currentVelocity = Mathf.MoveTowards(currentVelocity, 0, deceleration * Time.fixedDeltaTime);
-
+        }
         // Clamp velocity to max speed
         currentVelocity = Mathf.Clamp(currentVelocity, -maxVelocity, maxVelocity);
     }
@@ -125,6 +137,7 @@ public class ShipMovement : MonoBehaviour
 
     private void BeginSpin(int direction)
     {
+        AudioManager.playSound("Ship_Spin");
         LastDirection = direction;
         if (spinCoroutine != null) StopCoroutine(spinCoroutine);
         spinCoroutine = StartCoroutine(SpinShip());
