@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     [Header("Player Stats and Inventory")]
     public PlayerStats playerStats = new PlayerStats(); // Manages player upgrades and stats
     public PlayerInventory playerInventory = new PlayerInventory(); // Manages player inventory
-    public float money = 0; // Player's current money, 
 
     [Header("Screen Transitions")]
     public Transition.Screen intendedScreen;
@@ -125,8 +124,9 @@ public class GameManager : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(TITLE_SCENE_NAME);
     }
 
-    // Other    
-    public static void AdjustMoney(int amount) => Instance.money += amount;
+    // Other
+    public static float Money => Instance.playerInventory.money;
+    public static void AdjustMoney(float amount) => Instance.playerInventory.money += amount;
     public static void FindQuest(string name) => Instance.AllQuests.Find(quest => quest.questName == name);
 
     // Asset lookup helpers (search Resources for ScriptableObjects by name)

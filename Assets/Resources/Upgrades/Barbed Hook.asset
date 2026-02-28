@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Barbed Hook
   m_EditorClassIdentifier: 
   description: For REALLY catching fish.
+  mechDescriptionOverride: 
   icon: {fileID: 0}
   type: 4
   modifierType: 1
-  amount: 1.2
+  amount: 0.8

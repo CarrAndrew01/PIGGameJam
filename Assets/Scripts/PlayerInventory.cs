@@ -35,6 +35,7 @@ public class PlayerInventory
     public int MaxFishStorage => (int)GameManager.GetPlayerStat(StatType.fishStorage);
 
     public int maxInt = 0;
+    public float money = 0; // Player's current money, 
 
     public int NewID()
     {
@@ -99,7 +100,7 @@ public class PlayerInventory
                 // If we already have a bait selected, remove its upgrade effects before switching
                 GameManager.RemoveUpgrade(currentBaitUpgrade);
             }
-            
+
             currentBaitUpgrade = baitUpgrade;
             // Apply the bait as an active upgrade
             GameManager.AddUpgrade(baitUpgrade);
@@ -248,6 +249,7 @@ public class PlayerInventory
         }
 
         save.currentBaitUpgradeName = currentBaitUpgrade != null ? currentBaitUpgrade.name : "";
+        save.money = money;
 
         string json = save.ToJson();
         PlayerPrefs.SetString("Manager_Inventory", json);
@@ -294,6 +296,9 @@ public class PlayerInventory
         currentBaitUpgrade = !string.IsNullOrEmpty(save.currentBaitUpgradeName)
             ? GameManager.FindUpgradeByName(save.currentBaitUpgradeName)
             : null;
+
+        // Restore saved money
+        money = save.money;
 
         // Ensure maxInt reflects the highest assigned ID in the inventory so
         // subsequent calls to NewID() generate unique IDs above existing ones.

@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 /// <summary>
@@ -33,6 +34,11 @@ public class Upgrade : ScriptableObject
             return mechDescriptionOverride;
         }
         string modifierString = modifierType == UpgradeModifierType.Additive ? $"{amount:+0.##;-0.##;0}" : $"{(amount - 1f):+0.##%;-0.##%;0%}";
-        return $"{type}: {modifierString}";
+        // Insert spaces into camelCase / PascalCase enum names (e.g. fishStorage -> fish Storage)
+        string rawName = type.ToString();
+        // Add space between lower/number and upper, and between letters and numbers
+        rawName = Regex.Replace(rawName, "([a-z0-9])([A-Z])", "$1 $2");
+        rawName = Regex.Replace(rawName, "([A-Za-z])([0-9])", "$1 $2");
+        return $"{rawName}: {modifierString}";
     }
 }

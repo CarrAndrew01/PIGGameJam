@@ -42,17 +42,15 @@ public class SellListItem : MonoBehaviour
 
     public void OnSellClicked()
     {
-        //handle the rest of the logic
-
-
         // Remove from inventory and add money
         GameManager.Instance.playerInventory.RemoveFishByID(fishRef.id);
-        GameManager.Instance.money += GameManager.CalculateFishValue(fishRef);
+        GameManager.AdjustMoney(GameManager.CalculateFishValue(fishRef));
 
         // Refresh the parent menu to ensure UI matches inventory (safer than relying on Destroy timing)
         if (parentMenu != null)
         {
             parentMenu.PopulateListWithFish(GameManager.Instance.playerInventory.caughtFish);
+            parentMenu.UpdateMoneyDisplay();
         }
     }
 
@@ -64,7 +62,6 @@ public class SellListItem : MonoBehaviour
         {
             parentMenu.nameField.text = fishRef.fish.name;
             parentMenu.descriptionField.text = description;
-           // parentMenu.mechanicalDescriptionField.text = mechanicalDescription;
         }
     }
 }
