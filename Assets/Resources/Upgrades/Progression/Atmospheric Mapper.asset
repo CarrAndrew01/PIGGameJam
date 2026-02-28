@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6850115a7fcc1b46b10a3206e760afa, type: 3}
   m_Name: Atmospheric Mapper
   m_EditorClassIdentifier: 
-  description: 
-  mechDescriptionOverride: 
+  description: By relying on sensors beyond the pilot's own two eyes, we are capable
+    of travelling into atmospheres far denser that of Earth.
+  mechDescriptionOverride: 'Allows travel: Cloud Planet'
   icon: {fileID: 0}
-  type: 0
+  type: 12
   modifierType: 0
-  amount: 0
+  amount: 1

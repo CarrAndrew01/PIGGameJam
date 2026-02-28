@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6850115a7fcc1b46b10a3206e760afa, type: 3}
   m_Name: Bio Filter
   m_EditorClassIdentifier: 
-  description: 
-  mechDescriptionOverride: 
+  description: Filters destructive spores from the atmoshperic thruster's air intake.
+  mechDescriptionOverride: 'Allows travel: Bio Planet'
   icon: {fileID: 0}
-  type: 0
+  type: 13
   modifierType: 0
-  amount: 0
+  amount: 1
