@@ -96,7 +96,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Reeling
     clip: {fileID: 8300000, guid: 44d01f7fb59b87847a22a823c755ba10, type: 3}
-    volume: 0.6
+    volume: 0.34
     pitch: 1
     loop: 1
     audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}

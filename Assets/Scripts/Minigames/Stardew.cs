@@ -104,7 +104,7 @@ public class Stardew : MonoBehaviour
 
     // ANIMATION
 
-    public static Action<string>  OnCatching;
+    public static Action<string> OnCatching;
 
     // SFX
     //public static Action<> OnCaught;
@@ -119,6 +119,8 @@ public class Stardew : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // starts playing the reeling audio. this will be stopped by bobber
+        AudioManager.playSound("Reeling");
         // Grab player stats from GameManager
         statCatchSpeed = GameManager.GetPlayerStat(StatType.catchSpeed);
         statCatchArea = GameManager.GetPlayerStat(StatType.catchArea);
@@ -378,7 +380,7 @@ public class Stardew : MonoBehaviour
 
             // Tell the shadow fish
             stardewFishShadow.EndFishing(true);
-            
+
         }
         else if (caughtProgress <= -1f && canEscape)
         {
