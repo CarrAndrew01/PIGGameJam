@@ -58,6 +58,9 @@ TagManager:
   - name: Terrain
     uniqueID: 2461076823
     locked: 0
+  - name: Jellyfish
+    uniqueID: 2477441413
+    locked: 0
   - name: Lava
     uniqueID: 12061587
     locked: 0
