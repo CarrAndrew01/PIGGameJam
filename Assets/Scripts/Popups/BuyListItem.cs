@@ -53,7 +53,7 @@ public class BuyListItem : ListItem
         if (upgradeRef.upgrade != null)
         { // If this list item represents an upgrade, select it as such
             parentMenu.selectedShopItem = new ShopItem(upgradeRef, priceValue);
-            parentMenu.nameField.text = upgradeRef.upgrade.name;
+            parentMenu.nameField.text = upgradeRef.upgrade.upgradeName;
             parentMenu.priceFieldBuy.text = $"Price: {priceValue}";
             parentMenu.mechanicalDescriptionField.text = upgradeRef.upgrade.GetMechanicalDescription();
 
@@ -68,7 +68,7 @@ public class BuyListItem : ListItem
         else if (fishRef.fish != null)
         { // If this entry represents a fish, select that
             parentMenu.selectedShopItem = new ShopItem(fishRef, priceValue);
-            parentMenu.nameField.text = fishRef.fish.name;
+            parentMenu.nameField.text = fishRef.fish.fishName;
             parentMenu.descriptionField.text = fishRef.fish.description;
             parentMenu.mechanicalDescriptionField.text = "It's a fish!";
 
@@ -84,7 +84,7 @@ public class BuyListItem : ListItem
         else
         { // Otherwise treat as bait
             parentMenu.selectedShopItem = new ShopItem(baitRef, priceValue);
-            parentMenu.nameField.text = baitRef.baitUpgrade.name;
+            parentMenu.nameField.text = baitRef.baitUpgrade.upgradeName;
             parentMenu.mechanicalDescriptionField.text = baitRef.baitUpgrade.GetMechanicalDescription();
 
             // Enable only the mechanical description for bait/upgrade

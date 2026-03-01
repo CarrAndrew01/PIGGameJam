@@ -151,11 +151,11 @@ public class PlayerInventory
     {
         if (caughtFish.Remove(catchToRemove))
         {
-            Debug.Log($"Removed {catchToRemove.fish.name} from inventory. Current count: {caughtFish.Count}/{MaxFishStorage}");
+            Debug.Log($"Removed {catchToRemove.fish.fishName} from inventory. Current count: {caughtFish.Count}/{MaxFishStorage}");
         }
         else
         {
-            Debug.LogError($"Attempted to remove {catchToRemove.fish.name} which is not in inventory!");
+            Debug.LogError($"Attempted to remove {catchToRemove.fish.fishName} which is not in inventory!");
         }
     }
 

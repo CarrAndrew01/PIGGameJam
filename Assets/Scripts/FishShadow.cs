@@ -189,9 +189,9 @@ public class FishShadow : MonoBehaviour
         if (!inventoryFull)
         {
             if (amountInCatch > 1)
-                Toast.ShowToast($"+{amountInCatch} X {fishData.fish.name}!", icon: fishData.fish.sprite);
+                Toast.ShowToast($"+{amountInCatch} X {fishData.fish.fishName}!", icon: fishData.fish.sprite);
             else
-                Toast.ShowToast(fishData.fish.name + " caught!", substring1: $"Weight: {fishData.weight}", icon: fishData.fish.sprite);
+                Toast.ShowToast(fishData.fish.fishName + " caught!", substring1: $"Weight: {fishData.weight}", icon: fishData.fish.sprite);
         }
 
         // Destroy the fish shadow since it's been caught
