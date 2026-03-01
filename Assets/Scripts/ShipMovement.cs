@@ -47,13 +47,11 @@ public class ShipMovement : MonoBehaviour
     }
     private void OnEnable()
     {
-        if (AudioManager.instance != null)
-            AudioManager.playSound?.Invoke("Ship_Hover");
+        AudioManager.playSound?.Invoke("Ship_Hover");
     }
     private void OnDisable()
     {
-        if (AudioManager.instance != null)
-            AudioManager.playSound?.Invoke("Ship_Hover");
+        AudioManager.stopSound?.Invoke("Ship_Hover");
     }
 
     void Start()

@@ -9,7 +9,9 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public Image pointerImage;
     Color startColour;
 
-    
+    public CatSound catsound = CatSound.Medium_Meow;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +28,19 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
         OutlineCat(true);
+        switch (catsound)
+        {
+            case (CatSound.High_Meow):
+                AudioManager.playSound?.Invoke("High_Meow");
+                break;
+            case (CatSound.Medium_Meow):
+                AudioManager.playSound?.Invoke("Medium_Meow");
+                break;
+            case (CatSound.Low_Meow):
+                AudioManager.playSound?.Invoke("Low_Meow");
+                break;
+
+        }
     }
     public virtual void OnPointerExit(PointerEventData eventData)
     {
@@ -38,7 +53,7 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
     public virtual void InteractWithCat()
     {
-        
+
     }
 
     void OutlineCat(bool on)
@@ -55,4 +70,10 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             pointerImage.color = new Color(startColour.r, startColour.g, startColour.b, alpha);
         }
     }
+}
+public enum CatSound
+{
+    High_Meow,
+    Medium_Meow,
+    Low_Meow
 }

@@ -232,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineImage: {fileID: 777466342}
   pointerImage: {fileID: 491570056}
+  catsound: 0
 --- !u!1 &243402269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,6 +1380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineImage: {fileID: 1332301879}
   pointerImage: {fileID: 596760658}
+  catsound: 1
 --- !u!1 &777466339
 GameObject:
   m_ObjectHideFlags: 0
@@ -3052,6 +3054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineImage: {fileID: 1369981127}
   pointerImage: {fileID: 419645234}
+  catsound: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

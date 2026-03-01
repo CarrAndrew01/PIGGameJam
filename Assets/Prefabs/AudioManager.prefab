@@ -96,6 +96,20 @@ MonoBehaviour:
       loop: 0
       audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
+    - name: Medium_Meow
+      clip: {fileID: 8300000, guid: a7a834de658aaf04a8cd21ea3c569984, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
+    - name: High_Meow
+      clip: {fileID: 8300000, guid: d33ea921acca14b4c8267d8f9ae79275, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
   - type: 0
     sounds:
     - name: Ice_Planet_Music
