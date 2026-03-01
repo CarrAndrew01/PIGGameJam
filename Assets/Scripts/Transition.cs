@@ -26,6 +26,8 @@ public class Transition : MonoBehaviour
     
     private Coroutine fadeCoroutine;
 
+    private Animator animator;
+
     private void Awake()
     {
         // Singleton pattern
@@ -37,6 +39,8 @@ public class Transition : MonoBehaviour
         {
             Instance = this;
         }
+
+        animator = GetComponent<Animator>();
     }
 
     private void OnDestroy()
@@ -129,15 +133,20 @@ public class Transition : MonoBehaviour
         fadeCoroutine = StartCoroutine(coroutine);
     }
 
+    private bool IsInAnimatorTransition()
+    {
+        return animator.IsInTransition(0) || animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1;
+    }
+
     public void TransitionToPlanets(bool fadeText = true)
     {
-        if (fadeText && fadeCoroutine != null)
+        if (fadeText && IsInAnimatorTransition())
         {
             // Don't allow starting transitions if we're still moving unless we're skipping the text fade
             return;
         }
 
-        gameObject.GetComponent<Animator>().SetBool("PlanetTransition", true);
+        animator.SetBool("PlanetTransition", true);
         currentScreen = Screen.Galaxy;
         OnTransition?.Invoke();
         if (fadeText) FadeCoroutineStarter(FadeTextCoroutine());
@@ -146,13 +155,13 @@ public class Transition : MonoBehaviour
 
     public void TransitionToSettings(bool fadeText = true)
     {
-        if (fadeText && fadeCoroutine != null)
+        if (fadeText && IsInAnimatorTransition())
         {
             // Don't allow starting transitions if we're still moving unless we're skipping the text fade
             return;
         }
 
-        gameObject.GetComponent<Animator>().SetBool("SettingsTransition", true);
+        animator.SetBool("SettingsTransition", true);
         currentScreen = Screen.Settings;
         OnTransition?.Invoke();
         if (fadeText) FadeCoroutineStarter(FadeTextCoroutine());
@@ -161,13 +170,13 @@ public class Transition : MonoBehaviour
 
     public void TransitionToMainMenuFromPlanets()
     {
-        if (fadeCoroutine != null)
+        if (IsInAnimatorTransition())
         {
             // Don't allow starting transitions if we're still moving
             return;
         }
 
-        gameObject.GetComponent<Animator>().SetBool("PlanetTransition", false);
+        animator.SetBool("PlanetTransition", false);
         currentScreen = Screen.Main;
         OnTransition?.Invoke();
         FadeCoroutineStarter(UnFadeTextCoroutine());
@@ -175,13 +184,13 @@ public class Transition : MonoBehaviour
 
     public void TransitionToMainMenuFromSettings()
     {
-        if (fadeCoroutine != null)
+        if (IsInAnimatorTransition())
         {
             // Don't allow starting transitions if we're still moving
             return;
         }
 
-        gameObject.GetComponent<Animator>().SetBool("SettingsTransition", false);
+        animator.SetBool("SettingsTransition", false);
         currentScreen = Screen.Main;
         OnTransition?.Invoke();
         FadeCoroutineStarter(UnFadeTextCoroutine());
