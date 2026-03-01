@@ -45,6 +45,28 @@ public class AmbientSoundGenerator : MonoBehaviour
             default:
                 break;
         }
+
+        switch (areaType)
+        {
+            case AreaType.Title:
+                break;
+            case AreaType.Ice_Planet:
+                AudioManager.stopSound?.Invoke("Ice_Planet_Music");
+                AudioManager.stopSound?.Invoke("Water");
+                break;
+            case AreaType.Lava_Planet:
+                AudioManager.stopSound?.Invoke("Lava_Planet_Water");
+                AudioManager.stopSound?.Invoke("Water");
+                break;
+            case AreaType.Cat_Ship:
+                AudioManager.stopSound?.Invoke("Cat_Ship_Music");
+                break;
+            case AreaType.Poker:
+                AudioManager.stopSound?.Invoke("Poker_Music");
+                break;
+            default:
+                break;
+        }
     }
 }
 public enum AreaType

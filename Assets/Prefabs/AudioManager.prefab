@@ -82,6 +82,13 @@ MonoBehaviour:
       loop: 0
       audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
+    - name: Throw_Rod_Begin
+      clip: {fileID: 8300000, guid: b3acc272d91fce44cb9dd23261e2476f, type: 3}
+      volume: 0.41
+      pitch: 1.25
+      loop: 0
+      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
     - name: Fish_Caught
       clip: {fileID: 8300000, guid: 4137b0a0a4a359a4983e509ff5832247, type: 3}
       volume: 1

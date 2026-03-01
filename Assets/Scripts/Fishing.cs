@@ -88,7 +88,7 @@ public class Fishing : MonoBehaviour
             {
                 // TRIGGER EQUIP ANIMATION
                 OnEquip.Invoke("Equip");
-
+                AudioManager.playSound?.Invoke("Throw_Rod_Begin");
                 IsCharging = true;
                 ThrowStrength = 0f;
 
