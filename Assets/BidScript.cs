@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BidScript : MonoBehaviour
@@ -16,7 +17,15 @@ public class BidScript : MonoBehaviour
     public delegate void WagerComplete();
     public static event WagerComplete wagerComplete;
 
+    public TextMeshProUGUI playerTotalCash;
+    public TextMeshProUGUI playerWager;
 
+
+    private void Start()
+    {
+        playerTotalCash.text = "CASH - $" + GameManager.Money.ToString();
+        playerWager.text = "WAGER - $0";
+    }
     public void AddToBid()
     {
         if (GameManager.Money >= 5)
@@ -31,6 +40,8 @@ public class BidScript : MonoBehaviour
                 }
                 tokens.Add(newToken);
                 bidTokens++;
+                playerTotalCash.text = "CASH - $" + GameManager.Money.ToString();
+                playerWager.text = "WAGER - $" + (bidTokens * bidTokenValue);
             }
         }
     }
@@ -43,6 +54,8 @@ public class BidScript : MonoBehaviour
 
             bidTokens--;
             GameManager.AdjustMoney(5);
+            playerTotalCash.text = "CASH - $" + GameManager.Money.ToString();
+            playerWager.text = "WAGER - $" + (bidTokens * bidTokenValue);
         }
     }
     public void BeginMatch()
