@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Parallax : MonoBehaviour
 {
 
     private float startpos;
     private GameObject cam;
-    public float parllax;
+    [FormerlySerializedAs("parllax")]
+    public float parallax;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,22 +16,24 @@ public class Parallax : MonoBehaviour
         cam = Camera.main.gameObject;
 
         // if parallax is 1, then the background should just move with the camera so I'm parenting it and disabling this script
-        if (parllax >= 1)
+        if (parallax >= 1)
         {
             transform.parent = cam.transform;
             enabled = false;
         }
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    // Update after camera has moved so parallax stays in sync with rendering
+    void LateUpdate()
     {
-        if (parllax <= 0 || parllax >= 1)
+        if (parallax <= 0 || parallax >= 1)
             return;
 
-        float temp = (cam.transform.position.x * (1 - parllax));
-        float distance = (cam.transform.position.x * parllax);
+        if (cam == null)
+            cam = Camera.main != null ? Camera.main.gameObject : null;
+        if (cam == null) return;
 
+        float distance = (cam.transform.position.x * parallax);
         transform.position = new Vector3(startpos + distance, transform.position.y, transform.position.z);
     }
 }
