@@ -159,6 +159,7 @@ public class Bobber : MonoBehaviour
         BobberReturning.Invoke("Reel");
         // plays the reeling sound.
         AudioManager.playSound?.Invoke("Reeling");
+        AudioManager.playSound?.Invoke("Bobber1");
     }
 
     private void ReelInBobber()
