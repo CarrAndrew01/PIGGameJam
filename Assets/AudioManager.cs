@@ -7,8 +7,7 @@ public class AudioManager : MonoBehaviour
     public SoundArrays[] soundsArray;
 
     [Header("Audio Mixers")]
-    public AudioMixerGroup musicMixerGroup;
-    public AudioMixerGroup sfxMixerGroup;
+    public AudioMixer audioMixer;
 
     public float effectiveMuteThreshold = -40f; // Threshold in decibels below which sound is considered effectively muted
 
@@ -26,6 +25,30 @@ public class AudioManager : MonoBehaviour
     public static StopSound stopSound;
 
     public static AudioManager instance;
+
+    // Helper: convert linear (0..1) to decibel, honoring effective mute logic
+    private float LinearToDecibel(float linear, bool effectivelyMute)
+    {
+        if (!effectivelyMute)
+            return Mathf.Lerp(DECIBEL_MIN, DECIBEL_MAX, linear);
+
+        float dB = Mathf.Lerp(effectiveMuteThreshold, DECIBEL_MAX, linear);
+        if (dB <= effectiveMuteThreshold)
+            dB = DECIBEL_MIN;
+        return dB;
+    }
+
+    // Helper: convert decibel to linear (0..1), honoring effective mute logic
+    private float DecibelToLinear(float dB, bool effectivelyMute)
+    {
+        if (!effectivelyMute)
+            return Mathf.InverseLerp(DECIBEL_MIN, DECIBEL_MAX, dB);
+
+        if (dB <= effectiveMuteThreshold)
+            return 0f;
+
+        return Mathf.InverseLerp(effectiveMuteThreshold, DECIBEL_MAX, dB);
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -55,18 +78,41 @@ public class AudioManager : MonoBehaviour
                 s.source.outputAudioMixerGroup = s.audioMixer;
             }
 
-            // Load saved audio settings from PlayerPrefs
-            float musicVolume, sfxVolume;
-            if (PlayerPrefs.HasKey("Settings_MusicVolume"))
-            {
-                musicVolume = PlayerPrefs.GetFloat("Settings_MusicVolume");
-                musicMixerGroup.audioMixer.SetFloat(MUSIC_VOLUME_PARAM, musicVolume);
-            }
-            if (PlayerPrefs.HasKey("Settings_SFXVolume"))
-            {
-                sfxVolume = PlayerPrefs.GetFloat("Settings_SFXVolume");
-                sfxMixerGroup.audioMixer.SetFloat(SFX_VOLUME_PARAM, sfxVolume);
-            }
+        // Load saved audio settings from PlayerPrefs.
+        // Accept either previously-saved decibel values or newer linear (0..1) values.
+        if (PlayerPrefs.HasKey("Settings_MasterVolume"))
+        {
+            float val = PlayerPrefs.GetFloat("Settings_MasterVolume");
+            if (val >= 0f && val <= 1f)
+                SetMasterVolume(val);
+            else
+                audioMixer.SetFloat(MASTER_VOLUME_PARAM, val);
+        }
+
+        if (PlayerPrefs.HasKey("Settings_MusicVolume"))
+        {
+            float val = PlayerPrefs.GetFloat("Settings_MusicVolume");
+            if (val >= 0f && val <= 1f)
+                SetMusicVolume(val);
+            else
+                audioMixer.SetFloat(MUSIC_VOLUME_PARAM, val);
+        }
+
+        if (PlayerPrefs.HasKey("Settings_SFXVolume"))
+        {
+            float val = PlayerPrefs.GetFloat("Settings_SFXVolume");
+            if (val >= 0f && val <= 1f)
+                SetSFXVolume(val);
+            else
+                audioMixer.SetFloat(SFX_VOLUME_PARAM, val);
+        }
+        if (PlayerPrefs.HasKey("Settings_AmbientVolume"))
+        {
+            float val = PlayerPrefs.GetFloat("Settings_AmbientVolume");
+            if (val >= 0f && val <= 1f)
+                SetAmbientVolume(val);
+            else
+                audioMixer.SetFloat(AMBIENT_VOLUME_PARAM, val);
         }
     }
 
@@ -82,68 +128,48 @@ public class AudioManager : MonoBehaviour
     }
 
     // Mixer groups
+    public void SetMasterVolume(float volume, bool effectivelyMute = true)
+    {
+        audioMixer.SetFloat(MASTER_VOLUME_PARAM, LinearToDecibel(volume, effectivelyMute));
+    }
+
+    public float GetMasterVolume(bool effectivelyMute = true)
+    {
+        audioMixer.GetFloat(MASTER_VOLUME_PARAM, out float dB);
+        return DecibelToLinear(dB, effectivelyMute);
+    }
+
     public void SetMusicVolume(float volume, bool effectivelyMute = true)
     {
-        // Convert linear slider value (0.0 to 1.0) to decibel range
-        float dBVolume;
-        if (!effectivelyMute)
-            dBVolume = Mathf.Lerp(DECIBEL_MIN, DECIBEL_MAX, volume);
-        else
-        {
-            // If effectively muting, set volume to the effective mute threshold
-            dBVolume = Mathf.Lerp(effectiveMuteThreshold, DECIBEL_MAX, volume);
-            if (dBVolume <= effectiveMuteThreshold)
-                dBVolume = DECIBEL_MIN; // Set to absolute minimum if below effective mute threshold
-        }
-        musicMixerGroup.audioMixer.SetFloat(MUSIC_VOLUME_PARAM, dBVolume);
+        audioMixer.SetFloat(MUSIC_VOLUME_PARAM, LinearToDecibel(volume, effectivelyMute));
     }
 
     public float GetMusicVolume(bool effectivelyMute = true)
     {
-        musicMixerGroup.audioMixer.GetFloat(MUSIC_VOLUME_PARAM, out float volume);
-        // Convert decibel value back to linear range (0.0 to 1.0)
-        float volumeLinear;
-        if (!effectivelyMute) volumeLinear = Mathf.InverseLerp(DECIBEL_MIN, DECIBEL_MAX, volume);
-        else
-        {
-            if (volume <= effectiveMuteThreshold)
-                volumeLinear = 0f; // Consider effectively muted if below threshold
-            else
-                volumeLinear = Mathf.InverseLerp(effectiveMuteThreshold, DECIBEL_MAX, volume);
-        }
-        return volumeLinear;
+        audioMixer.GetFloat(MUSIC_VOLUME_PARAM, out float dB);
+        return DecibelToLinear(dB, effectivelyMute);
     }
 
     public void SetSFXVolume(float volume, bool effectivelyMute = true)
     {
-        // Convert linear slider value (0.0 to 1.0) to decibel range
-        float dBVolume;
-        if (!effectivelyMute)
-            dBVolume = Mathf.Lerp(DECIBEL_MIN, DECIBEL_MAX, volume);
-        else
-        {
-            // If effectively muting, set volume to the effective mute threshold
-            dBVolume = Mathf.Lerp(effectiveMuteThreshold, DECIBEL_MAX, volume);
-            if (dBVolume <= effectiveMuteThreshold)
-                dBVolume = DECIBEL_MIN; // Set to absolute minimum if below effective mute threshold
-        }
-        sfxMixerGroup.audioMixer.SetFloat(SFX_VOLUME_PARAM, dBVolume);
+        audioMixer.SetFloat(SFX_VOLUME_PARAM, LinearToDecibel(volume, effectivelyMute));
     }
 
     public float GetSFXVolume(bool effectivelyMute = true)
     {
-        sfxMixerGroup.audioMixer.GetFloat(SFX_VOLUME_PARAM, out float volume);
-        // Convert decibel value back to linear range (0.0 to 1.0)
-        float volumeLinear;
-        if (!effectivelyMute) volumeLinear = Mathf.InverseLerp(DECIBEL_MIN, DECIBEL_MAX, volume);
-        else
-        {
-            if (volume <= effectiveMuteThreshold)
-                volumeLinear = 0f; // Consider effectively muted if below threshold
-            else
-                volumeLinear = Mathf.InverseLerp(effectiveMuteThreshold, DECIBEL_MAX, volume);
-        }
-        return volumeLinear;
+        audioMixer.GetFloat(SFX_VOLUME_PARAM, out float dB);
+        return DecibelToLinear(dB, effectivelyMute);
+    }
+
+    public void SetAmbientVolume(float volume, bool effectivelyMute = true)
+    {
+        audioMixer.SetFloat(AMBIENT_VOLUME_PARAM, LinearToDecibel(volume, effectivelyMute));
+    }
+
+    public float GetAmbientVolume(bool effectivelyMute = true)
+    {
+        audioMixer.GetFloat(AMBIENT_VOLUME_PARAM, out float dB);
+        return DecibelToLinear(dB, effectivelyMute);
     }
 
     public void Play(string name)

@@ -25,54 +25,64 @@ public class SettingsMenu : MonoBehaviour
     private void Awake()
     {
         // Get references to the fill images of each slider
-        // masterSliderFill = masterVolumeSlider.fillRect.GetComponent<Image>();
+        masterSliderFill = masterVolumeSlider.fillRect.GetComponent<Image>();
         musicSliderFill = musicVolumeSlider.fillRect.GetComponent<Image>();
         sfxSliderFill = sfxVolumeSlider.fillRect.GetComponent<Image>();
-        // ambientSliderFill = ambientVolumeSlider.fillRect.GetComponent<Image>();
+        ambientSliderFill = ambientVolumeSlider.fillRect.GetComponent<Image>();
 
         // Initialize slider colors
-        // UpdateSliderColor(masterVolumeSlider, masterSliderFill, ref lastMasterFillValue, overwrite: true);
+        UpdateSliderColor(masterVolumeSlider, masterSliderFill, ref lastMasterFillValue, overwrite: true);
         UpdateSliderColor(musicVolumeSlider, musicSliderFill, ref lastMusicFillValue, overwrite: true);
         UpdateSliderColor(sfxVolumeSlider, sfxSliderFill, ref lastSfxFillValue, overwrite: true);
-        // UpdateSliderColor(ambientVolumeSlider, ambientSliderFill, ref lastAmbientFillValue, overwrite: true);
+        UpdateSliderColor(ambientVolumeSlider, ambientSliderFill, ref lastAmbientFillValue, overwrite: true);
     }
 
     private void Start()
     {
         // Initialize sliders with current volume levels from AudioManager
-        // masterVolumeSlider.value = AudioManager.instance.GetMasterVolume();
+        masterVolumeSlider.value = AudioManager.instance.GetMasterVolume();
         musicVolumeSlider.value = AudioManager.instance.GetMusicVolume();
         sfxVolumeSlider.value = AudioManager.instance.GetSFXVolume();
-        // ambientVolumeSlider.value = AudioManager.instance.GetAmbientVolume();
+        ambientVolumeSlider.value = AudioManager.instance.GetAmbientVolume();
     }
 
     void OnDestroy()
     {
         // Save settings to PlayerPrefs when the menu is closed/destroyed
-        // float masterVolume = AudioManager.instance.GetMasterVolume();
+        float masterVolume = AudioManager.instance.GetMasterVolume();
         float musicVolume = AudioManager.instance.GetMusicVolume();
         float sfxVolume = AudioManager.instance.GetSFXVolume();
-        // float ambientVolume = AudioManager.instance.GetAmbientVolume();
+        float ambientVolume = AudioManager.instance.GetAmbientVolume();
 
-        // PlayerPrefs.SetFloat("Settings_MasterVolume", masterVolume);
+        PlayerPrefs.SetFloat("Settings_MasterVolume", masterVolume);
         PlayerPrefs.SetFloat("Settings_MusicVolume", musicVolume);
         PlayerPrefs.SetFloat("Settings_SFXVolume", sfxVolume);
-        // PlayerPrefs.SetFloat("Settings_AmbientVolume", ambientVolume);
+        PlayerPrefs.SetFloat("Settings_AmbientVolume", ambientVolume);
+        PlayerPrefs.Save();
     }
+
+    // void OnEnable()
+    // {
+    //     //Debug player pref
+    //     Debug.Log("Master Volume: " + PlayerPrefs.GetFloat("Settings_MasterVolume", -1f));
+    //     Debug.Log("Music Volume: " + PlayerPrefs.GetFloat("Settings_MusicVolume", -1f));
+    //     Debug.Log("SFX Volume: " + PlayerPrefs.GetFloat("Settings_SFXVolume", -1f));
+    //     Debug.Log("Ambient Volume: " + PlayerPrefs.GetFloat("Settings_AmbientVolume", -1f));
+    // }
 
     void Update()
     {
         // Update slider colors in real-time as the sliders are adjusted
-        // UpdateSliderColor(masterVolumeSlider, masterSliderFill);
+        UpdateSliderColor(masterVolumeSlider, masterSliderFill, ref lastMasterFillValue);
         UpdateSliderColor(musicVolumeSlider, musicSliderFill, ref lastMusicFillValue);
         UpdateSliderColor(sfxVolumeSlider, sfxSliderFill, ref lastSfxFillValue);
-        // UpdateSliderColor(ambientVolumeSlider, ambientSliderFill);
+        UpdateSliderColor(ambientVolumeSlider, ambientSliderFill, ref lastAmbientFillValue);
     }
 
     // Methods
     public void SetMasterVolume(float volume)
     {
-        // AudioManager.instance.SetMasterVolume(volume);
+        AudioManager.instance.SetMasterVolume(volume);
     }
     public void SetMusicVolume(float volume)
     {
@@ -84,7 +94,7 @@ public class SettingsMenu : MonoBehaviour
     }
     public void SetAmbientVolume(float volume)
     {
-        // AudioManager.instance.SetAmbientVolume(volume);
+        AudioManager.instance.SetAmbientVolume(volume);
     }
     public void CloseMenu()
     {
