@@ -167,7 +167,17 @@ public class BlackjackScript : MonoBehaviour
             }
             else
             {
+                // every ace is counted as 11. then for each ace whilst it's over 21, 10 is removed
+                scoreCounter += 1;
                 aceCount++;
+            }
+        }
+        // checks over each ace and removes 10 if its not actually an ace
+        if (aceCount > 0)
+        {
+            if (scoreCounter + 10 <= 21)
+            {
+                scoreCounter += 10;
             }
         }
         // basically need to check for aces here
