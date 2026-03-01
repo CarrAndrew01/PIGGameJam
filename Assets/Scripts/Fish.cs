@@ -39,6 +39,8 @@ public class Fish : ScriptableObject
 
     public float minWeight, maxWeight; // Weight range for the fish, which will affect money earned I guess
     public int minAmount = 1, maxAmount = 1; // Amount range for the fish, which will affect how many can be caught in one catch
+    
+    public string fishName;
     public string description;
     public int preferredBaitType; // A specific number that must be matched by the baitType stat in order to bite, 0 for no preference
     public float value;

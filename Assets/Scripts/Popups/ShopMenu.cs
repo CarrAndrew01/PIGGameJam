@@ -59,9 +59,9 @@ public class ShopItem
 
     public string GetName()
     {
-        if (bait.HasValue) return bait.Value.baitUpgrade.name;
-        else if (fish.HasValue) return fish.Value.fish.name;
-        else if (upgrade.HasValue) return upgrade.Value.upgrade.name;
+        if (bait.HasValue) return bait.Value.baitUpgrade.upgradeName;
+        else if (fish.HasValue) return fish.Value.fish.fishName;
+        else if (upgrade.HasValue) return upgrade.Value.upgrade.upgradeName;
         else return "ERROR: No item";
     }
     public string GetDescription()
@@ -198,7 +198,7 @@ public class ShopMenu : MonoBehaviour
                     {
                         GameManager.AdjustMoney(-price);
                         GameManager.AddUpgrade(purchUp.upgrade);
-                        Toast.ShowToast($"Purchased {purchUp.upgrade.name} for ${price:F2}!", icon: purchUp.upgrade.icon);
+                        Toast.ShowToast($"Purchased {purchUp.upgrade.upgradeName} for ${price:F2}!", icon: purchUp.upgrade.icon);
 
                         // stamp the matching UI item so it shows purchased immediately
                         foreach (Transform child in listContentArea)
@@ -212,11 +212,11 @@ public class ShopMenu : MonoBehaviour
                         }
                     } else if (GameManager.PlayerHasUpgrade(purchUp.upgrade))
                     {
-                        Toast.ShowToast($"Cannot purchase {purchUp.upgrade.name}: Upgrade already owned!");
+                        Toast.ShowToast($"Cannot purchase {purchUp.upgrade.upgradeName}: Upgrade already owned!");
                     }
                     else
                     {
-                        Toast.ShowToast($"Cannot purchase {purchUp.upgrade.name}: Not enough money!");
+                        Toast.ShowToast($"Cannot purchase {purchUp.upgrade.upgradeName}: Not enough money!");
                     }
                 }
                 UpdateMoneyDisplay();
@@ -230,13 +230,13 @@ public class ShopMenu : MonoBehaviour
                     {
                         GameManager.AdjustMoney(-price);
                         GameManager.AddFishToInventory(fish);
-                        Toast.ShowToast($"Purchased {fish.fish.name} for ${price:F2}!", icon: fish.fish.sprite);
+                        Toast.ShowToast($"Purchased {fish.fish.fishName} for ${price:F2}!", icon: fish.fish.sprite);
                     } else if (GameManager.IsInventoryFull())
                     {
-                        Toast.ShowToast($"Cannot purchase {fish.fish.name}: Inventory is full!");
+                        Toast.ShowToast($"Cannot purchase {fish.fish.fishName}: Inventory is full!");
                     } else
                     {
-                        Toast.ShowToast($"Cannot purchase {fish.fish.name}: Not enough money!");
+                        Toast.ShowToast($"Cannot purchase {fish.fish.fishName}: Not enough money!");
                     }
                 }
                 UpdateMoneyDisplay();
@@ -331,21 +331,21 @@ public class ShopMenu : MonoBehaviour
                 GameObject newItem = Instantiate(listBuyPrefab, listContentArea);
                 BuyListItem listItemComponent = newItem.GetComponent<BuyListItem>();
                 if (listItemComponent != null)
-                    listItemComponent.Init(bait, this, bait.baitUpgrade.name, item.price);
+                    listItemComponent.Init(bait, this, bait.baitUpgrade.upgradeName, item.price);
             }
             else if (type == ShopItem.ShopItemType.Fish && item.TryGetFish(out var fish))
             {
                 GameObject newItem = Instantiate(listBuyPrefab, listContentArea);
                 BuyListItem listItemComponent = newItem.GetComponent<BuyListItem>();
                 if (listItemComponent != null)
-                    listItemComponent.Init(fish, this, fish.fish.name, item.price);
+                    listItemComponent.Init(fish, this, fish.fish.fishName, item.price);
             }
             else if (type == ShopItem.ShopItemType.Upgrade && item.TryGetUpgrade(out var upgrade))
             {
                 GameObject newItem = Instantiate(listBuyPrefab, listContentArea);
                 BuyListItem listItemComponent = newItem.GetComponent<BuyListItem>();
                 if (listItemComponent != null)
-                    listItemComponent.Init(upgrade, this, upgrade.upgrade.name, item.price);
+                    listItemComponent.Init(upgrade, this, upgrade.upgrade.upgradeName, item.price);
 
                 // If the player already owns this upgrade, visually stamp the item
                 var playerUps = GameManager.GetPlayerUpgrades();
@@ -376,7 +376,7 @@ public class ShopMenu : MonoBehaviour
             SellListItem listItemComponent = newItem.GetComponent<SellListItem>();
 
 
-            listItemComponent.Init(caughtFish, this, caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}",
+            listItemComponent.Init(caughtFish, this, caughtFish.fish.fishName, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}",
             subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description);
         }
     }

@@ -81,7 +81,7 @@ public class Menu : MonoBehaviour
         for (int i = 0; i < upgrades.Count; i++)
         {
             Upgrade upgrade = upgrades[i];
-            CreateListItem(upgrade.name, upgrade.icon, description: upgrade.description, mechanicalDescription: upgrade.GetMechanicalDescription(), index: i);
+            CreateListItem(upgrade.upgradeName, upgrade.icon, description: upgrade.description, mechanicalDescription: upgrade.GetMechanicalDescription(), index: i);
         }
     }
     public void PopulateListWithBaits(List<Bait> baits)
@@ -96,7 +96,7 @@ public class Menu : MonoBehaviour
         for (int i = 0; i < baits.Count; i++)
         {
             Bait bait = baits[i];
-            CreateListItem(bait.baitUpgrade.name, bait.baitUpgrade.icon, subtext: $"Uses: {bait.numberOfUses}", description: bait.baitUpgrade.description, mechanicalDescription: bait.baitUpgrade.GetMechanicalDescription(), index: i);
+            CreateListItem(bait.baitUpgrade.upgradeName, bait.baitUpgrade.icon, subtext: $"Uses: {bait.numberOfUses}", description: bait.baitUpgrade.description, mechanicalDescription: bait.baitUpgrade.GetMechanicalDescription(), index: i);
         }
     }
     public void PopulateListWithFish(List<CaughtFish> fishTypes)
@@ -111,7 +111,7 @@ public class Menu : MonoBehaviour
         for (int i = 0; i < fishTypes.Count; i++)
         {
             CaughtFish caughtFish = fishTypes[i];
-            CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description, index: i);
+            CreateListItem(caughtFish.fish.fishName, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description, index: i);
         }
     }
 
@@ -130,11 +130,13 @@ public class Menu : MonoBehaviour
             // Find the corresponding fish type for the item
             Sprite itemIcon = null;
             string itemDescription = "";
+            string displayName = fish.Key;
             if (fishTypes != null)
             {
                 CaughtFish caughtFish = fishTypes.Find(f => f.fish.name == fish.Key);
                 itemIcon = caughtFish.fish.sprite;
                 itemDescription = caughtFish.fish.description;
+                if (caughtFish.fish != null) displayName = caughtFish.fish.fishName;
             }
             // Get total value by adding together the value of each fish
             float totalValue = 0f;
@@ -145,7 +147,7 @@ public class Menu : MonoBehaviour
                     totalValue += GameManager.CalculateFishValue(caughtFish);
                 }
             }
-            CreateListItem(fish.Key, itemIcon, subtext: $"Count: {fish.Value:F2}", subtext2: $"Total Value: {totalValue:F2}", description: itemDescription);
+            CreateListItem(displayName, itemIcon, subtext: $"Count: {fish.Value:F2}", subtext2: $"Total Value: {totalValue:F2}", description: itemDescription);
         }
     }
 

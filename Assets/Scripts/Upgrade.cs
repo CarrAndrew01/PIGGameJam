@@ -15,6 +15,7 @@ public class Upgrade : ScriptableObject
 
 
     // Variables
+    public string upgradeName;
     [TextArea(2, 5)]
     public string description;
     [TextArea(2, 5)]

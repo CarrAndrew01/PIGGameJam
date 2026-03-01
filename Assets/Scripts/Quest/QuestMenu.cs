@@ -157,7 +157,7 @@ public class QuestMenu : MonoBehaviour
         }
         else if (quest.rewardUpgrade != null && quest.moneyReward == 0)
         {
-            rewardText.text = quest.rewardUpgrade.name;
+            rewardText.text = quest.rewardUpgrade.upgradeName;
         }
         else if (quest.rewardUpgrade != null && quest.moneyReward > 0)
         {

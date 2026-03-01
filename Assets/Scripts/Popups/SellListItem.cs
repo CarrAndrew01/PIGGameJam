@@ -45,7 +45,7 @@ public class SellListItem : ListItem
     {
         if (parentMenu != null)
         {
-            parentMenu.nameField.text = fishRef.fish.name;
+            parentMenu.nameField.text = fishRef.fish.fishName;
             parentMenu.descriptionField.text = description;
             parentMenu.mechanicalDescriptionField.text = mechanicalDescription;
         }
