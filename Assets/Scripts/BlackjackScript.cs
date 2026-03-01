@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Collections;
+using Unity.Mathematics;
 
 public class BlackjackScript : MonoBehaviour
 {
@@ -34,23 +35,59 @@ public class BlackjackScript : MonoBehaviour
     // TODO MAKE DEALER ALWAYS STAND ON 17 OR ABOVE 
 
 
-    public delegate void Round1();
-    public static event Round1 onDeal; // push down cards then spread them
-    public delegate void Round2();
-    public static event Round2 onDeal2;
+
+    public delegate void Wager();
+    public static event Wager wager;
+    public delegate void DealCards();
+    public static event DealCards dealCards; // push down cards then spread them
     public delegate void Round3();
     public static event Round3 onDeal3;
     public delegate void Round4();
     public static event Round4 onDeal4;
-    public delegate void Round5(); // cards return to cat (drags them back?)
-    public static event Round5 onDeal5;
+    public delegate void Reset(); // cards return to cat (drags them back?)
+    public static event Reset resetEvent;
 
+
+    public GameObject biddingUI;
+    public GameObject gameUI;
+
+
+    private void OnEnable()
+    {
+        resetEvent += ResetGame;
+        wager += StartWager;
+        BidScript.wagerComplete += BeginGame;
+
+    }
+    private void OnDisable()
+    {
+        resetEvent -= ResetGame;
+        wager -= StartWager;
+        BidScript.wagerComplete -= BeginGame;
+    }
     private void Start()
     {
-        onDeal?.Invoke();
+        gameUI.SetActive(false);
+        // dealCards?.Invoke();
         // deals 2 cards for player + 1 card for dealer
+        // CreateNewCard(true, ref playerCardIndex, ref playerCards);
+        // CreateNewCard(true, ref playerCardIndex, ref playerCards);
+        // CreateNewCard(false, ref dealerCardIndex, ref dealerCards);
+    }
+    void BeginGame()
+    {
+        biddingUI.SetActive(false);
+        gameUI.SetActive(true);
+        StartCoroutine(BeginningCoroutine());
+    }
+    IEnumerator BeginningCoroutine()
+    {
+        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1f);
         CreateNewCard(true, ref playerCardIndex, ref playerCards);
+        yield return new WaitForSeconds(1f);
         CreateNewCard(true, ref playerCardIndex, ref playerCards);
+        yield return new WaitForSeconds(1f);
         CreateNewCard(false, ref dealerCardIndex, ref dealerCards);
     }
     public void Hit()
@@ -82,24 +119,24 @@ public class BlackjackScript : MonoBehaviour
         // add animate card
 
         // recalculate score
-        var test = RecalculateScore(cards, cardIndex);
+        int scoreInt = RecalculateScore(cards, cardIndex);
         if (player)
         {
-            playerScoreText.text = "Score: " + test.ToString();
-            currentPlayerValue = test;
-            if (currentPlayerValue > 21)
+            playerScoreText.text = "Score: " + scoreInt.ToString();
+            currentPlayerValue = scoreInt;
+            if (currentPlayerValue > BUSTNUMBER)
             {
                 didBust = true;
             }
-            else if (currentPlayerValue == 21)
+            else if (currentPlayerValue == BUSTNUMBER)
             {
                 didStand = true;
             }
         }
         else
         {
-            dealerScoreText.text = "Dealer Score: " + test.ToString();
-            currentDealerValue = test;
+            dealerScoreText.text = "Dealer Score: " + scoreInt.ToString();
+            currentDealerValue = scoreInt;
         }
         // scoreText.text = "Total - " + test.ToString();
         // scoreText.text += "\nDealer Total - 0";
@@ -108,7 +145,11 @@ public class BlackjackScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            // CreateNewCard(true);
+            resetEvent?.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            PayOut();
         }
     }
 
@@ -134,10 +175,27 @@ public class BlackjackScript : MonoBehaviour
     }
     void ResetGame()
     {
+        playerCardIndex = -1;
+        dealerCardIndex = -1;
         currentPlayerValue = 0;
         currentDealerValue = 0;
         didStand = false;
         didBust = false;
+        // should always be 0
+        playerScoreText.text = "Score: " + currentPlayerValue.ToString();
+        dealerScoreText.text = "Dealer Score: " + currentDealerValue.ToString();
+
+
+    }
+    void StartWager()
+    {
+        biddingUI.SetActive(true);
+        gameUI.SetActive(false);
+    }
+
+    void PayOut()
+    {
+        GameManager.AdjustMoney(BidScript.bidTokens * BidScript.bidTokenValue);
     }
 
     // void CreateNewCard(bool player)
@@ -241,4 +299,13 @@ public class BlackjackScript : MonoBehaviour
     //         Debug.Log("Dealer Win");
     //     }
     // }
+}
+public enum BlackjackStates
+{
+    WAGER,
+    SETTING_UP,
+    FLIPPING_FIRST_THREE_CARDS,
+    PLAYING_GAME,
+    PAYOUT,
+    RESET
 }

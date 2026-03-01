@@ -4,12 +4,18 @@ using UnityEngine;
 public class BidScript : MonoBehaviour
 {
     // need to plan how much cash = a token and integrate taking in and out cash
-    public int bidTokens = 0;
+    public static int bidTokens = 0;
+    [HideInInspector]
+    public static float bidTokenValue = 5;
     public int maxBid = 5;
 
     public GameObject tokenPrefab;
     public List<GameObject> tokens;
     public Transform bidSpawnTransform;
+
+    public delegate void WagerComplete();
+    public static event WagerComplete wagerComplete;
+
 
     public void AddToBid()
     {
@@ -37,6 +43,15 @@ public class BidScript : MonoBehaviour
 
             bidTokens--;
             GameManager.AdjustMoney(5);
+        }
+    }
+    public void BeginMatch()
+    {
+        // calls match start on blackjack script
+        if (bidTokens > 0)
+        {
+            Debug.Log("HELLO");
+            wagerComplete?.Invoke();
         }
     }
 

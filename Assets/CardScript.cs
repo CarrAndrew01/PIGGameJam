@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,15 +21,17 @@ public class CardScript : MonoBehaviour
     public Vector2 cardPilePosition;
     public Vector2 intendedPosition;
     public bool moving = true;
-
+    public GameObject catHandPrefab;
 
     private void OnEnable()
     {
-        BlackjackScript.onDeal += Move;
+        BlackjackScript.dealCards += Move;
+        BlackjackScript.resetEvent += ResetCard;
     }
     private void OnDisable()
     {
-        BlackjackScript.onDeal -= Move;
+        BlackjackScript.dealCards -= Move;
+        BlackjackScript.resetEvent += ResetCard;
     }
     private void Start()
     {
@@ -72,6 +76,13 @@ public class CardScript : MonoBehaviour
         {
             numberText.color = new Color32(184, 67, 48, 235);
         }
+        StartCoroutine(AnimateFlip());
+        var catHand = Instantiate(catHandPrefab, transform.parent.parent.parent);
+        catHand.transform.position = transform.position + new Vector3(0, 210, 0);
+    }
+    IEnumerator AnimateFlip()
+    {
+        yield return new WaitForSeconds(.5f);
         cardAnimator.SetTrigger("Flip");
         string flipSound = "Card_Flip" + Random.Range(1, 3).ToString();
         AudioManager.playSound?.Invoke(flipSound);
@@ -87,6 +98,7 @@ public class CardScript : MonoBehaviour
     {
         moving = true;
     }
+    // slowly moves cards out to position
     void Movement()
     {
         float step = 600 * Time.deltaTime;
@@ -102,14 +114,18 @@ public class CardScript : MonoBehaviour
         {
             Movement();
         }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            ResetCard();
-        }
     }
     void ResetCard()
     {
         cardAnimator.SetTrigger("Reset");
+        StartCoroutine(resetTrigger());
+
+    }
+    // fixes an issue where triggers were held
+    IEnumerator resetTrigger()
+    {
+        yield return new WaitForSeconds(1f);
+        cardAnimator.ResetTrigger("Reset");
     }
 
 }

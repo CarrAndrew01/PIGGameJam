@@ -94,6 +94,11 @@ MonoBehaviour:
   - {fileID: 7801935638673694419, guid: b1e17680554e7e74ca2f86e7e723ab6a, type: 3}
   - {fileID: 6873211150615424690, guid: b1e17680554e7e74ca2f86e7e723ab6a, type: 3}
   - {fileID: 2216743327413667587, guid: b1e17680554e7e74ca2f86e7e723ab6a, type: 3}
+  cardAnimator: {fileID: 0}
+  cardPilePosition: {x: 0, y: 0}
+  intendedPosition: {x: 0, y: 0}
+  moving: 1
+  catHandPrefab: {fileID: 2787622293992522169, guid: 9f2cc31f597792448a9cf9b9bfbab2e7, type: 3}
 --- !u!1 &6201733546399776815
 GameObject:
   m_ObjectHideFlags: 0
