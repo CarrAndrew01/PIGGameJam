@@ -21,6 +21,10 @@ public class Parallax : MonoBehaviour
             transform.parent = cam.transform;
             enabled = false;
         }
+
+        // Test low fps
+        // QualitySettings.vSyncCount = 0;
+        // Application.targetFrameRate = 60;
     }
 
     // Update after camera has moved so parallax stays in sync with rendering
@@ -33,7 +37,9 @@ public class Parallax : MonoBehaviour
             cam = Camera.main != null ? Camera.main.gameObject : null;
         if (cam == null) return;
 
-        float distance = (cam.transform.position.x * parallax);
-        transform.position = new Vector3(startpos + distance, transform.position.y, transform.position.z);
+        float camX = cam.transform.position.x;
+        float distance = camX * parallax;
+        float relativePos = distance - camX + startpos;
+        transform.position = new Vector3(relativePos + camX, transform.position.y, transform.position.z);
     }
 }

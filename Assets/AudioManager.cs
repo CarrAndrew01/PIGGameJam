@@ -95,6 +95,9 @@ public class AudioManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("Settings_AmbientVolume"))
             SetAmbientVolume(PlayerPrefs.GetFloat("Settings_AmbientVolume"), effectivelyMute: true);
+
+        if (PlayerPrefs.HasKey("Settings_UIVolume"))
+            SetUIVolume(PlayerPrefs.GetFloat("Settings_UIVolume"), effectivelyMute: true);
     }
 
     private void OnEnable()
@@ -150,6 +153,17 @@ public class AudioManager : MonoBehaviour
     public float GetAmbientVolume(bool effectivelyMute = true)
     {
         audioMixer.GetFloat(AMBIENT_VOLUME_PARAM, out float dB);
+        return DecibelToLinear(dB, effectivelyMute);
+    }
+
+    public void SetUIVolume(float volume, bool effectivelyMute = true)
+    {
+        audioMixer.SetFloat("uiVol", LinearToDecibel(volume, effectivelyMute));
+    }
+
+    public float GetUIVolume(bool effectivelyMute = true)
+    {
+        audioMixer.GetFloat("uiVol", out float dB);
         return DecibelToLinear(dB, effectivelyMute);
     }
 

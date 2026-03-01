@@ -169,7 +169,7 @@ RectTransform:
   m_Father: {fileID: 7097735354877881273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -702,14 +702,14 @@ MonoBehaviour:
   finishQuestAvailable: {fileID: 4074380122596217319}
   questComplete: {fileID: 6987532550030150829}
   listContentArea: {fileID: 4010864222147942281}
-  listItemPrefab: {fileID: 7157666235849277296, guid: 707498bf9ad52972285530f0d70e83f1, type: 3}
+  listItemPrefab: {fileID: 5154807117915704442, guid: 74694c7d678616e4594f469e2f1ba860, type: 3}
   currentlyDisplayedQuestItem: {fileID: 0}
   requirementObjects:
   - {fileID: 2122503797947729640}
   - {fileID: 5483845743358200065}
   - {fileID: 4143637240341006116}
   rewardText: {fileID: 9023082723950070664}
-  DisableEverything: {fileID: 0}
+  cachedQuestStatuses: 
 --- !u!1 &2059272145516127266
 GameObject:
   m_ObjectHideFlags: 0
@@ -2005,7 +2005,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7082260745060368285
 RectTransform:
   m_ObjectHideFlags: 0

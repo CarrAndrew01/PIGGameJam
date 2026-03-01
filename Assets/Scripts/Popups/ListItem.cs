@@ -45,19 +45,29 @@ public class ListItem : MonoBehaviour
     public void SetupComponents(Sprite iconSprite = null, string subtext = "", string subtext2 = "")
     {
         // Subtext
-        subtextField.text = subtext;
-        subtextField2.text = subtext2;
+        if (subtextField != null)
+        {
+            subtextField.text = subtext;
+            subtextField2.text = subtext2;
+        }
 
         // Set icon visibility based on whether an icon was provided
-        icon.sprite = iconSprite;
-        icon.transform.parent.gameObject.SetActive(iconSprite != null);
+        if (icon != null)
+        {
+            icon.sprite = iconSprite;
+            icon.transform.parent.gameObject.SetActive(iconSprite != null);
+        }
 
         // Set stamp visibility based on whether the item is stamped
-        stampIcon.gameObject.SetActive(IsStamped);
+        if (stampIcon != null)
+            stampIcon.gameObject.SetActive(IsStamped);
 
         // Set the subtexts visibility based on whether they were provided
-        subtextField.gameObject.SetActive(!string.IsNullOrEmpty(subtext));
-        subtextField2.gameObject.SetActive(!string.IsNullOrEmpty(subtext2));
+        if (subtextField != null)
+        {
+            subtextField.gameObject.SetActive(!string.IsNullOrEmpty(subtext));
+            subtextField2.gameObject.SetActive(!string.IsNullOrEmpty(subtext2));
+        }
 
         // Disable the select object by default, it will be enabled when selected
         if (selectHightlight != null) selectHightlight.gameObject.SetActive(false);
