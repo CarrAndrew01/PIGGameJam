@@ -47,12 +47,13 @@ public class ShipMovement : MonoBehaviour
     }
     private void OnEnable()
     {
-        // NOTE: This can throw an error if the audio manager isn't initialized first
-        AudioManager.playSound.Invoke("Ship_Hover");
+        if (AudioManager.instance != null)
+            AudioManager.playSound.Invoke("Ship_Hover");
     }
     private void OnDisable()
     {
-        AudioManager.stopSound.Invoke("Ship_Hover");
+        if (AudioManager.instance != null)
+            AudioManager.stopSound.Invoke("Ship_Hover");
     }
 
     void Start()

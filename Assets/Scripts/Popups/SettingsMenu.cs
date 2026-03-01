@@ -3,43 +3,103 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
+    [Header("Variables")]
+    public Color sliderStartColor = Color.white;
+    public Color sliderEndColor = Color.white;
+
     [Header("Components")]
+    public Slider masterVolumeSlider;
     public Slider musicVolumeSlider;
     public Slider sfxVolumeSlider;
+    public Slider ambientVolumeSlider;
 
+    private Image masterSliderFill;
+    private Image musicSliderFill;
+    private Image sfxSliderFill;
+    private Image ambientSliderFill;
+
+    private float lastMasterFillValue = -1f;
+    private float lastMusicFillValue = -1f;
+    private float lastSfxFillValue = -1f;
+    private float lastAmbientFillValue = -1f;
+    private void Awake()
+    {
+        // Get references to the fill images of each slider
+        // masterSliderFill = masterVolumeSlider.fillRect.GetComponent<Image>();
+        musicSliderFill = musicVolumeSlider.fillRect.GetComponent<Image>();
+        sfxSliderFill = sfxVolumeSlider.fillRect.GetComponent<Image>();
+        // ambientSliderFill = ambientVolumeSlider.fillRect.GetComponent<Image>();
+
+        // Initialize slider colors
+        // UpdateSliderColor(masterVolumeSlider, masterSliderFill, ref lastMasterFillValue, overwrite: true);
+        UpdateSliderColor(musicVolumeSlider, musicSliderFill, ref lastMusicFillValue, overwrite: true);
+        UpdateSliderColor(sfxVolumeSlider, sfxSliderFill, ref lastSfxFillValue, overwrite: true);
+        // UpdateSliderColor(ambientVolumeSlider, ambientSliderFill, ref lastAmbientFillValue, overwrite: true);
+    }
 
     private void Start()
     {
         // Initialize sliders with current volume levels from AudioManager
+        // masterVolumeSlider.value = AudioManager.instance.GetMasterVolume();
         musicVolumeSlider.value = AudioManager.instance.GetMusicVolume();
         sfxVolumeSlider.value = AudioManager.instance.GetSFXVolume();
-    }
-
-    // Methods
-    public void SetMusicVolume(float volume)
-    {
-        AudioManager.instance.SetMusicVolume(volume);
-    }
-
-    public void SetSFXVolume(float volume)
-    {
-        AudioManager.instance.SetSFXVolume(volume);
+        // ambientVolumeSlider.value = AudioManager.instance.GetAmbientVolume();
     }
 
     void OnDestroy()
     {
         // Save settings to PlayerPrefs when the menu is closed/destroyed
+        // float masterVolume = AudioManager.instance.GetMasterVolume();
         float musicVolume = AudioManager.instance.GetMusicVolume();
         float sfxVolume = AudioManager.instance.GetSFXVolume();
+        // float ambientVolume = AudioManager.instance.GetAmbientVolume();
 
+        // PlayerPrefs.SetFloat("Settings_MasterVolume", masterVolume);
         PlayerPrefs.SetFloat("Settings_MusicVolume", musicVolume);
         PlayerPrefs.SetFloat("Settings_SFXVolume", sfxVolume);
+        // PlayerPrefs.SetFloat("Settings_AmbientVolume", ambientVolume);
+    }
+
+    void Update()
+    {
+        // Update slider colors in real-time as the sliders are adjusted
+        // UpdateSliderColor(masterVolumeSlider, masterSliderFill);
+        UpdateSliderColor(musicVolumeSlider, musicSliderFill, ref lastMusicFillValue);
+        UpdateSliderColor(sfxVolumeSlider, sfxSliderFill, ref lastSfxFillValue);
+        // UpdateSliderColor(ambientVolumeSlider, ambientSliderFill);
     }
 
     // Methods
+    public void SetMasterVolume(float volume)
+    {
+        // AudioManager.instance.SetMasterVolume(volume);
+    }
+    public void SetMusicVolume(float volume)
+    {
+        AudioManager.instance.SetMusicVolume(volume);
+    }
+    public void SetSFXVolume(float volume)
+    {
+        AudioManager.instance.SetSFXVolume(volume);
+    }
+    public void SetAmbientVolume(float volume)
+    {
+        // AudioManager.instance.SetAmbientVolume(volume);
+    }
     public void CloseMenu()
     {
         // Close
         Menus.Instance.CloseCurrentMenu();
+    }
+
+    private void UpdateSliderColor(Slider slider, Image fillImage, ref float lastFillValue, bool overwrite = false)
+    {
+        float fillValue = slider.value;
+        if (overwrite || !Mathf.Approximately(fillValue, lastFillValue))
+        {
+            Color newColor = Color.Lerp(sliderStartColor, sliderEndColor, fillValue);
+            fillImage.color = newColor;
+            lastFillValue = fillValue;
+        }
     }
 }
