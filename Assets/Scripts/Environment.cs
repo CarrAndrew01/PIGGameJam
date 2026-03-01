@@ -31,6 +31,7 @@ public class Environment : MonoBehaviour
     public float minFishSpawnInterval = 30f; // Minimum time between fish spawns (seconds)
     public float maxFishSpawnInterval = 60f; // Maximum time between fish spawns (seconds)
     public float fishSpawnRadius = 5f; // Radius around the environment's position where fish shadows can spawn
+    public float fishSummonRadius = 4f; // Radius around the bobber where fish can be summoned when a bite occurs, tends to spawn closer to edges
     public int maxFishShadows = 50; // Maximum number of fish shadows that can exist at once
     public int initialFishShadows = 10; // Number of fish shadows to spawn when the environment is first loaded
 
@@ -92,6 +93,37 @@ public class Environment : MonoBehaviour
         }
     }
 
+    public static (Fish fish, float summonTime) GetSummonFish()
+    {
+        Fish fish = null;
+        float summonTime = 0f;
+        foreach (FishCatchInfo fishInfo in CurrentEnvironment.fishTypes)
+        {
+            if (fishInfo.fish.preferredBaitType == GameManager.GetPlayerStat(StatType.baitType))
+            {
+                fish = fishInfo.fish;
+                summonTime = Random.Range(fish.minSummonTime, fish.maxSummonTime);
+                return (fish, summonTime);
+            }
+        }
+        return (fish, summonTime);
+    }
+
+    public static GameObject SummonFishToBobber(Bobber bobber, Fish fish)
+    {
+        // Instantiate the fish shadow prefab at the bobber's position
+        Vector3 spawnPosition = bobber.transform.position;
+        spawnPosition.y = WaterHeight;
+
+        // Find a random position with a bias towards the edges of the summon radius
+        // Code from CoPilot -- don't ask me how it works
+        float t = Random.value;
+        float r = (t < 0.5f) ? Mathf.Pow(t * 2f, 0.4f) / 2f : 1f - Mathf.Pow((1f - t) * 2f, 0.4f) / 2f;
+        spawnPosition.x += (r * 2f - 1f) * CurrentEnvironment.fishSummonRadius;
+
+        return CurrentEnvironment.SpawnFishShadow(fish, spawnPosition);
+    }
+
     // Methods
     private void CheckSpawnFish()
     {
@@ -114,16 +146,27 @@ public class Environment : MonoBehaviour
         // The player stat acts as a multiplier (1 is normal, 0.5 is half, ect.)
         nextFishSpawnTime = Random.Range(minFishSpawnInterval, maxFishSpawnInterval) * statFishSpawnInterval;
     }
-    private void SpawnFishShadow()
+    private GameObject SpawnFishShadow(Fish fishToSpawn = null, Vector3? position = null)
     {
-        Fish fishToSpawn = GetRandomFish();
+        // Instantiate the fish shadow prefab at a random position within the environment
+        Vector3 spawnPosition = position ?? GetRandomSpawnPosition();
+        GameObject fishShadowObj = Instantiate(fishShadowPrefab, spawnPosition, Quaternion.identity, transform);
+
+        // If a specific fish type was provided, initialize the FishShadow with that fish
         if (fishToSpawn != null)
         {
-            // Instantiate the fish shadow prefab at a random position within the environment
-            Vector3 spawnPosition = GetRandomSpawnPosition();
-            GameObject fishShadowObj = Instantiate(fishShadowPrefab, spawnPosition, Quaternion.identity, transform);
-            FishShadowsInScene++;
+            FishShadow shadow = fishShadowObj.GetComponent<FishShadow>();
+            if (shadow != null)
+            {
+                float statFishWeight = GameManager.GetPlayerStat(StatType.fishWeight);
+                float weight = Random.Range(fishToSpawn.minWeight, fishToSpawn.maxWeight) * statFishWeight;
+                string origin = Environment.CurrentEnvironment != null ? Environment.CurrentEnvironment.environmentName : "Unknown";
+                shadow.fishData = new CaughtFish(fishToSpawn, weight, origin);
+            }
         }
+
+        FishShadowsInScene++;
+        return fishShadowObj;
     }
     private Vector3 GetRandomSpawnPosition()
     {

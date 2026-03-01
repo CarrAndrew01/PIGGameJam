@@ -77,19 +77,24 @@ public class FishShadow : MonoBehaviour
         initialPosition = transform.position;
         shipTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
-        // Generate fish data for this shadow.
-        Fish fish = Environment.GetRandomFish();
-        fishData = new CaughtFish(fish, Random.Range(fish.minWeight, fish.maxWeight) * statFishWeight, Environment.CurrentEnvironment != null ? Environment.CurrentEnvironment.name : "Unknown");
+        // If `fishData` wasn't provided by the spawner, pick a random fish; otherwise keep the provided data
+        Fish fishRef = fishData.fish != null ? fishData.fish : Environment.GetRandomFish();
+        if (fishData.fish == null && fishRef != null)
+        {
+            fishData = new CaughtFish(fishRef, Random.Range(fishRef.minWeight, fishRef.maxWeight) * statFishWeight, Environment.CurrentEnvironment != null ? Environment.CurrentEnvironment.name : "Unknown");
+        }
 
-        amountInCatch = Random.Range(fish.minAmount, fish.maxAmount + 1); // +1 because Random.Range is exclusive of the upper bound
+        // Determine amount in catch based on the fish type
+        if (fishRef != null)
+            amountInCatch = Random.Range(fishRef.minAmount, fishRef.maxAmount + 1); // +1 because Random.Range is exclusive of the upper bound
 
         // Set the preview sprite to match the fish type
-        if (previewTransform != null && fish.sprite != null)
+        if (previewTransform != null && fishRef != null && fishRef.sprite != null)
         {
             SpriteRenderer sr = previewTransform.GetComponent<SpriteRenderer>();
             if (sr != null)
             {
-                sr.sprite = fish.sprite;
+                sr.sprite = fishRef.sprite;
 
                 // Only enable if the player has the stat
                 if (GameManager.GetPlayerStat(StatType.fishPreview) > 0)
@@ -269,15 +274,22 @@ public class FishShadow : MonoBehaviour
                     || Vector2.Distance(targetBobber.spriteRenderer.transform.position, spriteTransform.position) < targetBobber.hookRange)
                 {
                     // If the fish is in hook range, hook it (if it likes the bait)
-                    if (!IsHooked && (/*fishData.fish.preferredBaitType == 0 || */fishData.fish.preferredBaitType == GameManager.GetPlayerStat(StatType.baitType)))
+                    if (!IsHooked && (fishData.fish.preferredBaitType == GameManager.GetPlayerStat(StatType.baitType)))
                     {
                         IsHooked = true;
                         BeginFishing();
                     }
-                    else
+                    // If the doesn't like the bait, we roll a chance to have it lose interest and stop investigating
+                    else if (Random.value < 0.5f) // 50% chance to lose interest, can tweak this or make it based on stats or something
                     {
                         targetBobber = null;
-                        Toast.ShowToast($"The fish is not interested in that bait!");
+                        Toast.ShowToast($"The fish is not interested in that bait...");
+                    }
+                    else 
+                    {
+                        IsHooked = true;
+                        BeginFishing();
+                        Toast.ShowToast($"Incorrect bait type, but the fish is hooked anyway!");
                     }
                 }
                 return;

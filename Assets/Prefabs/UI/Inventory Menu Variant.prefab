@@ -382,7 +382,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 18}
+  m_AnchoredPosition: {x: 0, y: 1218}
   m_SizeDelta: {x: 178, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3093673296335627563
@@ -724,17 +724,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 975117724082923609, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_Size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1038692222721961120, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1038692222721961120, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000037605183
       objectReference: {fileID: 0}
     - target: {fileID: 1268723381565363041, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
       propertyPath: m_AnchorMax.y
@@ -835,18 +827,6 @@ PrefabInstance:
     - target: {fileID: 3005684585088712589, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270074819944339855, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_text
-      value: Inventory
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270074819944339855, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_fontSize
-      value: 21.88
-      objectReference: {fileID: 0}
-    - target: {fileID: 3270074819944339855, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 21.88
       objectReference: {fileID: 0}
     - target: {fileID: 3822140406651541967, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
       propertyPath: m_AnchorMax.x
@@ -996,26 +976,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5944359014245484889, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_fontSize
-      value: 7.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5944359014245484889, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_fontSizeMax
-      value: 7.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5944359014245484889, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_fontSizeMin
-      value: 4.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5944359014245484889, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_overflowMode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5944359014245484889, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6141091086505260257, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
       propertyPath: nameField
       value: 
@@ -1024,34 +984,6 @@ PrefabInstance:
       propertyPath: moneyField
       value: 
       objectReference: {fileID: 6046427479589101677}
-    - target: {fileID: 7546892883261886970, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_fontSize
-      value: 6.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 7546892883261886970, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_margin.w
-      value: 52.701508
-      objectReference: {fileID: 0}
-    - target: {fileID: 7546892883261886970, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_fontSizeMax
-      value: 10.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7546892883261886970, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_fontSizeMin
-      value: 7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7546892883261886970, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 6.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 7546892883261886970, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_enableAutoSizing
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7854712379907411209, guid: 2d04c0d3dd65cf84680890871b2708e1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
