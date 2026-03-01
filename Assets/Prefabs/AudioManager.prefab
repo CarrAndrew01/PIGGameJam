@@ -113,7 +113,7 @@ MonoBehaviour:
       audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
     - name: Poker_Music
-      clip: {fileID: 0}
+      clip: {fileID: 8300000, guid: 0e545e531944f6f4782522f6de57ad1d, type: 3}
       volume: 0.1
       pitch: 1
       loop: 1
