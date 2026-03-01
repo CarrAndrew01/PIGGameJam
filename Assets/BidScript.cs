@@ -13,30 +13,31 @@ public class BidScript : MonoBehaviour
 
     public void AddToBid()
     {
-        if (bidTokens < 5)
+        if (GameManager.Money >= 5)
         {
-            GameObject newToken = Instantiate(tokenPrefab, transform);
-            if (bidSpawnTransform != null)
+            if (bidTokens < 5)
             {
-                newToken.transform.position = bidSpawnTransform.position;
+                GameManager.AdjustMoney(-5);
+                GameObject newToken = Instantiate(tokenPrefab, transform);
+                if (bidSpawnTransform != null)
+                {
+                    newToken.transform.position = bidSpawnTransform.position;
+                }
+                tokens.Add(newToken);
+                bidTokens++;
             }
-            tokens.Add(newToken);
-            bidTokens++;
         }
     }
     public void RemoveFromBid()
     {
         if (bidTokens > 0)
         {
-            // Destroy(tokens[bidTokens - 1]);
-            // tokens.Remove(tokens[bidTokens - 1]);
-
-            // bidTokens--;
             Destroy(tokens[0]);
             tokens.Remove(tokens[0]);
 
             bidTokens--;
-
+            GameManager.AdjustMoney(5);
         }
     }
+
 }
