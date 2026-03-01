@@ -7,6 +7,10 @@ using UnityEngine;
 /// </summary>
 public class Bobber : MonoBehaviour
 {
+    public static float summonTimer = 0f;
+    public static float timeTillSummon = 0f;
+    public static Fish fishToSummon;
+    
     // State
     [Header("State")]
     [ReadOnly] public FishShadow currentFishShadow; // The fish shadow the player is currently trying to catch, if any
@@ -88,6 +92,18 @@ public class Bobber : MonoBehaviour
                 timeInWater += Time.deltaTime;
                 if (timeInWater > bobBeginWait)
                     timeInWater = bobBeginWait;
+            }
+            if (fishToSummon != null)
+            {
+                summonTimer += Time.deltaTime;
+                if (summonTimer >= timeTillSummon)
+                {
+                    FishShadow fish = Environment.SummonFishToBobber(this, fishToSummon).GetComponent<FishShadow>();
+                    fish.targetBobber = this;
+                    fishToSummon = null;
+                    summonTimer = 0f;
+                    timeTillSummon = 0f;
+                }
             }
             ApplyBobbing();
             CheckHooked();
@@ -235,10 +251,26 @@ public class Bobber : MonoBehaviour
             timeInWater = 0f;
             fishTrigger.enabled = true; // Enable the fish trigger when we hit the water so we can start catching fish
 
-
             // code to randomly play a sound out of the bobber options
             int num = UnityEngine.Random.Range(1, 3);
             AudioManager.playSound?.Invoke("Bobber" + num.ToString());
+
+            // Check if we should summon a fish when the bobber hits the water
+            if (Environment.CurrentEnvironment.doesSpawnFish && GameManager.Instance.playerInventory.currentBaitUpgrade != null)
+            {
+                (Fish fish, float summonTime) = Environment.GetSummonFish();
+                fishToSummon = fish;
+                timeTillSummon = summonTime;
+
+                if (fishToSummon != null)
+                {
+                    summonTimer = 0f;
+                    Debug.Log($"Summoning a fish in {summonTime} seconds.");
+                } else
+                {
+                    Toast.ShowToast($"That bait doesn't seem effective here...");
+                }
+            }
         }
     }
     private void ApplyBobbing()

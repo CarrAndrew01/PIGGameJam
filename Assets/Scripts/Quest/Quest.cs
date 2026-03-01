@@ -20,6 +20,7 @@ public class QuestSubtype
 public class Quest : ScriptableObject
 {
     public string questName = "";
+    [TextArea(2, 5)]
     public string description = "";
     
     //I will have this here for conveniance, but we also have a seperate list of completed and active quests in GameManager. It's kind of doubling up,

@@ -147,6 +147,7 @@ public class ShopMenu : MonoBehaviour
         leftButton.GetComponent<Image>().sprite = open;
         rightButton.GetComponent<Image>().sprite = closed;
 
+        descriptionField.gameObject.SetActive(true);
         mechanicalDescriptionField.gameObject.SetActive(true);
         priceFieldBuy.gameObject.SetActive(true);
         buyButton.SetActive(true);
@@ -159,6 +160,7 @@ public class ShopMenu : MonoBehaviour
         leftButton.GetComponent<Image>().sprite = closed;
         rightButton.GetComponent<Image>().sprite = open;
 
+        descriptionField.gameObject.SetActive(false);
         mechanicalDescriptionField.gameObject.SetActive(false);
         priceFieldBuy.gameObject.SetActive(false);
         buyButton.SetActive(false);
