@@ -14,7 +14,7 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void Start()
     {
         startColour = outlineImage.color;
     }
@@ -28,6 +28,15 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
         OutlineCat(true);
+    }
+    public virtual void OnPointerExit(PointerEventData eventData)
+    {
+        OutlineCat(false);
+    }
+    // onpointerclick is used here, somewhere else i will add button presses
+    public virtual void OnPointerClick(PointerEventData eventData)
+    {
+        InteractWithCat();
         switch (catsound)
         {
             case (CatSound.High_Meow):
@@ -42,15 +51,6 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         }
     }
-    public virtual void OnPointerExit(PointerEventData eventData)
-    {
-        OutlineCat(false);
-    }
-    // onpointerclick is used here, somewhere else i will add button presses
-    public virtual void OnPointerClick(PointerEventData eventData)
-    {
-        InteractWithCat();
-    }
     public virtual void InteractWithCat()
     {
 
@@ -59,7 +59,7 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     void OutlineCat(bool on)
     {
         // if the bool is true, set the alpha to full, otherwise set to 0
-        var alpha = on ? 255 : 0;
+        var alpha = on ? 1 : 0;
 
         if (outlineImage != null)
         {

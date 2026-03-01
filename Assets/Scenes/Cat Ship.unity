@@ -1380,7 +1380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineImage: {fileID: 1332301879}
   pointerImage: {fileID: 596760658}
-  catsound: 1
+  catsound: 2
 --- !u!1 &777466339
 GameObject:
   m_ObjectHideFlags: 0
@@ -2439,6 +2439,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[0].sounds.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[0].sounds.Array.data[9].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f7c026930fe51346a53d624b24abcc6, type: 3}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[0].sounds.Array.data[9].name
+      value: Low_Meow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[0].sounds.Array.data[9].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[0].sounds.Array.data[9].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[0].sounds.Array.data[9].audioMixer
+      value: 
+      objectReference: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
     - target: {fileID: 8848270691227238726, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
       propertyPath: m_Name
       value: AudioManager

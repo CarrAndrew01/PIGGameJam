@@ -4,8 +4,9 @@ public class TabbyCat : CatInteract
 {
     private Menus menus;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
         menus = GameManager.MenuPopup.GetComponent<Menus>();
     }
 
