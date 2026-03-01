@@ -183,6 +183,11 @@ public class Toast : Popup
         ToastData[] arr = toastStack.ToArray();
         bool foundAny = false;
         float latestNewDuration = 0f;
+        // Parse the incoming number once and treat it as the increment amount (fallback to +1)
+        int incomingIncrement = 1;
+        Match globalIncMatch = hashNumberPattern.Match(message);
+        if (globalIncMatch.Success && int.TryParse(globalIncMatch.Groups[1].Value, out int parsedInc))
+            incomingIncrement = parsedInc;
 
         for (int i = 0; i < arr.Length; ++i)
         {
@@ -197,11 +202,10 @@ public class Toast : Popup
                 current = parsed;
             else
             {
-                Match incMatch = hashNumberPattern.Match(message);
-                if (incMatch.Success) int.TryParse(incMatch.Groups[1].Value, out current);
+                if (globalIncMatch.Success) int.TryParse(globalIncMatch.Groups[1].Value, out current);
             }
 
-            int next = current + 1;
+            int next = current + incomingIncrement;
             string newMessage = hashNumberPattern.Replace(arr[i].message, "#" + next.ToString(), 1);
 
             float newDuration = defaultDuration + (newMessage.Length * multPerCharacter);

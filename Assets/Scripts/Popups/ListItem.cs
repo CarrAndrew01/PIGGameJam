@@ -23,6 +23,7 @@ public class ListItem : MonoBehaviour
     public float stampedShakeDuration = 0.2f;
     public float stampedShakeMagnitude = 10f;
     public float stampedShakeRotation = 10f;
+    // public Vector2 stampPosition = new Vector2(-30, 30); // Position of the stamp relative to the bottom right corner of the item
 
     [Header("Components")]
     public TextMeshProUGUI nameField;
@@ -130,10 +131,11 @@ public class ListItem : MonoBehaviour
     // Coroutine to make the stamp expand from 0 to 1 scale, as well as shake left and right a little bit
     private IEnumerator StampAnimation()
     {
+        RectTransform rt = stampIcon.GetComponent<RectTransform>();
         float elapsed = 0f;
         Vector3 targetScale = Vector3.one; // Final scale of the stamp
-        Vector3 originalPosition = stampIcon.transform.localPosition;
-
+        Vector3 originalPosition = rt.anchoredPosition;
+        
         while (elapsed < stampedGrowDuration)
         {
             elapsed += Time.deltaTime;
@@ -154,7 +156,7 @@ public class ListItem : MonoBehaviour
             float shakeOffset = originalPosition.x + Mathf.Sin(t * Mathf.PI * 4) * stampedShakeMagnitude; // 4 full shakes
             float rotationOffset = Mathf.Sin(t * Mathf.PI * 4) * stampedShakeRotation;
 
-            stampIcon.transform.localPosition = new Vector3(shakeOffset, originalPosition.y, originalPosition.z);
+            rt.anchoredPosition = new Vector3(shakeOffset, originalPosition.y, originalPosition.z);
             stampIcon.transform.localRotation = Quaternion.Euler(0, 0, rotationOffset);
 
             yield return null;
@@ -162,7 +164,8 @@ public class ListItem : MonoBehaviour
 
         // Ensure final state is correct
         stampIcon.transform.localScale = targetScale;
-        stampIcon.transform.localPosition = new Vector3(originalPosition.x, originalPosition.y, originalPosition.z);
+        rt.anchoredPosition = new Vector3(originalPosition.x, originalPosition.y, originalPosition.z);
+        stampIcon.transform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 
     private IEnumerator UnstampAnimation()

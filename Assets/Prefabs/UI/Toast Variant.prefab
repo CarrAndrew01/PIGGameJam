@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 22, y: 22}
+  m_SizeDelta: {x: 48, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7933013570213485902
 CanvasRenderer:
@@ -296,8 +296,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 10}
-  m_SizeDelta: {x: -28, y: 10}
+  m_AnchoredPosition: {x: 0, y: 1}
+  m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &7225361779298309253
 MonoBehaviour:
@@ -409,6 +409,30 @@ PrefabInstance:
     - target: {fileID: 3847822284047299910, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
       propertyPath: m_Name
       value: Toast Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337813683901706719, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337813683901706719, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337813683901706719, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337813683901706719, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337813683901706719, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4337813683901706719, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 4938393223379864619, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
       propertyPath: m_AnchorMax.y
@@ -553,10 +577,10 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6168742214130187422, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
       insertIndex: 0
-      addedObject: {fileID: 8775344162925226111}
-    - targetCorrespondingSourceObject: {fileID: 6168742214130187422, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6877552945431220799}
+    - targetCorrespondingSourceObject: {fileID: 6168742214130187422, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 8775344162925226111}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3847822284047299910, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
       insertIndex: -1
@@ -601,6 +625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77362a1dc87767458e21eefce2db4aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemName: 
   description: 
   mechanicalDescription: 
   listIndex: 0

@@ -147,8 +147,12 @@ public class ShopMenu : MonoBehaviour
         leftButton.GetComponent<Image>().sprite = open;
         rightButton.GetComponent<Image>().sprite = closed;
 
+        nameField.gameObject.SetActive(true);
         descriptionField.gameObject.SetActive(true);
         mechanicalDescriptionField.gameObject.SetActive(true);
+
+        // Buy controls on for buying
+        priceFieldBuy.transform.parent.gameObject.SetActive(true);
         priceFieldBuy.gameObject.SetActive(true);
         buyButton.SetActive(true);
 
@@ -160,8 +164,12 @@ public class ShopMenu : MonoBehaviour
         leftButton.GetComponent<Image>().sprite = closed;
         rightButton.GetComponent<Image>().sprite = open;
 
-        descriptionField.gameObject.SetActive(false);
+        nameField.gameObject.SetActive(true);
+        descriptionField.gameObject.SetActive(true);
         mechanicalDescriptionField.gameObject.SetActive(false);
+
+        // Buy controls off for selling
+        priceFieldBuy.transform.parent.gameObject.SetActive(false);
         priceFieldBuy.gameObject.SetActive(false);
         buyButton.SetActive(false);
 
@@ -182,9 +190,10 @@ public class ShopMenu : MonoBehaviour
                     if (GameManager.Money >= price)
                     {
                         GameManager.AdjustMoney(-price);
-                        GameManager.Instance.playerInventory.AddBait(bait.baitUpgrade, 1);
+                        GameManager.Instance.playerInventory.AddBait(bait.baitUpgrade, bait.numberOfUses);
                         Toast.ShowToast($"Purchased #{bait.numberOfUses} {bait.baitUpgrade.name} for ${price:F2}!", icon: bait.baitUpgrade.icon);
-                    } else
+                    }
+                    else
                     {
                         Toast.ShowToast($"Cannot purchase {bait.baitUpgrade.name}: Not enough money!");
                     }
@@ -212,7 +221,8 @@ public class ShopMenu : MonoBehaviour
                                 break;
                             }
                         }
-                    } else if (GameManager.PlayerHasUpgrade(purchUp.upgrade))
+                    }
+                    else if (GameManager.PlayerHasUpgrade(purchUp.upgrade))
                     {
                         Toast.ShowToast($"Cannot purchase {purchUp.upgrade.upgradeName}: Upgrade already owned!");
                     }
@@ -233,10 +243,12 @@ public class ShopMenu : MonoBehaviour
                         GameManager.AdjustMoney(-price);
                         GameManager.AddFishToInventory(fish);
                         Toast.ShowToast($"Purchased {fish.fish.fishName} for ${price:F2}!", icon: fish.fish.sprite);
-                    } else if (GameManager.IsInventoryFull())
+                    }
+                    else if (GameManager.IsInventoryFull())
                     {
                         Toast.ShowToast($"Cannot purchase {fish.fish.fishName}: Inventory is full!");
-                    } else
+                    }
+                    else
                     {
                         Toast.ShowToast($"Cannot purchase {fish.fish.fishName}: Not enough money!");
                     }
@@ -277,13 +289,11 @@ public class ShopMenu : MonoBehaviour
     {
         // Reset main selection panel and clear existing list items
         selectedShopItem = null;
-        nameField.text = "";
+        nameField.text = "Buying Items";
         descriptionField.text = "";
-        mechanicalDescriptionField.text = "";
-        // Hide description/mechanical until an item is selected
-        descriptionField.gameObject.SetActive(false);
-        mechanicalDescriptionField.gameObject.SetActive(false);
+        mechanicalDescriptionField.text = "Click on an item to see its description.";
         // Hide buy controls until selection
+        priceFieldBuy.transform.parent.gameObject.SetActive(false);
         priceFieldBuy.gameObject.SetActive(false);
         buyButton.SetActive(false);
 
@@ -362,6 +372,10 @@ public class ShopMenu : MonoBehaviour
 
     public void PopulateListWithFish(List<CaughtFish> fishTypes)
     {
+        // Reset main selection panel and clear existing list items
+        selectedShopItem = null;
+        nameField.text = "Selling Fish";
+        descriptionField.text = "";
         // Clear existing list items (iterate backwards to avoid skipping when destroying)
         for (int i = listContentArea.childCount - 1; i >= 0; i--)
         {

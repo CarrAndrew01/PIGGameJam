@@ -1,5 +1,6 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
+using TMPro;
 
 /// <summary>
 /// Class representing a single item in a list, such as an upgrade or inventory item.
@@ -13,6 +14,8 @@ public class BuyListItem : ListItem
     [ShowInInspector, ReadOnly] public CaughtFish fishRef; // optional: if this entry represents a fish
     [ShowInInspector, ReadOnly] public float priceValue; // stored numeric price for this entry
 
+    public TextMeshProUGUI multField;  // Used to show bait quantity
+
     [ShowInInspector, ReadOnly] private ShopMenu parentMenu;
 
 
@@ -22,6 +25,8 @@ public class BuyListItem : ListItem
         parentMenu = parent;
         nameField.text = name;
         priceValue = price;
+        multField.text = $"X{bait.numberOfUses}";
+        multField.gameObject.SetActive(bait.numberOfUses > 1);
 
         SetupComponents(null, $"Price: {price:F2}");
     }
@@ -32,6 +37,7 @@ public class BuyListItem : ListItem
         parentMenu = parent;
         nameField.text = name;
         priceValue = price;
+        multField.gameObject.SetActive(false);
 
         SetupComponents(upgrade.upgrade.icon, $"Price: {price:F2}");
     }
@@ -42,6 +48,7 @@ public class BuyListItem : ListItem
         parentMenu = parent;
         nameField.text = name;
         priceValue = price;
+        multField.gameObject.SetActive(false);
 
         SetupComponents(fish.fish.sprite, $"Price: {price:F2}");
     }
@@ -58,10 +65,11 @@ public class BuyListItem : ListItem
             parentMenu.descriptionField.text = upgradeRef.upgrade.description;
             parentMenu.mechanicalDescriptionField.text = upgradeRef.upgrade.GetMechanicalDescription();
 
-            // Enable only the mechanical description for upgrades
-            parentMenu.descriptionField.gameObject.SetActive(!string.IsNullOrEmpty(parentMenu.descriptionField.text));
-            parentMenu.mechanicalDescriptionField.gameObject.SetActive(!string.IsNullOrEmpty(parentMenu.mechanicalDescriptionField.text));
-            parentMenu.descriptionField.gameObject.SetActive(false);
+            // Enable the mechanical description for upgrades
+            parentMenu.mechanicalDescriptionField.gameObject.SetActive(true);
+
+            // Buy controls on for upgrades
+            parentMenu.priceFieldBuy.transform.parent.gameObject.SetActive(true);
             parentMenu.priceFieldBuy.gameObject.SetActive(true);
             parentMenu.buyButton.SetActive(true);
 
@@ -74,13 +82,14 @@ public class BuyListItem : ListItem
             parentMenu.descriptionField.text = fishRef.fish.description;
             parentMenu.mechanicalDescriptionField.text = "It's a fish!";
 
-            // Enable only the description for fish
-            parentMenu.descriptionField.gameObject.SetActive(!string.IsNullOrEmpty(parentMenu.descriptionField.text));
+            // Disable the mechanical description for fish
             parentMenu.mechanicalDescriptionField.gameObject.SetActive(false);
-            parentMenu.priceFieldBuy.gameObject.SetActive(true);
             parentMenu.priceFieldBuy.text = $"Price: {priceValue}";
-            parentMenu.buyButton.SetActive(true);
 
+            // Buy controls on for fish
+            parentMenu.priceFieldBuy.transform.parent.gameObject.SetActive(true);
+            parentMenu.priceFieldBuy.gameObject.SetActive(true);
+            parentMenu.buyButton.SetActive(true);
             UpdateSelectionHighlight();
         }
         else
@@ -90,11 +99,13 @@ public class BuyListItem : ListItem
             parentMenu.descriptionField.text = baitRef.baitUpgrade.description;
             parentMenu.mechanicalDescriptionField.text = baitRef.baitUpgrade.GetMechanicalDescription();
 
-            // Enable only the mechanical description for bait/upgrade
-            parentMenu.descriptionField.gameObject.SetActive(!string.IsNullOrEmpty(parentMenu.descriptionField.text));
-            parentMenu.mechanicalDescriptionField.gameObject.SetActive(!string.IsNullOrEmpty(parentMenu.mechanicalDescriptionField.text));
-            parentMenu.priceFieldBuy.gameObject.SetActive(true);
+            // Enable the mechanical description for bait/upgrade
+            parentMenu.mechanicalDescriptionField.gameObject.SetActive(true);
             parentMenu.priceFieldBuy.text = $"Price: {priceValue}";
+
+            // Buy controls on for bait
+            parentMenu.priceFieldBuy.transform.parent.gameObject.SetActive(true);
+            parentMenu.priceFieldBuy.gameObject.SetActive(true);
             parentMenu.buyButton.SetActive(true);
 
             // Update selection visuals for this item and siblings

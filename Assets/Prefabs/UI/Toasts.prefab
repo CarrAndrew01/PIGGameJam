@@ -105,10 +105,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: -5
-    m_Right: -5
-    m_Top: -5
-    m_Bottom: -5
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
@@ -214,7 +214,6 @@ MonoBehaviour:
   fadeFinishPercent: 0.5
   windowRect: {fileID: 5205402543939291962}
   childCanvas: {fileID: 0}
-  toastOffset: {x: -20, y: -20}
   defaultDuration: 1
   multPerCharacter: 0.1
   toastPrefab: {fileID: 3184273213278384288, guid: d3371cfcfd37a6445bc32cca760e913e, type: 3}
