@@ -6106,6 +6106,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5423f5e12c4cafd47be403326bb44a0f, type: 3}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.data[1].name
+      value: Poker_Chip_Remove
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: bcf2e7481ee3ed148a8da86ce5f021c7, type: 3}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.data[2].name
+      value: Card_Flip1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 805fd4c69ac8f0c4fb5ddd88e710485b, type: 3}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.data[3].name
+      value: Card_Flip2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7b5a8664eb5486048b2faf790d1aefa8, type: 3}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.data[4].name
+      value: Card_Flip3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.data[1].pitch
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.data[4].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.data[4].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
+      propertyPath: soundsArray.Array.data[3].sounds.Array.data[4].audioMixer
+      value: 
+      objectReference: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
     - target: {fileID: 8848270691227238726, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
       propertyPath: m_Name
       value: AudioManager
