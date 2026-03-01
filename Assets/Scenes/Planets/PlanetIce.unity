@@ -3436,31 +3436,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
       propertyPath: fishTypes.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
+      propertyPath: fishTypes.Array.data[5].fish
+      value: 
+      objectReference: {fileID: 11400000, guid: 82c7752f2703e8655b5f5202c1a7348f, type: 2}
+    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
       propertyPath: fishTypes.Array.data[0].chance
-      value: 150
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
       propertyPath: fishTypes.Array.data[1].chance
-      value: 150
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
       propertyPath: fishTypes.Array.data[2].chance
-      value: 50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
       propertyPath: fishTypes.Array.data[3].chance
-      value: 1
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
       propertyPath: fishTypes.Array.data[4].chance
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
       propertyPath: fishTypes.Array.data[5].chance
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

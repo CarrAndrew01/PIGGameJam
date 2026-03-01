@@ -17,17 +17,17 @@ MonoBehaviour:
     uses its strange body to rotate at high speeds, propelling itself up and down
     through the atmosphere at will.\n\n  Chef's Notes:\nThe "propeller" is totally
     useless, but the gooey insides of the body are delicious when steamed.
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: ba1679fc7c08dace5810c3f3509c2fa3, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
-  minWeight: 0
-  maxWeight: 0
+  minWeight: 5
+  maxWeight: 7
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 0
-  minigamePrefab: {fileID: 0}
+  value: 9
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
   jumpiness: 1
   speed: 1
-  stubbornness: 1
-  size: 1
+  stubbornness: 0.062
+  size: 0.196

@@ -19,17 +19,17 @@ MonoBehaviour:
     its volcanic home.\n\n  Chef's Notes:\nWhat a strange creature... Its meat is
     tender and delicious, anyway, but I really do hate looking at the thing while
     I prepare it.
-  sprite: {fileID: 0}
+  sprite: {fileID: -7351176481537246033, guid: 2bba71d07677b6346845161d6cf5e627, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
-  minWeight: 0
-  maxWeight: 0
+  minWeight: 25
+  maxWeight: 35
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 0
-  minigamePrefab: {fileID: 0}
-  jumpiness: 1
-  speed: 1
-  stubbornness: 1
-  size: 1
+  value: 15
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  jumpiness: 0.751
+  speed: 0.612
+  stubbornness: 0.689
+  size: 0.53

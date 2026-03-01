@@ -19,17 +19,17 @@ MonoBehaviour:
     Chef's Notes:\nThe body isn't any nicer than its distant cousin on Boreala, but
     the fake "lava" on it's back- some sort of gelatin- makes for a lovely thickener,
     and its shell can be powdered and used as a spice.
-  sprite: {fileID: 0}
+  sprite: {fileID: 2104901783972924173, guid: eb2e8851a498f2245b256fe8df4be4c0, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
-  minWeight: 0
-  maxWeight: 0
+  minWeight: 35
+  maxWeight: 55
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 0
-  minigamePrefab: {fileID: 0}
-  jumpiness: 1
-  speed: 1
-  stubbornness: 1
-  size: 1
+  value: 10
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  jumpiness: 0.364
+  speed: 0.282
+  stubbornness: 0.866
+  size: 0.335
