@@ -163,7 +163,7 @@ public class Fishing : MonoBehaviour
             GameObject chosenMinigamePrefab = fishShadow.fishData.fish.minigamePrefab;
             if (chosenMinigamePrefab != null)
             {
-                GameManager.TriggerPopIn(GameManager.MinigamePopup, fishShadow.fishData.fish.minigamePrefab, forceSwap: true, onBeforeShow: go =>
+                GameManager.TriggerPopIn(GameManager.MinigamePopup, chosenMinigamePrefab, forceSwap: true, onBeforeShow: go =>
                 {
                     if (go != null)
                         FindScreenSide();

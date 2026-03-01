@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
   m_Name: Frost Trout
   m_EditorClassIdentifier: 
+  fishName: Frost Trout
+  description: Fast, agile and light, these would be more difficult to catch if they
+    weren't barely lighter than a feather.\n\n  Chef's notes:\nA staple of my cooking,
+    as it goes with anything. Particularly nice barbequed.
   sprite: {fileID: -1060274179321268171, guid: cc1046d54f86a4d33b7889e39424f56a, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
@@ -19,7 +23,6 @@ MonoBehaviour:
   maxWeight: 9
   minAmount: 1
   maxAmount: 1
-  description: 
   preferredBaitType: 0
   value: 3
   minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}

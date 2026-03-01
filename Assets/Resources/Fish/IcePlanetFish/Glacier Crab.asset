@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
   m_Name: Glacier Crab
   m_EditorClassIdentifier: 
+  fishName: Glaciar Crab
+  description: The Glacier Crab uses its powerful claws to cut cubes out of the vast
+    floating icebergs of Boreala, using them as a durable, but disposable, shell.\n\n 
+    Chef's notes:\nTough, gamey and flavourless, it's a real challenge to make these
+    at all palateable. Still, if we don't eat them- who will?
   sprite: {fileID: -6575632591311876742, guid: fa1bd15f9e51464daaa74f6767ff8bab, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
@@ -19,7 +24,6 @@ MonoBehaviour:
   maxWeight: 9
   minAmount: 1
   maxAmount: 1
-  description: 
   preferredBaitType: 0
   value: 2
   minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}

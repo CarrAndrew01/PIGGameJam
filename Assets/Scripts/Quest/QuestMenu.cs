@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -92,6 +93,7 @@ public class QuestMenu : MonoBehaviour
             if (i == 0 && created != null)
             {
                 currentlyDisplayedQuestItem = created;
+                currentlyDisplayedQuestItem.UpdateSelectionHighlight();
             }
         }
 
@@ -143,7 +145,7 @@ public class QuestMenu : MonoBehaviour
 
             for (int i = 0; i < quest.questFish.Count && i < labels.Length && i < images.Length; i++)
             {
-                labels[i].text = $"{quest.questFish[i].quantity} X {quest.questFish[i].fishType.name}";
+                labels[i].text = $"{quest.questFish[i].quantity} X {quest.questFish[i].fishType.fishName}";
                 images[i].sprite = quest.questFish[i].fishType.sprite;
             }
         }

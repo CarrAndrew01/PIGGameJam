@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
+  m_Name: Magmatic Terrorwyrm
+  m_EditorClassIdentifier: 
+  fishName: Magmatic Terrorwyrm
+  description: Possibly the most dangerous creature across all four planets in the
+    system, terrorwyrms are peerless hunters both on land and in the magma-flows
+    of Firax. A wise hunter waits until it has taken a dip in the lava to draw it
+    out.\n\n  Chef's Notes:\nWell worth the trouble! Like most predators, its meat
+    is naturally tough, but after a long slow-cook, garnished with fireweed and powdered
+    Magma Crab shell, a Terrorwyrm roast is one of the best crowd-pleasers around!
+  sprite: {fileID: 0}
+  WithBackground: {fileID: 0}
+  background: {fileID: 0}
+  minWeight: 0
+  maxWeight: 0
+  minAmount: 1
+  maxAmount: 1
+  preferredBaitType: 0
+  value: 0
+  minigamePrefab: {fileID: 0}
+  jumpiness: 1
+  speed: 1
+  stubbornness: 1
+  size: 1

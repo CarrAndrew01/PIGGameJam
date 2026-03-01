@@ -46,7 +46,7 @@ public class BuyListItem : ListItem
         SetupComponents(fish.fish.sprite, $"Price: {price:F2}");
     }
 
-    new public void OnItemClicked()
+    public override void OnItemClicked()
     {
         if (parentMenu == null) return;
 

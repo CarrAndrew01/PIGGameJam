@@ -1,11 +1,7 @@
 using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
 
-public class QuestListItem : MonoBehaviour
+public class QuestListItem : ListItem
 {
-
-    public TextMeshProUGUI nameField;
     public TextMeshProUGUI completedField;
 
     public QuestMenu parentMenu;
@@ -14,16 +10,6 @@ public class QuestListItem : MonoBehaviour
 
     public Quest quest;
 
-
-    public void OnItemClicked()
-    {
-        if (parentMenu != null)
-        {
-            parentMenu.FillInField(quest);
-        }
-        parentMenu.currentlyDisplayedQuestItem = this;
-    }
-
     public void Init(QuestMenu parent, Quest quest, bool completed = false)
     {
         this.quest = quest;
@@ -31,5 +17,19 @@ public class QuestListItem : MonoBehaviour
         nameField.text = quest.questName;
 
         completedField.text = completed ? "Completed" : ""; //display nothing if its not completed
+
+        SetupComponents();
+    }
+
+    public override void OnItemClicked()
+    {
+        if (parentMenu == null) return;
+
+        parentMenu.FillInField(quest);
+
+        parentMenu.currentlyDisplayedQuestItem = this;
+
+        // Update selection visuals for this item and siblings
+        UpdateSelectionHighlight();
     }
 }
