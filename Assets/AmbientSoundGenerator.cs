@@ -14,7 +14,7 @@ public class AmbientSoundGenerator : MonoBehaviour
     {
         // AudioManager.stopSound?.Invoke("Water");
         // AudioManager.stopSound?.Invoke("Ice_Planet_Music");
-        PlayOrStopAudio(true);
+        PlayOrStopAudio(false);
     }
 
     // Update is called once per frame
@@ -24,48 +24,53 @@ public class AmbientSoundGenerator : MonoBehaviour
     }
     void PlayOrStopAudio(bool play)
     {
-        switch (areaType)
+        if (play)
         {
-            case AreaType.Title:
-                break;
-            case AreaType.Ice_Planet:
-                AudioManager.playSound?.Invoke("Ice_Planet_Music");
-                AudioManager.playSound?.Invoke("Water");
-                break;
-            case AreaType.Lava_Planet:
-                AudioManager.playSound?.Invoke("Lava_Planet_Water");
-                AudioManager.playSound?.Invoke("Water");
-                break;
-            case AreaType.Cat_Ship:
-                AudioManager.playSound?.Invoke("Cat_Ship_Music");
-                break;
-            case AreaType.Poker:
-                AudioManager.playSound?.Invoke("Poker_Music");
-                break;
-            default:
-                break;
+            switch (areaType)
+            {
+                case AreaType.Title:
+                    break;
+                case AreaType.Ice_Planet:
+                    AudioManager.playSound?.Invoke("Ice_Planet_Music");
+                    AudioManager.playSound?.Invoke("Water");
+                    break;
+                case AreaType.Lava_Planet:
+                    AudioManager.playSound?.Invoke("Lava_Planet_Water");
+                    AudioManager.playSound?.Invoke("Water");
+                    break;
+                case AreaType.Cat_Ship:
+                    AudioManager.playSound?.Invoke("Cat_Ship_Music");
+                    break;
+                case AreaType.Poker:
+                    AudioManager.playSound?.Invoke("Poker_Music");
+                    break;
+                default:
+                    break;
+            }
         }
-
-        switch (areaType)
+        else
         {
-            case AreaType.Title:
-                break;
-            case AreaType.Ice_Planet:
-                AudioManager.stopSound?.Invoke("Ice_Planet_Music");
-                AudioManager.stopSound?.Invoke("Water");
-                break;
-            case AreaType.Lava_Planet:
-                AudioManager.stopSound?.Invoke("Lava_Planet_Water");
-                AudioManager.stopSound?.Invoke("Water");
-                break;
-            case AreaType.Cat_Ship:
-                AudioManager.stopSound?.Invoke("Cat_Ship_Music");
-                break;
-            case AreaType.Poker:
-                AudioManager.stopSound?.Invoke("Poker_Music");
-                break;
-            default:
-                break;
+            switch (areaType)
+            {
+                case AreaType.Title:
+                    break;
+                case AreaType.Ice_Planet:
+                    AudioManager.stopSound?.Invoke("Ice_Planet_Music");
+                    AudioManager.stopSound?.Invoke("Water");
+                    break;
+                case AreaType.Lava_Planet:
+                    AudioManager.stopSound?.Invoke("Lava_Planet_Water");
+                    AudioManager.stopSound?.Invoke("Water");
+                    break;
+                case AreaType.Cat_Ship:
+                    AudioManager.stopSound?.Invoke("Cat_Ship_Music");
+                    break;
+                case AreaType.Poker:
+                    AudioManager.stopSound?.Invoke("Poker_Music");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
