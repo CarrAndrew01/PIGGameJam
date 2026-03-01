@@ -95,7 +95,28 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: dcd5d287f2dc16d4b8b390a5c53b6018, type: 3}
       volume: 0.1
       pitch: 1
-      loop: 0
+      loop: 1
+      audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
+    - name: Lava_Planet_Music
+      clip: {fileID: 8300000, guid: 22986605f9f34c24096199e664c3b6bf, type: 3}
+      volume: 0.1
+      pitch: 1
+      loop: 1
+      audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
+    - name: Cat_Ship_Music
+      clip: {fileID: 8300000, guid: be483798da0ac9547b2b301bfa8efdac, type: 3}
+      volume: 0.1
+      pitch: 1
+      loop: 1
+      audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
+    - name: Poker_Music
+      clip: {fileID: 0}
+      volume: 0.1
+      pitch: 1
+      loop: 1
       audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
   - type: 1
