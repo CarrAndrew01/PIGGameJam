@@ -132,6 +132,13 @@ public class BlackjackScript : MonoBehaviour
         // basically need to check for aces here
         return scoreCounter;
     }
+    void ResetGame()
+    {
+        currentPlayerValue = 0;
+        currentDealerValue = 0;
+        didStand = false;
+        didBust = false;
+    }
 
     // void CreateNewCard(bool player)
     // {

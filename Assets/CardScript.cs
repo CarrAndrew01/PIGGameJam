@@ -16,7 +16,7 @@ public class CardScript : MonoBehaviour
     public List<Sprite> SUITS = new List<Sprite>();
 
     public Animator cardAnimator;
-
+    public Vector2 cardPilePosition;
     public Vector2 intendedPosition;
     public bool moving = true;
 
@@ -102,6 +102,14 @@ public class CardScript : MonoBehaviour
         {
             Movement();
         }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            ResetCard();
+        }
+    }
+    void ResetCard()
+    {
+        cardAnimator.SetTrigger("Reset");
     }
 
 }
