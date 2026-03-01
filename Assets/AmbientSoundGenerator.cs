@@ -33,10 +33,14 @@ public class AmbientSoundGenerator : MonoBehaviour
                 AudioManager.playSound?.Invoke("Water");
                 break;
             case AreaType.Lava_Planet:
+                AudioManager.playSound?.Invoke("Lava_Planet_Water");
+                AudioManager.playSound?.Invoke("Water");
                 break;
             case AreaType.Cat_Ship:
+                AudioManager.playSound?.Invoke("Cat_Ship_Music");
                 break;
             case AreaType.Poker:
+                AudioManager.playSound?.Invoke("Poker_Music");
                 break;
             default:
                 break;
