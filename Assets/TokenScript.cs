@@ -20,7 +20,7 @@ public class TokenScript : MonoBehaviour
 
         image.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);
 
-        AudioManager.playSound("Poker_Chip");
+        AudioManager.playSound?.Invoke(("Poker_Chip"));
     }
 
     // Update is called once per frame

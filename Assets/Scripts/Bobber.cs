@@ -66,7 +66,7 @@ public class Bobber : MonoBehaviour
 
     void Start()
     {
-        AudioManager.playSound("Throw_Rod");
+        AudioManager.playSound?.Invoke("Throw_Rod");
         currentWaterHeight = Environment.WaterHeight;
         // Default cached fish sprite world position to the water height so sprite offsets have a sensible target
         cachedShadowSpritePosition = new Vector2(transform.position.x, Environment.WaterHeight);
@@ -158,7 +158,7 @@ public class Bobber : MonoBehaviour
         isReelingIn = true;
         BobberReturning.Invoke("Reel");
         // plays the reeling sound.
-        AudioManager.playSound("Reeling");
+        AudioManager.playSound?.Invoke("Reeling");
     }
 
     private void ReelInBobber()
@@ -237,7 +237,7 @@ public class Bobber : MonoBehaviour
 
             // code to randomly play a sound out of the bobber options
             int num = UnityEngine.Random.Range(1, 3);
-            AudioManager.playSound("Bobber" + num.ToString());
+            AudioManager.playSound?.Invoke("Bobber" + num.ToString());
         }
     }
     private void ApplyBobbing()

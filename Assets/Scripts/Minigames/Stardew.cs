@@ -120,7 +120,7 @@ public class Stardew : MonoBehaviour
     void Start()
     {
         // starts playing the reeling audio. this will be stopped by bobber
-        AudioManager.playSound("Reeling");
+        AudioManager.playSound?.Invoke("Reeling");
         // Grab player stats from GameManager
         statCatchSpeed = GameManager.GetPlayerStat(StatType.catchSpeed);
         statCatchArea = GameManager.GetPlayerStat(StatType.catchArea);

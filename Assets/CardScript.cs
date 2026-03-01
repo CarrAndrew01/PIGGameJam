@@ -62,7 +62,7 @@ public class CardScript : MonoBehaviour
         }
         cardAnimator.SetTrigger("Flip");
         string flipSound = "Card_Flip" + Random.Range(1, 3).ToString();
-        AudioManager.playSound(flipSound);
+        AudioManager.playSound?.Invoke(flipSound);
     }
     public int GetCardValue()
     {

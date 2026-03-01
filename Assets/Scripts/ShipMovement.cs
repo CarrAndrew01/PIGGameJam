@@ -48,12 +48,12 @@ public class ShipMovement : MonoBehaviour
     private void OnEnable()
     {
         if (AudioManager.instance != null)
-            AudioManager.playSound.Invoke("Ship_Hover");
+            AudioManager.playSound?.Invoke("Ship_Hover");
     }
     private void OnDisable()
     {
         if (AudioManager.instance != null)
-            AudioManager.stopSound.Invoke("Ship_Hover");
+            AudioManager.playSound?.Invoke("Ship_Hover");
     }
 
     void Start()
@@ -138,7 +138,7 @@ public class ShipMovement : MonoBehaviour
 
     private void BeginSpin(int direction)
     {
-        AudioManager.playSound("Ship_Spin");
+        AudioManager.playSound?.Invoke("Ship_Spin");
         LastDirection = direction;
         if (spinCoroutine != null) StopCoroutine(spinCoroutine);
         spinCoroutine = StartCoroutine(SpinShip());
