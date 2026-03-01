@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6850115a7fcc1b46b10a3206e760afa, type: 3}
   m_Name: Whale Bait
   m_EditorClassIdentifier: 
+  upgradeName: Whale Bait
   description: For the greatest of catches.
   mechDescriptionOverride: Lures the Greatwhale.
   icon: {fileID: 0}

@@ -442,9 +442,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128f6fd75b6df68469bb525577c68a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  listItems: []
+  selectedIndex: -1
+  onItemSelected:
+    m_PersistentCalls:
+      m_Calls: []
   listContentArea: {fileID: 1038692222721961120}
+  nameField: {fileID: 3270074819944339855}
   descriptionField: {fileID: 7546892883261886970}
   mechanicalDescriptionField: {fileID: 5944359014245484889}
+  moneyField: {fileID: 0}
   listItemPrefab: {fileID: 3847822284047299910, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
 --- !u!1 &2343002564028562225
 GameObject:
@@ -555,10 +562,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5276532277696780343}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 0}
-  m_SizeDelta: {x: 213.2128, y: 405.9155}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 13.2128, y: 6.0409975}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4406546256332995900
 CanvasRenderer:
@@ -790,8 +797,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 91.52161, y: 0}
-  m_SizeDelta: {x: -163.7119, y: 6.041}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 13.212791, y: 6.041004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7163812525507248921
 CanvasRenderer:
@@ -999,7 +1006,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 0
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 1
   m_linkedTextComponent: {fileID: 0}

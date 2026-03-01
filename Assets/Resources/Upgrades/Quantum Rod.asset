@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6850115a7fcc1b46b10a3206e760afa, type: 3}
   m_Name: Quantum Rod
   m_EditorClassIdentifier: 
+  upgradeName: Quantum Rod
   description: Our scientists aren't quite sure this isn't just a normal rod.
+  mechDescriptionOverride: 
   icon: {fileID: 0}
   type: 0
   modifierType: 1
