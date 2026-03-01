@@ -19,16 +19,16 @@ MonoBehaviour:
     out.\n\n  Chef's Notes:\nWell worth the trouble! Like most predators, its meat
     is naturally tough, but after a long slow-cook, garnished with fireweed and powdered
     Magma Crab shell, a Terrorwyrm roast is one of the best crowd-pleasers around!
-  sprite: {fileID: 0}
+  sprite: {fileID: -6507732772421794743, guid: 4ef26123630546c81a8874571704abd4, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
-  minWeight: 0
-  maxWeight: 0
+  minWeight: 1000
+  maxWeight: 2000
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 0
-  minigamePrefab: {fileID: 0}
+  value: 50
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
   jumpiness: 1
   speed: 1
   stubbornness: 1

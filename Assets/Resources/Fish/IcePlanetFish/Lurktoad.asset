@@ -28,8 +28,8 @@ MonoBehaviour:
   maxAmount: 1
   preferredBaitType: 0
   value: 15
-  minigamePrefab: {fileID: 8698781624365525647, guid: 1bb842189dbff3706822de6fa9cb1c5f, type: 3}
-  jumpiness: 1
-  speed: 1
-  stubbornness: 1
-  size: 1
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  jumpiness: 0.523
+  speed: 0.249
+  stubbornness: 0.606
+  size: 0.797

@@ -23,17 +23,17 @@ MonoBehaviour:
     remaining flesh over a 400c flame, to drive out the last traces of poison in
     the meat. Finally, after all that effort, we have a tiny mound flavourless, textureless,
     colorless meat. Good grief!
-  sprite: {fileID: 0}
+  sprite: {fileID: -8455539998564936456, guid: 7ccfa97e9c9a0d9abb4dc8e2d908bcfc, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
-  minWeight: 0
-  maxWeight: 0
+  minWeight: 15
+  maxWeight: 26
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 0
-  minigamePrefab: {fileID: 0}
-  jumpiness: 1
-  speed: 1
-  stubbornness: 1
-  size: 1
+  value: 45
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  jumpiness: 0.636
+  speed: 0.517
+  stubbornness: 0.545
+  size: 0.41

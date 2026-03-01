@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
   m_Name: Stingbug
   m_EditorClassIdentifier: 
-  fishName: 
+  fishName: Stingbug
   description: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 4710035748828112202, guid: 9055f12abb17ef03ca5bbcc53d5b29df, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
-  minWeight: 0
-  maxWeight: 0
+  minWeight: 160
+  maxWeight: 240
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 0
-  minigamePrefab: {fileID: 0}
-  jumpiness: 1
-  speed: 1
-  stubbornness: 1
-  size: 1
+  value: 80
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  jumpiness: 0.684
+  speed: 0.531
+  stubbornness: 0.66
+  size: 0.871

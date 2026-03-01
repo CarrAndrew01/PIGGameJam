@@ -12,24 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
   m_Name: Obsidian
   m_EditorClassIdentifier: 
-  fishName: Obsidian piranha
+  fishName: Obsidian Piranha
   description: One of the only creatures able to actively swim through the magma
     flows of Firax, it's impossibly tough hide protects it from heat and predators.
     Even the terrorwyrms 20,000 PSI jaws are unable to pierce them.\n\n  Chef's Notes:\nNyaaa,
     the amount of good knives I've lost trying to cut these things up... You don't
     know where their hide end and their flesh begins! Best way is to burn the scales
     off with acid, then boil whatever's left. It's flavoursome, at least.
-  sprite: {fileID: 0}
+  sprite: {fileID: 1684247888740680957, guid: 833e95a8a5190836aa1016dad0ac235b, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
-  minWeight: 0
-  maxWeight: 0
+  minWeight: 8
+  maxWeight: 12
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 0
-  minigamePrefab: {fileID: 0}
-  jumpiness: 1
-  speed: 1
-  stubbornness: 1
-  size: 1
+  value: 16
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  jumpiness: 0.426
+  speed: 0.689
+  stubbornness: 0.368
+  size: 0.225

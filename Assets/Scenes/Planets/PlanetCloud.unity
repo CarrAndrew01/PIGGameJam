@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parllax: 0.2
+  parallax: 0.2
 --- !u!1 &122116403
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parllax: 0.8
+  parallax: 0.8
 --- !u!1 &365564769
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,7 +737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parllax: 0.9
+  parallax: 0.9
 --- !u!1 &393373471
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,7 +838,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parllax: 0.1
+  parallax: 0.1
 --- !u!1 &491041318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,7 +1342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parllax: 0.7
+  parallax: 0.7
 --- !u!1 &1150989266
 GameObject:
   m_ObjectHideFlags: 0
@@ -6447,7 +6447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e705f098cc7714cbbe32b90c3591f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parllax: 0.95
+  parallax: 0.95
 --- !u!1 &1901510341
 GameObject:
   m_ObjectHideFlags: 0
@@ -6702,6 +6702,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Menu Popup
       objectReference: {fileID: 0}
+    - target: {fileID: 842915824428752365, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 842915824428752365, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6676963861173588917, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -6872,6 +6880,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
+      propertyPath: fishTypes.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
+      propertyPath: fishTypes.Array.data[0].fish
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a57a5828c3aeeaf1979ea022e66d646, type: 2}
+    - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
+      propertyPath: fishTypes.Array.data[1].fish
+      value: 
+      objectReference: {fileID: 11400000, guid: 508c6ce17b6685d8ea3745fc7c4f2a04, type: 2}
+    - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
+      propertyPath: fishTypes.Array.data[2].fish
+      value: 
+      objectReference: {fileID: 11400000, guid: 8282cf8c4fbdb3dffbe846cc648b9a9c, type: 2}
+    - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
+      propertyPath: fishTypes.Array.data[3].fish
+      value: 
+      objectReference: {fileID: 11400000, guid: 733bf908623ce0dfab332383ff0c168e, type: 2}
+    - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
+      propertyPath: fishTypes.Array.data[4].fish
+      value: 
+      objectReference: {fileID: 11400000, guid: e4e985faf7f4cf8dfa50a253097f968f, type: 2}
+    - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
+      propertyPath: fishTypes.Array.data[0].chance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
+      propertyPath: fishTypes.Array.data[1].chance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
+      propertyPath: fishTypes.Array.data[3].chance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
+      propertyPath: fishTypes.Array.data[4].chance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6928649743868906514, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
       propertyPath: m_Name
       value: Cloud Planet
