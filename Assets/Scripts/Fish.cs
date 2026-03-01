@@ -33,6 +33,10 @@ public class Fish : ScriptableObject
 {
     // Variables
     [Header("General")]
+    
+    public string fishName;
+    public string description;
+    
     public Sprite sprite;
     public Sprite WithBackground; //sprites with an in-built background
     public Sprite background; //background sprite if it doesn't come with one (if we use this idk)
@@ -40,8 +44,6 @@ public class Fish : ScriptableObject
     public float minWeight, maxWeight; // Weight range for the fish, which will affect money earned I guess
     public int minAmount = 1, maxAmount = 1; // Amount range for the fish, which will affect how many can be caught in one catch
     
-    public string fishName;
-    public string description;
     public int preferredBaitType; // A specific number that must be matched by the baitType stat in order to bite, 0 for no preference
     public float value;
     public GameObject minigamePrefab;

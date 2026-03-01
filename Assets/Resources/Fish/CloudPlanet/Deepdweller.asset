@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
+  m_Name: Deepdweller
+  m_EditorClassIdentifier: 
+  fishName: Deepdweller
+  description: Dwelling on the mysterious solid core of Nimbus, noone is quite sure
+    what the deep dweller actually looks like, as the incredible stresses placed
+    on its body during the long journey into orbit has caused immense malformation.\n\n 
+    Chef's Notes:\nAre you sure there's no way to catch one of these things without
+    manglin' it like that? Like this, we have to mash it up and reconstitute it just
+    to get a decent cut of meat...
+  sprite: {fileID: 0}
+  WithBackground: {fileID: 0}
+  background: {fileID: 0}
+  minWeight: 0
+  maxWeight: 0
+  minAmount: 1
+  maxAmount: 1
+  preferredBaitType: 0
+  value: 0
+  minigamePrefab: {fileID: 0}
+  jumpiness: 1
+  speed: 1
+  stubbornness: 1
+  size: 1
