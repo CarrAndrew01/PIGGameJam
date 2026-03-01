@@ -44,129 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7b4146de674ddd46888bf31be2e4885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - name: Water
-    clip: {fileID: 8300000, guid: b245a15f23ed61c4bbd591cffdc5621c, type: 3}
-    volume: 0.54
-    pitch: 1
-    loop: 1
-    audioMixer: {fileID: -3147002154482606886, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
-  - name: Poker_Chip
-    clip: {fileID: 8300000, guid: 5423f5e12c4cafd47be403326bb44a0f, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
-  - name: Card_Flip1
-    clip: {fileID: 8300000, guid: bcf2e7481ee3ed148a8da86ce5f021c7, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
-  - name: Card_Flip2
-    clip: {fileID: 8300000, guid: 805fd4c69ac8f0c4fb5ddd88e710485b, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
-  - name: Card_Flip3
-    clip: {fileID: 8300000, guid: 7b5a8664eb5486048b2faf790d1aefa8, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
-  - name: Bobber1
-    clip: {fileID: 8300000, guid: 7f5976df1ca7d98418bac175482d1e64, type: 3}
-    volume: 0.2
-    pitch: 1
-    loop: 0
-    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
-  - name: Bobber2
-    clip: {fileID: 8300000, guid: b40a4540639013b499a73ca216cdd413, type: 3}
-    volume: 0.2
-    pitch: 1
-    loop: 0
-    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
-  - name: Reeling
-    clip: {fileID: 8300000, guid: 44d01f7fb59b87847a22a823c755ba10, type: 3}
-    volume: 0.34
-    pitch: 1
-    loop: 1
-    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
-  - name: Ship_Hover
-    clip: {fileID: 8300000, guid: 7066f11ac24197f4a8394a4936039fe9, type: 3}
-    volume: 0.33
-    pitch: 1
-    loop: 1
-    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
-  - name: Ship_Spin
-    clip: {fileID: 8300000, guid: f055e14ebf79ff24084092d5afc033f9, type: 3}
-    volume: 0.44
-    pitch: 1
-    loop: 0
-    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
-  - name: Throw_Rod
-    clip: {fileID: 8300000, guid: c50dc0f52fc4e964395ec3ee81a36ad7, type: 3}
-    volume: 0.41
-    pitch: 0.8
-    loop: 0
-    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
-  - name: Fish_Caught
-    clip: {fileID: 8300000, guid: 4137b0a0a4a359a4983e509ff5832247, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
-  - name: Ice_Planet_Music
-    clip: {fileID: 8300000, guid: dcd5d287f2dc16d4b8b390a5c53b6018, type: 3}
-    volume: 0.1
-    pitch: 1
-    loop: 0
-    audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-    source: {fileID: 0}
   soundsArray:
   - type: 2
     sounds:
-    - name: Poker_Chip
-      clip: {fileID: 8300000, guid: 5423f5e12c4cafd47be403326bb44a0f, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-      source: {fileID: 0}
-    - name: Card_Flip1
-      clip: {fileID: 8300000, guid: bcf2e7481ee3ed148a8da86ce5f021c7, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-      source: {fileID: 0}
-    - name: Card_Flip2
-      clip: {fileID: 8300000, guid: 805fd4c69ac8f0c4fb5ddd88e710485b, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-      source: {fileID: 0}
-    - name: Card_Flip3
-      clip: {fileID: 8300000, guid: 7b5a8664eb5486048b2faf790d1aefa8, type: 3}
-      volume: 1
-      pitch: 1
-      loop: 0
-      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-      source: {fileID: 0}
     - name: Bobber1
       clip: {fileID: 8300000, guid: 7f5976df1ca7d98418bac175482d1e64, type: 3}
       volume: 0.2
@@ -233,6 +113,36 @@ MonoBehaviour:
       pitch: 1
       loop: 1
       audioMixer: {fileID: -3147002154482606886, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
+  - type: 3
+    sounds:
+    - name: Poker_Chip
+      clip: {fileID: 8300000, guid: 5423f5e12c4cafd47be403326bb44a0f, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
+    - name: Card_Flip1
+      clip: {fileID: 8300000, guid: bcf2e7481ee3ed148a8da86ce5f021c7, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
+    - name: Card_Flip2
+      clip: {fileID: 8300000, guid: 805fd4c69ac8f0c4fb5ddd88e710485b, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
+    - name: Card_Flip3
+      clip: {fileID: 8300000, guid: 7b5a8664eb5486048b2faf790d1aefa8, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
   musicMixerGroup: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
   sfxMixerGroup: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
