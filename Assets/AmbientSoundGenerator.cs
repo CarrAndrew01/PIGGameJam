@@ -1,13 +1,20 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class AmbientSoundGenerator : MonoBehaviour
 {
+    public AreaType areaType;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        AudioManager.playSound?.Invoke("Water");
-        AudioManager.playSound?.Invoke("Ice_Planet_Music");
+        PlayOrStopAudio(true);
+    }
+    private void OnDisable()
+    {
+        // AudioManager.stopSound?.Invoke("Water");
+        // AudioManager.stopSound?.Invoke("Ice_Planet_Music");
+        PlayOrStopAudio(true);
     }
 
     // Update is called once per frame
@@ -15,4 +22,37 @@ public class AmbientSoundGenerator : MonoBehaviour
     {
 
     }
+    void PlayOrStopAudio(bool play)
+    {
+        switch (areaType)
+        {
+            case AreaType.Title:
+                break;
+            case AreaType.Ice_Planet:
+                AudioManager.playSound?.Invoke("Ice_Planet_Music");
+                AudioManager.playSound?.Invoke("Water");
+                break;
+            case AreaType.Lava_Planet:
+                AudioManager.playSound?.Invoke("Lava_Planet_Water");
+                AudioManager.playSound?.Invoke("Water");
+                break;
+            case AreaType.Cat_Ship:
+                AudioManager.playSound?.Invoke("Cat_Ship_Music");
+                break;
+            case AreaType.Poker:
+                AudioManager.playSound?.Invoke("Poker_Music");
+                break;
+            default:
+                break;
+        }
+    }
+}
+public enum AreaType
+{
+    Title,
+    Ice_Planet,
+    Lava_Planet,
+    Cat_Ship,
+    Poker
+
 }
