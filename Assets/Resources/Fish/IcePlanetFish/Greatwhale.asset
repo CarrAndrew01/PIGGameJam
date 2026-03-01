@@ -12,14 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
   m_Name: Greatwhale
   m_EditorClassIdentifier: 
-  sprite: {fileID: 4486896796446330732, guid: 59910ec926096d8f783a33994cc00806, type: 3}
-  WithBackground: {fileID: -7559995653518803251, guid: 0fd903cf4975920bd83f404b52f2284d, type: 3}
+  fishName: Greatwale
+  description: These enormous mammals originate from another world entirely, where
+    they have long been extinct. They were brought to Boreala in a desperate attempt
+    to keep their species alive, and have fared surprisingly well here for over 200
+    years.\n\n  Chef's notes:\nI prefer "quality" over "quantity", but the Wale is
+    happy marriage of both. It's enormous size and ample fat reserves combine to
+    be a truly delectable mountain of caloric quality.
+  sprite: {fileID: -7559995653518803251, guid: 0fd903cf4975920bd83f404b52f2284d, type: 3}
+  WithBackground: {fileID: 0}
   background: {fileID: 0}
   minWeight: 20000
   maxWeight: 30000
-  minAmount: 1
-  maxAmount: 1
-  description: 
+  minAmount: 2
+  maxAmount: 4
   preferredBaitType: 0
   value: 50
   minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}

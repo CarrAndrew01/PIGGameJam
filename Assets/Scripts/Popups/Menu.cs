@@ -18,6 +18,7 @@ public class Menu : MonoBehaviour
     // Components
     [Header("Components")]
     public RectTransform listContentArea; // Reference to the RectTransform for the list
+    public TextMeshProUGUI nameField;
     public TextMeshProUGUI descriptionField; // Reference to the TextMeshProUGUI for the description field
     public TextMeshProUGUI mechanicalDescriptionField; // Reference to the TextMeshProUGUI for the mechanical description field
     public TextMeshProUGUI moneyField;
