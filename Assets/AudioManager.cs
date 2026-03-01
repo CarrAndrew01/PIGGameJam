@@ -4,7 +4,7 @@ using System;
 public class AudioManager : MonoBehaviour
 {
     [Header("Sound Clips")]
-    public Sound[] sounds;
+    public SoundArrays[] soundsArray;
 
     [Header("Audio Mixers")]
     public AudioMixerGroup musicMixerGroup;
@@ -42,28 +42,31 @@ public class AudioManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
 
-        foreach (Sound s in sounds)
+        foreach (SoundArrays array in soundsArray)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
+            foreach (Sound s in array)
+            {
+                s.source = gameObject.AddComponent<AudioSource>();
+                s.source.clip = s.clip;
 
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-            s.source.outputAudioMixerGroup = s.audioMixer;
-        }
+                s.source.volume = s.volume;
+                s.source.pitch = s.pitch;
+                s.source.loop = s.loop;
+                s.source.outputAudioMixerGroup = s.audioMixer;
+            }
 
-        // Load saved audio settings from PlayerPrefs
-        float musicVolume, sfxVolume;
-        if (PlayerPrefs.HasKey("Settings_MusicVolume"))
-        {
-            musicVolume = PlayerPrefs.GetFloat("Settings_MusicVolume");
-            musicMixerGroup.audioMixer.SetFloat(MUSIC_VOLUME_PARAM, musicVolume);
-        }
-        if (PlayerPrefs.HasKey("Settings_SFXVolume"))
-        {
-            sfxVolume = PlayerPrefs.GetFloat("Settings_SFXVolume");
-            sfxMixerGroup.audioMixer.SetFloat(SFX_VOLUME_PARAM, sfxVolume);
+            // Load saved audio settings from PlayerPrefs
+            float musicVolume, sfxVolume;
+            if (PlayerPrefs.HasKey("Settings_MusicVolume"))
+            {
+                musicVolume = PlayerPrefs.GetFloat("Settings_MusicVolume");
+                musicMixerGroup.audioMixer.SetFloat(MUSIC_VOLUME_PARAM, musicVolume);
+            }
+            if (PlayerPrefs.HasKey("Settings_SFXVolume"))
+            {
+                sfxVolume = PlayerPrefs.GetFloat("Settings_SFXVolume");
+                sfxMixerGroup.audioMixer.SetFloat(SFX_VOLUME_PARAM, sfxVolume);
+            }
         }
     }
 
@@ -145,8 +148,7 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name)
     {
-
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = FindSound(name);
         if (s == null)
         {
             Debug.LogWarning("Sound: " + name + " not found.");
@@ -156,12 +158,27 @@ public class AudioManager : MonoBehaviour
     }
     public void Stop(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
+        Sound s = FindSound(name);
         if (s == null)
         {
             Debug.LogWarning("Sound: " + name + " not found.");
             return;
         }
         s.source.Stop();
+    }
+    public Sound FindSound(string name)
+    {
+        foreach (SoundArrays array in soundsArray)
+        {
+            foreach (Sound sound in array)
+            {
+                if (sound.name == name)
+                {
+                    return sound;
+                }
+            }
+        }
+        // if sound isnt found
+        return null;
     }
 }
