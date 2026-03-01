@@ -11,7 +11,7 @@ public class ListItem : MonoBehaviour
 {
     // Components
     [Header("Data")]
-    public string fishName;
+    public string itemName;
     public string description;
     public string mechanicalDescription;
     public int listIndex; // Index of this item in the list, set by the Menu when creating the item
@@ -38,7 +38,7 @@ public class ListItem : MonoBehaviour
         parentMenuBase = parent;
         nameField.text = name;
         listIndex = index;
-        fishName = name;
+        this.itemName = name;
         this.description = description;
         this.mechanicalDescription = mechanicalDescription;
         SetupComponents(iconSprite, subtext, subtext2);
@@ -77,7 +77,7 @@ public class ListItem : MonoBehaviour
 
     public void SetDescriptionFields()
     {
-        parentMenuBase.nameField.text = fishName;
+        parentMenuBase.nameField.text = itemName;
         parentMenuBase.descriptionField.text = description;
         parentMenuBase.mechanicalDescriptionField.text = mechanicalDescription;
     }

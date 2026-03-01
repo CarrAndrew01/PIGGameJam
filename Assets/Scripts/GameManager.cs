@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 /// <summary>
@@ -18,9 +19,7 @@ public class GameManager : MonoBehaviour
     public Transition.Screen intendedScreen;
 
     [Header("Quests")]
-    public List<Quest> AllQuests = new(
-    //temp assignments
-    );
+    public List<Quest> AllQuests { get; private set; } = new List<Quest>(); // List of all quests in the game, populated at runtime
 
     public Fish TEMPFISH;
 
@@ -44,6 +43,9 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // Get quests from resources
+        GetQuestsFromResources();
 
         // Load persisted player data (upgrades) before applying base stats
         playerStats.LoadUpgradesFromPrefs();
@@ -95,6 +97,12 @@ public class GameManager : MonoBehaviour
 
         // Optional: clamp to [0, 1] to handle values outside the range safely
         return Mathf.Clamp01(normalized);
+    }
+
+    private void GetQuestsFromResources()
+    {
+        Quest[] quests = Resources.LoadAll<Quest>("Quests");
+        AllQuests.AddRange(quests);
     }
 
 
