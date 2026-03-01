@@ -33,8 +33,21 @@ public class BlackjackScript : MonoBehaviour
 
     // TODO MAKE DEALER ALWAYS STAND ON 17 OR ABOVE 
 
+
+    public delegate void Round1();
+    public static event Round1 onDeal; // push down cards then spread them
+    public delegate void Round2();
+    public static event Round2 onDeal2;
+    public delegate void Round3();
+    public static event Round3 onDeal3;
+    public delegate void Round4();
+    public static event Round4 onDeal4;
+    public delegate void Round5(); // cards return to cat (drags them back?)
+    public static event Round5 onDeal5;
+
     private void Start()
     {
+        onDeal?.Invoke();
         // deals 2 cards for player + 1 card for dealer
         CreateNewCard(true, ref playerCardIndex, ref playerCards);
         CreateNewCard(true, ref playerCardIndex, ref playerCards);

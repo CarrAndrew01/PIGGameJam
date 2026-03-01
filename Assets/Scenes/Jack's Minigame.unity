@@ -685,11 +685,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 910
+      value: 1320
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -160
+      value: 420
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -705,7 +705,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_Name
-      value: Card (3)
+      value: Dealer Card (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.x
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1213,11 +1221,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 410
+      value: 1320
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -160
+      value: 815
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1233,7 +1241,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_Name
-      value: Card (1)
+      value: Player Card (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.x
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1315,11 +1331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 160
+      value: 1320
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -160
+      value: 420
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1335,7 +1351,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_Name
-      value: Card
+      value: Dealer Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1448,11 +1472,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 910
+      value: 1320
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -160
+      value: 815
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1468,7 +1492,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_Name
-      value: Card (3)
+      value: Player Card (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.x
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1550,11 +1582,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 410
+      value: 1320
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -160
+      value: 420
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1570,7 +1602,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_Name
-      value: Card (1)
+      value: Dealer Card (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.x
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1603,7 +1643,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &584823414
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2897,11 +2937,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 160
+      value: 1320
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -160
+      value: 815
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2917,7 +2957,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_Name
-      value: Card
+      value: Player Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2999,11 +3047,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 660
+      value: 1320
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -160
+      value: 815
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3019,7 +3067,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_Name
-      value: Card (2)
+      value: Player Card (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3817,11 +3873,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 660
+      value: 1320
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -160
+      value: 420
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3837,11 +3893,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_Name
-      value: Card (2)
+      value: Dealer Card (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4347,7 +4411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1730383781
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4444,11 +4508,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1160
+      value: 1320
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -160
+      value: 815
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4464,7 +4528,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_Name
-      value: Card (4)
+      value: Player Card (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5049,11 +5121,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1160
+      value: 1320
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -160
+      value: 420
       objectReference: {fileID: 0}
     - target: {fileID: 1351592705661935497, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5069,7 +5141,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1620052241354439156, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
       propertyPath: m_Name
-      value: Card (4)
+      value: Dealer Card (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7731909377229220438, guid: 1ac93b02e38538d43b1433dc1fbee0a2, type: 3}
+      propertyPath: intendedPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5422,7 +5502,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2015700433}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb18590877de7d443b3f6ab6ddb25c72, type: 3}
   m_Name: 
@@ -6106,58 +6186,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 5423f5e12c4cafd47be403326bb44a0f, type: 3}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.data[1].name
-      value: Poker_Chip_Remove
-      objectReference: {fileID: 0}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.data[2].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: bcf2e7481ee3ed148a8da86ce5f021c7, type: 3}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.data[2].name
-      value: Card_Flip1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.data[3].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 805fd4c69ac8f0c4fb5ddd88e710485b, type: 3}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.data[3].name
-      value: Card_Flip2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.data[4].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 7b5a8664eb5486048b2faf790d1aefa8, type: 3}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.data[4].name
-      value: Card_Flip3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.data[1].pitch
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.data[4].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.data[4].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2553548299507118143, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
-      propertyPath: soundsArray.Array.data[3].sounds.Array.data[4].audioMixer
-      value: 
-      objectReference: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
     - target: {fileID: 8848270691227238726, guid: 025e28852a3c2d548b3a75015a2fd09f, type: 3}
       propertyPath: m_Name
       value: AudioManager

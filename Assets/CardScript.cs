@@ -17,6 +17,18 @@ public class CardScript : MonoBehaviour
 
     public Animator cardAnimator;
 
+    public Vector2 intendedPosition;
+    public bool moving = true;
+
+
+    private void OnEnable()
+    {
+        BlackjackScript.onDeal += Move;
+    }
+    private void OnDisable()
+    {
+        BlackjackScript.onDeal -= Move;
+    }
     private void Start()
     {
         cardAnimator = GetComponent<Animator>();
@@ -70,6 +82,26 @@ public class CardScript : MonoBehaviour
         if (num >= 10) return 10;
         // return 1-9
         return num;
+    }
+    void Move()
+    {
+        moving = true;
+    }
+    void Movement()
+    {
+        float step = 600 * Time.deltaTime;
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, intendedPosition, step);
+        if (Vector3.Distance(transform.localPosition, intendedPosition) < 0.001f)
+        {
+            moving = false;
+        }
+    }
+    private void Update()
+    {
+        if (moving)
+        {
+            Movement();
+        }
     }
 
 }
