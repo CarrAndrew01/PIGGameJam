@@ -35,8 +35,8 @@ public class AmbientSoundGenerator : MonoBehaviour
                     AudioManager.playSound?.Invoke("Water");
                     break;
                 case AreaType.Lava_Planet:
-                    AudioManager.playSound?.Invoke("Lava_Planet_Water");
-                    AudioManager.playSound?.Invoke("Water");
+                    AudioManager.playSound?.Invoke("Lava_Planet_Music");
+                    AudioManager.playSound?.Invoke("Lava_Bubbling");
                     break;
                 case AreaType.Cat_Ship:
                     AudioManager.playSound?.Invoke("Cat_Ship_Music");
@@ -59,8 +59,8 @@ public class AmbientSoundGenerator : MonoBehaviour
                     AudioManager.stopSound?.Invoke("Water");
                     break;
                 case AreaType.Lava_Planet:
-                    AudioManager.stopSound?.Invoke("Lava_Planet_Water");
-                    AudioManager.stopSound?.Invoke("Water");
+                    AudioManager.stopSound?.Invoke("Lava_Planet_Music");
+                    AudioManager.stopSound?.Invoke("Lava_Bubbling");
                     break;
                 case AreaType.Cat_Ship:
                     AudioManager.stopSound?.Invoke("Cat_Ship_Music");

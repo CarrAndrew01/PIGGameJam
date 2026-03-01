@@ -142,6 +142,13 @@ MonoBehaviour:
       loop: 1
       audioMixer: {fileID: -3147002154482606886, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
+    - name: Lava_Bubbling
+      clip: {fileID: 8300000, guid: 7def15032618586469dba919d3f6601d, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 1
+      audioMixer: {fileID: -3147002154482606886, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
   - type: 3
     sounds:
     - name: Poker_Chip
