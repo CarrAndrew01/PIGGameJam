@@ -110,6 +110,13 @@ MonoBehaviour:
       loop: 0
       audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
+    - name: Low_Meow
+      clip: {fileID: 8300000, guid: 1f7c026930fe51346a53d624b24abcc6, type: 3}
+      volume: 1
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
   - type: 0
     sounds:
     - name: Ice_Planet_Music
