@@ -61,14 +61,14 @@ public class SettingsMenu : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    // void OnEnable()
-    // {
-    //     //Debug player pref
-    //     Debug.Log("Master Volume: " + PlayerPrefs.GetFloat("Settings_MasterVolume", -1f));
-    //     Debug.Log("Music Volume: " + PlayerPrefs.GetFloat("Settings_MusicVolume", -1f));
-    //     Debug.Log("SFX Volume: " + PlayerPrefs.GetFloat("Settings_SFXVolume", -1f));
-    //     Debug.Log("Ambient Volume: " + PlayerPrefs.GetFloat("Settings_AmbientVolume", -1f));
-    // }
+    void OnEnable()
+    {
+        //Debug player pref
+        Debug.Log("Master Volume: " + PlayerPrefs.GetFloat("Settings_MasterVolume", -1f));
+        Debug.Log("Music Volume: " + PlayerPrefs.GetFloat("Settings_MusicVolume", -1f));
+        Debug.Log("SFX Volume: " + PlayerPrefs.GetFloat("Settings_SFXVolume", -1f));
+        Debug.Log("Ambient Volume: " + PlayerPrefs.GetFloat("Settings_AmbientVolume", -1f));
+    }
 
     void Update()
     {

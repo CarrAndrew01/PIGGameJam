@@ -77,44 +77,24 @@ public class AudioManager : MonoBehaviour
                 s.source.loop = s.loop;
                 s.source.outputAudioMixerGroup = s.audioMixer;
             }
-
-            // Load saved audio settings from PlayerPrefs.
-            // Accept either previously-saved decibel values or newer linear (0..1) values.
-            if (PlayerPrefs.HasKey("Settings_MasterVolume"))
-            {
-                float val = PlayerPrefs.GetFloat("Settings_MasterVolume");
-                if (val >= 0f && val <= 1f)
-                    SetMasterVolume(val);
-                else
-                    audioMixer.SetFloat(MASTER_VOLUME_PARAM, val);
-            }
-
-            if (PlayerPrefs.HasKey("Settings_MusicVolume"))
-            {
-                float val = PlayerPrefs.GetFloat("Settings_MusicVolume");
-                if (val >= 0f && val <= 1f)
-                    SetMusicVolume(val);
-                else
-                    audioMixer.SetFloat(MUSIC_VOLUME_PARAM, val);
-            }
-
-            if (PlayerPrefs.HasKey("Settings_SFXVolume"))
-            {
-                float val = PlayerPrefs.GetFloat("Settings_SFXVolume");
-                if (val >= 0f && val <= 1f)
-                    SetSFXVolume(val);
-                else
-                    audioMixer.SetFloat(SFX_VOLUME_PARAM, val);
-            }
-            if (PlayerPrefs.HasKey("Settings_AmbientVolume"))
-            {
-                float val = PlayerPrefs.GetFloat("Settings_AmbientVolume");
-                if (val >= 0f && val <= 1f)
-                    SetAmbientVolume(val);
-                else
-                    audioMixer.SetFloat(AMBIENT_VOLUME_PARAM, val);
-            }
         }
+    }
+
+    void Start()
+    {
+        // Load saved audio settings from PlayerPrefs.
+        // Accept either previously-saved decibel values or newer linear (0..1) values.
+        if (PlayerPrefs.HasKey("Settings_MasterVolume"))
+            SetMasterVolume(PlayerPrefs.GetFloat("Settings_MasterVolume"), effectivelyMute: true);
+
+        if (PlayerPrefs.HasKey("Settings_MusicVolume"))
+            SetMusicVolume(PlayerPrefs.GetFloat("Settings_MusicVolume"), effectivelyMute: true);
+
+        if (PlayerPrefs.HasKey("Settings_SFXVolume"))
+            SetSFXVolume(PlayerPrefs.GetFloat("Settings_SFXVolume"), effectivelyMute: true);
+
+        if (PlayerPrefs.HasKey("Settings_AmbientVolume"))
+            SetAmbientVolume(PlayerPrefs.GetFloat("Settings_AmbientVolume"), effectivelyMute: true);
     }
 
     private void OnEnable()
