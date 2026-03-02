@@ -41,3 +41,5 @@ MonoBehaviour:
     value: 0
   - type: 9
     value: 0
+  - type: 14
+    value: 5
