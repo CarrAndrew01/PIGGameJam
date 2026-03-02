@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     public Fish TEMPFISH;
 
+
     // Variables
     public const string TITLE_SCENE_NAME = "Title";
 
