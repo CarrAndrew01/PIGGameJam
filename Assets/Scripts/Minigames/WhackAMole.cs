@@ -100,9 +100,6 @@ public class WhackAMole : MonoBehaviour
         //the fake cursor always follows the mouse and vice versa
         //never mind that royally fucks everything up, we'll just move the mouse when its time
 
-
-        
-
         var gamepad = Gamepad.current;
 
         if (gamepad != null)

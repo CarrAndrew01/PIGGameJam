@@ -17,19 +17,21 @@ MonoBehaviour:
     existance of a divine creator, and by others to be proof of the opposite. In
     any case, it's large hands allow it to climb up and down the steep slopes of
     its volcanic home.\n\n  Chef's Notes:\nWhat a strange creature... Its meat is
-    tender and delicious, anyway, but I really do hate looking at the thing while
-    I prepare it.
+    tender and delicious, but I really do hate looking at the thing while I prepare
+    it.
   sprite: {fileID: -7351176481537246033, guid: 2bba71d07677b6346845161d6cf5e627, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
+  value: 15
   minWeight: 25
   maxWeight: 35
   minAmount: 1
   maxAmount: 1
-  preferredBaitType: 0
-  value: 15
-  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  preferredBaitType: 9
+  minSummonTime: 20
+  maxSummonTime: 60
   jumpiness: 0.751
   speed: 0.612
   stubbornness: 0.689
   size: 0.53
+  minigamePrefab: {fileID: 8294167711542879585, guid: 3dfa3e8b701dce6528a00fa6509b985f, type: 3}

@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Whale Bait
   m_EditorClassIdentifier: 
   upgradeName: Space Krill
-  description: For the greatest of catches.
-  mechDescriptionOverride: Lures the Greatwhale
+  description: Wale's eat huge amount of microscopic creatures from the waters of
+    Boreala. By concentrating huge amount of these into a tiny space, it it irresistable
+    to the enormous beast.
+  mechDescriptionOverride: Lures the whale
   icon: {fileID: 0}
   type: 9
   modifierType: 0
