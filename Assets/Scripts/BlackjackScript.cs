@@ -118,7 +118,7 @@ public class BlackjackScript : MonoBehaviour
     IEnumerator StandCoroutine()
     {
         didStand = true;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
         // if dealer < 17 OR beat player, hit
         while (dealerCardIndex < 4)
         {

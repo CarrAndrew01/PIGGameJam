@@ -37,7 +37,7 @@ public class BidScript : MonoBehaviour
     }
     void ResetTextValues()
     {
-        playerTotalCash.text = "CASH - $" + GameManager.Money.ToString();
+        playerTotalCash.text = $"CASH - ${GameManager.Money:f2}";
         playerWager.text = "WAGER - $0";
     }
     public void AddToBid()
@@ -54,8 +54,7 @@ public class BidScript : MonoBehaviour
                 }
                 tokens.Add(newToken);
                 bidTokens++;
-                playerTotalCash.text = "CASH - $" + GameManager.Money.ToString();
-                playerWager.text = "WAGER - $" + (bidTokens * bidTokenValue);
+                ResetTextValues();
             }
         }
     }
@@ -68,8 +67,7 @@ public class BidScript : MonoBehaviour
 
             bidTokens--;
             GameManager.AdjustMoney(5);
-            playerTotalCash.text = "CASH - $" + GameManager.Money.ToString();
-            playerWager.text = "WAGER - $" + (bidTokens * bidTokenValue);
+            ResetTextValues();
         }
     }
     public void BeginMatch()
