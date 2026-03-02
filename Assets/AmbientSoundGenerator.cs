@@ -38,6 +38,12 @@ public class AmbientSoundGenerator : MonoBehaviour
                     AudioManager.playSound?.Invoke("Lava_Planet_Music");
                     AudioManager.playSound?.Invoke("Lava_Bubbling");
                     break;
+                case AreaType.Bio_Planet:
+                    AudioManager.playSound?.Invoke("Bio_Planet_Music");
+                    break;
+                case AreaType.Cloud_Planet:
+                    AudioManager.playSound?.Invoke("Cloud_PlanetMusic");
+                    break;
                 case AreaType.Cat_Ship:
                     AudioManager.playSound?.Invoke("Cat_Ship_Music");
                     break;
@@ -62,6 +68,12 @@ public class AmbientSoundGenerator : MonoBehaviour
                     AudioManager.stopSound?.Invoke("Lava_Planet_Music");
                     AudioManager.stopSound?.Invoke("Lava_Bubbling");
                     break;
+                case AreaType.Bio_Planet:
+                    AudioManager.stopSound?.Invoke("Bio_Planet_Music");
+                    break;
+                case AreaType.Cloud_Planet:
+                    AudioManager.stopSound?.Invoke("Cloud_PlanetMusic");
+                    break;
                 case AreaType.Cat_Ship:
                     AudioManager.stopSound?.Invoke("Cat_Ship_Music");
                     break;
@@ -79,6 +91,8 @@ public enum AreaType
     Title,
     Ice_Planet,
     Lava_Planet,
+    Bio_Planet,
+    Cloud_Planet,
     Cat_Ship,
     Poker
 
