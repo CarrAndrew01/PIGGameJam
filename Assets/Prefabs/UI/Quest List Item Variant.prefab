@@ -342,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6168742214130187422, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 170
       objectReference: {fileID: 0}
     - target: {fileID: 6168742214130187422, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
       propertyPath: m_SizeDelta.y
@@ -398,7 +398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7461877093015054369, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
       propertyPath: m_fontSize
-      value: 14
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6263394704098142295, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
@@ -478,6 +478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b495a0dbe3b49d88b375ef219c86f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemName: 
   description: 
   mechanicalDescription: 
   listIndex: 0
