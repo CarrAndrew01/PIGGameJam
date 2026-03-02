@@ -4691,6 +4691,7 @@ MonoBehaviour:
   dealerScoreText: {fileID: 0}
   biddingUI: {fileID: 0}
   gameUI: {fileID: 0}
+  tokenIcon: {fileID: 0}
 --- !u!1 &1823801944
 GameObject:
   m_ObjectHideFlags: 0
@@ -5889,7 +5890,6 @@ GameObject:
   - component: {fileID: 2015700434}
   - component: {fileID: 2015700435}
   - component: {fileID: 2015700436}
-  - component: {fileID: 2015700437}
   m_Layer: 0
   m_Name: POTENTIAL BLACKJACK VISUALS
   m_TagString: Untagged
@@ -5944,6 +5944,7 @@ MonoBehaviour:
   dealerScoreText: {fileID: 661927959}
   biddingUI: {fileID: 1093681769}
   gameUI: {fileID: 1730383780}
+  tokenIcon: {fileID: 21300000, guid: d2ed614dfc3e3754aa7f182f12b624e7, type: 3}
 --- !u!114 &2015700436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5956,19 +5957,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac5cb65218665c640abf7181fef6e121, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2015700437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015700433}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 213d0b91fc3cffc4fb706aa8bc56ae29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  areaType: 0
 --- !u!1 &2019321022
 GameObject:
   m_ObjectHideFlags: 0

@@ -58,6 +58,8 @@ public class BlackjackScript : MonoBehaviour
     public GameObject gameUI;
 
 
+    public Sprite tokenIcon;
+
     private void OnEnable()
     {
         resetEvent += ResetGame;
@@ -111,7 +113,12 @@ public class BlackjackScript : MonoBehaviour
         if (!playerCanPlay) return;
         if (didBust) return;
         if (didStand) return;
+        StartCoroutine(StandCoroutine());
+    }
+    IEnumerator StandCoroutine()
+    {
         didStand = true;
+        yield return new WaitForSeconds(1f);
         // if dealer < 17 OR beat player, hit
         while (dealerCardIndex < 4)
         {
@@ -248,14 +255,18 @@ public class BlackjackScript : MonoBehaviour
         switch (state)
         {
             case GameEndState.WIN:
-                GameManager.AdjustMoney(value * 2);
+                value *= 2;
+                Toast.ShowToast($"You win!", icon: tokenIcon, substring1: $"${value}");
                 break;
             case GameEndState.PUSH:
-                GameManager.AdjustMoney(value);
+                Toast.ShowToast($"You pushed!", icon: tokenIcon, substring1: $"${value}");
                 break;
             case GameEndState.LOSE:
+                Toast.ShowToast($"You lost!", icon: tokenIcon, substring1: $"-${value}");
+                value = 0;
                 break;
         }
+        GameManager.AdjustMoney(value);
         StartCoroutine(ResetCoroutine());
     }
     IEnumerator ResetCoroutine()
