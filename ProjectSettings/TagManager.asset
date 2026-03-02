@@ -82,5 +82,8 @@ TagManager:
   - name: Foreground
     uniqueID: 1217790485
     locked: 0
+  - name: Overlay
+    uniqueID: 4004259755
+    locked: 0
   m_RenderingLayers:
   - Default

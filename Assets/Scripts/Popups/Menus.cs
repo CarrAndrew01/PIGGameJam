@@ -9,7 +9,8 @@ public class Menus : MonoBehaviour
 {
     public static Menus Instance { get; private set; }
 
-    public static bool IsAnyMenuOpen => Instance.CurrentMenu != null;
+    private static bool IsGamePlaying => UnityEngine.Application.isPlaying; // Check if the game is currently running (not in editor mode or paused)
+    [ShowInInspector, ReadOnly] public static bool IsAnyMenuOpen => IsGamePlaying && Instance.CurrentMenu != null;
 
     public enum MenuType
     {
@@ -265,7 +266,7 @@ public class Menus : MonoBehaviour
         GameObject prefabToOpen = GetPrefabForMenuType(menuType);
         if (prefabToOpen != null)
         {
-            GameManager.TriggerPopIn(GameManager.MenuPopup, prefabToOpen, forceSwap: priority, onComplete: go =>
+            GameManager.TriggerPopIn(GameManager.MenuPopup, prefabToOpen, forceSwap: priority, onBeforeShow: go =>
             {
                 CurrentMenu = go;
                 if (CurrentMenu == null)
@@ -278,9 +279,11 @@ public class Menus : MonoBehaviour
     {
         if (CurrentMenu != null)
         {
-            GameManager.TriggerPopOut(GameManager.MenuPopup);
-            CurrentMenu = null;
-            CurrentMenuType = MenuType.None;
+            GameManager.TriggerPopOut(GameManager.MenuPopup, onAfter: go =>
+            {
+                CurrentMenu = null;
+                CurrentMenuType = MenuType.None;
+            });
         }
     }
 

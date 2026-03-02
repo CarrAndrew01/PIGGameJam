@@ -116,10 +116,11 @@ public class Environment : MonoBehaviour
         spawnPosition.y = WaterHeight;
 
         // Find a random position with a bias towards the edges of the summon radius
-        // Code from CoPilot -- don't ask me how it works
-        float t = Random.value;
-        float r = (t < 0.5f) ? Mathf.Pow(t * 2f, 0.4f) / 2f : 1f - Mathf.Pow((1f - t) * 2f, 0.4f) / 2f;
-        spawnPosition.x += (r * 2f - 1f) * CurrentEnvironment.fishSummonRadius;
+        // Code from CoPilot -- don't ask me how it works. I'm bad at math anyhow
+        float sign = Random.value < 0.5f ? -1f : 1f;
+        float edgeBias = 2.0f; // >1 biases to edges; 1.0 is uniform
+        float r = 1f - Mathf.Pow(Random.value, edgeBias); // r in (0,1], more likely near 1
+        spawnPosition.x += sign * r * CurrentEnvironment.fishSummonRadius;
 
         return CurrentEnvironment.SpawnFishShadow(fish, spawnPosition);
     }

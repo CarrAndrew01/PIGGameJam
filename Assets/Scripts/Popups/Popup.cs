@@ -116,12 +116,12 @@ public class Popup : MonoBehaviour
             if (forceSwap)
             {
                 // Forced swap: perform swap immediately and return the result via onComplete
-                yield return StartCoroutine(TriggerSwap(canvasPrefab, onComplete));
+                yield return StartCoroutine(TriggerSwap(canvasPrefab, onComplete, onBeforeShow));
                 yield break;
             }
 
             Debug.Log("Menu exists -- swapping menu after.");
-            yield return StartCoroutine(TriggerSwap(canvasPrefab, onComplete));
+            yield return StartCoroutine(TriggerSwap(canvasPrefab, onComplete, onBeforeShow));
             yield break;
         }
 
@@ -166,7 +166,7 @@ public class Popup : MonoBehaviour
         onAfter?.Invoke(canvasObj);
     }
 
-    protected IEnumerator TriggerSwap(GameObject newMenuPrefab, System.Action<GameObject> onSwapComplete = null)
+    protected IEnumerator TriggerSwap(GameObject newMenuPrefab, System.Action<GameObject> onSwapComplete = null, System.Action<GameObject> onBeforeShow = null)
     {
         if (!isPoppedIn || !ReadyForInput)
         {
@@ -174,12 +174,12 @@ public class Popup : MonoBehaviour
             yield break;
         }
         isSwapping = true;
-        yield return StartCoroutine(SwapMenu(newMenuPrefab));
+        yield return StartCoroutine(SwapMenu(newMenuPrefab, onBeforeShow));
         onSwapComplete?.Invoke(childCanvas != null ? childCanvas.gameObject : null);
     }
 
     // Coroutine to swap from the current menu to a new menu of the given type, by first popping out at a fast speed, then popping in the new menu at a fast speed
-    protected IEnumerator SwapMenu(GameObject newMenuPrefab)
+    protected IEnumerator SwapMenu(GameObject newMenuPrefab, System.Action<GameObject> onBeforeShow = null)
     {
         // Pop out at a fast speed
         StartCoroutine(TriggerPopOut(swapOutDuration));
@@ -189,7 +189,7 @@ public class Popup : MonoBehaviour
         }
 
         // Pop in the new menu at a fast speed
-        yield return StartCoroutine(TriggerPopIn(newMenuPrefab));
+        yield return StartCoroutine(TriggerPopIn(newMenuPrefab, -1f, false, null, onBeforeShow));
         isSwapping = false;
     }
 

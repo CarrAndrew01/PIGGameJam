@@ -406,6 +406,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 912141177404342101, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_fontSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 912141177404342101, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580315996757718985, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_fontSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580315996757718985, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3847822284047299910, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
       propertyPath: m_Name
       value: Toast Variant
@@ -428,7 +444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4337813683901706719, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4337813683901706719, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -568,7 +584,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7461877093015054369, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
       propertyPath: m_fontSize
-      value: 12
+      value: 8.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7461877093015054369, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5748933204169075183, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}

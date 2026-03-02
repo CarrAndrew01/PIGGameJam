@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1423159279
+  m_SortingLayerID: -290707541
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 457832fb0b84890449c9a1f3d5ade8cc, type: 3}
@@ -270,6 +270,8 @@ MonoBehaviour:
   targetBobber: {fileID: 0}
   numberOfFailsBeforeEscape: 2
   timeUntilLeaving: 60
+  wrongBaitIgnoreChance: 0.8
+  wrongBaitBadIgnoreChance: 0.5
   movementRadius: 1.4
   movementSpeed: 0.1
   verticalMovementMax: 0
@@ -361,7 +363,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1423159279
+  m_SortingLayerID: -290707541
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}

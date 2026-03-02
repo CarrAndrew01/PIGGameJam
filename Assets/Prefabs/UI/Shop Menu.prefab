@@ -1711,7 +1711,11 @@ MonoBehaviour:
   - baitUpgrade: {fileID: 11400000, guid: 4b753a8ac8713b94fb2a60a694e98c33, type: 2}
     numberOfUses: 1
     cost: 50
-  purchasableFish: []
+  purchasableFish:
+  - id: 0
+    fish: {fileID: 11400000, guid: 8282cf8c4fbdb3dffbe846cc648b9a9c, type: 2}
+    weight: 0
+    planetOfOrigin: HEy
   purchasableUpgrades:
   - upgrade: {fileID: 11400000, guid: 71fef0380d70e8848931573630d35745, type: 2}
     price: 10

@@ -26,6 +26,8 @@ public class FishShadow : MonoBehaviour
     [Header("Settings")]
     public int numberOfFailsBeforeEscape = 2; // How many times the player can fail to catch this fish before it escapes
     public float timeUntilLeaving = 20f; // How long the fish will stay before it leaves on its own, in seconds
+    public float wrongBaitIgnoreChance = 0.8f; // Chance that a fish that likes a certain bait will ignore the bait if it's the wrong type
+    public float wrongBaitBadIgnoreChance = 0.5f; // Chance that a fish that usually likes no bait will ignore the special bait
 
     [Header("Movement")]
     public float movementRadius = 2f; // How far from its initial position the fish will move
@@ -196,7 +198,7 @@ public class FishShadow : MonoBehaviour
             if (amountInCatch > 1)
                 Toast.ShowToast($"+{amountInCatch} X {fishData.fish.fishName}!", icon: fishData.fish.sprite);
             else
-                Toast.ShowToast(fishData.fish.fishName + " caught!", substring1: $"Weight: {fishData.weight}", icon: fishData.fish.sprite);
+                Toast.ShowToast(fishData.fish.fishName + " caught!", substring1: $"Weight: {fishData.weight:F0}", icon: fishData.fish.sprite);
         }
 
         // Destroy the fish shadow since it's been caught
@@ -247,6 +249,22 @@ public class FishShadow : MonoBehaviour
             previewTransform.localPosition = previewOffset + new Vector3(0f, bobbingOffset, 0f);
         }
     }
+    private bool IsWithinHookRange(Bobber bobber)
+    {
+        float rangeSqr = bobber.hookRange * bobber.hookRange;
+        var toBobber = bobber.transform.position - transform.position;
+        var toSprite = bobber.spriteRenderer.transform.position - spriteTransform.position;
+        return toBobber.sqrMagnitude < rangeSqr || toSprite.sqrMagnitude < rangeSqr;
+    }
+    private bool IsOutsideMovementRadius(Vector2 center, float radius)
+    {
+        float radiusSqr = radius * radius;
+        if (((Vector2)transform.position - center).sqrMagnitude > radiusSqr)
+            return true;
+        if (spriteTransform != null && ((Vector2)spriteTransform.position - center).sqrMagnitude > radiusSqr)
+            return true;
+        return false;
+    }
     private void HandleDirectionChange()
     {
         // Shift the initial direction based on the position of the player ship when hooked, as well as decreasing the radius based on Fishing.reelInFactor
@@ -270,26 +288,38 @@ public class FishShadow : MonoBehaviour
                 targetDirection = ((Vector2)targetBobber.transform.position - (Vector2)spriteTransform.position).normalized;
 
                 // Check if in hook range (both the transform and the sprite, since sprite is vertically offset)
-                if (Vector2.Distance(targetBobber.transform.position, transform.position) < targetBobber.hookRange
-                    || Vector2.Distance(targetBobber.spriteRenderer.transform.position, spriteTransform.position) < targetBobber.hookRange)
+                if (!IsHooked && IsWithinHookRange(targetBobber))
                 {
                     // If the fish is in hook range, hook it (if it likes the bait)
-                    if (!IsHooked && (fishData.fish.preferredBaitType == GameManager.GetPlayerStat(StatType.baitType)))
+                    if (fishData.fish.preferredBaitType == GameManager.GetPlayerStat(StatType.baitType))
                     {
                         IsHooked = true;
                         BeginFishing();
                     }
-                    // If the doesn't like the bait, we roll a chance to have it lose interest and stop investigating
-                    else if (Random.value < 0.5f) // 50% chance to lose interest, can tweak this or make it based on stats or something
+                    else
                     {
-                        targetBobber = null;
-                        Toast.ShowToast($"The fish is not interested in that bait...");
-                    }
-                    else 
-                    {
+                        if (fishData.fish.preferredBaitType == 0) // If the fish usually likes no bait, we roll a chance to have no intereset
+                        {
+                            if (Random.value < wrongBaitBadIgnoreChance)
+                            {
+                                targetBobber = null;
+                                Toast.ShowToast($"The fish doesn't seem interested..");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            if (Random.value < wrongBaitIgnoreChance) // Chance to ignore wrong bait with a preferred bait type
+                            {
+                                targetBobber = null;
+                                Toast.ShowToast($"The fish is not interested in that bait...");
+                                return;
+                            }
+                        }
+                        // Bite the wrong bait anyway
                         IsHooked = true;
                         BeginFishing();
-                        Toast.ShowToast($"Incorrect bait type, but the fish is hooked anyway!");
+                        // Toast.ShowToast($"Incorrect bait type, but the fish is hooked anyway!");
                     }
                 }
                 return;
@@ -298,8 +328,7 @@ public class FishShadow : MonoBehaviour
                 targetBobber = null;
 
             // If either the object or its sprite are outside movement radius, head back toward initial position
-            if (Vector2.Distance(transform.position, radiusPoint) > currentRadius
-                || (spriteTransform != null && Vector2.Distance(spriteTransform.position, radiusPoint) > currentRadius))
+            if (IsOutsideMovementRadius(radiusPoint, currentRadius))
             {
                 targetDirection = (radiusPoint - (Vector2)transform.position).normalized;
             }

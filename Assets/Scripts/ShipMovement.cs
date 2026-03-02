@@ -91,6 +91,13 @@ public class ShipMovement : MonoBehaviour
     // Methods
     private void GetInput()
     {
+        if (Menus.IsAnyMenuOpen || Fishing.IsMinigameActive || Fishing.IsFishing)
+        {
+            // In menus, input becomes zero so the ship slows to a stop
+            inputDirection = Vector2.zero;
+            return;
+        }
+
         inputDirection = moveAction.action.ReadValue<Vector2>();
         // If input direction changes from left to right or vice versa, start the spin animation
         if (inputDirection.x > 0 && LastDirection == -1)

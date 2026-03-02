@@ -145,7 +145,7 @@ public class Menu : MonoBehaviour
                     totalValue += GameManager.CalculateFishValue(caughtFish);
                 }
             }
-            CreateListItem(displayName, itemIcon, subtext: $"Count: {fish.Value:F2}", subtext2: $"Total Value: {totalValue:F2}", description: itemDescription, mechanicalDescription: itemMechanicalDescription);
+            CreateListItem(displayName, itemIcon, subtext: $"Count: {fish.Value}", subtext2: $"Total Value: {totalValue:F2}", description: itemDescription, mechanicalDescription: itemMechanicalDescription);
         }
     }
 
