@@ -133,6 +133,20 @@ MonoBehaviour:
       loop: 1
       audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
+    - name: Bio_Planet_Music
+      clip: {fileID: 8300000, guid: 003f8a170bafe944ca147faa446a5c5c, type: 3}
+      volume: 0.1
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
+    - name: Cloud_Planet_Music
+      clip: {fileID: 8300000, guid: 1f55e5e42018a8144a109146ad5be017, type: 3}
+      volume: 0.1
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
     - name: Cat_Ship_Music
       clip: {fileID: 8300000, guid: be483798da0ac9547b2b301bfa8efdac, type: 3}
       volume: 0.1
@@ -151,7 +165,7 @@ MonoBehaviour:
     sounds:
     - name: Ship_Hover
       clip: {fileID: 8300000, guid: 7066f11ac24197f4a8394a4936039fe9, type: 3}
-      volume: 0.33
+      volume: 0.15
       pitch: 1
       loop: 1
       audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
