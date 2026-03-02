@@ -184,6 +184,13 @@ MonoBehaviour:
       loop: 1
       audioMixer: {fileID: -3147002154482606886, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
+    - name: Ambient_Wind
+      clip: {fileID: 8300000, guid: 1355503326143e04780fe22e4cf32b0c, type: 3}
+      volume: 0.025
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -3147002154482606886, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
   - type: 3
     sounds:
     - name: Poker_Chip
