@@ -49,6 +49,7 @@ public class Menu : MonoBehaviour
     public void PopulateList(string[] items)
     {
         // Clear existing list items
+        listItems.Clear();
         foreach (Transform child in listContentArea)
         {
             Destroy(child.gameObject);
@@ -69,6 +70,7 @@ public class Menu : MonoBehaviour
     public void PopulateListWithUpgrades(List<Upgrade> upgrades)
     {
         // Clear existing list items
+        listItems.Clear();
         foreach (Transform child in listContentArea)
         {
             Destroy(child.gameObject);
@@ -84,6 +86,7 @@ public class Menu : MonoBehaviour
     public void PopulateListWithBaits(List<Bait> baits)
     {
         // Clear existing list items
+        listItems.Clear();
         foreach (Transform child in listContentArea)
         {
             Destroy(child.gameObject);
@@ -99,6 +102,7 @@ public class Menu : MonoBehaviour
     public void PopulateListWithFish(List<CaughtFish> fishTypes)
     {
         // Clear existing list items
+        listItems.Clear();
         foreach (Transform child in listContentArea)
         {
             Destroy(child.gameObject);
@@ -115,6 +119,7 @@ public class Menu : MonoBehaviour
     public void PopulateListWithFishCount(Dictionary<string, int> fishCount, List<CaughtFish> fishTypes = null)
     {
         // Clear existing list items
+        listItems.Clear();
         foreach (Transform child in listContentArea)
         {
             Destroy(child.gameObject);

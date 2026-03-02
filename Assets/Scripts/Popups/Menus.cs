@@ -117,15 +117,16 @@ public class Menus : MonoBehaviour
         if (!GameManager.MenuPopup.ReadyForInput || Transition.CurrentScreen == Transition.Screen.Main || Fishing.IsMinigameActive)
             return; // Don't allow menu input if the popup is currently animating or problems occur
 
-        if (menuAction != null && menuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.MainMenu))
+        // Menu action handles closing all menus, so it should be always active.
+        if (menuAction != null && menuAction.action.WasPressedThisFrame())
         {
             if (CurrentMenu != null)
             {
                 CloseCurrentMenu();
             }
-            else
+            else if (IsMenuOpenable(MenuType.MainMenu))
             {
-                // Only open the main menu if no menu is currently open
+                // OPEN ESCAPE MENU
                 OpenMenu(MenuType.MainMenu, priority: true);
                 CurrentMenuType = MenuType.MainMenu;
             }
@@ -138,7 +139,7 @@ public class Menus : MonoBehaviour
             }
             else
             {
-                // Otherwise, open the upgrade menu
+                // OPEN UPGRADE MENU
                 OpenMenu(MenuType.UpgradeMenu, priority: true);
                 CurrentMenuType = MenuType.UpgradeMenu;
             }
@@ -151,12 +152,27 @@ public class Menus : MonoBehaviour
             }
             else
             {
-                // Otherwise, open the inventory menu
+                // OPEN INVENTORY MENU
                 OpenMenu(MenuType.InventoryMenu, priority: true);
                 CurrentMenuType = MenuType.InventoryMenu;
             }
         }
-        // DEBUG ONLY -- These shouldn't be openable with buttons
+        else if (baitMenuAction != null && baitMenuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.BaitMenu))
+        {
+            if (CurrentMenu != null && CurrentMenuType == MenuType.BaitMenu)
+            {
+                CloseCurrentMenu();
+            }
+            else
+            {
+                // OPEN BAIT MENU
+                OpenMenu(MenuType.BaitMenu, priority: true);
+                CurrentMenuType = MenuType.BaitMenu;
+            }
+        }
+
+
+        // NOTE: DEBUG ONLY -- These shouldn't be openable with buttons
         else if (shopMenuAction != null && shopMenuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.ShopMenu))
         {
             if (CurrentMenu != null && CurrentMenuType == MenuType.ShopMenu)
@@ -165,7 +181,7 @@ public class Menus : MonoBehaviour
             }
             else
             {
-                // Otherwise, open the shop menu
+                // OPEN SHOP MENU
                 OpenMenu(MenuType.ShopMenu, priority: true);
                 CurrentMenuType = MenuType.ShopMenu;
             }
@@ -178,22 +194,9 @@ public class Menus : MonoBehaviour
             }
             else
             {
-                // Otherwise, open the quest menu
+                // OPEN QUEST MENU
                 OpenMenu(MenuType.QuestMenu, priority: true);
                 CurrentMenuType = MenuType.QuestMenu;
-            }
-        }
-        else if (baitMenuAction != null && baitMenuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.BaitMenu))
-        {
-            if (CurrentMenu != null && CurrentMenuType == MenuType.BaitMenu)
-            {
-                CloseCurrentMenu();
-            }
-            else
-            {
-                // Otherwise, open the bait menu
-                OpenMenu(MenuType.BaitMenu, priority: true);
-                CurrentMenuType = MenuType.BaitMenu;
             }
         }
         else if (settingsMenuAction != null && settingsMenuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.SettingsMenu))
@@ -204,7 +207,7 @@ public class Menus : MonoBehaviour
             }
             else
             {
-                // Otherwise, open the settings menu
+                // OPEN SETTINGS MENU
                 OpenMenu(MenuType.SettingsMenu, priority: true);
                 CurrentMenuType = MenuType.SettingsMenu;
             }
@@ -249,9 +252,11 @@ public class Menus : MonoBehaviour
             case MenuType.MainMenu: return OpenableMenus.HasFlag(MenuOpenableFlags.MainMenu);
             case MenuType.UpgradeMenu: return OpenableMenus.HasFlag(MenuOpenableFlags.UpgradeMenu);
             case MenuType.InventoryMenu: return OpenableMenus.HasFlag(MenuOpenableFlags.InventoryMenu);
+            case MenuType.BaitMenu: return OpenableMenus.HasFlag(MenuOpenableFlags.BaitMenu);
+
+            // DEBUG ONLY
             case MenuType.ShopMenu: return OpenableMenus.HasFlag(MenuOpenableFlags.ShopMenu);
             case MenuType.QuestMenu: return OpenableMenus.HasFlag(MenuOpenableFlags.QuestMenu);
-            case MenuType.BaitMenu: return OpenableMenus.HasFlag(MenuOpenableFlags.BaitMenu);
             case MenuType.SettingsMenu: return OpenableMenus.HasFlag(MenuOpenableFlags.SettingsMenu);
             default: Debug.LogError($"Unhandled menu type {menuType} in IsMenuOpenable!"); return false;
         }
@@ -295,9 +300,11 @@ public class Menus : MonoBehaviour
             case MenuType.MainMenu: return menuPrefab;
             case MenuType.UpgradeMenu: return upgradeMenuPrefab;
             case MenuType.InventoryMenu: return inventoryMenuPrefab;
+            case MenuType.BaitMenu: return baitMenuPrefab;
+
+            // DEBUG ONLY
             case MenuType.ShopMenu: return shopMenuPrefab;
             case MenuType.QuestMenu: return questMenuPrefab;
-            case MenuType.BaitMenu: return baitMenuPrefab;
             case MenuType.SettingsMenu: return settingsMenuPrefab;
             default: Debug.LogError($"Unhandled menu type {menuType} in GetPrefabForMenuType!"); return null;
         }

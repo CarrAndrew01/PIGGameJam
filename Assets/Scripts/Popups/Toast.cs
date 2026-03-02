@@ -133,12 +133,16 @@ public class Toast : Popup
                 // Rebuild the queue with the updated items
                 Instance.toastStack = new Generic.Queue<ToastData>(arr);
 
-                if (Instance.childCanvas != null)
+                // Check if the currently visible toast matches the incoming base, and if so, reset its timer
+                if (Instance.childCanvas != null && Instance.toastStack.Count > 0)
                 {
-                    ToastUI toastUI = Instance.childCanvas.GetComponentInChildren<ToastUI>();
-                    if (toastUI != null)
+                    if (Instance.toastStack.Peek().message == message)
                     {
-                        toastUI.ResetTimer();
+                        ToastUI toastUI = Instance.childCanvas.GetComponentInChildren<ToastUI>();
+                        if (toastUI != null)
+                        {
+                            toastUI.ResetTimer();
+                        }
                     }
                 }
 
