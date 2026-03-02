@@ -235,5 +235,19 @@ MonoBehaviour:
       loop: 0
       audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
+    - name: Card_Swipe1
+      clip: {fileID: 8300000, guid: e444852f3e0199949bec4920225b834a, type: 3}
+      volume: 0.35
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
+    - name: Card_Swipe2
+      clip: {fileID: 8300000, guid: dac2030e1acdb7d499b707bd876fe5a9, type: 3}
+      volume: 0.35
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
   effectiveMuteThreshold: -18
