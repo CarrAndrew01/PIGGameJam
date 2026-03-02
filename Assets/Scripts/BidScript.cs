@@ -6,9 +6,13 @@ public class BidScript : MonoBehaviour
 {
     // need to plan how much cash = a token and integrate taking in and out cash
     public static int bidTokens = 0;
+    public static float bidTokenValue = 5f;
+
     [HideInInspector]
-    public static float bidTokenValue = 5;
     public int maxBid = 5;
+
+    public float Wager => bidTokens * bidTokenValue;
+
 
     public GameObject tokenPrefab;
     public List<GameObject> tokens;
@@ -30,23 +34,29 @@ public class BidScript : MonoBehaviour
         BlackjackScript.resetEvent -= ResetValues;
     }
 
+    private void OnDestroy()
+    {
+        bidTokens = 0;
+    }
+
 
     private void Start()
     {
-
+        bidTokenValue = GameManager.GetPlayerStat(StatType.blackjackWager);
+        ResetTextValues();
     }
     void ResetTextValues()
     {
         playerTotalCash.text = $"CASH - ${GameManager.Money:f2}";
-        playerWager.text = "WAGER - $0";
+        playerWager.text = $"WAGER - ${Wager:f2}";
     }
     public void AddToBid()
     {
-        if (GameManager.Money >= 5)
+        if (GameManager.Money >= bidTokenValue)
         {
             if (bidTokens < maxBid)
             {
-                GameManager.AdjustMoney(-5);
+                GameManager.AdjustMoney(-bidTokenValue);
                 GameObject newToken = Instantiate(tokenPrefab, transform);
                 if (bidSpawnTransform != null)
                 {
@@ -66,7 +76,7 @@ public class BidScript : MonoBehaviour
             tokens.Remove(tokens[0]);
 
             bidTokens--;
-            GameManager.AdjustMoney(5);
+            GameManager.AdjustMoney(bidTokenValue);
             ResetTextValues();
         }
     }

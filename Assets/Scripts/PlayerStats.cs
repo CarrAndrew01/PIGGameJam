@@ -22,6 +22,7 @@ public enum StatType
     lavaPlanet,
     cloudPlanet,
     bioPlanet,
+    blackjackWager,
 }
 
 /// <summary>

@@ -401,6 +401,8 @@ MonoBehaviour:
     price: 20
   - upgrade: {fileID: 11400000, guid: 990978738cf441e42af6a59a2e60677c, type: 2}
     price: 6
+  - upgrade: {fileID: 11400000, guid: 67c8fe14a20c13947a5a9a96f76d1cf3, type: 2}
+    price: 50
 --- !u!1 &7300396583188152871
 GameObject:
   m_ObjectHideFlags: 0
