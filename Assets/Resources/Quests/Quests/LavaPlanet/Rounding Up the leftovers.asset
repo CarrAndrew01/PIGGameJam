@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9499bf2fb1d0e9219990631173add5c7, type: 3}
+  m_Name: Rounding Up the leftovers
+  m_EditorClassIdentifier: 
+  questName: Rounding up the Leftovers
+  description: Well, seems we left a couple of catches off the list. Might as well
+    round up whatevers left- I'll give you a very special upgrade to your ship in
+    return.
+  completedStatus: 2
+  type: 0
+  questFish:
+  - fishType: {fileID: 11400000, guid: 2d8ebcd1c7df35e5f98451dc82e3d65d, type: 2}
+    quantity: 2
+  - fishType: {fileID: 11400000, guid: 0cbb54362247b714592d3f193df5e35d, type: 2}
+    quantity: 2
+  rewardUpgrade: {fileID: 11400000, guid: 83e85021eda82715295f0065bfa736c4, type: 2}
+  moneyReward: 25
+  nextQuest: []

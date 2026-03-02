@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9499bf2fb1d0e9219990631173add5c7, type: 3}
+  m_Name: A Whale of a Time
+  m_EditorClassIdentifier: 
+  questName: A Whale of a Time
+  description: 'Well done on your previous assignments. My chef is badgering me for
+    new meats. Specifically, he begs me day in and day out to provide him with a
+    Wale from the depths of Boreala. Succeed, and I''ll grant you means to travel
+    onwards to Nimbus.
+
+    \nOf course, you will need to purchase specialized bait
+    first- ask my friend here.'
+  completedStatus: 2
+  type: 0
+  questFish:
+  - fishType: {fileID: 11400000, guid: 902095158271bed2d9120bbea819e7c3, type: 2}
+    quantity: 1
+  rewardUpgrade: {fileID: 11400000, guid: 252e558c526e0df488f5e606adfaa5d4, type: 2}
+  moneyReward: 0
+  nextQuest:
+  - {fileID: 11400000, guid: 5afe022a2ca08bbb0ad85bab4b573a3d, type: 2}
+  - {fileID: 11400000, guid: 6de714ad809f95c58b0fc3f9a2aad0a2, type: 2}

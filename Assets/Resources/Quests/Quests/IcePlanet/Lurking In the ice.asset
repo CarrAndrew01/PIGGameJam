@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9499bf2fb1d0e9219990631173add5c7, type: 3}
+  m_Name: Lurking In the ice
+  m_EditorClassIdentifier: 
+  questName: Lurking in the Ice
+  description: Well done! If you'd like a reward that might make it easier to catch
+    some of the more difficult creatures of this system, catch me a Lurktoad. I've
+    heard they're rare- some bait might help.
+  completedStatus: 2
+  type: 0
+  questFish:
+  - fishType: {fileID: 11400000, guid: 82c7752f2703e8655b5f5202c1a7348f, type: 2}
+    quantity: 1
+  rewardUpgrade: {fileID: 11400000, guid: d38b5293740419043b66f9985dfa7c36, type: 2}
+  moneyReward: 0
+  nextQuest: []

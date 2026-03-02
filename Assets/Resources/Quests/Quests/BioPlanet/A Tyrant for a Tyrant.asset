@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9499bf2fb1d0e9219990631173add5c7, type: 3}
+  m_Name: A Tyrant for a Tyrant
+  m_EditorClassIdentifier: 
+  questName: A tyrant for a tyrant
+  description: You have exceeded all our expectations! Since you've travelled to
+    three of the four planets in this system, it'd seem a shame not to go onwards,
+    to the last, no? Get my chef a Tyrantworm- who knows what for, they taste like
+    mud and take up all the space in our pantry- and I'll upgrade your shielding
+    to cope with the harsh heat of Firax.
+  completedStatus: 2
+  type: 0
+  questFish:
+  - fishType: {fileID: 11400000, guid: 3fc782acc6737645988360f3cfd41c9b, type: 2}
+    quantity: 1
+  rewardUpgrade: {fileID: 11400000, guid: b64d6ce5f2ff03f46a1a029cb5d8f44d, type: 2}
+  moneyReward: 0
+  nextQuest:
+  - {fileID: 11400000, guid: 4c3a0434f69c16420b672056d31d27d2, type: 2}

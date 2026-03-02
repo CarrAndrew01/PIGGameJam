@@ -15,7 +15,7 @@ MonoBehaviour:
   upgradeName: Porous Rock
   description: A rock with many holes in its surface. Inside you can see trace amounts
     of glittery mineral.
-  mechDescriptionOverride: Lures the Lava Worm
+  mechDescriptionOverride: Lures Lava Worms
   icon: {fileID: 0}
   type: 9
   modifierType: 0

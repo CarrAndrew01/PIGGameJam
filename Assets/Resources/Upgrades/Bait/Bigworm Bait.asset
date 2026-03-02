@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Bigworm Bait
   m_EditorClassIdentifier: 
   upgradeName: Fungal Lamp
-  description: The glowing remains of some bioluminescent mushroom.
-  mechDescriptionOverride: Lures the Bigworm
+  description: The glowing remains of a bioluminescent mushroom.
+  mechDescriptionOverride: Lures the Tyrantworm
   icon: {fileID: 0}
   type: 9
   modifierType: 0

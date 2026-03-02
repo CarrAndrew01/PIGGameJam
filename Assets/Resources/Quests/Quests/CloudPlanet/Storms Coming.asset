@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9499bf2fb1d0e9219990631173add5c7, type: 3}
+  m_Name: Storms Coming
+  m_EditorClassIdentifier: 
+  questName: Storms Coming
+  description: Well, you're doing quite well now. Go and get a taste of this new
+    planet- if you succeed, I'll know you're the real deal.
+  completedStatus: 2
+  type: 0
+  questFish:
+  - fishType: {fileID: 11400000, guid: 733bf908623ce0dfab332383ff0c168e, type: 2}
+    quantity: 2
+  - fishType: {fileID: 11400000, guid: 8a57a5828c3aeeaf1979ea022e66d646, type: 2}
+    quantity: 1
+  rewardUpgrade: {fileID: 0}
+  moneyReward: 40
+  nextQuest:
+  - {fileID: 11400000, guid: 9fbca90128915665e808424e4273b6c1, type: 2}
+  - {fileID: 11400000, guid: 9d4171f11c4fb7df59d4eb3bdbf9be49, type: 2}

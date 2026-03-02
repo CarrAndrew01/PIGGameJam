@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9499bf2fb1d0e9219990631173add5c7, type: 3}
+  m_Name: Down To the Depths
+  m_EditorClassIdentifier: 
+  questName: Down to the Depths
+  description: 'Excellent work on my last assignment- my chef has never been happier.
+    However, he desires another rare creature- one of the famed Deepdwellers of Boreala-
+    for his next culinary "project". They dwell all the way at the core of Nimbus,
+    so you''ll need an extremely heavy lure to have a hope of finding one. '
+  completedStatus: 2
+  type: 0
+  questFish:
+  - fishType: {fileID: 11400000, guid: 8282cf8c4fbdb3dffbe846cc648b9a9c, type: 2}
+    quantity: 1
+  rewardUpgrade: {fileID: 11400000, guid: 36d5b148a99961a498d297132ad42cca, type: 2}
+  moneyReward: 0
+  nextQuest:
+  - {fileID: 11400000, guid: e7e89cce4e5075a8595c60db476e0355, type: 2}

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9499bf2fb1d0e9219990631173add5c7, type: 3}
+  m_Name: Prove Your Worth
+  m_EditorClassIdentifier: 
+  questName: Prove your worth!
+  description: Hail, furless traveller- I have never seen a creature like you before.
+    We are the Nyaalines, and we are gastronomers, gluttons and epicures all. This
+    system is home to many delectable delights- if you can catch some for us, perhaps
+    our relationship can be... profitable. Take this mission as a sample, and we'll
+    see if you're worth our time.
+  completedStatus: 2
+  type: 0
+  questFish:
+  - fishType: {fileID: 11400000, guid: f313a96d1f6d8bac7b75a26e0460a881, type: 2}
+    quantity: 1
+  - fishType: {fileID: 11400000, guid: 7668650b99818b3af8a2a0b93b59c358, type: 2}
+    quantity: 1
+  rewardUpgrade: {fileID: 0}
+  moneyReward: 25
+  nextQuest:
+  - {fileID: 11400000, guid: b15728856cf3ad562936afb90f178ada, type: 2}
+  - {fileID: 11400000, guid: 914c694957397a24eae86e9e4a810a66, type: 2}
