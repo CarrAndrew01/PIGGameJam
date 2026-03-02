@@ -10,7 +10,7 @@ public class Bobber : MonoBehaviour
     public static float summonTimer = 0f;
     public static float timeTillSummon = 0f;
     public static Fish fishToSummon;
-    
+
     // State
     [Header("State")]
     [ReadOnly] public FishShadow currentFishShadow; // The fish shadow the player is currently trying to catch, if any
@@ -18,8 +18,6 @@ public class Bobber : MonoBehaviour
     private Vector2 currentVelocity; // Current velocity of the bobber, used for movement
     [ShowInInspector, ReadOnly]
     private bool isInWater = false;
-    [ShowInInspector, ReadOnly]
-    private bool isReelingIn = false;
     [ShowInInspector, ReadOnly]
     private bool isHooked = false;
     private float timeInWater = 0f; // Tracks how long the bobber has been in water
@@ -29,6 +27,8 @@ public class Bobber : MonoBehaviour
     private Vector2 cachedShadowSpritePosition;
 
     public bool isMinigameActive = false;
+    [ShowInInspector, ReadOnly]
+    public bool IsReelingIn { get; private set; } = false;
 
     // Variables
     [Header("Bobber Settings")]
@@ -85,7 +85,7 @@ public class Bobber : MonoBehaviour
     void Update()
     {
         // Bobbing is applied to sprite, therefore not in fixed update
-        if (isInWater && !isReelingIn)
+        if (isInWater && !IsReelingIn)
         {
             if (timeInWater < bobBeginWait)
             {
@@ -118,7 +118,7 @@ public class Bobber : MonoBehaviour
     void FixedUpdate()
     {
         // Physics is in fixed update
-        if (isReelingIn)
+        if (IsReelingIn)
         {
             ApplyVelocity();
             ReelInBobber();
@@ -171,7 +171,7 @@ public class Bobber : MonoBehaviour
     // Methods
     public void BeginReelIn()
     {
-        isReelingIn = true;
+        IsReelingIn = true;
         BobberReturning.Invoke("Reel");
         // plays the reeling sound.
         AudioManager.playSound?.Invoke("Reeling");
@@ -266,7 +266,8 @@ public class Bobber : MonoBehaviour
                 {
                     summonTimer = 0f;
                     Debug.Log($"Summoning a fish in {summonTime} seconds.");
-                } else
+                }
+                else
                 {
                     Toast.ShowToast($"That bait doesn't seem effective here...");
                 }

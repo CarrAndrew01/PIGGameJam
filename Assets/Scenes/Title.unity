@@ -7037,6 +7037,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2121229537046814194, guid: 1bad5018e21c41e48859bc478eba16f9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 691088280}
+    - target: {fileID: 2121229537046814194, guid: 1bad5018e21c41e48859bc478eba16f9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TransitionToMainMenuFromSettings
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121229537046814194, guid: 1bad5018e21c41e48859bc478eba16f9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Transition, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2148624206890147160, guid: 1bad5018e21c41e48859bc478eba16f9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

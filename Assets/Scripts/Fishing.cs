@@ -17,8 +17,9 @@ public class Fishing : MonoBehaviour
 
     private static bool IsGamePlaying => UnityEngine.Application.isPlaying; // Check if the game is currently running (not in editor mode or paused)
     [ShowInInspector, ReadOnly] public static bool CanFish => IsGamePlaying && (IsMinigameActive == false || Instance.IsCharging) && Instance.CurrentBobber == null && !Menus.IsAnyMenuOpen;
-    [ShowInInspector, ReadOnly] public static bool IsFishing => IsGamePlaying && Instance.CurrentBobber != null;
+    [ShowInInspector, ReadOnly] public static bool IsFishing => Instance.CurrentBobber != null;
     [ShowInInspector, ReadOnly] public static bool IsMinigameActive => IsGamePlaying && GameManager.MinigamePopup != null && GameManager.MinigamePopup.childCanvas != null;
+    [ShowInInspector, ReadOnly] public static bool IsReelingIn => IsFishing && Instance.CurrentBobber.IsReelingIn;
     public static FishShadow LastFishShadow { get => Instance.lastFishShadow; set => Instance.lastFishShadow = value; }
     public static float reelInFactor = 0f; // Set by the current minigame
 

@@ -222,4 +222,4 @@ MonoBehaviour:
       audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
-  effectiveMuteThreshold: -40
+  effectiveMuteThreshold: -18
