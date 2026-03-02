@@ -196,4 +196,9 @@ public class Transition : MonoBehaviour
         OnTransition?.Invoke();
         FadeCoroutineStarter(UnFadeTextCoroutine());
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
