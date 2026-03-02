@@ -1,6 +1,5 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
 
 /// <summary>
 /// Class representing a single item in a list, such as an upgrade or inventory item.
