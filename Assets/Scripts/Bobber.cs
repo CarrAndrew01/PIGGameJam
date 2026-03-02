@@ -67,7 +67,11 @@ public class Bobber : MonoBehaviour
     public static Action<string> BobberReturning;
     public static Action<string> BobberReturned;
 
-
+    // Stops reeling from playing infinitely if you leave the scene while reeling.
+    private void OnDestroy()
+    {
+        AudioManager.stopSound?.Invoke("Reeling");
+    }
     void Start()
     {
         AudioManager.playSound?.Invoke("Throw_Rod");
