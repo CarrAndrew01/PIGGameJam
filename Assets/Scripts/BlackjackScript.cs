@@ -257,16 +257,20 @@ public class BlackjackScript : MonoBehaviour
             case GameEndState.WIN:
                 value *= 2;
                 Toast.ShowToast($"You win!", icon: tokenIcon, substring1: $"${value}");
+                AudioManager.playSound?.Invoke("Poker_Chip_End");
                 break;
             case GameEndState.PUSH:
                 Toast.ShowToast($"You pushed!", icon: tokenIcon, substring1: $"${value}");
+                // AudioManager.playSound?.Invoke("Poker_Chip_End");
                 break;
             case GameEndState.LOSE:
                 Toast.ShowToast($"You lost!", icon: tokenIcon, substring1: $"-${value}");
+                // AudioManager.playSound?.Invoke("Poker_Chip_Remove");
                 value = 0;
                 break;
         }
         GameManager.AdjustMoney(value);
+        AudioManager.playSound?.Invoke("Poker_Chip_End");
         StartCoroutine(ResetCoroutine());
     }
     IEnumerator ResetCoroutine()

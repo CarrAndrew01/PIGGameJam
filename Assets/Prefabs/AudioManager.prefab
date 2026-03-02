@@ -228,5 +228,12 @@ MonoBehaviour:
       loop: 0
       audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
+    - name: Poker_Chip_End
+      clip: {fileID: 8300000, guid: 095b6ec8c8ff09145ace318f63f96cb7, type: 3}
+      volume: 0.5
+      pitch: 1.25
+      loop: 0
+      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
   audioMixer: {fileID: 24100000, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
   effectiveMuteThreshold: -18
