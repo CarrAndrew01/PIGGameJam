@@ -22,8 +22,9 @@ public class WhackAMole : MonoBehaviour
 
 
     //Scoring variables
-     public int score = 0;
-     public int targetScore = 8;
+    public int score = 0;
+    public int targetScore = 8;
+    public bool gameOver = false;
 
     //UI stuff
     public TextMeshProUGUI scoreText;
@@ -77,7 +78,7 @@ public class WhackAMole : MonoBehaviour
         {
             // localPoint is now in button's local space (pivot-aware)
             // buttonRect.rect is the local bounds with (0,0) at pivot, extending by size/2 in each direction
-            
+
             return buttonRect.rect.Contains(localPoint);
         }
         return false;
@@ -87,6 +88,9 @@ public class WhackAMole : MonoBehaviour
 
     void Update()
     {
+        if (gameOver)
+            return;
+        
         //check if we;re using joystick
 
         //yeah, I'm spaghettying again
@@ -106,8 +110,8 @@ public class WhackAMole : MonoBehaviour
         {
             //Read the current value of the left stick as a Vector2
             Vector3 moveDirection = gamepad.leftStick.ReadValue();
-            
-            if(Vector2.Distance(moveDirection, new Vector2(0,0)) > 0.001f) 
+
+            if (Vector2.Distance(moveDirection, new Vector2(0, 0)) > 0.001f)
             {
                 //basically, we now know we're using the joystick
                 if (!usingJoystick)
@@ -118,34 +122,37 @@ public class WhackAMole : MonoBehaviour
 
                     Vector2 pos;
 
-                    if(RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
                     GetComponentInParent<Canvas>().transform as RectTransform,
                     Input.mousePosition,
                     GetComponentInParent<Canvas>().worldCamera,   // null works for Screen Space - Overlay
-                    out pos)){
+                    out pos))
+                    {
                         fakeCursor.GetComponent<RectTransform>().localPosition = pos;
                     }
-                }            
-                fakeCursor.transform.position += moveDirection * 2; 
+                }
+                fakeCursor.transform.position += moveDirection * 2;
             }
         }
 
         var mouse = Mouse.current;
-        if(mouse != null)
+        if (mouse != null)
         {
             Vector3 mouseDirection = mouse.delta.ReadValue();
             //if we move the mouse, just have the other cursor follow it around 
-            if(Vector2.Distance(mouseDirection, new Vector2(0, 0)) > 0.001f)
+            if (Vector2.Distance(mouseDirection, new Vector2(0, 0)) > 0.001f)
             {
-                if(usingJoystick){
+                if (usingJoystick)
+                {
                     usingJoystick = false;
                     Cursor.visible = true;
                     fakeCursor.SetActive(false);
-                }       
+                }
             }
         }
 
-        if(usingJoystick && IsPivotOverButton() && action.action.WasPressedThisFrame()){
+        if (usingJoystick && IsPivotOverButton() && action.action.WasPressedThisFrame())
+        {
             OnClicked(currentPopupTarget); //for joystick
         }
 
@@ -154,15 +161,16 @@ public class WhackAMole : MonoBehaviour
         popDownTimer += Time.deltaTime;
         totalGameTimer -= Time.deltaTime;
 
-        string gameTimerRounded = totalGameTimer.ToString("F1"); 
+        string gameTimerRounded = totalGameTimer.ToString("F1");
         timerText.text = gameTimerRounded;
 
-        if(totalGameTimer <= 0)
+        if (totalGameTimer <= 0)
         {
             fishShadow.EndFishing(false);
+            gameOver = true;
         }
 
-        if(popDownTimer > currentTimeTarget)
+        if (popDownTimer > currentTimeTarget)
         {
             //we failed, pop down and start again
             Debug.Log("Fail!");
@@ -173,7 +181,7 @@ public class WhackAMole : MonoBehaviour
 
     public void OnClicked(GameObject go)
     {
-        if(go.transform.parent.gameObject != currentPopupTarget)
+        if (go.transform.parent.gameObject != currentPopupTarget)
         {
             return;
         }
@@ -181,7 +189,7 @@ public class WhackAMole : MonoBehaviour
         currentPopupTarget.GetComponentInParent<Animator>().SetBool("PopUp", false);
         UpdateScore(1);
 
-        if(score >= targetScore)
+        if (score >= targetScore)
         {
             Debug.Log("we win!");
             fishShadow.EndFishing(true);
@@ -194,7 +202,7 @@ public class WhackAMole : MonoBehaviour
         }
     }
 
-    
+
 
     //Randomly select which one will pop up, then play the animation
     void PopUp()
@@ -209,12 +217,12 @@ public class WhackAMole : MonoBehaviour
     void RandomizeSelection()
     {
         int rand = Random.Range(0, circles.Count);
-        
-        while(circles[rand].transform.GetChild(0).gameObject == currentPopupTarget)
+
+        while (circles[rand].transform.GetChild(0).gameObject == currentPopupTarget)
         {
             rand = Random.Range(0, circles.Count); //keep rolling until we dont have the same one that we just clicked
         }
-        
+
         currentPopupTarget = circles[rand].transform.GetChild(0).gameObject;
     }
 }
