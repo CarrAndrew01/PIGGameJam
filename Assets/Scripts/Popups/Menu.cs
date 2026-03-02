@@ -108,7 +108,7 @@ public class Menu : MonoBehaviour
         for (int i = 0; i < fishTypes.Count; i++)
         {
             CaughtFish caughtFish = fishTypes[i];
-            CreateListItem(caughtFish.fish.fishName, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description, mechanicalDescription: caughtFish.planetOfOrigin, index: i);
+            CreateListItem(caughtFish.fish.fishName, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description, mechanicalDescription: $"Planet of origin: {caughtFish.planetOfOrigin}", index: i);
         }
     }
 
@@ -133,7 +133,7 @@ public class Menu : MonoBehaviour
                 CaughtFish caughtFish = fishTypes.Find(f => f.fish.name == fish.Key);
                 itemIcon = caughtFish.fish.sprite;
                 itemDescription = caughtFish.fish.description;
-                itemMechanicalDescription = $"Origin: {caughtFish.planetOfOrigin}";
+                itemMechanicalDescription = $"Planet of origin: {caughtFish.planetOfOrigin}";
                 if (caughtFish.fish != null) displayName = caughtFish.fish.fishName;
             }
             // Get total value by adding together the value of each fish
