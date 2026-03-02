@@ -40,9 +40,11 @@ public class AmbientSoundGenerator : MonoBehaviour
                     break;
                 case AreaType.Bio_Planet:
                     AudioManager.playSound?.Invoke("Bio_Planet_Music");
+                    AudioManager.playSound?.Invoke("Water");
                     break;
                 case AreaType.Cloud_Planet:
                     AudioManager.playSound?.Invoke("Cloud_Planet_Music");
+                    AudioManager.playSound?.Invoke("Ambient_Wind");
                     break;
                 case AreaType.Cat_Ship:
                     AudioManager.playSound?.Invoke("Cat_Ship_Music");
@@ -70,9 +72,11 @@ public class AmbientSoundGenerator : MonoBehaviour
                     break;
                 case AreaType.Bio_Planet:
                     AudioManager.stopSound?.Invoke("Bio_Planet_Music");
+                    AudioManager.stopSound?.Invoke("Water");
                     break;
                 case AreaType.Cloud_Planet:
                     AudioManager.stopSound?.Invoke("Cloud_Planet_Music");
+                    AudioManager.stopSound?.Invoke("Ambient_Wind");
                     break;
                 case AreaType.Cat_Ship:
                     AudioManager.stopSound?.Invoke("Cat_Ship_Music");
