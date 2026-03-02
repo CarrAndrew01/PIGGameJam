@@ -6,6 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Collections;
 using Unity.Mathematics;
+using UnityEngine.Rendering;
 
 public class BlackjackScript : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class BlackjackScript : MonoBehaviour
 
     bool didStand = false;
     bool didBust = false;
+    bool dealerDidBust = false;
+
+    bool playerCanPlay = false;
     // -1 means no cards placed
     int playerCardIndex = -1;
     int dealerCardIndex = -1;
@@ -48,6 +52,8 @@ public class BlackjackScript : MonoBehaviour
     public static event Reset resetEvent;
 
 
+
+
     public GameObject biddingUI;
     public GameObject gameUI;
 
@@ -68,36 +74,43 @@ public class BlackjackScript : MonoBehaviour
     private void Start()
     {
         gameUI.SetActive(false);
-        // dealCards?.Invoke();
-        // deals 2 cards for player + 1 card for dealer
-        // CreateNewCard(true, ref playerCardIndex, ref playerCards);
-        // CreateNewCard(true, ref playerCardIndex, ref playerCards);
-        // CreateNewCard(false, ref dealerCardIndex, ref dealerCards);
     }
     void BeginGame()
     {
         biddingUI.SetActive(false);
         gameUI.SetActive(true);
+        dealCards?.Invoke();
         StartCoroutine(BeginningCoroutine());
     }
     IEnumerator BeginningCoroutine()
     {
-        yield return new WaitForSeconds(2.5f);
+        playerCanPlay = false;
+        yield return new WaitForSeconds(1.5f);
         yield return new WaitForSeconds(1f);
         CreateNewCard(true, ref playerCardIndex, ref playerCards);
         yield return new WaitForSeconds(1f);
         CreateNewCard(true, ref playerCardIndex, ref playerCards);
         yield return new WaitForSeconds(1f);
         CreateNewCard(false, ref dealerCardIndex, ref dealerCards);
+        playerCanPlay = true;
+        // if player gets 21 automatically
+        if (RecalculateScore(playerCards, playerCardIndex) == 21)
+        {
+            Stand();
+        }
     }
     public void Hit()
     {
+        if (!playerCanPlay) return;
         if (didBust) return;
         if (didStand) return;
         CreateNewCard(true, ref playerCardIndex, ref playerCards);
     }
     public void Stand()
     {
+        if (!playerCanPlay) return;
+        if (didBust) return;
+        if (didStand) return;
         didStand = true;
         // if dealer < 17 OR beat player, hit
         while (dealerCardIndex < 4)
@@ -105,6 +118,35 @@ public class BlackjackScript : MonoBehaviour
             // if dealer score >= 17, break
             if (currentDealerValue >= 17) break;
             CreateNewCard(false, ref dealerCardIndex, ref dealerCards);
+
+        }
+        CalculateWinLogic();
+    }
+    void CalculateWinLogic()
+    {
+        if (currentDealerValue > BUSTNUMBER)
+        {
+            dealerDidBust = true;
+        }
+        if (currentDealerValue == currentPlayerValue)
+        {
+            // TODO add push
+            EndGame(GameEndState.PUSH);
+        }
+        else if (currentDealerValue < currentPlayerValue)
+        {
+            EndGame(GameEndState.WIN);
+        }
+        else if (currentDealerValue > currentPlayerValue)
+        {
+            if (dealerDidBust)
+            {
+                EndGame(GameEndState.WIN);
+            }
+            else
+            {
+                EndGame(GameEndState.LOSE);
+            }
         }
     }
     public void CreateNewCard(bool player, ref int cardIndex, ref List<GameObject> cards)
@@ -127,10 +169,11 @@ public class BlackjackScript : MonoBehaviour
             if (currentPlayerValue > BUSTNUMBER)
             {
                 didBust = true;
+                EndGame(GameEndState.LOSE);
             }
             else if (currentPlayerValue == BUSTNUMBER)
             {
-                didStand = true;
+                Stand();
             }
         }
         else
@@ -143,14 +186,6 @@ public class BlackjackScript : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            resetEvent?.Invoke();
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            PayOut();
-        }
     }
 
     public int RecalculateScore(List<GameObject> cards, int cardIndex)
@@ -191,6 +226,7 @@ public class BlackjackScript : MonoBehaviour
         currentDealerValue = 0;
         didStand = false;
         didBust = false;
+        dealerDidBust = false;
         // should always be 0
         playerScoreText.text = "Score: " + currentPlayerValue.ToString();
         dealerScoreText.text = "Dealer Score: " + currentDealerValue.ToString();
@@ -203,9 +239,32 @@ public class BlackjackScript : MonoBehaviour
         gameUI.SetActive(false);
     }
 
-    void PayOut()
+    void EndGame(GameEndState state)
     {
-        GameManager.AdjustMoney(BidScript.bidTokens * BidScript.bidTokenValue);
+        playerCanPlay = false;
+
+        float value = BidScript.bidTokens * BidScript.bidTokenValue;
+
+        switch (state)
+        {
+            case GameEndState.WIN:
+                GameManager.AdjustMoney(value * 2);
+                break;
+            case GameEndState.PUSH:
+                GameManager.AdjustMoney(value);
+                break;
+            case GameEndState.LOSE:
+                break;
+        }
+        StartCoroutine(ResetCoroutine());
+    }
+    IEnumerator ResetCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+        resetEvent.Invoke();
+        yield return new WaitForSeconds(3f);
+        StartWager();
+
     }
 
     // void CreateNewCard(bool player)
@@ -318,4 +377,10 @@ public enum BlackjackStates
     PLAYING_GAME,
     PAYOUT,
     RESET
+}
+public enum GameEndState
+{
+    WIN,
+    LOSE,
+    PUSH
 }

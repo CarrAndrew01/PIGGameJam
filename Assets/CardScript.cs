@@ -18,24 +18,30 @@ public class CardScript : MonoBehaviour
     public List<Sprite> SUITS = new List<Sprite>();
 
     public Animator cardAnimator;
-    public Vector2 cardPilePosition;
+    Vector2 cardPilePosition;
     public Vector2 intendedPosition;
-    public bool moving = true;
+    [SerializeField]
+    Vector2 currentMoveTarget;
+    public bool moving = false;
     public GameObject catHandPrefab;
+
+    float maxSpeed = 1000;
 
     private void OnEnable()
     {
-        BlackjackScript.dealCards += Move;
+        BlackjackScript.dealCards += MoveToCardPos;
         BlackjackScript.resetEvent += ResetCard;
     }
     private void OnDisable()
     {
-        BlackjackScript.dealCards -= Move;
-        BlackjackScript.resetEvent += ResetCard;
+        BlackjackScript.dealCards -= MoveToCardPos;
+        BlackjackScript.resetEvent -= ResetCard;
     }
     private void Start()
     {
         cardAnimator = GetComponent<Animator>();
+        cardPilePosition = transform.localPosition;
+        currentMoveTarget = intendedPosition;
     }
     public void SetCard()
     {
@@ -94,38 +100,41 @@ public class CardScript : MonoBehaviour
         // return 1-9
         return num;
     }
-    void Move()
-    {
-        moving = true;
-    }
+
+    // public Vector2 cardPilePosition;
+    // public Vector2 intendedPosition;
+
+
     // slowly moves cards out to position
     void Movement()
     {
-        float step = 600 * Time.deltaTime;
-        transform.localPosition = Vector3.MoveTowards(transform.localPosition, intendedPosition, step);
-        if (Vector3.Distance(transform.localPosition, intendedPosition) < 0.001f)
+        float step = (2f * Vector2.Distance(transform.localPosition, currentMoveTarget)) * Time.deltaTime;
+        transform.localPosition = Vector3.MoveTowards(transform.localPosition, currentMoveTarget, step);
+        if (Vector3.Distance(transform.localPosition, currentMoveTarget) < 0.001f)
         {
             moving = false;
         }
     }
     private void Update()
     {
-        if (moving)
-        {
-            Movement();
-        }
+        Movement();
+    }
+
+    void MoveToCardPos()
+    {
+        currentMoveTarget = intendedPosition;
     }
     void ResetCard()
     {
         cardAnimator.SetTrigger("Reset");
         StartCoroutine(resetTrigger());
-
     }
     // fixes an issue where triggers were held
     IEnumerator resetTrigger()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         cardAnimator.ResetTrigger("Reset");
+        currentMoveTarget = cardPilePosition;
     }
 
 }

@@ -21,7 +21,21 @@ public class BidScript : MonoBehaviour
     public TextMeshProUGUI playerWager;
 
 
+    private void OnEnable()
+    {
+        BlackjackScript.resetEvent += ResetValues;
+    }
+    private void OnDisable()
+    {
+        BlackjackScript.resetEvent -= ResetValues;
+    }
+
+
     private void Start()
+    {
+
+    }
+    void ResetTextValues()
     {
         playerTotalCash.text = "CASH - $" + GameManager.Money.ToString();
         playerWager.text = "WAGER - $0";
@@ -63,9 +77,18 @@ public class BidScript : MonoBehaviour
         // calls match start on blackjack script
         if (bidTokens > 0)
         {
-            Debug.Log("HELLO");
             wagerComplete?.Invoke();
         }
+    }
+    void ResetValues()
+    {
+        bidTokens = 0;
+        foreach (var token in tokens)
+        {
+            Destroy(token);
+        }
+        tokens.Clear();
+        ResetTextValues();
     }
 
 }
