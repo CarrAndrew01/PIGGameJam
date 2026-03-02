@@ -284,7 +284,7 @@ public class BlackjackScript : MonoBehaviour
     }
     public void ReturnToHome()
     {
-        SceneManager.LoadScene("Jack's Minigame");
+        SceneManager.LoadScene("Cat Ship");
     }
 
     // void CreateNewCard(bool player)

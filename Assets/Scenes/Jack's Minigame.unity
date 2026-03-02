@@ -5296,7 +5296,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2015700435}
         m_TargetAssemblyTypeName: BlackjackScript, Assembly-CSharp
-        m_MethodName: Hit
+        m_MethodName: ReturnToHome
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
