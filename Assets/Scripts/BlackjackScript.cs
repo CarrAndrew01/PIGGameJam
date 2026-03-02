@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 using System.Collections;
 using Unity.Mathematics;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class BlackjackScript : MonoBehaviour
 {
@@ -280,6 +281,10 @@ public class BlackjackScript : MonoBehaviour
         yield return new WaitForSeconds(3f);
         StartWager();
 
+    }
+    public void ReturnToHome()
+    {
+        SceneManager.LoadScene("Jack's Minigame");
     }
 
     // void CreateNewCard(bool player)
