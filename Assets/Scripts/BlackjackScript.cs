@@ -80,9 +80,12 @@ public class BlackjackScript : MonoBehaviour
     }
     void BeginGame()
     {
+        int flipSound = Random.Range(1, 2);
+        AudioManager.playSound("Card_Swipe" + flipSound);
         biddingUI.SetActive(false);
         gameUI.SetActive(true);
         dealCards?.Invoke();
+
         StartCoroutine(BeginningCoroutine());
     }
     IEnumerator BeginningCoroutine()
@@ -278,6 +281,8 @@ public class BlackjackScript : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         resetEvent.Invoke();
+        int flipSound = Random.Range(1, 2);
+        AudioManager.playSound("Card_Swipe" + flipSound);
         yield return new WaitForSeconds(3f);
         StartWager();
 
