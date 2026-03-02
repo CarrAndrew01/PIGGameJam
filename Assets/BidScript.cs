@@ -44,7 +44,7 @@ public class BidScript : MonoBehaviour
     {
         if (GameManager.Money >= 5)
         {
-            if (bidTokens < 5)
+            if (bidTokens < maxBid)
             {
                 GameManager.AdjustMoney(-5);
                 GameObject newToken = Instantiate(tokenPrefab, transform);
