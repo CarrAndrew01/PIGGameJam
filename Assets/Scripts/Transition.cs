@@ -23,7 +23,7 @@ public class Transition : MonoBehaviour
 
     [ShowInInspector, ReadOnly] private Screen currentScreen = Screen.Main;
     public static Screen CurrentScreen => Instance != null ? Instance.currentScreen : Screen.None;
-    
+
     private Coroutine fadeCoroutine;
 
     private Animator animator;
@@ -151,6 +151,7 @@ public class Transition : MonoBehaviour
         OnTransition?.Invoke();
         if (fadeText) FadeCoroutineStarter(FadeTextCoroutine());
         else HideAllText();
+        AudioManager.playSound("Fly_By");
     }
 
     public void TransitionToSettings(bool fadeText = true)

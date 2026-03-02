@@ -117,6 +117,13 @@ MonoBehaviour:
       loop: 0
       audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
+    - name: Fly_By
+      clip: {fileID: 8300000, guid: 37f533279c7fa3543829d6b0db3170b1, type: 3}
+      volume: 0.1
+      pitch: 1
+      loop: 0
+      audioMixer: {fileID: -7618833650971275109, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
+      source: {fileID: 0}
   - type: 0
     sounds:
     - name: Ice_Planet_Music
