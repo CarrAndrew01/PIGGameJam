@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: Quest 1
   description: A simple quest.
-  completedStatus: 0
+  completedStatus: 2
   type: 0
   questFish:
   - fishType: {fileID: 11400000, guid: f313a96d1f6d8bac7b75a26e0460a881, type: 2}

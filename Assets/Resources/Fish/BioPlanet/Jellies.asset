@@ -12,28 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
   m_Name: Jellies
   m_EditorClassIdentifier: 
-  fishName: Venomgrub
-  description: Small, slow, weak and extremely poisonous. The venom grub is generally
-    considered not worth the trouble by most predators, and as an excellent challenge
-    to Nyaalines. \n\n  Chef's Notes:\nNyaa, what trouble! First, we have to use
-    steam them, to draw out the thin layer of poison on its skin. Then, we have to
-    carefully- VERY CARFEULLY- remove the pressurised, poison-filled sacks on its
-    back. Poke one too hard and they explode. Finally, special tools are needed to
-    pull out the internal organs, each one coated in deadly poison, then roast the
-    remaining flesh over a 400c flame, to drive out the last traces of poison in
-    the meat. Finally, after all that effort, we have a tiny mound flavourless, textureless,
-    colorless meat. Good grief!
+  fishName: Jellies
+  description: "Possibly a relative of the Valentines Jellies of Boreala, these brainless
+    creatures are far less poisonous and far more difficult to catch.\\n\\n\n\nChef\u2019s
+    Notes:\\nI suppose they can be\u2026 boiled maybe? Why did you bring me this? "
   sprite: {fileID: 7569122246748246755, guid: dd07622db208603b6aedf08a7a29021f, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
+  value: 8
   minWeight: 0.1
   maxWeight: 0.2
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 8
-  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  minSummonTime: 20
+  maxSummonTime: 60
   jumpiness: 0.234
   speed: 0.158
   stubbornness: 0.172
   size: 0.081
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}

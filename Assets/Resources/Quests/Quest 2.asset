@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: Quest 2
   description: So you're not useless...
-  completedStatus: 0
+  completedStatus: 2
   type: 0
   questFish:
   - fishType: {fileID: 11400000, guid: fdc201654ffeda5919d8ef4c1af3232c, type: 2}

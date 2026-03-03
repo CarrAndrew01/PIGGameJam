@@ -18,7 +18,7 @@ MonoBehaviour:
     system is home to many delectable delights- if you can catch some for us, perhaps
     our relationship can be... profitable. Take this mission as a sample, and we'll
     see if you're worth our time.
-  completedStatus: 2
+  completedStatus: 0
   type: 0
   questFish:
   - fishType: {fileID: 11400000, guid: f313a96d1f6d8bac7b75a26e0460a881, type: 2}

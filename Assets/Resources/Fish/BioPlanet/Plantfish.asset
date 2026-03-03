@@ -12,19 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
   m_Name: Plantfish
   m_EditorClassIdentifier: 
-  fishName: Treetuna
-  description: 
+  fishName: Sapfish
+  description: "A symbiotic lifeform, the sapfish has learned to cultivate tiny seeds
+    along its back, which in turn attract the insects that it eats.\\n\\n\n\nChef\u2019s
+    Notes:\\n\nThe plants can\u2019t be eaten, but the fish tastes like\u2026 well,
+    fish. "
   sprite: {fileID: 319325203572441677, guid: d540c3ebaeb3a464aac2457f8d101a53, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
+  value: 15
   minWeight: 7
   maxWeight: 12
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 15
-  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  minSummonTime: 20
+  maxSummonTime: 60
   jumpiness: 0.397
   speed: 0.278
   stubbornness: 0.225
   size: 0.478
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}

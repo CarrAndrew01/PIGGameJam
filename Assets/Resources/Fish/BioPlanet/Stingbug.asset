@@ -13,18 +13,24 @@ MonoBehaviour:
   m_Name: Stingbug
   m_EditorClassIdentifier: 
   fishName: Stingbug
-  description: 
+  description: "Huge and fierce, the Stingbug is one of the apex predators of Lantis.
+    It\u2019s stinger liquifies its preys insides, and its proboscis then sucks them
+    out to feast.\\n\n\nChef\u2019s Notes:\\n\nNyaa, stop bringin\u2019 me bugs!
+    I suppose I could use those wings as a fashionable garnish\u2026 maybe the eyes
+    could be useful for something..."
   sprite: {fileID: 4710035748828112202, guid: 9055f12abb17ef03ca5bbcc53d5b29df, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
+  value: 80
   minWeight: 160
   maxWeight: 240
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 80
-  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  minSummonTime: 20
+  maxSummonTime: 60
   jumpiness: 0.684
   speed: 0.531
   stubbornness: 0.66
   size: 0.871
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
