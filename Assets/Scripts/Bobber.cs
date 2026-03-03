@@ -270,6 +270,7 @@ public class Bobber : MonoBehaviour
                 {
                     summonTimer = 0f;
                     Debug.Log($"Summoning a fish in {summonTime} seconds.");
+                    Toast.ShowToast($"You see some movement in the water...");
                 }
                 else
                 {

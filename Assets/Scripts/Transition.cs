@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Transition : MonoBehaviour
 {
@@ -20,11 +21,19 @@ public class Transition : MonoBehaviour
     }
 
     public List<TMP_Text> TextObjects = new();
+    public InputActionReference returnToMainAction;
 
     [ShowInInspector, ReadOnly] private Screen currentScreen = Screen.Main;
     public static Screen CurrentScreen => Instance != null ? Instance.currentScreen : Screen.None;
 
+    [ShowInInspector, ReadOnly]
     private Coroutine fadeCoroutine;
+    [ShowInInspector, ReadOnly]
+    private Coroutine queueCoroutine;
+    [ShowInInspector, ReadOnly]
+    private Screen queuedTransition = Screen.None;
+    [ShowInInspector, ReadOnly]
+    private bool queuedFadeText = true;
 
     private Animator animator;
 
@@ -58,13 +67,32 @@ public class Transition : MonoBehaviour
             case Screen.Main:
                 break;
             case Screen.Galaxy:
-                TransitionToPlanets(false);
+                // Bypass the animator guard — nothing meaningful is playing at startup.
+                ExecuteTransitionTo(Screen.Galaxy, false);
                 GameManager.Instance.intendedScreen = Screen.Main;
                 break;
             case Screen.Settings:
-                TransitionToSettings(false);
+                ExecuteTransitionTo(Screen.Settings, false);
                 GameManager.Instance.intendedScreen = Screen.Main;
                 break;
+        }
+    }
+
+    private void Update()
+    {
+        if (returnToMainAction.action.WasPressedThisFrame())
+        {
+            switch (currentScreen)
+            {
+                case Screen.Galaxy:
+                    TransitionToMainMenuFromPlanets();
+                    break;
+                case Screen.Settings:
+                    TransitionToMainMenuFromSettings();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -138,63 +166,102 @@ public class Transition : MonoBehaviour
         return animator.IsInTransition(0) || animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1;
     }
 
+    private void QueueTransition(Screen target, bool fadeText)
+    {
+        if (currentScreen == target) return; // already heading there, don't queue
+        queuedTransition = target;
+        queuedFadeText = fadeText;
+        if (queueCoroutine == null)
+            queueCoroutine = StartCoroutine(WaitAndExecuteQueuedTransition());
+    }
+
+    // Called by the queue coroutine so it doesn't re-trigger the guard and loop infinitely.
+    private void ExecuteTransitionTo(Screen target, bool fadeText)
+    {
+        switch (target)
+        {
+            case Screen.Galaxy:
+                animator.SetBool("PlanetTransition", true);
+                currentScreen = Screen.Galaxy;
+                OnTransition?.Invoke();
+                if (fadeText) FadeCoroutineStarter(FadeTextCoroutine());
+                else HideAllText();
+                AudioManager.playSound("Fly_By");
+                break;
+            case Screen.Settings:
+                animator.SetBool("SettingsTransition", true);
+                currentScreen = Screen.Settings;
+                OnTransition?.Invoke();
+                if (fadeText) FadeCoroutineStarter(FadeTextCoroutine());
+                else HideAllText();
+                break;
+            case Screen.Main:
+                if (currentScreen == Screen.Galaxy)
+                    animator.SetBool("PlanetTransition", false);
+                else if (currentScreen == Screen.Settings)
+                    animator.SetBool("SettingsTransition", false);
+                currentScreen = Screen.Main;
+                OnTransition?.Invoke();
+                FadeCoroutineStarter(UnFadeTextCoroutine());
+                break;
+        }
+    }
+
+    IEnumerator WaitAndExecuteQueuedTransition()
+    {
+        while (IsInAnimatorTransition())
+            yield return null;
+
+        Screen target = queuedTransition;
+        bool fade = queuedFadeText;
+        queuedTransition = Screen.None;
+        queueCoroutine = null;
+
+        ExecuteTransitionTo(target, fade);
+    }
+
     public void TransitionToPlanets(bool fadeText = true)
     {
-        if (fadeText && IsInAnimatorTransition())
+        if (IsInAnimatorTransition())
         {
-            // Don't allow starting transitions if we're still moving unless we're skipping the text fade
+            QueueTransition(Screen.Galaxy, fadeText);
             return;
         }
 
-        animator.SetBool("PlanetTransition", true);
-        currentScreen = Screen.Galaxy;
-        OnTransition?.Invoke();
-        if (fadeText) FadeCoroutineStarter(FadeTextCoroutine());
-        else HideAllText();
-        AudioManager.playSound("Fly_By");
+        ExecuteTransitionTo(Screen.Galaxy, fadeText);
     }
 
     public void TransitionToSettings(bool fadeText = true)
     {
-        if (fadeText && IsInAnimatorTransition())
+        if (IsInAnimatorTransition())
         {
-            // Don't allow starting transitions if we're still moving unless we're skipping the text fade
+            QueueTransition(Screen.Settings, fadeText);
             return;
         }
 
-        animator.SetBool("SettingsTransition", true);
-        currentScreen = Screen.Settings;
-        OnTransition?.Invoke();
-        if (fadeText) FadeCoroutineStarter(FadeTextCoroutine());
-        else HideAllText();
+        ExecuteTransitionTo(Screen.Settings, fadeText);
     }
 
     public void TransitionToMainMenuFromPlanets()
     {
         if (IsInAnimatorTransition())
         {
-            // Don't allow starting transitions if we're still moving
+            QueueTransition(Screen.Main, true);
             return;
         }
 
-        animator.SetBool("PlanetTransition", false);
-        currentScreen = Screen.Main;
-        OnTransition?.Invoke();
-        FadeCoroutineStarter(UnFadeTextCoroutine());
+        ExecuteTransitionTo(Screen.Main, true);
     }
 
     public void TransitionToMainMenuFromSettings()
     {
         if (IsInAnimatorTransition())
         {
-            // Don't allow starting transitions if we're still moving
+            QueueTransition(Screen.Main, true);
             return;
         }
 
-        animator.SetBool("SettingsTransition", false);
-        currentScreen = Screen.Main;
-        OnTransition?.Invoke();
-        FadeCoroutineStarter(UnFadeTextCoroutine());
+        ExecuteTransitionTo(Screen.Main, true);
     }
 
     public void QuitGame()
