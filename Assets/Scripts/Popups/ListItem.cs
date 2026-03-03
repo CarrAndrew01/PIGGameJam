@@ -57,7 +57,7 @@ public class ListItem : MonoBehaviour
         if (icon != null)
         {
             icon.sprite = iconSprite;
-            icon.transform.parent.gameObject.SetActive(iconSprite != null);
+            icon.transform.parent.parent.gameObject.SetActive(iconSprite != null);
         }
 
         // Set stamp visibility based on whether the item is stamped

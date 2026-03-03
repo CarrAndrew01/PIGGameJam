@@ -34,6 +34,7 @@ public class Stardew : MonoBehaviour
     private float caughtProgress = 0f;
     private float timeSinceStateChange = 0f; // How much time has passed since the fish last changed state
     private float currentStateDuration = 0f; // How long the fish will stay in its current state
+    private float timeElapsed = 0f; // Total time the minigame has been active, used for difficulty ramp
     private float fishStateStartPosition = 0f; // Fish slider position when current state began
     private float currentMaxMoveDistance = 0f; // Max distance the fish can travel in the current Up/Down state
     private float currentFishVelocity = 0f; // How quickly the fish slider is currently moving, positive is up, negative is down
@@ -58,9 +59,11 @@ public class Stardew : MonoBehaviour
     public float pullForceRange = 1.5f; // Multiplier for the range around the hook in which the blackhole effect applies
     public float pullForce = 0.2f;
 
-    // Catch properties that take into account player stats and upgrades
-    public float CatchRate => catchRate * statCatchSpeed;
-    public float EscapeRate => escapeRate * statFishEscapeRate;
+    // Catch properties that take into account player stats, upgrades, and difficulty ramp
+    private float RampT => Mathf.Clamp01(timeElapsed / rampDuration);
+    private float DifficultyRampT => Mathf.Clamp01(timeElapsed / difficultyRampDuration);
+    public float CatchRate => catchRate * statCatchSpeed * Mathf.Lerp(catchStartMultiplier, 1f, RampT);
+    public float EscapeRate => escapeRate * statFishEscapeRate * Mathf.Lerp(1f, escapeEndMultiplier, DifficultyRampT);
     public float HookGravity => hookGravity * statHookGravity;
     public float CatchAreaSize => catchSize * statCatchArea;
 
@@ -97,6 +100,12 @@ public class Stardew : MonoBehaviour
     private RectTransform hookRect;
     private RectTransform sliderRect;
     [HideInInspector] public Fish fish; // Reference to the fish ScriptableObject, set when we create the Stardew instance in the scene
+
+    [Header("Difficulty Ramp")]
+    public float rampDuration = 3f;
+    public float difficultyRampDuration = 10f;
+    [Range(0f, 1f)] public float catchStartMultiplier = 0.25f;
+    [Min(1f)] public float escapeEndMultiplier = 1.75f;
 
     [Header("Debug")]
     [SerializeField] private bool canCatch = true;
@@ -157,6 +166,8 @@ public class Stardew : MonoBehaviour
     void Update()
     {
         if (fishState == FishState.Caught || fishState == FishState.Escaped) return; // If we've already caught or escaped the fish, no need to update anything
+
+        timeElapsed += Time.deltaTime;
 
         // Player input and hook movement
         GetInput();

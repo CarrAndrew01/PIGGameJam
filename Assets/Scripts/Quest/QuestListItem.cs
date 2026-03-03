@@ -17,6 +17,7 @@ public class QuestListItem : ListItem
         nameField.text = quest.questName;
 
         completedField.text = completed ? "Completed" : ""; //display nothing if its not completed
+        completedField.gameObject.SetActive(completed);
 
         SetupComponents();
     }
