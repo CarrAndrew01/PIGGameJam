@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
   m_Name: bloatwinnow
   m_EditorClassIdentifier: 
-  fishName: bloatwinnow
+  fishName: Bloatwinnow
   description: The closest thing to an actual fish on Nimbus, the bloatwinnow expands
     itself to enormous size, then releases it to move through the upper-atmosphere
     at high speed.\n\n  Chef's Notes:\nA huge bag of wind and almost no brains. Reminds
@@ -20,14 +20,16 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: bc32602138d1ed54a978cebc53959430, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
+  value: 8
   minWeight: 2
   maxWeight: 3
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 8
-  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  minSummonTime: 20
+  maxSummonTime: 60
   jumpiness: 0.23
   speed: 0.493
   stubbornness: 0.512
   size: 0.086
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}

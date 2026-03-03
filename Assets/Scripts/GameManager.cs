@@ -108,6 +108,14 @@ public class GameManager : MonoBehaviour
 
 
     // Static methods
+    // Saves and loading
+    public static void ClearPlayerData()
+    {
+        Instance.playerInventory.ClearInventory();
+        Instance.playerStats.ClearUpgrades();
+        PlayerPrefs.DeleteAll();
+        Toast.ShowToast("Player data cleared.");
+    }
     // Upgrades and stats
     public static List<Upgrade> GetPlayerUpgrades() => Instance.playerStats.upgrades;
     public static bool PlayerHasUpgrade(Upgrade upgrade) => Instance.playerStats.HasUpgrade(upgrade);

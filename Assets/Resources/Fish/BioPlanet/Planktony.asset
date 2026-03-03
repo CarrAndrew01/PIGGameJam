@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
   m_Name: Planktony
   m_EditorClassIdentifier: 
-  fishName: Venomgrub
+  fishName: Gribble Snail
   description: Small, slow, weak and extremely poisonous. The venom grub is generally
     considered not worth the trouble by most predators, and as an excellent challenge
     to Nyaalines. \n\n  Chef's Notes:\nNyaa, what trouble! First, we have to use
@@ -26,14 +26,16 @@ MonoBehaviour:
   sprite: {fileID: -8455539998564936456, guid: 7ccfa97e9c9a0d9abb4dc8e2d908bcfc, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
+  value: 45
   minWeight: 15
   maxWeight: 26
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 45
-  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  minSummonTime: 20
+  maxSummonTime: 60
   jumpiness: 0.636
   speed: 0.517
   stubbornness: 0.545
   size: 0.41
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}

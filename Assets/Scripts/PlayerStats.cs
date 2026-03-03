@@ -46,6 +46,12 @@ public class PlayerStats
     }
 
     // Persistence
+    public void ClearUpgrades()
+    {
+        upgrades.Clear();
+        ResetStats();
+    }
+
     public void SaveUpgradesToPrefs()
     {
         PlayerStatsSave save = new PlayerStatsSave();

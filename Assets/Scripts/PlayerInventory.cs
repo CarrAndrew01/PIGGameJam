@@ -45,6 +45,15 @@ public class PlayerInventory
 
 
     // Methods
+    public void ClearInventory()
+    {
+        caughtFish.Clear();
+        baits.Clear();
+        currentBaitUpgrade = null;
+        money = 0;
+        maxInt = 0;
+    }
+    
     public void AddBait(Upgrade baitUpgrade, int uses)
     {
         int existingIndex = baits.FindIndex(b => b.baitUpgrade == baitUpgrade);

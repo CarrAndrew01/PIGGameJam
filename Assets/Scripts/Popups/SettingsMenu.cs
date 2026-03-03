@@ -91,6 +91,10 @@ public class SettingsMenu : MonoBehaviour
     }
 
     // Methods
+    public void ClearPrefs()
+    {
+        GameManager.ClearPlayerData();
+    }
     public void SetMasterVolume(float volume)
     {
         AudioManager.instance.SetMasterVolume(volume);

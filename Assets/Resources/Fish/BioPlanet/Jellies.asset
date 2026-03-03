@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9fe3d45641f53438993b1097c79734, type: 3}
   m_Name: Jellies
   m_EditorClassIdentifier: 
-  fishName: Jellies
+  fishName: Glow Jellies
   description: "Possibly a relative of the Valentines Jellies of Boreala, these brainless
     creatures are far less poisonous and far more difficult to catch.\\n\\n\n\nChef\u2019s
     Notes:\\nI suppose they can be\u2026 boiled maybe? Why did you bring me this? "
