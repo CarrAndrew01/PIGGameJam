@@ -26,7 +26,7 @@ MonoBehaviour:
   maxAmount: 8
   preferredBaitType: 7
   minSummonTime: 5
-  maxSummonTime: 20
+  maxSummonTime: 10
   jumpiness: 0.057
   speed: 0.029
   stubbornness: 0.172

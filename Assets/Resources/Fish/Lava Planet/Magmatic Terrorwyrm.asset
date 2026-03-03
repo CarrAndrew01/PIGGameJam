@@ -28,8 +28,8 @@ MonoBehaviour:
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 8
-  minSummonTime: 20
-  maxSummonTime: 60
+  minSummonTime: 5
+  maxSummonTime: 15
   jumpiness: 1
   speed: 1
   stubbornness: 1
