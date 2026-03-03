@@ -245,7 +245,7 @@ RectTransform:
   m_GameObject: {fileID: 1533861940500961755}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9044980291512005688}
@@ -337,8 +337,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 7954852202861176150}
   circles: []
+  totalGameTimer: 10
   score: 0
   targetScore: 8
+  gameOver: 0
   scoreText: {fileID: 5287353366401494774}
   timerText: {fileID: 3414050062700442765}
   usingJoystick: 0
