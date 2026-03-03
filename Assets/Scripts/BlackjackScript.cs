@@ -1,12 +1,8 @@
-using System;
 using System.Collections.Generic;
-using NUnit.Framework.Internal;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Collections;
-using Unity.Mathematics;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class BlackjackScript : MonoBehaviour
@@ -203,7 +199,6 @@ public class BlackjackScript : MonoBehaviour
     {
         int scoreCounter = 0;
         int aceCount = 0;
-        Debug.Log("index: " + cardIndex);
         for (int i = 0; i <= cardIndex; i++)
         {
             var tempScore = cards[i].GetComponent<CardScript>().GetCardValue();
@@ -291,108 +286,6 @@ public class BlackjackScript : MonoBehaviour
     {
         SceneManager.LoadScene("Cat Ship");
     }
-
-    // void CreateNewCard(bool player)
-    // {
-    //     int cardNumber = Random.Range(CARDNUMMIN, CARDNUMMAX);
-    //     string newCardValue = cardNumber.ToString();
-    //     int newCardSuitIndex = Random.Range(0, 3);
-    //     string newCardSuit = SUITS[newCardSuitIndex];
-
-    //     var cardTransform = player ? playerCardsTransform : dealerCardsTransform;
-
-    //     GameObject newCard = Instantiate(cardPrefab, cardTransform);
-
-    //     newCard.GetComponentInChildren<TextMeshProUGUI>().text = newCardValue + newCardSuit;
-
-    //     // animates the cards via event (non-new cards wiggle)
-    //     onCardsSpawn?.Invoke();
-
-
-
-
-    //     if (player)
-    //     {
-    //         currentPlayerValue += cardNumber;
-    //         playerCards.Add(newCard);
-    //         UpdateValues();
-
-
-    //         if (currentPlayerValue == BUSTNUMBER)
-    //         {
-    //             Debug.Log("you win");
-    //         }
-    //         if (currentPlayerValue > BUSTNUMBER)
-    //         {
-    //             Bust();
-    //         }
-    //     }
-    //     else
-    //     {
-    //         currentDealerValue += cardNumber;
-    //         dealerCards.Add(newCard);
-    //         UpdateValues();
-
-    //         if (currentDealerValue >= BUSTNUMBER)
-    //         {
-    //             DealerBust();
-    //         }
-    //     }
-    // }
-    // void Bust()
-    // {
-    //     Debug.Log("PLAYER BUST!! Card value: " + currentPlayerValue.ToString());
-    //     didBust = true;
-    // }
-    // void DealerBust()
-    // {
-    //     Debug.Log("DEALER BUST!! Card value: " + currentDealerValue.ToString());
-    // }
-    // void UpdateValues()
-    // {
-    //     string textValue = "Dealer: " + currentDealerValue.ToString() + "\nPlayer: " + currentPlayerValue.ToString();
-    //     scoreText.text = textValue;
-    // }
-
-    // public void Hit()
-    // {
-    //     if (didStand) return;
-    //     if (didBust) return;
-    //     // IF CAN HIT
-    //     CreateNewCard(true);
-    // }
-    // public void Stand()
-    // {
-    //     if (didStand) return;
-    //     if (didBust) return;
-    //     didStand = true;
-
-
-    //     // now dealer plays
-
-    //     //
-    //     // if ()
-    //     // {
-
-    //     // }
-    //     // bust condition
-    //     while ((currentDealerValue < 21) && (currentDealerValue < currentPlayerValue))
-    //     {
-    //         CreateNewCard(false);
-    //     }
-    //     if (currentDealerValue == currentPlayerValue)
-    //     {
-    //         Debug.Log("Draw");
-    //     }
-    //     else if (currentDealerValue > 21)
-    //     {
-    //         Debug.Log("Dealer Bust");
-    //     }
-    //     else
-    //     {
-    //         Debug.Log("Dealer Win");
-    //     }
-    // }
 }
 public enum BlackjackStates
 {
