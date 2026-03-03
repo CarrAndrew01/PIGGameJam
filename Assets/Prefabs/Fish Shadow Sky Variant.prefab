@@ -270,7 +270,7 @@ MonoBehaviour:
   targetBobber: {fileID: 0}
   numberOfFailsBeforeEscape: 2
   timeUntilLeaving: 60
-  wrongBaitIgnoreChance: 0.8
+  wrongBaitIgnoreChance: 0
   wrongBaitBadIgnoreChance: 0.5
   movementRadius: 1.4
   movementSpeed: 0.1

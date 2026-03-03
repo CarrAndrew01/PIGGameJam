@@ -6839,7 +6839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
       propertyPath: fishTypes.Array.data[4].chance
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6928649743868906514, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
       propertyPath: m_Name

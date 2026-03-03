@@ -4178,7 +4178,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 3c25b330cc56019ac847df81abef086c, type: 2}
     - target: {fileID: 8605051606740615530, guid: de9d472cf23dccd41a4544c65fb93443, type: 3}
       propertyPath: fishTypes.Array.data[0].chance
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8605051606740615530, guid: de9d472cf23dccd41a4544c65fb93443, type: 3}
       propertyPath: fishTypes.Array.data[1].chance
@@ -4186,7 +4186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8605051606740615530, guid: de9d472cf23dccd41a4544c65fb93443, type: 3}
       propertyPath: fishTypes.Array.data[2].chance
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8605051606740615530, guid: de9d472cf23dccd41a4544c65fb93443, type: 3}
       propertyPath: fishTypes.Array.data[4].chance
