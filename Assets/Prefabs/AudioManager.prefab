@@ -144,14 +144,14 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: 003f8a170bafe944ca147faa446a5c5c, type: 3}
       volume: 0.1
       pitch: 1
-      loop: 0
+      loop: 1
       audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
     - name: Cloud_Planet_Music
       clip: {fileID: 8300000, guid: 1f55e5e42018a8144a109146ad5be017, type: 3}
       volume: 0.1
       pitch: 1
-      loop: 0
+      loop: 1
       audioMixer: {fileID: -2981361263152771259, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
       source: {fileID: 0}
     - name: Cat_Ship_Music
@@ -186,7 +186,7 @@ MonoBehaviour:
       source: {fileID: 0}
     - name: Lava_Bubbling
       clip: {fileID: 8300000, guid: 7def15032618586469dba919d3f6601d, type: 3}
-      volume: 1
+      volume: 0.5
       pitch: 1
       loop: 1
       audioMixer: {fileID: -3147002154482606886, guid: 6da90c3d683b7f5449387d9b3e54ee6e, type: 2}
