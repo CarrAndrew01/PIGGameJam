@@ -370,9 +370,12 @@ MonoBehaviour:
   selectedShopItem:
     price: 0
   purchasableBait:
+  - baitUpgrade: {fileID: 11400000, guid: dc1fdfc7fab3a7bfdb9b2425bfca94b0, type: 2}
+    numberOfUses: 1
+    cost: 4
   - baitUpgrade: {fileID: 11400000, guid: 84a705650b7473e46a6b90a5da79417a, type: 2}
     numberOfUses: 2
-    cost: 6
+    cost: 8
   - baitUpgrade: {fileID: 11400000, guid: b7c2d2f730a1fce41865fb73fb0adf96, type: 2}
     numberOfUses: 1
     cost: 12
@@ -388,6 +391,9 @@ MonoBehaviour:
   - baitUpgrade: {fileID: 11400000, guid: beceeaccb34b293479dbe1122b68e395, type: 2}
     numberOfUses: 4
     cost: 34
+  - baitUpgrade: {fileID: 11400000, guid: 0dd2b94f2fa030cd19822529a6d7fa84, type: 2}
+    numberOfUses: 2
+    cost: 38
   - baitUpgrade: {fileID: 11400000, guid: 4b753a8ac8713b94fb2a60a694e98c33, type: 2}
     numberOfUses: 1
     cost: 50

@@ -22,7 +22,7 @@ MonoBehaviour:
   sprite: {fileID: -7351176481537246033, guid: 2bba71d07677b6346845161d6cf5e627, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
-  value: 15
+  value: 80
   minWeight: 25
   maxWeight: 35
   minAmount: 1
