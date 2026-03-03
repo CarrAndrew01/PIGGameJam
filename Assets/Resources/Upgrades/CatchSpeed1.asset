@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6850115a7fcc1b46b10a3206e760afa, type: 3}
-  m_Name: Pocket Dimension
+  m_Name: CatchSpeed1
   m_EditorClassIdentifier: 
-  upgradeName: Pocket Dimension
-  description: An entire universe, just for your stuff
-  mechDescriptionOverride: Given +100 storage
+  upgradeName: Titanium Rod
+  description: Our scientists aren't quite sure this isn't just a normal rod.
+  mechDescriptionOverride: 
   icon: {fileID: 0}
-  type: 5
-  modifierType: 0
-  amount: 100
+  type: 0
+  modifierType: 1
+  amount: 1.1

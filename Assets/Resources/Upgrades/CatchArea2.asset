@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6850115a7fcc1b46b10a3206e760afa, type: 3}
-  m_Name: Nanotube Line
+  m_Name: CatchArea2
   m_EditorClassIdentifier: 
   upgradeName: Nanotube Line
-  description: They wont break this one.
+  description: They wont get away from this durable line!
   mechDescriptionOverride: 
   icon: {fileID: 0}
   type: 1
   modifierType: 1
-  amount: 1.3
+  amount: 1.4

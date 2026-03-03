@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Sonar
   m_EditorClassIdentifier: 
   upgradeName: Sonar
-  description: It's just a fish-finder.
-  mechDescriptionOverride: 
+  description: It's just a fish-finder. Helps you see what fish are around.
+  mechDescriptionOverride: Shows fish before you catch them
   icon: {fileID: 0}
   type: 6
   modifierType: 0

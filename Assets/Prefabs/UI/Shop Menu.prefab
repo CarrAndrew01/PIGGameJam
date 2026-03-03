@@ -393,14 +393,18 @@ MonoBehaviour:
     cost: 50
   purchasableFish: []
   purchasableUpgrades:
+  - upgrade: {fileID: 11400000, guid: 990978738cf441e42af6a59a2e60677c, type: 2}
+    price: 6
   - upgrade: {fileID: 11400000, guid: 71fef0380d70e8848931573630d35745, type: 2}
     price: 10
   - upgrade: {fileID: 11400000, guid: 397f8efc7be98fc4e9e8b2dc7312bccc, type: 2}
-    price: 12
-  - upgrade: {fileID: 11400000, guid: d38b5293740419043b66f9985dfa7c36, type: 2}
-    price: 20
-  - upgrade: {fileID: 11400000, guid: 990978738cf441e42af6a59a2e60677c, type: 2}
-    price: 6
+    price: 16
+  - upgrade: {fileID: 11400000, guid: 00f687103a2c571499f0a6d45c0e7615, type: 2}
+    price: 46
+  - upgrade: {fileID: 11400000, guid: aee1e88160c681041a09b54fa410a23a, type: 2}
+    price: 60
+  - upgrade: {fileID: 11400000, guid: 1981d400e187de4439a5c7b0d655c9dd, type: 2}
+    price: 100
   - upgrade: {fileID: 11400000, guid: 67c8fe14a20c13947a5a9a96f76d1cf3, type: 2}
     price: 50
 --- !u!1 &7300396583188152871

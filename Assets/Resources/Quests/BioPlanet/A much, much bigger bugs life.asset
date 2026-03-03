@@ -21,5 +21,5 @@ MonoBehaviour:
   - fishType: {fileID: 11400000, guid: 5f6b75b47a105580a9a1386b83b1b909, type: 2}
     quantity: 1
   rewardUpgrade: {fileID: 11400000, guid: eb5112db3af8bf243adb44f8b133c806, type: 2}
-  moneyReward: 25
+  moneyReward: 0
   nextQuest: []

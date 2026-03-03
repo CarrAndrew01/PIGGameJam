@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6850115a7fcc1b46b10a3206e760afa, type: 3}
-  m_Name: Boot Storage
+  m_Name: EscapeRate1
   m_EditorClassIdentifier: 
-  upgradeName: Boot Storage
-  description: Turns out your ship has had a boot all along!
+  upgradeName: Barbed Hook
+  description: There's nothing sci-fi about this. You're not sure where these cats
+    are even getting these upgrades, now that you think about it.
   mechDescriptionOverride: 
   icon: {fileID: 0}
-  type: 5
-  modifierType: 0
-  amount: 4
+  type: 4
+  modifierType: 1
+  amount: 0.8
