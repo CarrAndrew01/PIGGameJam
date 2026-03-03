@@ -640,7 +640,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5356528702443750012, guid: e420b088386300248b9526869f035fcc, type: 3}
       propertyPath: m_text
-      value: B
+      value: 'Bait
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 5795588730409526709, guid: e420b088386300248b9526869f035fcc, type: 3}
       propertyPath: m_SizeDelta.y
