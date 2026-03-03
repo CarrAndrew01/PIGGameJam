@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -78,6 +80,8 @@ public class SettingsMenu : MonoBehaviour
         Debug.Log("SFX Volume: " + PlayerPrefs.GetFloat("Settings_SFXVolume", -1f));
         Debug.Log("Ambient Volume: " + PlayerPrefs.GetFloat("Settings_AmbientVolume", -1f));
         Debug.Log("UI Volume: " + PlayerPrefs.GetFloat("Settings_UIVolume", -1f));
+
+        SetupNavigation();
     }
 
     void Update()
@@ -130,5 +134,15 @@ public class SettingsMenu : MonoBehaviour
             fillImage.color = newColor;
             lastFillValue = fillValue;
         }
+    }
+
+    private void SetupNavigation()
+    {
+        if (Gamepad.current == null) return;
+
+        // Set up navigation for the buttons in the settings menu
+        var button = GetComponentInChildren<Button>();
+
+        EventSystem.current.SetSelectedGameObject(button.gameObject);
     }
 }

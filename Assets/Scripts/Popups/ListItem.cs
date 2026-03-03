@@ -2,11 +2,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// Class representing a single item in a list, such as an upgrade or inventory item.
 /// </summary>
-public class ListItem : MonoBehaviour
+public class ListItem : MonoBehaviour, ISelectHandler
 {
     // Components
     [Header("Data")]
@@ -92,6 +93,11 @@ public class ListItem : MonoBehaviour
         }
 
         UpdateSelectionHighlight();
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        OnItemClicked();
     }
 
     public void UpdateSelectionHighlight()

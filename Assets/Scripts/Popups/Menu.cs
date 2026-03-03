@@ -2,6 +2,9 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Generic menu class used for various menus with a list of items.
@@ -60,6 +63,8 @@ public class Menu : MonoBehaviour
         {
             CreateListItem(item, null);
         }
+
+        SetupNavigation();
     }
 
     public void UpdateMoneyDisplay()
@@ -82,6 +87,7 @@ public class Menu : MonoBehaviour
             Upgrade upgrade = upgrades[i];
             CreateListItem(upgrade.upgradeName, upgrade.icon, description: upgrade.description, mechanicalDescription: upgrade.GetMechanicalDescription(), index: i);
         }
+        SetupNavigation();
     }
     public void PopulateListWithBaits(List<Bait> baits)
     {
@@ -98,6 +104,7 @@ public class Menu : MonoBehaviour
             Bait bait = baits[i];
             CreateListItem(bait.baitUpgrade.upgradeName, bait.baitUpgrade.icon, subtext: $"Uses: {bait.numberOfUses}", description: bait.baitUpgrade.description, mechanicalDescription: bait.baitUpgrade.GetMechanicalDescription(), index: i);
         }
+        SetupNavigation();
     }
     public void PopulateListWithFish(List<CaughtFish> fishTypes)
     {
@@ -114,6 +121,7 @@ public class Menu : MonoBehaviour
             CaughtFish caughtFish = fishTypes[i];
             CreateListItem(caughtFish.fish.fishName, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description, mechanicalDescription: $"Planet of origin: {caughtFish.planetOfOrigin}", index: i);
         }
+        SetupNavigation();
     }
 
     public void PopulateListWithFishCount(Dictionary<string, int> fishCount, List<CaughtFish> fishTypes = null)
@@ -151,6 +159,18 @@ public class Menu : MonoBehaviour
                 }
             }
             CreateListItem(displayName, itemIcon, subtext: $"Count: {fish.Value}", subtext2: $"Total Value: {totalValue:F2}", description: itemDescription, mechanicalDescription: itemMechanicalDescription);
+        }
+        SetupNavigation();
+    }
+
+    private void SetupNavigation()
+    {
+        if (Gamepad.current == null) return;
+
+        if (listItems.Count > 0)
+        {
+            EventSystem.current.SetSelectedGameObject(listItems[0].gameObject);
+            OnListItemSelected(0);
         }
     }
 
