@@ -82,8 +82,8 @@ public class CardScript : MonoBehaviour
             numberText.color = new Color32(184, 67, 48, 235);
         }
         StartCoroutine(AnimateFlip());
-        var catHand = Instantiate(catHandPrefab, transform.parent.parent.parent);
-        catHand.transform.position = transform.position + new Vector3(0, 210, 0);
+        var catHand = Instantiate(catHandPrefab, transform);
+        catHand.transform.localPosition = Vector2.zero + new Vector2(0, 210);
     }
     IEnumerator AnimateFlip()
     {
