@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class TokenScript : MonoBehaviour
 {
+    public float force = 50000f;
     Rigidbody2D rb;
     Image image;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -16,7 +17,7 @@ public class TokenScript : MonoBehaviour
         // rotates the token so that when force is applied, it will fly in a random direction
         transform.Rotate(0, 0, tokenRotation);
         // fires the token out in the direction the token is facing. a very high value but it uses high linear damping to slow it
-        rb.AddRelativeForce(transform.up * 50000);
+        rb.AddRelativeForce(transform.up * force);
 
         image.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);
 

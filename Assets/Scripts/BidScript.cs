@@ -57,10 +57,10 @@ public class BidScript : MonoBehaviour
             if (bidTokens < maxBid)
             {
                 GameManager.AdjustMoney(-bidTokenValue);
-                GameObject newToken = Instantiate(tokenPrefab, transform);
+                GameObject newToken = Instantiate(tokenPrefab, bidSpawnTransform);
                 if (bidSpawnTransform != null)
                 {
-                    newToken.transform.position = bidSpawnTransform.position;
+                    newToken.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);
                 }
                 tokens.Add(newToken);
                 bidTokens++;
