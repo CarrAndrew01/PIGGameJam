@@ -82,6 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5589523359723795294}
   - component: {fileID: 7464259187866263754}
+  - component: {fileID: 3271693258421371090}
   m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
@@ -110,7 +111,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 30}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7464259187866263754
 MonoBehaviour:
@@ -163,6 +164,22 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3271693258421371090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3456104650448547604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef58d634f23ba2a41bd93a92431854fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useScaleFeedback: 1
+  selectedScale: {x: 1.5, y: 1.5, z: 1.5}
+  useColorFeedback: 1
+  selectedColor: {r: 0.54088044, g: 0.54088044, b: 0.54088044, a: 1}
 --- !u!1 &3648585907507224520
 GameObject:
   m_ObjectHideFlags: 0

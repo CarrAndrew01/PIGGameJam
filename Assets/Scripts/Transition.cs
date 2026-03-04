@@ -5,6 +5,8 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Transition : MonoBehaviour
 {
@@ -22,6 +24,10 @@ public class Transition : MonoBehaviour
 
     public List<TMP_Text> TextObjects = new();
     public InputActionReference returnToMainAction;
+    public Selectable firstButtonOnPlanetScreen;
+    public Selectable firstButtonOnSettingsScreen;
+    public Selectable firstButtonOnMainScreen;
+    private bool hasSelectedFirstButton = false;
 
     [ShowInInspector, ReadOnly] private Screen currentScreen = Screen.Main;
     public static Screen CurrentScreen => Instance != null ? Instance.currentScreen : Screen.None;
@@ -50,6 +56,27 @@ public class Transition : MonoBehaviour
         }
 
         animator = GetComponent<Animator>();
+    }
+
+    private void SelectFirstButton()
+    {
+        if (!InputUtils.IsControllerActive())
+            return;
+        // Ensure the first button is selected on each screen at the start
+        if (currentScreen == Screen.Main && firstButtonOnMainScreen != null)
+        {
+            firstButtonOnMainScreen.Select();
+        }
+        else if (currentScreen == Screen.Galaxy && firstButtonOnPlanetScreen != null)
+        {
+            firstButtonOnPlanetScreen.Select();
+        }
+        else if (currentScreen == Screen.Settings && firstButtonOnSettingsScreen != null)
+        {
+            firstButtonOnSettingsScreen.Select();
+        }
+
+        hasSelectedFirstButton = true;
     }
 
     private void OnDestroy()
@@ -93,6 +120,22 @@ public class Transition : MonoBehaviour
                 default:
                     break;
             }
+        }
+
+        // If a controller is active and we haven't selected the first button on the current screen yet, do so.
+        if (InputUtils.IsControllerActive())
+        {
+            if (!hasSelectedFirstButton)
+            SelectFirstButton();
+        }
+        else
+        {
+            // If a controller isn't active, make sure no buttons are selected
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+            }
+            hasSelectedFirstButton = false;
         }
     }
 
@@ -187,6 +230,7 @@ public class Transition : MonoBehaviour
                 if (fadeText) FadeCoroutineStarter(FadeTextCoroutine());
                 else HideAllText();
                 AudioManager.playSound("Fly_By");
+                SelectFirstButton();
                 break;
             case Screen.Settings:
                 animator.SetBool("SettingsTransition", true);
@@ -194,6 +238,7 @@ public class Transition : MonoBehaviour
                 OnTransition?.Invoke();
                 if (fadeText) FadeCoroutineStarter(FadeTextCoroutine());
                 else HideAllText();
+                SelectFirstButton();
                 break;
             case Screen.Main:
                 if (currentScreen == Screen.Galaxy)
@@ -203,6 +248,7 @@ public class Transition : MonoBehaviour
                 currentScreen = Screen.Main;
                 OnTransition?.Invoke();
                 FadeCoroutineStarter(UnFadeTextCoroutine());
+                SelectFirstButton();
                 break;
         }
     }

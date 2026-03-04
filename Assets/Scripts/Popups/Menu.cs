@@ -2,6 +2,9 @@ using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// Generic menu class used for various menus with a list of items.
@@ -11,6 +14,9 @@ public class Menu : MonoBehaviour
     // State
     public List<ListItem> listItems = new List<ListItem>(); // List of the current list items in the menu
     public int selectedIndex = -1; // Index of the currently selected item, -1 if none selected
+
+    [Header("Input Actions")]
+    public InputActionReference navigateDescriptionAction; // Vector2 for scrolling the description field
 
     [Header("Events")]
     public UnityEvent<int> onItemSelected; // Event that gets triggered when an item is selected, passing the index of the selected item
@@ -23,14 +29,25 @@ public class Menu : MonoBehaviour
     public TextMeshProUGUI mechanicalDescriptionField; // Reference to the TextMeshProUGUI for the mechanical description field
     public TextMeshProUGUI moneyField;
 
+    private ScrollRect descriptionScrollRect;
+
     [Header("Prefabs")]
     public GameObject listItemPrefab; // Prefab for the list items in the menu
 
     void Awake()
     {
+        // Get reference to the ScrollRect component for the description fields
+        descriptionScrollRect = descriptionField.GetComponentInParent<ScrollRect>();
+
+        // Set initial text for description fields
         descriptionField.text = "";
         mechanicalDescriptionField.text = "Click on an item to see its description.";
         UpdateMoneyDisplay();
+    }
+
+    void Update()
+    {
+        HandleDescriptionNavigation();
     }
 
     // Methods
@@ -60,6 +77,8 @@ public class Menu : MonoBehaviour
         {
             CreateListItem(item, null);
         }
+
+        SetupNavigation();
     }
 
     public void UpdateMoneyDisplay()
@@ -82,6 +101,7 @@ public class Menu : MonoBehaviour
             Upgrade upgrade = upgrades[i];
             CreateListItem(upgrade.upgradeName, upgrade.icon, description: upgrade.description, mechanicalDescription: upgrade.GetMechanicalDescription(), index: i);
         }
+        SetupNavigation();
     }
     public void PopulateListWithBaits(List<Bait> baits)
     {
@@ -98,6 +118,7 @@ public class Menu : MonoBehaviour
             Bait bait = baits[i];
             CreateListItem(bait.baitUpgrade.upgradeName, bait.baitUpgrade.icon, subtext: $"Uses: {bait.numberOfUses}", description: bait.baitUpgrade.description, mechanicalDescription: bait.baitUpgrade.GetMechanicalDescription(), index: i);
         }
+        SetupNavigation();
     }
     public void PopulateListWithFish(List<CaughtFish> fishTypes)
     {
@@ -114,6 +135,7 @@ public class Menu : MonoBehaviour
             CaughtFish caughtFish = fishTypes[i];
             CreateListItem(caughtFish.fish.fishName, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description, mechanicalDescription: $"Planet of origin: {caughtFish.planetOfOrigin}", index: i);
         }
+        SetupNavigation();
     }
 
     public void PopulateListWithFishCount(Dictionary<string, int> fishCount, List<CaughtFish> fishTypes = null)
@@ -152,6 +174,18 @@ public class Menu : MonoBehaviour
             }
             CreateListItem(displayName, itemIcon, subtext: $"Count: {fish.Value}", subtext2: $"Total Value: {totalValue:F2}", description: itemDescription, mechanicalDescription: itemMechanicalDescription);
         }
+        SetupNavigation();
+    }
+
+    private void SetupNavigation()
+    {
+        if (Gamepad.current == null) return;
+
+        if (listItems.Count > 0)
+        {
+            EventSystem.current.SetSelectedGameObject(listItems[0].gameObject);
+            OnListItemSelected(0);
+        }
     }
 
     private ListItem CreateListItem(string itemName, Sprite itemIcon, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "", int index = -1)
@@ -170,5 +204,20 @@ public class Menu : MonoBehaviour
             Debug.LogError("List item prefab is missing a ListItem component!");
         }
         return listItemComponent;
+    }
+
+    private void HandleDescriptionNavigation()
+    {
+        if (navigateDescriptionAction == null || descriptionScrollRect == null) return;
+
+        Vector2 navigationInput = navigateDescriptionAction.action.ReadValue<Vector2>();
+
+        // Scroll vertically based on the y component of the input
+        if (Mathf.Abs(navigationInput.y) > 0.1f)
+        {
+            float scrollAmount = navigationInput.y * Time.deltaTime;
+            descriptionScrollRect.verticalNormalizedPosition += scrollAmount;
+            descriptionScrollRect.verticalNormalizedPosition = Mathf.Clamp01(descriptionScrollRect.verticalNormalizedPosition);
+        }
     }
 }

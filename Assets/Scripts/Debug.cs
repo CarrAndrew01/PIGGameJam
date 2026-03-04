@@ -24,10 +24,10 @@ public class DebugTools : MonoBehaviour
     {
 
         //F1 reloads the scene
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        // if (Input.GetKeyDown(KeyCode.F1))
+        // {
+        //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        // }
 
         
     }
