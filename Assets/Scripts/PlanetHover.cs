@@ -1,11 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-/// <summary>
-/// Attach to a planet Button. Manages hover/select visuals and scene entry.
-/// Wire the Button's onClick to TryEnter(). Set Button Navigation to point
-/// at neighbouring planets so the EventSystem handles controller navigation.
-/// </summary>
 public class PlanetHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
     [Header("Planet Data")]
@@ -18,12 +14,30 @@ public class PlanetHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public GameObject nameLabel;
     public GameObject highlight;
 
+    private Button button;
+
     private void Awake()
     {
         SetVisualsActive(false);
+        button = GetComponent<Button>();
     }
 
-    // --- Mouse ---
+    private void Update()
+    {
+        bool menuOpen = Menus.IsAnyMenuOpen;
+        if (button != null && button.enabled == menuOpen)
+        {
+            button.enabled = !menuOpen;
+            if (menuOpen)
+            {
+                if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
+                    EventSystem.current.SetSelectedGameObject(null);
+                SetVisualsActive(false);
+            }
+        }
+    }
+
+    // Mouse
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -35,7 +49,7 @@ public class PlanetHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         SetVisualsActive(false);
     }
 
-    // --- Controller / Keyboard navigation ---
+    // Controller / Keyboard navigation
 
     public void OnSelect(BaseEventData eventData)
     {
@@ -47,11 +61,7 @@ public class PlanetHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         SetVisualsActive(false);
     }
 
-    // --- Entry (called by Button.onClick) ---
-
-    /// <summary>
-    /// Wire this to the planet Button's onClick event.
-    /// </summary>
+    // Entry (called by Button.onClick)
     public void TryEnter()
     {
         if (CanEnter)

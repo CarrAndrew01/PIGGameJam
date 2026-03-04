@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
+using UnityEngine.InputSystem;
 
 [Serializable]
 public struct PurchasableUpgrade
@@ -87,14 +88,9 @@ public class ShopItem
 /// <summary>
 /// Handles the shop menu.
 /// </summary>
-public class ShopMenu : MonoBehaviour
+public class ShopMenu : Menu
 {
-    public TextMeshProUGUI nameField;
-    public TextMeshProUGUI descriptionField; // Reference to the TextMeshProUGUI for the description field
-    public TextMeshProUGUI mechanicalDescriptionField; // Reference to the TextMeshProUGUI for the mechanical description field
-
     public TextMeshProUGUI priceFieldBuy;
-    public TextMeshProUGUI moneyField;
     public GameObject buyButton;
 
 
@@ -105,7 +101,6 @@ public class ShopMenu : MonoBehaviour
     public GameObject rightButton;
 
 
-    public RectTransform listContentArea; // Reference to the RectTransform for the list
     public GameObject listSellPrefab; // Prefab for the list items in the menu
 
     public GameObject listBuyPrefab; // Prefab for the list items in the menu
@@ -122,6 +117,11 @@ public class ShopMenu : MonoBehaviour
     // Combined list used for populating the buy UI
     private List<ShopItem> shopItems = new();
 
+    
+    [Header("Input Actions")]
+    public InputActionReference previousPageAction; // expects Button
+    public InputActionReference nextPageAction; // expects Button
+
     public void Start()
     {
         // Combine the three source lists into the unified shopItems list,
@@ -129,17 +129,29 @@ public class ShopMenu : MonoBehaviour
         CombineShopItems();
         BuySwitch();
         UpdateMoneyDisplay();
+    }
 
-        // For testing, add some fish to the inventory
-        // GameManager.Instance.playerInventory.caughtFish.Add(
-        //     new CaughtFish(GameManager.Instance.TEMPFISH, 1f, "Earth"));
-        // GameManager.Instance.playerInventory.caughtFish.Add(
-        //     new CaughtFish(GameManager.Instance.TEMPFISH, 2f, "Water"));
-        // GameManager.Instance.playerInventory.caughtFish.Add(
-        //     new CaughtFish(GameManager.Instance.TEMPFISH, 3f, "Fire"));
-        // GameManager.Instance.playerInventory.caughtFish.Add(
-        //     new CaughtFish(GameManager.Instance.TEMPFISH, 4f, "Air"));
+    public override void Update()
+    {
+        base.Update();
 
+        // Page navigation (if applicable)
+        if (previousPageAction != null && previousPageAction.action.WasPressedThisFrame())
+        {
+            BuySwitch();
+        }
+        else if (nextPageAction != null && nextPageAction.action.WasPressedThisFrame())
+        {
+            SellSwitch();
+        }
+    }
+
+    public override void OnListItemSubmitted(ListItem item)
+    {
+        if (item is SellListItem sell)
+            sell.OnSellClicked();
+        else if (item is BuyListItem)
+            BuyButton();
     }
 
     public void BuySwitch()
@@ -173,7 +185,7 @@ public class ShopMenu : MonoBehaviour
         priceFieldBuy.gameObject.SetActive(false);
         buyButton.SetActive(false);
 
-        PopulateListWithFish(GameManager.Instance.playerInventory.caughtFish);
+        PopulateSellList(GameManager.Instance.playerInventory.caughtFish);
     }
 
     public void BuyButton()
@@ -258,11 +270,6 @@ public class ShopMenu : MonoBehaviour
         }
     }
 
-    public void UpdateMoneyDisplay()
-    {
-        moneyField.text = $"${GameManager.Money:F2}";
-    }
-
     private void CombineShopItems()
     {
         shopItems.Clear();
@@ -287,6 +294,7 @@ public class ShopMenu : MonoBehaviour
 
     public void PopulateListWithPurchasables()
     {
+        BeginListRebuild();
         // Reset main selection panel and clear existing list items
         selectedShopItem = null;
         nameField.text = "Buying Items";
@@ -298,6 +306,7 @@ public class ShopMenu : MonoBehaviour
         buyButton.SetActive(false);
 
         // Clear existing list items (iterate backwards to avoid skipping when destroying)
+        listItems.Clear();
         for (int i = listContentArea.childCount - 1; i >= 0; i--)
         {
             Destroy(listContentArea.GetChild(i).gameObject);
@@ -343,21 +352,30 @@ public class ShopMenu : MonoBehaviour
                 GameObject newItem = Instantiate(listBuyPrefab, listContentArea);
                 BuyListItem listItemComponent = newItem.GetComponent<BuyListItem>();
                 if (listItemComponent != null)
+                {
                     listItemComponent.Init(bait, this, bait.baitUpgrade.upgradeName, item.price);
+                    listItems.Add(listItemComponent);
+                }
             }
             else if (type == ShopItem.ShopItemType.Fish && item.TryGetFish(out var fish))
             {
                 GameObject newItem = Instantiate(listBuyPrefab, listContentArea);
                 BuyListItem listItemComponent = newItem.GetComponent<BuyListItem>();
                 if (listItemComponent != null)
+                {
                     listItemComponent.Init(fish, this, fish.fish.fishName, item.price);
+                    listItems.Add(listItemComponent);
+                }
             }
             else if (type == ShopItem.ShopItemType.Upgrade && item.TryGetUpgrade(out var upgrade))
             {
                 GameObject newItem = Instantiate(listBuyPrefab, listContentArea);
                 BuyListItem listItemComponent = newItem.GetComponent<BuyListItem>();
                 if (listItemComponent != null)
+                {
                     listItemComponent.Init(upgrade, this, upgrade.upgrade.upgradeName, item.price);
+                    listItems.Add(listItemComponent);
+                }
 
                 // If the player already owns this upgrade, visually stamp the item
                 var playerUps = GameManager.GetPlayerUpgrades();
@@ -367,12 +385,16 @@ public class ShopMenu : MonoBehaviour
                 }
             }
         }
+
+        SetupNavigation();
     }
 
 
-    public void PopulateListWithFish(List<CaughtFish> fishTypes)
+    public void PopulateSellList(List<CaughtFish> fishTypes)
     {
+        BeginListRebuild();
         // Reset main selection panel and clear existing list items
+        listItems.Clear();
         selectedShopItem = null;
         nameField.text = "Selling Fish";
         descriptionField.text = "";
@@ -386,14 +408,15 @@ public class ShopMenu : MonoBehaviour
         for (int i = 0; i < GameManager.Instance.playerInventory.caughtFish.Count; i++)
         {
             CaughtFish caughtFish = GameManager.Instance.playerInventory.caughtFish[i];
-            //CreateListItem(caughtFish.fish.name, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}", subtext2: $"Value: {(caughtFish.weight * 10):F2}", description: caughtFish.fish.description);
 
             GameObject newItem = Instantiate(listSellPrefab, listContentArea);
             SellListItem listItemComponent = newItem.GetComponent<SellListItem>();
 
-
             listItemComponent.Init(caughtFish, this, caughtFish.fish.fishName, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}",
             subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description);
+            listItems.Add(listItemComponent);
         }
+
+        SetupNavigation();
     }
 }

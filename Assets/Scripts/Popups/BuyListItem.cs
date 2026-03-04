@@ -23,6 +23,7 @@ public class BuyListItem : ListItem
     {
         baitRef = bait;
         parentMenu = parent;
+        parentMenuBase = parent;
         nameField.text = name;
         priceValue = price;
         multField.text = $"X{bait.numberOfUses}";
@@ -35,6 +36,7 @@ public class BuyListItem : ListItem
     {
         upgradeRef = upgrade;
         parentMenu = parent;
+        parentMenuBase = parent;
         nameField.text = name;
         priceValue = price;
         multField.gameObject.SetActive(false);
@@ -46,6 +48,7 @@ public class BuyListItem : ListItem
     {
         fishRef = fish;
         parentMenu = parent;
+        parentMenuBase = parent;
         nameField.text = name;
         priceValue = price;
         multField.gameObject.SetActive(false);

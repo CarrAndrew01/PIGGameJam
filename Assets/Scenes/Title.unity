@@ -1410,7 +1410,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 994462794363852919, guid: 860d065b23022794b8fe61127b741637, type: 3}
       propertyPath: planetName
-      value: Firax
+      value: PlanetLava
       objectReference: {fileID: 0}
     - target: {fileID: 994462794363852919, guid: 860d065b23022794b8fe61127b741637, type: 3}
       propertyPath: requiredEntryStat
@@ -8546,7 +8546,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 994462794363852919, guid: 860d065b23022794b8fe61127b741637, type: 3}
       propertyPath: planetName
-      value: Nimbus
+      value: PlanetCloud
       objectReference: {fileID: 0}
     - target: {fileID: 994462794363852919, guid: 860d065b23022794b8fe61127b741637, type: 3}
       propertyPath: requiredEntryStat
@@ -10136,7 +10136,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 994462794363852919, guid: 860d065b23022794b8fe61127b741637, type: 3}
       propertyPath: planetName
-      value: Lantis
+      value: PlanetBio
       objectReference: {fileID: 0}
     - target: {fileID: 994462794363852919, guid: 860d065b23022794b8fe61127b741637, type: 3}
       propertyPath: requiredEntryStat
@@ -10289,7 +10289,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 994462794363852919, guid: 860d065b23022794b8fe61127b741637, type: 3}
       propertyPath: planetName
-      value: Boreala
+      value: PlanetIce
       objectReference: {fileID: 0}
     - target: {fileID: 1385085465828270549, guid: 860d065b23022794b8fe61127b741637, type: 3}
       propertyPath: m_Pivot.x

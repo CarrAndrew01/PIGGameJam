@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: CatchSpeed1
   m_EditorClassIdentifier: 
   upgradeName: Titanium Rod
-  description: Our scientists aren't quite sure this isn't just a normal rod.
+  description: Strong and- hang on, is titanium flexible? Are we sure this is a good
+    material for this?
   mechDescriptionOverride: 
   icon: {fileID: 0}
   type: 0

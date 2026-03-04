@@ -31,6 +31,9 @@ public class BaitMenu : MonoBehaviour
         // Default to the currently selected bait in the inventory when the menu opens
         menuComponent.selectedIndex = GameManager.Instance.playerInventory.baits.FindIndex(b => b.baitUpgrade == GameManager.Instance.playerInventory.currentBaitUpgrade);
         CheckButtonState();
+
+        // Pressing Submit (controller A / Enter) on a bait item selects/deselects it.
+        menuComponent.onItemSubmitted.AddListener(_ => SelectBait());
     }
 
 
@@ -85,26 +88,21 @@ public class BaitMenu : MonoBehaviour
 
     private void CheckStampState()
     {
-        if (menuComponent.selectedIndex != -1 && menuComponent.selectedIndex < GameManager.Instance.playerInventory.baits.Count)
+        Upgrade currentBait = GameManager.Instance.playerInventory.currentBaitUpgrade;
+        selectedListItem = null;
+
+        List<Bait> baits = GameManager.Instance.playerInventory.baits;
+        for (int i = 0; i < menuComponent.listItems.Count && i < baits.Count; i++)
         {
-            Bait selectedBait = GameManager.Instance.playerInventory.baits[menuComponent.selectedIndex];
-            bool isCurrentlySelected = selectedBait.baitUpgrade == GameManager.Instance.playerInventory.currentBaitUpgrade;
-
-            // Update stamp state based on whether the bait is currently selected
-            if (isCurrentlySelected)
+            bool isCurrentBait = baits[i].baitUpgrade == currentBait;
+            if (isCurrentBait)
             {
-                if (selectedListItem != null)
-                {
-                    selectedListItem.Unstamp();
-                }
-
-                menuComponent.listItems[menuComponent.selectedIndex].Stamp();
-                selectedListItem = menuComponent.listItems[menuComponent.selectedIndex];
+                menuComponent.listItems[i].Stamp();
+                selectedListItem = menuComponent.listItems[i];
             }
-            else if (!isCurrentlySelected)
+            else if (menuComponent.listItems[i].IsStamped)
             {
-                menuComponent.listItems[menuComponent.selectedIndex].Unstamp();
-                selectedListItem = null;
+                menuComponent.listItems[i].Unstamp();
             }
         }
     }

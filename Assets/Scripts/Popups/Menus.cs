@@ -119,14 +119,14 @@ public class Menus : MonoBehaviour
         if (!GameManager.MenuPopup.ReadyForInput || Transition.CurrentScreen == Transition.Screen.Main || Fishing.IsMinigameActive)
             return; // Don't allow menu input if the popup is currently animating or problems occur
     
-        if (closeMenuAction != null && closeMenuAction.action.WasPressedThisFrame())
+        if (closeMenuAction != null && CurrentMenu != null && closeMenuAction.action.WasPressedThisFrame())
         {
             CloseCurrentMenu();
         }
 
         else if (menuAction != null && menuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.MainMenu))
         {
-            if (!InputUtils.IsControllerActive())
+            if (!InputUtils.IsControllerActive)
             {
                 // If a controller wasn't the last used device, close any open menu
                 if (CurrentMenu != null)

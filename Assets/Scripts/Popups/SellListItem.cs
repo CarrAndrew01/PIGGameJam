@@ -16,14 +16,7 @@ public class SellListItem : ListItem
     {
         fishRef = fish;
         parentMenu = parent;
-        nameField.text = name;
-        subtextField.text = subtext;
-        subtextField2.text = subtext2;
-        icon.sprite = iconSprite;
-        this.description = description;
-        this.mechanicalDescription = mechanicalDescription;
-
-        SetupComponents(iconSprite, subtext, subtext2);
+        base.Init(parent, name, iconSprite, subtext, subtext2, description, mechanicalDescription);
     }
 
     public void OnSellClicked()
@@ -35,12 +28,12 @@ public class SellListItem : ListItem
         // Refresh the parent menu to ensure UI matches inventory (safer than relying on Destroy timing)
         if (parentMenu != null)
         {
-            parentMenu.PopulateListWithFish(GameManager.Instance.playerInventory.caughtFish);
+            parentMenu.PopulateSellList(GameManager.Instance.playerInventory.caughtFish);
             parentMenu.UpdateMoneyDisplay();
         }
     }
 
-    new public void OnItemClicked()
+    public override void OnItemClicked()
     {
         if (parentMenu != null)
         {

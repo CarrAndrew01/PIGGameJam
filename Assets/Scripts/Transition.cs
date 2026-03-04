@@ -60,7 +60,7 @@ public class Transition : MonoBehaviour
 
     private void SelectFirstButton()
     {
-        if (!InputUtils.IsControllerActive())
+        if (!InputUtils.IsControllerActive)
             return;
         // Ensure the first button is selected on each screen at the start
         if (currentScreen == Screen.Main && firstButtonOnMainScreen != null)
@@ -107,7 +107,7 @@ public class Transition : MonoBehaviour
 
     private void Update()
     {
-        if (returnToMainAction.action.WasPressedThisFrame())
+        if (returnToMainAction.action.WasPressedThisFrame() && !Menus.IsAnyMenuOpen)
         {
             switch (currentScreen)
             {
@@ -123,10 +123,17 @@ public class Transition : MonoBehaviour
         }
 
         // If a controller is active and we haven't selected the first button on the current screen yet, do so.
-        if (InputUtils.IsControllerActive())
+        if (InputUtils.IsControllerActive)
         {
-            if (!hasSelectedFirstButton)
-            SelectFirstButton();
+            if (Menus.IsAnyMenuOpen)
+            {
+                // A menu is open and owns navigation — reset so we re-select when it closes.
+                hasSelectedFirstButton = false;
+            }
+            else if (!hasSelectedFirstButton)
+            {
+                SelectFirstButton();
+            }
         }
         else
         {
@@ -230,7 +237,7 @@ public class Transition : MonoBehaviour
                 if (fadeText) FadeCoroutineStarter(FadeTextCoroutine());
                 else HideAllText();
                 AudioManager.playSound("Fly_By");
-                SelectFirstButton();
+                hasSelectedFirstButton = false;
                 break;
             case Screen.Settings:
                 animator.SetBool("SettingsTransition", true);
@@ -238,7 +245,7 @@ public class Transition : MonoBehaviour
                 OnTransition?.Invoke();
                 if (fadeText) FadeCoroutineStarter(FadeTextCoroutine());
                 else HideAllText();
-                SelectFirstButton();
+                hasSelectedFirstButton = false;
                 break;
             case Screen.Main:
                 if (currentScreen == Screen.Galaxy)
@@ -248,7 +255,7 @@ public class Transition : MonoBehaviour
                 currentScreen = Screen.Main;
                 OnTransition?.Invoke();
                 FadeCoroutineStarter(UnFadeTextCoroutine());
-                SelectFirstButton();
+                hasSelectedFirstButton = false;
                 break;
         }
     }

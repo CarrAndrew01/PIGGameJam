@@ -353,17 +353,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c325334d795c6248a7997f5326fcc14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  listItems: []
+  selectedIndex: -1
+  navigateDescriptionAction: {fileID: 0}
+  onItemSelected:
+    m_PersistentCalls:
+      m_Calls: []
+  listContentArea: {fileID: 8637233673709497708}
   nameField: {fileID: 3535195292548654308}
   descriptionField: {fileID: 6623288124461152249}
   mechanicalDescriptionField: {fileID: 6681279050212230702}
-  priceFieldBuy: {fileID: 2930740569494193974}
   moneyField: {fileID: 6280320078279885823}
+  listItemPrefab: {fileID: 0}
+  priceFieldBuy: {fileID: 2930740569494193974}
   buyButton: {fileID: 8101569150076090570}
   open: {fileID: -9120438393101357466, guid: 416b4d396a0727deabaa54612f4b42f0, type: 3}
   closed: {fileID: -1800688359, guid: 416b4d396a0727deabaa54612f4b42f0, type: 3}
   leftButton: {fileID: 3793351662907809187}
   rightButton: {fileID: 1827018362674676155}
-  listContentArea: {fileID: 8637233673709497708}
   listSellPrefab: {fileID: 7340073339813450577, guid: 28501b02e61c47749b83dac36cbb20d3, type: 3}
   listBuyPrefab: {fileID: 5328000772481157963, guid: 338ff86bab58970418dd1196240d6152, type: 3}
   dividerPrefab: {fileID: 9010777057105141058, guid: c52395b8ae5783440b3ceb383bc00a19, type: 3}
@@ -378,16 +385,16 @@ MonoBehaviour:
     cost: 8
   - baitUpgrade: {fileID: 11400000, guid: b7c2d2f730a1fce41865fb73fb0adf96, type: 2}
     numberOfUses: 1
-    cost: 12
+    cost: 22
   - baitUpgrade: {fileID: 11400000, guid: 8c4e0f736e57b5d41876db5031490df9, type: 2}
     numberOfUses: 2
     cost: 16
   - baitUpgrade: {fileID: 11400000, guid: bd7e6db06cfd0d34790733ee1d841a59, type: 2}
-    numberOfUses: 3
-    cost: 20
+    numberOfUses: 1
+    cost: 42
   - baitUpgrade: {fileID: 11400000, guid: 126376677b048c942b175eab350b0fdb, type: 2}
     numberOfUses: 1
-    cost: 26
+    cost: 125
   - baitUpgrade: {fileID: 11400000, guid: beceeaccb34b293479dbe1122b68e395, type: 2}
     numberOfUses: 4
     cost: 34
@@ -396,7 +403,7 @@ MonoBehaviour:
     cost: 38
   - baitUpgrade: {fileID: 11400000, guid: 4b753a8ac8713b94fb2a60a694e98c33, type: 2}
     numberOfUses: 1
-    cost: 50
+    cost: 224
   purchasableFish: []
   purchasableUpgrades:
   - upgrade: {fileID: 11400000, guid: 990978738cf441e42af6a59a2e60677c, type: 2}
@@ -408,11 +415,19 @@ MonoBehaviour:
   - upgrade: {fileID: 11400000, guid: 00f687103a2c571499f0a6d45c0e7615, type: 2}
     price: 46
   - upgrade: {fileID: 11400000, guid: aee1e88160c681041a09b54fa410a23a, type: 2}
-    price: 60
+    price: 120
+  - upgrade: {fileID: 11400000, guid: cb2f6ed388686b04aab5964a26f10cd9, type: 2}
+    price: 210
+  - upgrade: {fileID: 11400000, guid: 363b72a6a6958a240b1dc5ffdbeda142, type: 2}
+    price: 340
   - upgrade: {fileID: 11400000, guid: 1981d400e187de4439a5c7b0d655c9dd, type: 2}
-    price: 100
+    price: 800
   - upgrade: {fileID: 11400000, guid: 67c8fe14a20c13947a5a9a96f76d1cf3, type: 2}
-    price: 50
+    price: 123
+  - upgrade: {fileID: 11400000, guid: d1e252c95e77a0b48aad439fc4ec982d, type: 2}
+    price: 777
+  previousPageAction: {fileID: 1264969880926577010, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  nextPageAction: {fileID: 5990779157559530609, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!1 &7300396583188152871
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -991,6 +1006,10 @@ PrefabInstance:
     - target: {fileID: 6829790853159330146, guid: a64a7703b16792c49b9ce541c9a68dbb, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4281479730
+      objectReference: {fileID: 0}
+    - target: {fileID: 8642459719671423358, guid: a64a7703b16792c49b9ce541c9a68dbb, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8642459719671423358, guid: a64a7703b16792c49b9ce541c9a68dbb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1390,7 +1409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -1929,6 +1948,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 234288457913359171}
     m_Modifications:
+    - target: {fileID: 591291666880544377, guid: 0ba84ae657afaa04c97dc7f203866210, type: 3}
+      propertyPath: m_Size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 591291666880544377, guid: 0ba84ae657afaa04c97dc7f203866210, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 853095502524971648, guid: 0ba84ae657afaa04c97dc7f203866210, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0

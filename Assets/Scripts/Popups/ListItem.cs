@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Class representing a single item in a list, such as an upgrade or inventory item.
 /// </summary>
-public class ListItem : MonoBehaviour, ISelectHandler, IDeselectHandler
+public class ListItem : MonoBehaviour, ISelectHandler, IDeselectHandler, ISubmitHandler
 {
     // Components
     [Header("Data")]
@@ -103,7 +103,7 @@ public class ListItem : MonoBehaviour, ISelectHandler, IDeselectHandler
     {
         OnItemClicked();
         // In controller mode the nav-focus drives the highlight, so force it on.
-        if (InputUtils.IsControllerActive() && selectHightlight != null)
+        if (InputUtils.IsControllerActive && selectHightlight != null)
             selectHightlight.gameObject.SetActive(true);
     }
 
@@ -111,8 +111,22 @@ public class ListItem : MonoBehaviour, ISelectHandler, IDeselectHandler
     {
         // In controller mode, hide the highlight when focus leaves this item,
         // unless it is also the description-selected item and we're not using a controller.
-        if (InputUtils.IsControllerActive() && selectHightlight != null)
+        if (InputUtils.IsControllerActive && selectHightlight != null)
             selectHightlight.gameObject.SetActive(false);
+    }
+
+    public void OnSubmit(BaseEventData eventData)
+    {
+        OnItemSubmitted();
+    }
+
+    /// <summary>
+    /// Called when the player presses Submit (controller A / keyboard Enter) on this item.
+    /// Override in subclasses to define the confirm action for that item type.
+    /// </summary>
+    public virtual void OnItemSubmitted()
+    {
+        parentMenuBase?.OnListItemSubmitted(this);
     }
 
     public void UpdateSelectionHighlight()
@@ -134,7 +148,7 @@ public class ListItem : MonoBehaviour, ISelectHandler, IDeselectHandler
         _isDescriptionSelected = selected;
         // In controller mode the highlight is owned by nav focus (OnSelect/OnDeselect),
         // so only apply it here when using mouse/keyboard.
-        if (!InputUtils.IsControllerActive())
+        if (!InputUtils.IsControllerActive)
             selectHightlight.gameObject.SetActive(selected);
         else if (!selected)
             selectHightlight.gameObject.SetActive(false);

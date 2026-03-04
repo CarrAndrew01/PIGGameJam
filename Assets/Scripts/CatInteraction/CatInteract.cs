@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ISelectHandler, IDeselectHandler
 {
     public Image outlineImage;
     public Image pointerImage;
@@ -10,69 +10,121 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public CatSound catsound = CatSound.Medium_Meow;
 
+    public bool selectFromStart = false;
+    private bool controllerSelectStarted = false;
 
+    private Button button;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public virtual void Start()
     {
         startColour = outlineImage.color;
+        button = GetComponent<Button>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
+        bool menuOpen = Menus.IsAnyMenuOpen;
 
-    }
+        // Disable/enable the button so controller navigation ignores cats while a menu is open.
+        if (button != null && button.enabled == menuOpen)
+        {
+            button.enabled = !menuOpen;
+
+            if (menuOpen)
+            {
+                // If this cat was selected, deselect it and clear the outline.
+                if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
+                    EventSystem.current.SetSelectedGameObject(null);
+                OutlineCat(false);
+                controllerSelectStarted = false;
+            }
+        }
+
+        if (menuOpen) return;
+
+        // Auto-select logic for controller
+        if (selectFromStart && InputUtils.IsControllerActive)
+        {
+            // Only select if nothing is currently selected (avoids stealing focus from other navigables)
+            if (!controllerSelectStarted)
+            {
+                controllerSelectStarted = true;
+                if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
+                    EventSystem.current.SetSelectedGameObject(gameObject);
+            }
+        }
+        else if (!InputUtils.IsControllerActive)
+        {
+            controllerSelectStarted = false;
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
+                EventSystem.current.SetSelectedGameObject(null);
+        }
+    } 
+
+    // Mouse
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
         OutlineCat(true);
     }
+
     public virtual void OnPointerExit(PointerEventData eventData)
     {
         OutlineCat(false);
     }
-    // onpointerclick is used here, somewhere else i will add button presses
+
     public virtual void OnPointerClick(PointerEventData eventData)
+    {
+        Interact();
+    }
+
+    // Controller / Keyboard navigation
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        OutlineCat(true);
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        OutlineCat(false);
+    }
+
+    public void Interact()
     {
         InteractWithCat();
         switch (catsound)
         {
-            case (CatSound.High_Meow):
+            case CatSound.High_Meow:
                 AudioManager.playSound?.Invoke("High_Meow");
                 break;
-            case (CatSound.Medium_Meow):
+            case CatSound.Medium_Meow:
                 AudioManager.playSound?.Invoke("Medium_Meow");
                 break;
-            case (CatSound.Low_Meow):
+            case CatSound.Low_Meow:
                 AudioManager.playSound?.Invoke("Low_Meow");
                 break;
-
         }
     }
-    public virtual void InteractWithCat()
-    {
 
-    }
+    public virtual void InteractWithCat() { }
 
     void OutlineCat(bool on)
     {
-        // if the bool is true, set the alpha to full, otherwise set to 0
         var alpha = on ? 1 : 0;
 
         if (outlineImage != null)
-        {
             outlineImage.color = new Color(startColour.r, startColour.g, startColour.b, alpha);
-        }
+
         if (pointerImage != null)
-        {
             pointerImage.color = new Color(startColour.r, startColour.g, startColour.b, alpha);
-        }
     }
 }
+
 public enum CatSound
 {
     High_Meow,
     Medium_Meow,
-    Low_Meow
+    Low_Meow,
+    No_Sound
 }

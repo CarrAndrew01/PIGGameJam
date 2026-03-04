@@ -3,25 +3,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuestMenu : MonoBehaviour
+public class QuestMenu : Menu
 {
-
-
-    public TextMeshProUGUI NameField;
-    public TextMeshProUGUI DescriptionField;
-
-
     public GameObject finishQuestUnavailable;
     public GameObject finishQuestAvailable;
 
     public GameObject questComplete;
 
-
-    public RectTransform listContentArea; // Reference to the RectTransform for the list
-
-
-    [Header("Prefabs")]
-    public GameObject listItemPrefab; // Prefab for the list items in the menu
 
     public QuestListItem currentlyDisplayedQuestItem;
 
@@ -39,6 +27,16 @@ public class QuestMenu : MonoBehaviour
         PopulateQuestList();
     }
 
+    public override void OnListItemSubmitted(ListItem item)
+    {
+        if (item is QuestListItem questItem)
+        {
+            CompleteSelectedQuest();
+            FillInField(questItem.quest);
+        }
+    }
+
+
     // Methods
     public void CloseMenu()
     {
@@ -48,6 +46,7 @@ public class QuestMenu : MonoBehaviour
     public void PopulateQuestList()
     {
         // Clear existing list items
+        listItems.Clear();
         foreach (Transform child in listContentArea)
         {
             Destroy(child.gameObject);
@@ -102,8 +101,8 @@ public class QuestMenu : MonoBehaviour
         }
         else
         {
-            NameField.text = "No Quests";
-            DescriptionField.text = "Who knows why.";
+            nameField.text = "No Quests";
+            descriptionField.text = "Who knows why.";
             rewardText.transform.parent.gameObject.SetActive(false); //turn off the reward text, just in case
             foreach (GameObject go in requirementObjects)
             {
@@ -112,6 +111,28 @@ public class QuestMenu : MonoBehaviour
             finishQuestAvailable.SetActive(false);
             finishQuestUnavailable.SetActive(false);
             questComplete.SetActive(false);
+        }
+
+        SetupNavigation();
+    }
+
+    public void CompleteSelectedQuest()
+    {
+        if (currentlyDisplayedQuestItem != null && currentlyDisplayedQuestItem.quest != null)
+        {
+            Quest.Completed displayStatus = GetCachedStatusForQuest(currentlyDisplayedQuestItem.quest);
+            
+            if (displayStatus == Quest.Completed.Active)
+            {
+                if (CheckCompletion(currentlyDisplayedQuestItem.quest))
+                {
+                    OnQuestCompletion();
+                }
+                else
+                {
+                    Debug.LogWarning("Attempted to complete quest that doesn't meet requirements.");
+                }
+            }
         }
     }
 
@@ -123,8 +144,8 @@ public class QuestMenu : MonoBehaviour
         // Always update basic fields
         Quest.Completed displayStatus = GetCachedStatusForQuest(quest);
 
-        NameField.text = quest.questName;
-        DescriptionField.text = quest.description;
+        nameField.text = quest.questName;
+        descriptionField.text = quest.description;
 
         // Ensure requirement UI is reset first
         for (int ri = 0; ri < requirementObjects.Count; ri++)
@@ -215,6 +236,7 @@ public class QuestMenu : MonoBehaviour
         if (listItemComponent != null)
         {
             listItemComponent.Init(this, quest, completed);
+            listItems.Add(listItemComponent);
             return listItemComponent;
         }
         else
@@ -297,10 +319,10 @@ public class QuestMenu : MonoBehaviour
                     }
                 }
             }
-
-            // Refresh the menu if there were any next quests to unlock
-            PopulateQuestList();
         }
+
+        // Refresh the quest list to reflect the updated statuses
+        PopulateQuestList();
 
         // Give the player the reward for the completed quest (use completedQuest directly)
         if (completedQuest.moneyReward > 0)

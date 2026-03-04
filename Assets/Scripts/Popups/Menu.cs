@@ -20,6 +20,7 @@ public class Menu : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent<int> onItemSelected; // Event that gets triggered when an item is selected, passing the index of the selected item
+    public UnityEvent<ListItem> onItemSubmitted; // Event triggered when an item is confirmed with Submit (controller A / keyboard Enter)
 
     // Components
     [Header("Components")]
@@ -30,24 +31,47 @@ public class Menu : MonoBehaviour
     public TextMeshProUGUI moneyField;
 
     private ScrollRect descriptionScrollRect;
+    private ScrollRect listScrollRect;
+    private ContentSizeFitter listContentSizeFitter;
+    private GameObject lastKnownSelected;
+    protected bool suppressAutoScroll = false;
 
     [Header("Prefabs")]
     public GameObject listItemPrefab; // Prefab for the list items in the menu
 
+    // Call at the start of every list rebuild to prevent the ContentSizeFitter
+    // from shrinking the content rect (and snapping scroll position) while items are being destroyed.
+    protected void BeginListRebuild()
+    {
+        suppressAutoScroll = true;
+        if (listContentSizeFitter != null)
+            listContentSizeFitter.enabled = false;
+    }
+
     void Awake()
     {
-        // Get reference to the ScrollRect component for the description fields
-        descriptionScrollRect = descriptionField.GetComponentInParent<ScrollRect>();
+        if (descriptionField != null)
+        {
+            descriptionScrollRect = descriptionField.GetComponentInParent<ScrollRect>();
+            descriptionField.text = "";
+        }
+        if (listContentArea != null)
+        {
+            listScrollRect = listContentArea.GetComponentInParent<ScrollRect>();
+            listContentSizeFitter = listContentArea.GetComponent<ContentSizeFitter>();
+        }
+        if (mechanicalDescriptionField != null)
+        {
+            mechanicalDescriptionField.text = "Click on an item to see its description.";
+        }
 
-        // Set initial text for description fields
-        descriptionField.text = "";
-        mechanicalDescriptionField.text = "Click on an item to see its description.";
         UpdateMoneyDisplay();
     }
 
-    void Update()
+    public virtual void Update()
     {
         HandleDescriptionNavigation();
+        HandleListAutoScroll();
     }
 
     // Methods
@@ -63,8 +87,18 @@ public class Menu : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when the player presses Submit on a list item. Override in subclasses or
+    /// subscribe to onItemSubmitted to define the confirm action for this menu.
+    /// </summary>
+    public virtual void OnListItemSubmitted(ListItem item)
+    {
+        onItemSubmitted?.Invoke(item);
+    }
+
     public void PopulateList(string[] items)
     {
+        BeginListRebuild();
         // Clear existing list items
         listItems.Clear();
         foreach (Transform child in listContentArea)
@@ -88,6 +122,7 @@ public class Menu : MonoBehaviour
 
     public void PopulateListWithUpgrades(List<Upgrade> upgrades)
     {
+        BeginListRebuild();
         // Clear existing list items
         listItems.Clear();
         foreach (Transform child in listContentArea)
@@ -105,6 +140,7 @@ public class Menu : MonoBehaviour
     }
     public void PopulateListWithBaits(List<Bait> baits)
     {
+        BeginListRebuild();
         // Clear existing list items
         listItems.Clear();
         foreach (Transform child in listContentArea)
@@ -122,6 +158,7 @@ public class Menu : MonoBehaviour
     }
     public void PopulateListWithFish(List<CaughtFish> fishTypes)
     {
+        BeginListRebuild();
         // Clear existing list items
         listItems.Clear();
         foreach (Transform child in listContentArea)
@@ -140,6 +177,7 @@ public class Menu : MonoBehaviour
 
     public void PopulateListWithFishCount(Dictionary<string, int> fishCount, List<CaughtFish> fishTypes = null)
     {
+        BeginListRebuild();
         // Clear existing list items
         listItems.Clear();
         foreach (Transform child in listContentArea)
@@ -177,8 +215,18 @@ public class Menu : MonoBehaviour
         SetupNavigation();
     }
 
-    private void SetupNavigation()
+    protected void SetupNavigation()
     {
+        // List is fully rebuilt — re-enable the ContentSizeFitter so it can measure the new items,
+        // then reset scroll to top and allow auto-scroll again.
+        if (listContentSizeFitter != null)
+            listContentSizeFitter.enabled = true;
+        Canvas.ForceUpdateCanvases();
+        lastKnownSelected = null;
+        if (listScrollRect != null)
+            listScrollRect.content.anchoredPosition = Vector2.zero;
+        suppressAutoScroll = false;
+
         if (Gamepad.current == null) return;
 
         if (listItems.Count > 0)
@@ -188,7 +236,7 @@ public class Menu : MonoBehaviour
         }
     }
 
-    private ListItem CreateListItem(string itemName, Sprite itemIcon, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "", int index = -1)
+    protected ListItem CreateListItem(string itemName, Sprite itemIcon, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "", int index = -1)
     {
         GameObject newItem = Instantiate(listItemPrefab, listContentArea);
         ListItem listItemComponent = newItem.GetComponent<ListItem>();
@@ -204,6 +252,67 @@ public class Menu : MonoBehaviour
             Debug.LogError("List item prefab is missing a ListItem component!");
         }
         return listItemComponent;
+    }
+
+    // Auto-scroll code providing by CoPilot
+    private void HandleListAutoScroll()
+    {
+        if (suppressAutoScroll) return;
+        if (listScrollRect == null || EventSystem.current == null) return;
+
+        GameObject selected = EventSystem.current.currentSelectedGameObject;
+        if (selected == null || selected == lastKnownSelected) return;
+        lastKnownSelected = selected;
+
+        // Only scroll for items that actually live inside this menu's list
+        if (!selected.transform.IsChildOf(listContentArea)) return;
+
+        EnsureItemVisible(selected.GetComponent<RectTransform>());
+    }
+
+    private void EnsureItemVisible(RectTransform item)
+    {
+        if (item == null || listScrollRect == null) return;
+
+        Canvas.ForceUpdateCanvases();
+
+        RectTransform viewport = listScrollRect.viewport != null
+            ? listScrollRect.viewport
+            : listScrollRect.GetComponent<RectTransform>();
+
+        float viewportHeight = viewport.rect.height;
+        float contentHeight  = listScrollRect.content.rect.height;
+
+        if (contentHeight <= viewportHeight) return;
+
+        // Get item pivot position in content-local space.
+        // Y is negative going downward (content flows top→bottom).
+        Vector2 localPos = listScrollRect.content.InverseTransformPoint(item.position);
+
+        // Convert to "distance from content top" so values grow going down.
+        float itemTop    = -localPos.y - item.rect.height * (1f - item.pivot.y);
+        float itemBottom = itemTop + item.rect.height;
+
+        // content.anchoredPosition.y represents how far the content has been scrolled up.
+        // visibleTop..visibleBottom is the currently visible window in "distance from content top".
+        float scrollPos     = listScrollRect.content.anchoredPosition.y;
+        float visibleTop    = scrollPos;
+        float visibleBottom = scrollPos + viewportHeight;
+
+        if (itemBottom > visibleBottom)
+        {
+            // Item bottom is below the viewport — scroll down to reveal it.
+            listScrollRect.content.anchoredPosition = new Vector2(
+                listScrollRect.content.anchoredPosition.x,
+                itemBottom - viewportHeight);
+        }
+        else if (itemTop < visibleTop)
+        {
+            // Item top is above the viewport — scroll up to reveal it.
+            listScrollRect.content.anchoredPosition = new Vector2(
+                listScrollRect.content.anchoredPosition.x,
+                itemTop);
+        }
     }
 
     private void HandleDescriptionNavigation()

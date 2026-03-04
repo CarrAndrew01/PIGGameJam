@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Blackhole Hook
   m_EditorClassIdentifier: 
   upgradeName: Blackhole Hook
-  description: A blackhole inside a hook?
+  description: A blackhole inside a hook? Is that cheating?
   mechDescriptionOverride: Draws fish into your hook
   icon: {fileID: 0}
   type: 8
