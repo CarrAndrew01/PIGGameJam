@@ -22,14 +22,16 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: f2d584bda738b25b3bb207f4e5561631, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
+  value: 12
   minWeight: 3
   maxWeight: 4
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 12
-  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
-  jumpiness: 0.861
+  minSummonTime: 20
+  maxSummonTime: 60
+  jumpiness: 0.14
   speed: 0.325
   stubbornness: 0.55
   size: 0.344
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}

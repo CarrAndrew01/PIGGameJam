@@ -972,7 +972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abb0d8ee9841c448a8c46c5ce6a12c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catchSize: 75
+  catchSize: 90
   catchRate: 0.35
   escapeRate: 0.35
   hookAcceleration: 1

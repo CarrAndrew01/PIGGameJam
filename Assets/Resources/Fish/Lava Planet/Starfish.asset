@@ -29,7 +29,7 @@ MonoBehaviour:
   minSummonTime: 20
   maxSummonTime: 60
   jumpiness: 0.072
-  speed: 0.1
+  speed: 0.507
   stubbornness: 1
-  size: 0.282
+  size: 0.493
   minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}

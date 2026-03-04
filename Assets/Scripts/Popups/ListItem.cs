@@ -120,10 +120,6 @@ public class ListItem : MonoBehaviour, ISelectHandler, IDeselectHandler, ISubmit
         OnItemSubmitted();
     }
 
-    /// <summary>
-    /// Called when the player presses Submit (controller A / keyboard Enter) on this item.
-    /// Override in subclasses to define the confirm action for that item type.
-    /// </summary>
     public virtual void OnItemSubmitted()
     {
         parentMenuBase?.OnListItemSubmitted(this);

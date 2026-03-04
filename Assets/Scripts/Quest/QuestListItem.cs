@@ -12,14 +12,14 @@ public class QuestListItem : ListItem
 
     public void Init(QuestMenu parent, Quest quest, bool completed = false)
     {
+        // QuestListItem specific initialization
         this.quest = quest;
         parentMenu = parent;
-        nameField.text = quest.questName;
-
         completedField.text = completed ? "Completed" : ""; //display nothing if its not completed
         completedField.gameObject.SetActive(completed);
 
-        SetupComponents();
+        // Call the usual base init
+        base.Init(parent, quest.questName);
     }
 
     public override void OnItemClicked()

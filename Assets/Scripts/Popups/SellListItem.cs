@@ -14,8 +14,11 @@ public class SellListItem : ListItem
 
     public void Init(CaughtFish fish, ShopMenu parent, string name, Sprite iconSprite = null, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "")
     {
+        // SellItem specific initialization
         fishRef = fish;
         parentMenu = parent;
+
+        // Call the usual base init
         base.Init(parent, name, iconSprite, subtext, subtext2, description, mechanicalDescription);
     }
 

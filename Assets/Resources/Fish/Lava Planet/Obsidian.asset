@@ -30,8 +30,8 @@ MonoBehaviour:
   preferredBaitType: 0
   minSummonTime: 20
   maxSummonTime: 60
-  jumpiness: 0.426
-  speed: 0.689
+  jumpiness: 0.902
+  speed: 0.786
   stubbornness: 0.368
   size: 0.225
   minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}

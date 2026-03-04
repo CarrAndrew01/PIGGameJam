@@ -14,6 +14,14 @@ public class InputUtils : MonoBehaviour
 
     private static bool controllerWasLastUsed = false;
 
+    private static void SetControllerActive(bool value)
+    {
+        if (controllerWasLastUsed == value) return;
+        controllerWasLastUsed = value;
+        Cursor.visible = !value;
+        Cursor.lockState = value ? CursorLockMode.Locked : CursorLockMode.None;
+    }
+
     [ShowInInspector, ReadOnly]
     public static bool IsControllerActive => controllerWasLastUsed;
     [ShowInInspector, ReadOnly]
@@ -49,7 +57,7 @@ public class InputUtils : MonoBehaviour
 
             if (buttonPressed || stickMoved)
             {
-                controllerWasLastUsed = true;
+                SetControllerActive(true);
                 return;
             }
         }
@@ -64,7 +72,7 @@ public class InputUtils : MonoBehaviour
 
             if (clicked || moved)
             {
-                controllerWasLastUsed = false;
+                SetControllerActive(false);
                 return;
             }
         }
@@ -72,7 +80,7 @@ public class InputUtils : MonoBehaviour
         if (Keyboard.current != null)
         {
             if (Keyboard.current.anyKey.wasPressedThisFrame)
-                controllerWasLastUsed = false;
+                SetControllerActive(false);
         }
     }
 }
