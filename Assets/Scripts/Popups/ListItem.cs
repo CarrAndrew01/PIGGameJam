@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Class representing a single item in a list, such as an upgrade or inventory item.
 /// </summary>
-public class ListItem : MonoBehaviour, ISelectHandler
+public class ListItem : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     // Components
     [Header("Data")]
@@ -33,6 +33,10 @@ public class ListItem : MonoBehaviour, ISelectHandler
     public Image selectHightlight;
     public Image stampIcon;
     protected Menu parentMenuBase;
+
+    private bool _isDescriptionSelected = false;
+
+
 
     public virtual void Init(Menu parent, string name, Sprite iconSprite = null, string subtext = "", string subtext2 = "", string description = "", string mechanicalDescription = "", int index = -1)
     {
@@ -98,6 +102,17 @@ public class ListItem : MonoBehaviour, ISelectHandler
     public void OnSelect(BaseEventData eventData)
     {
         OnItemClicked();
+        // In controller mode the nav-focus drives the highlight, so force it on.
+        if (InputUtils.IsControllerActive() && selectHightlight != null)
+            selectHightlight.gameObject.SetActive(true);
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        // In controller mode, hide the highlight when focus leaves this item,
+        // unless it is also the description-selected item and we're not using a controller.
+        if (InputUtils.IsControllerActive() && selectHightlight != null)
+            selectHightlight.gameObject.SetActive(false);
     }
 
     public void UpdateSelectionHighlight()
@@ -116,7 +131,13 @@ public class ListItem : MonoBehaviour, ISelectHandler
 
     public virtual void SetSelected(bool selected)
     {
-        selectHightlight.gameObject.SetActive(selected);
+        _isDescriptionSelected = selected;
+        // In controller mode the highlight is owned by nav focus (OnSelect/OnDeselect),
+        // so only apply it here when using mouse/keyboard.
+        if (!InputUtils.IsControllerActive())
+            selectHightlight.gameObject.SetActive(selected);
+        else if (!selected)
+            selectHightlight.gameObject.SetActive(false);
     }
 
     public void Stamp()

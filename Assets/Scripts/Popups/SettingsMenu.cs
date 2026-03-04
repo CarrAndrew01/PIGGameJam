@@ -121,7 +121,6 @@ public class SettingsMenu : MonoBehaviour
     }
     public void CloseMenu()
     {
-        // Close
         Menus.Instance.CloseCurrentMenu();
     }
 
@@ -140,9 +139,9 @@ public class SettingsMenu : MonoBehaviour
     {
         if (Gamepad.current == null) return;
 
-        // Set up navigation for the buttons in the settings menu
-        var button = GetComponentInChildren<Button>();
+        // Set up navigation the first navigation element in the menu (e.g., masterVolumeSlider) to be selected by default
+        var navigationObject = GetComponentInChildren<Selectable>();
 
-        EventSystem.current.SetSelectedGameObject(button.gameObject);
+        EventSystem.current.SetSelectedGameObject(navigationObject.gameObject);
     }
 }

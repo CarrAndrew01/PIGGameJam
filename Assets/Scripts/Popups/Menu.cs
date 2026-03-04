@@ -15,6 +15,9 @@ public class Menu : MonoBehaviour
     public List<ListItem> listItems = new List<ListItem>(); // List of the current list items in the menu
     public int selectedIndex = -1; // Index of the currently selected item, -1 if none selected
 
+    [Header("Input Actions")]
+    public InputActionReference navigateDescriptionAction; // Vector2 for scrolling the description field
+
     [Header("Events")]
     public UnityEvent<int> onItemSelected; // Event that gets triggered when an item is selected, passing the index of the selected item
 
@@ -26,14 +29,25 @@ public class Menu : MonoBehaviour
     public TextMeshProUGUI mechanicalDescriptionField; // Reference to the TextMeshProUGUI for the mechanical description field
     public TextMeshProUGUI moneyField;
 
+    private ScrollRect descriptionScrollRect;
+
     [Header("Prefabs")]
     public GameObject listItemPrefab; // Prefab for the list items in the menu
 
     void Awake()
     {
+        // Get reference to the ScrollRect component for the description fields
+        descriptionScrollRect = descriptionField.GetComponentInParent<ScrollRect>();
+
+        // Set initial text for description fields
         descriptionField.text = "";
         mechanicalDescriptionField.text = "Click on an item to see its description.";
         UpdateMoneyDisplay();
+    }
+
+    void Update()
+    {
+        HandleDescriptionNavigation();
     }
 
     // Methods
@@ -190,5 +204,20 @@ public class Menu : MonoBehaviour
             Debug.LogError("List item prefab is missing a ListItem component!");
         }
         return listItemComponent;
+    }
+
+    private void HandleDescriptionNavigation()
+    {
+        if (navigateDescriptionAction == null || descriptionScrollRect == null) return;
+
+        Vector2 navigationInput = navigateDescriptionAction.action.ReadValue<Vector2>();
+
+        // Scroll vertically based on the y component of the input
+        if (Mathf.Abs(navigationInput.y) > 0.1f)
+        {
+            float scrollAmount = navigationInput.y * Time.deltaTime;
+            descriptionScrollRect.verticalNormalizedPosition += scrollAmount;
+            descriptionScrollRect.verticalNormalizedPosition = Mathf.Clamp01(descriptionScrollRect.verticalNormalizedPosition);
+        }
     }
 }

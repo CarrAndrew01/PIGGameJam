@@ -142,13 +142,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OpenableMenus: -1
   EscapeMenuButtons: -1
-  menuAction: {fileID: 7417122882283802201, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  upgradeMenuAction: {fileID: -2308141821969077309, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  inventoryMenuAction: {fileID: 1287775752817895777, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  baitMenuAction: {fileID: 8762924982560131557, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  menuAction: {fileID: -1299147104198951138, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  upgradeMenuAction: {fileID: -1488146496936276448, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  inventoryMenuAction: {fileID: -3102916600961298983, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  baitMenuAction: {fileID: 1006841340536668324, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   shopMenuAction: {fileID: 0}
   questMenuAction: {fileID: 0}
   settingsMenuAction: {fileID: 0}
+  closeMenuAction: {fileID: 345706385713137814, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   menuPrefab: {fileID: 5994889511491456181, guid: a0864c37a86240e409b9fc1073e59805, type: 3}
   upgradeMenuPrefab: {fileID: 8273727319757726718, guid: e420b088386300248b9526869f035fcc, type: 3}
   inventoryMenuPrefab: {fileID: 2941574363715988928, guid: d4e5e35017dfa9e44bef6e72cb809966, type: 3}

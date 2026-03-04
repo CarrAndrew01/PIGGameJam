@@ -66,6 +66,8 @@ public class Menus : MonoBehaviour
     public InputActionReference questMenuAction; // expects Button
     public InputActionReference settingsMenuAction; // expects Button
 
+    public InputActionReference closeMenuAction; // expects Button
+
     [Header("Prefabs")]
     public GameObject menuPrefab; // Prefab for the escape menu popup
     public GameObject upgradeMenuPrefab; // Prefab for the upgrade menu popup
@@ -116,101 +118,61 @@ public class Menus : MonoBehaviour
     {
         if (!GameManager.MenuPopup.ReadyForInput || Transition.CurrentScreen == Transition.Screen.Main || Fishing.IsMinigameActive)
             return; // Don't allow menu input if the popup is currently animating or problems occur
-
-        // Menu action handles closing all menus, so it should be always active.
-        if (menuAction != null && menuAction.action.WasPressedThisFrame())
+    
+        if (closeMenuAction != null && closeMenuAction.action.WasPressedThisFrame())
         {
-            if (CurrentMenu != null)
+            CloseCurrentMenu();
+        }
+
+        else if (menuAction != null && menuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.MainMenu))
+        {
+            if (!InputUtils.IsControllerActive())
             {
-                CloseCurrentMenu();
+                // If a controller wasn't the last used device, close any open menu
+                if (CurrentMenu != null)
+                    CloseCurrentMenu();
             }
-            else if (IsMenuOpenable(MenuType.MainMenu))
-            {
-                // OPEN ESCAPE MENU
-                OpenMenu(MenuType.MainMenu, priority: true);
-                CurrentMenuType = MenuType.MainMenu;
-            }
+            CheckToggleMenu(MenuType.MainMenu);
         }
         else if (upgradeMenuAction != null && upgradeMenuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.UpgradeMenu))
         {
-            if (CurrentMenu != null && CurrentMenuType == MenuType.UpgradeMenu)
-            {
-                CloseCurrentMenu();
-            }
-            else
-            {
-                // OPEN UPGRADE MENU
-                OpenMenu(MenuType.UpgradeMenu, priority: true);
-                CurrentMenuType = MenuType.UpgradeMenu;
-            }
+            CheckToggleMenu(MenuType.UpgradeMenu);
         }
         else if (inventoryMenuAction != null && inventoryMenuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.InventoryMenu))
         {
-            if (CurrentMenu != null && CurrentMenuType == MenuType.InventoryMenu)
-            {
-                CloseCurrentMenu();
-            }
-            else
-            {
-                // OPEN INVENTORY MENU
-                OpenMenu(MenuType.InventoryMenu, priority: true);
-                CurrentMenuType = MenuType.InventoryMenu;
-            }
+            CheckToggleMenu(MenuType.InventoryMenu);
         }
         else if (baitMenuAction != null && baitMenuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.BaitMenu))
         {
-            if (CurrentMenu != null && CurrentMenuType == MenuType.BaitMenu)
-            {
-                CloseCurrentMenu();
-            }
-            else
-            {
-                // OPEN BAIT MENU
-                OpenMenu(MenuType.BaitMenu, priority: true);
-                CurrentMenuType = MenuType.BaitMenu;
-            }
+            CheckToggleMenu(MenuType.BaitMenu);
         }
 
 
         // NOTE: DEBUG ONLY -- These shouldn't be openable with buttons
         else if (shopMenuAction != null && shopMenuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.ShopMenu))
         {
-            if (CurrentMenu != null && CurrentMenuType == MenuType.ShopMenu)
-            {
-                CloseCurrentMenu();
-            }
-            else
-            {
-                // OPEN SHOP MENU
-                OpenMenu(MenuType.ShopMenu, priority: true);
-                CurrentMenuType = MenuType.ShopMenu;
-            }
+            CheckToggleMenu(MenuType.ShopMenu);
         }
         else if (questMenuAction != null && questMenuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.QuestMenu))
         {
-            if (CurrentMenu != null && CurrentMenuType == MenuType.QuestMenu)
-            {
-                CloseCurrentMenu();
-            }
-            else
-            {
-                // OPEN QUEST MENU
-                OpenMenu(MenuType.QuestMenu, priority: true);
-                CurrentMenuType = MenuType.QuestMenu;
-            }
+            CheckToggleMenu(MenuType.QuestMenu);
         }
         else if (settingsMenuAction != null && settingsMenuAction.action.WasPressedThisFrame() && IsMenuOpenable(MenuType.SettingsMenu))
         {
-            if (CurrentMenu != null && CurrentMenuType == MenuType.SettingsMenu)
-            {
-                CloseCurrentMenu();
-            }
-            else
-            {
-                // OPEN SETTINGS MENU
-                OpenMenu(MenuType.SettingsMenu, priority: true);
-                CurrentMenuType = MenuType.SettingsMenu;
-            }
+            CheckToggleMenu(MenuType.SettingsMenu);
+        }
+    }
+
+    public void CheckToggleMenu(MenuType menuType)
+    {
+        if (CurrentMenu != null && CurrentMenuType == menuType)
+        {
+            CloseCurrentMenu();
+        }
+        else
+        {
+            OpenMenu(menuType, priority: true);
+            CurrentMenuType = menuType;
         }
     }
 

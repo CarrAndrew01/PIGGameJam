@@ -128,7 +128,7 @@ public class Fishing : MonoBehaviour
         else if (!CanFish && Instance.CurrentBobber != null && fishAction.action.WasPressedThisFrame())
         {
             // Debug.Log("Fish button pressed while bobber is in water, trying to reel it in");
-            if (!IsMinigameActive)
+            if (!IsMinigameActive && Menus.IsAnyMenuOpen == false)
             {
                 ReelInCurrentBobber();
             }
