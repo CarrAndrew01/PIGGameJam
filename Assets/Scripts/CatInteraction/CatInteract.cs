@@ -61,9 +61,11 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
         else if (selectFromStart && InputUtils.IsControllerActive && !controllerSelectStarted)
         {
-            // Menu just closed and controller is active — re-select if appropriate
+            // Menu just closed and controller is active — re-select this cat.
+            // Don't check currentSelectedGameObject == null here: menus with selectables leave
+            // the EventSystem pointing at (now-destroyed) menu items, so the check would always fail.
             controllerSelectStarted = true;
-            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
+            if (EventSystem.current != null)
                 EventSystem.current.SetSelectedGameObject(gameObject);
         }
     }

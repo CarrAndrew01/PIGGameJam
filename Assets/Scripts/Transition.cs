@@ -23,6 +23,7 @@ public class Transition : MonoBehaviour
     }
 
     public List<TMP_Text> TextObjects = new();
+    public List<Selectable> SettingsObjects = new();
     public InputActionReference returnToMainAction;
     public Selectable firstButtonOnPlanetScreen;
     public Selectable firstButtonOnSettingsScreen;
@@ -77,6 +78,32 @@ public class Transition : MonoBehaviour
         }
 
         hasSelectedFirstButton = true;
+    }
+
+    private void OnEnable()
+    {
+        Menus.OnMenuStateChanged += HandleMenuStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        Menus.OnMenuStateChanged -= HandleMenuStateChanged;
+    }
+
+    private void HandleMenuStateChanged(bool menuOpen)
+    {
+        // NOTE: For now we are simply turning off buttons when a menu is open to stop automatic navigation
+        // TODO: Change menu popups to be explicit navigation and this is no longer needed
+        foreach (TMP_Text textObject in TextObjects)
+        {
+            var btn = textObject.GetComponent<Button>();
+            if (btn != null) btn.enabled = !menuOpen;
+        }
+
+        foreach (Selectable selectable in SettingsObjects)
+        {
+            if (selectable != null) selectable.enabled = !menuOpen;
+        }
     }
 
     private void OnDestroy()
@@ -151,6 +178,8 @@ public class Transition : MonoBehaviour
         foreach (TMP_Text textObject in TextObjects)
         {
             textObject.color = new Color(textObject.color.r, textObject.color.g, textObject.color.b, 0f);
+            var btn = textObject.GetComponent<Button>();
+            if (btn != null) btn.enabled = false;
         }
     }
 
@@ -174,12 +203,24 @@ public class Transition : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
+        foreach (TMP_Text textObject in TextObjects)
+        {
+            var btn = textObject.GetComponent<Button>();
+            if (btn != null) btn.enabled = false;
+        }
+
         // Get rid of the coroutine reference so we can start new transitions
         fadeCoroutine = null;
     }
 
     IEnumerator UnFadeTextCoroutine()
     {
+        foreach (TMP_Text textObject in TextObjects)
+        {
+            var btn = textObject.GetComponent<Button>();
+            if (btn != null) btn.enabled = true;
+        }
+
         for (int i = 0; i < 255; i++)
         {
             foreach (TMP_Text textObject in TextObjects)
