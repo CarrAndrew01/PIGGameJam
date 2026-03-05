@@ -19,6 +19,18 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         startColour = outlineImage.color;
         button = GetComponent<Button>();
+
+        // Sync button state now that button is initialized
+        if (button != null)
+            button.enabled = !Menus.IsAnyMenuOpen;
+
+        // If the controller was already active when this scene loaded, no event will fire so we do it here
+        if (selectFromStart && InputUtils.IsControllerActive && !Menus.IsAnyMenuOpen && !controllerSelectStarted)
+        {
+            controllerSelectStarted = true;
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
+                EventSystem.current.SetSelectedGameObject(gameObject);
+        }
     }
 
     protected virtual void OnEnable()
@@ -26,10 +38,6 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         controllerSelectStarted = false;
         Menus.OnMenuStateChanged += HandleMenuStateChanged;
         InputUtils.OnControllerActiveChanged += HandleControllerActiveChanged;
-
-        // Sync to current state in case events were missed while disabled
-        if (button != null)
-            button.enabled = !Menus.IsAnyMenuOpen;
     }
 
     protected virtual void OnDisable()
