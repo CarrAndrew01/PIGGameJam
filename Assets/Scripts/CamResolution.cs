@@ -14,19 +14,22 @@ public class CamResolution : MonoBehaviour
         ApplyResolution();
     }
 
-    void Update()
+    void OnEnable()
     {
-        // Recalculate if the screen resolution changes (e.g. entering/exiting fullscreen)
-        if (Screen.width != lastScreenWidth || Screen.height != lastScreenHeight)
-        {
-            ApplyResolution();
-        }
+        ResolutionUtils.OnResolutionChanged += ApplyResolution;
+        ResolutionUtils.OnFullscreenToggled += HandleFullscreenToggled;
     }
 
-    void ApplyResolution()
+    void OnDisable()
     {
-        lastScreenWidth = Screen.width;
-        lastScreenHeight = Screen.height;
+        ResolutionUtils.OnResolutionChanged -= ApplyResolution;
+        ResolutionUtils.OnFullscreenToggled -= HandleFullscreenToggled;
+    }
+
+    void ApplyResolution(Resolution newResolution = default)
+    {
+        lastScreenWidth = newResolution.width != 0 ? newResolution.width : Screen.width;
+        lastScreenHeight = newResolution.height != 0 ? newResolution.height : Screen.height;
 
         float targetAspect = targetResolution.x / targetResolution.y;
 
@@ -44,5 +47,15 @@ public class CamResolution : MonoBehaviour
             float scaleWidth = 1.0f / scaleHeight;
             cam.rect = new Rect((1.0f - scaleWidth) / 2.0f, 0, scaleWidth, 1);
         }
+    }
+
+    void HandleFullscreenToggled(bool isFullscreen)
+    {
+        // If entering windowed mode, set the window size to the target resolution
+        if (!isFullscreen)
+        {
+            Screen.SetResolution((int)targetResolution.x, (int)targetResolution.y, false);
+        }
+        ApplyResolution();
     }
 }

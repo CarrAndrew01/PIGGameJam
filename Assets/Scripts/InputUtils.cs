@@ -10,8 +10,9 @@ using UnityEngine.InputSystem;
 [DefaultExecutionOrder(-100)]
 public class InputUtils : MonoBehaviour
 {
-    [SerializeField] private float gamepadDriftThreshold = 0.2f;
-    private static float _driftThreshold = 0.2f;
+    [Header("Settings")]
+    public float gamepadDriftThreshold = 0.2f;
+    private static float driftThreshold = 0.2f;
 
     private static bool controllerWasLastUsed = false;
 
@@ -26,6 +27,7 @@ public class InputUtils : MonoBehaviour
         OnControllerActiveChanged?.Invoke(value);
     }
 
+    [Header("State")]
     [ShowInInspector, ReadOnly]
     public static bool IsControllerActive => controllerWasLastUsed;
     [ShowInInspector, ReadOnly]
@@ -33,7 +35,7 @@ public class InputUtils : MonoBehaviour
 
     private void Awake()
     {
-        _driftThreshold = gamepadDriftThreshold;
+        driftThreshold = gamepadDriftThreshold;
     }
 
     private void Update()
@@ -51,13 +53,13 @@ public class InputUtils : MonoBehaviour
                 gp.selectButton.wasPressedThisFrame ||
                 gp.leftShoulder.wasPressedThisFrame ||
                 gp.rightShoulder.wasPressedThisFrame ||
-                gp.leftTrigger.ReadValue() > _driftThreshold ||
-                gp.rightTrigger.ReadValue() > _driftThreshold ||
-                gp.dpad.ReadValue().magnitude > _driftThreshold;
+                gp.leftTrigger.ReadValue() > driftThreshold ||
+                gp.rightTrigger.ReadValue() > driftThreshold ||
+                gp.dpad.ReadValue().magnitude > driftThreshold;
 
             bool stickMoved =
-                gp.leftStick.ReadValue().magnitude > _driftThreshold ||
-                gp.rightStick.ReadValue().magnitude > _driftThreshold;
+                gp.leftStick.ReadValue().magnitude > driftThreshold ||
+                gp.rightStick.ReadValue().magnitude > driftThreshold;
 
             if (buttonPressed || stickMoved)
             {

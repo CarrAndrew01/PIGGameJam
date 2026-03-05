@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 209397260059208970}
   - component: {fileID: 6300131083065144623}
   - component: {fileID: 7095474395187160419}
+  - component: {fileID: 3595072946783019663}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -68,5 +69,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afe2f8840b3d89344852235a2e26f830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamepadDriftThreshold: 0.2
+--- !u!114 &3595072946783019663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3077475692530973662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1eebd5b06b4fb04aaa80f3b18d7f33d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
