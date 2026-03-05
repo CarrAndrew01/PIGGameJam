@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 /// <summary>
 /// Handles opening and closing various menus.
@@ -10,7 +11,10 @@ public class Menus : MonoBehaviour
     public static Menus Instance { get; private set; }
 
     private static bool IsGamePlaying => UnityEngine.Application.isPlaying; // Check if the game is currently running (not in editor mode or paused)
-    [ShowInInspector, ReadOnly] public static bool IsAnyMenuOpen => IsGamePlaying && Instance.CurrentMenu != null;
+    [ShowInInspector, ReadOnly]
+    public static bool IsAnyMenuOpen => IsGamePlaying && Instance != null && Instance.CurrentMenu != null;
+
+    public static event Action<bool> OnMenuStateChanged;
 
     public enum MenuType
     {
@@ -238,6 +242,8 @@ public class Menus : MonoBehaviour
                 CurrentMenu = go;
                 if (CurrentMenu == null)
                     Debug.Log($"Failed to trigger {menuType} popup - something may already be open.");
+                else
+                    OnMenuStateChanged?.Invoke(true);
             });
         }
     }
@@ -250,6 +256,7 @@ public class Menus : MonoBehaviour
             {
                 CurrentMenu = null;
                 CurrentMenuType = MenuType.None;
+                OnMenuStateChanged?.Invoke(false);
             });
         }
     }

@@ -21,45 +21,65 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         button = GetComponent<Button>();
     }
 
-    public virtual void Update()
+    protected virtual void OnEnable()
     {
-        bool menuOpen = Menus.IsAnyMenuOpen;
+        controllerSelectStarted = false;
+        Menus.OnMenuStateChanged += HandleMenuStateChanged;
+        InputUtils.OnControllerActiveChanged += HandleControllerActiveChanged;
 
-        // Disable/enable the button so controller navigation ignores cats while a menu is open.
-        if (button != null && button.enabled == menuOpen)
-        {
+        // Sync to current state in case events were missed while disabled
+        if (button != null)
+            button.enabled = !Menus.IsAnyMenuOpen;
+    }
+
+    protected virtual void OnDisable()
+    {
+        Menus.OnMenuStateChanged -= HandleMenuStateChanged;
+        InputUtils.OnControllerActiveChanged -= HandleControllerActiveChanged;
+    }
+
+    private void HandleMenuStateChanged(bool menuOpen)
+    {
+        if (button != null)
             button.enabled = !menuOpen;
 
-            if (menuOpen)
-            {
-                // If this cat was selected, deselect it and clear the outline.
-                if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
-                    EventSystem.current.SetSelectedGameObject(null);
-                OutlineCat(false);
-                controllerSelectStarted = false;
-            }
-        }
-
-        if (menuOpen) return;
-
-        // Auto-select logic for controller
-        if (selectFromStart && InputUtils.IsControllerActive)
+        if (menuOpen)
         {
-            // Only select if nothing is currently selected (avoids stealing focus from other navigables)
-            if (!controllerSelectStarted)
+            // If this cat was selected, deselect it and clear the outline.
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
+                EventSystem.current.SetSelectedGameObject(null);
+            OutlineCat(false);
+            controllerSelectStarted = false;
+        }
+        else if (selectFromStart && InputUtils.IsControllerActive && !controllerSelectStarted)
+        {
+            // Menu just closed and controller is active — re-select if appropriate
+            controllerSelectStarted = true;
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
+                EventSystem.current.SetSelectedGameObject(gameObject);
+        }
+    }
+
+    private void HandleControllerActiveChanged(bool controllerActive)
+    {
+        if (Menus.IsAnyMenuOpen) return;
+
+        if (controllerActive)
+        {
+            if (selectFromStart && !controllerSelectStarted)
             {
                 controllerSelectStarted = true;
                 if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
                     EventSystem.current.SetSelectedGameObject(gameObject);
             }
         }
-        else if (!InputUtils.IsControllerActive)
+        else
         {
             controllerSelectStarted = false;
             if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
                 EventSystem.current.SetSelectedGameObject(null);
         }
-    } 
+    }
 
     // Mouse
 

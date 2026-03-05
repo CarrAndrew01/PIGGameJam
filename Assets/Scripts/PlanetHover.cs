@@ -22,18 +22,30 @@ public class PlanetHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         button = GetComponent<Button>();
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        bool menuOpen = Menus.IsAnyMenuOpen;
-        if (button != null && button.enabled == menuOpen)
-        {
+        Menus.OnMenuStateChanged += HandleMenuStateChanged;
+
+        // Sync to current state in case events were missed while disabled
+        if (button != null)
+            button.enabled = !Menus.IsAnyMenuOpen;
+    }
+
+    private void OnDisable()
+    {
+        Menus.OnMenuStateChanged -= HandleMenuStateChanged;
+    }
+
+    private void HandleMenuStateChanged(bool menuOpen)
+    {
+        if (button != null)
             button.enabled = !menuOpen;
-            if (menuOpen)
-            {
-                if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
-                    EventSystem.current.SetSelectedGameObject(null);
-                SetVisualsActive(false);
-            }
+
+        if (menuOpen)
+        {
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
+                EventSystem.current.SetSelectedGameObject(null);
+            SetVisualsActive(false);
         }
     }
 

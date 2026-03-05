@@ -1,3 +1,4 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,12 +15,15 @@ public class InputUtils : MonoBehaviour
 
     private static bool controllerWasLastUsed = false;
 
+    public static event Action<bool> OnControllerActiveChanged;
+
     private static void SetControllerActive(bool value)
     {
         if (controllerWasLastUsed == value) return;
         controllerWasLastUsed = value;
         Cursor.visible = !value;
         Cursor.lockState = value ? CursorLockMode.Locked : CursorLockMode.None;
+        OnControllerActiveChanged?.Invoke(value);
     }
 
     [ShowInInspector, ReadOnly]

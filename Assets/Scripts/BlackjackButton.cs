@@ -4,9 +4,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using TMPro;
 
-public class BlackjackButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
+public class BlackjackButton : MonoBehaviour
 {
-    TextMeshProUGUI text;
     Button button;
 
     Color32 textDefaultColor = new Color32(247, 150, 23, 166);
@@ -14,82 +13,47 @@ public class BlackjackButton : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public UnityEvent buttonTarget;
 
-    public bool selectFromStart = false;
-    private bool controllerSelectStarted = false;
-
     private void Awake()
     {
-        text = GetComponent<TextMeshProUGUI>();
         button = GetComponent<Button>();
         if (button != null)
+        {
             button.onClick.AddListener(() => buttonTarget?.Invoke());
+            // Set colors because why didn't Jack just make buttons to begin with
+            button.colors = new ColorBlock
+            {
+                normalColor = textDefaultColor,
+                highlightedColor = textHoverColor,
+                pressedColor = textHoverColor,
+                selectedColor = textHoverColor,
+                disabledColor = new Color32(247, 150, 23, 100),
+                colorMultiplier = 1f,
+                fadeDuration = 0.1f
+             };
+        }
+            
     }
 
     private void OnEnable()
     {
-        controllerSelectStarted = false;
+        Menus.OnMenuStateChanged += HandleMenuStateChanged;
+
+        // Sync to current state in case events were missed while disabled
+        if (button != null)
+            button.enabled = !Menus.IsAnyMenuOpen;
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        bool menuOpen = Menus.IsAnyMenuOpen;
+        Menus.OnMenuStateChanged -= HandleMenuStateChanged;
+    }
 
-        // Disable/enable the button so controller navigation ignores cats while a menu is open.
-        if (button != null && button.enabled == menuOpen)
-        {
+    private void HandleMenuStateChanged(bool menuOpen)
+    {
+        if (button != null)
             button.enabled = !menuOpen;
 
-            if (menuOpen)
-            {
-                // If this cat was selected, deselect it and clear the outline.
-                if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
-                    EventSystem.current.SetSelectedGameObject(null);
-                controllerSelectStarted = false;
-            }
-        }
-
-        if (menuOpen) return;
-
-        // Auto-select logic for controller
-        if (selectFromStart && InputUtils.IsControllerActive)
-        {
-            // Only select if nothing is currently selected (avoids stealing focus from other navigables)
-            if (!controllerSelectStarted)
-            {
-                controllerSelectStarted = true;
-                if (EventSystem.current != null)
-                    EventSystem.current.SetSelectedGameObject(gameObject);
-            }
-        }
-        else if (!InputUtils.IsControllerActive)
-        {
-            controllerSelectStarted = false;
-            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
-                EventSystem.current.SetSelectedGameObject(null);
-        }
-    }
-
-    // Mouse
-
-    public virtual void OnPointerEnter(PointerEventData eventData)
-    {
-        if (text != null) text.color = textHoverColor;
-    }
-
-    public virtual void OnPointerExit(PointerEventData eventData)
-    {
-        if (text != null) text.color = textDefaultColor;
-    }
-
-    // Controller / Keyboard navigation
-
-    public virtual void OnSelect(BaseEventData eventData)
-    {
-        if (text != null) text.color = textHoverColor;
-    }
-
-    public virtual void OnDeselect(BaseEventData eventData)
-    {
-        if (text != null) text.color = textDefaultColor;
+        if (menuOpen && EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
+            EventSystem.current.SetSelectedGameObject(null);
     }
 }
