@@ -52,12 +52,9 @@ public class GameManager : MonoBehaviour
         playerStats.LoadUpgradesFromPrefs();
         playerStats.Init();
 
-        // Load inventory after stats and registries are initialized
+        // Load inventory after stats so that the max storage limit is applied
         playerInventory.LoadFromPlayerPrefs();
         // playerInventory.Init();
-
-        // NOTE: I swear to god, Andrew -- don't leave debug things in and make me think there are bugs.
-        // DEBUG_FISH_ADDITION(6);
     }
 
     void OnApplicationQuit()
@@ -66,17 +63,7 @@ public class GameManager : MonoBehaviour
         playerInventory.SaveToPlayerPrefs();
         playerStats.SaveUpgradesToPrefs();
     }
-
-    void DEBUG_FISH_ADDITION(int amount)
-    {
-
-        for (int i = 0; i < amount; i++)
-        {
-            CaughtFish newCatch = new CaughtFish(TEMPFISH, Random.Range(TEMPFISH.minWeight, TEMPFISH.maxWeight), "Debug");
-            AddFishToInventory(newCatch);
-        }
-    }
-
+    
     // Methods
     [ContextMenu("Reapply Upgrades")]
     public void ReapplyUpgrades()
@@ -124,7 +111,7 @@ public class GameManager : MonoBehaviour
     public static void RemoveUpgrade(Upgrade upgrade) => Instance.playerStats.RemoveUpgrade(upgrade);
 
     // Inventory
-    public static void AddFishToInventory(CaughtFish newCatch) => Instance.playerInventory.AddFish(newCatch);
+    public static void AddFishToInventory(CaughtFish newCatch, bool ignoreLimit = false) => Instance.playerInventory.AddFish(newCatch, ignoreLimit);
     public static void RemoveFishFromInventory(CaughtFish catchToRemove) => Instance.playerInventory.RemoveFish(catchToRemove);
     public static void RemoveFishFromInventoryIndex(int index) => Instance.playerInventory.RemoveFishAt(index);
     public static float CalculateFishValue(CaughtFish fish) => fish.fish.value + (fish.fish.value * GetNormalizedWeight(fish.weight, fish.fish.minWeight, fish.fish.maxWeight));

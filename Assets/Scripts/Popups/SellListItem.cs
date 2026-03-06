@@ -45,6 +45,8 @@ public class SellListItem : ListItem
             parentMenu.mechanicalDescriptionField.text = mechanicalDescription;
         }
 
+        parentMenuBase.OnListItemSelected(listIndex);
+
         // Update selection visuals for this item and siblings
         UpdateSelectionHighlight();
     }

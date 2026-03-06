@@ -457,7 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   listItems: []
   selectedIndex: -1
-  navigateDescriptionAction: {fileID: 0}
+  navigateDescriptionAction: {fileID: 159688401375007787, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   onItemSelected:
     m_PersistentCalls:
       m_Calls: []

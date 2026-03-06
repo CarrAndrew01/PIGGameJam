@@ -116,8 +116,9 @@ public class ShopMenu : Menu
 
     // Combined list used for populating the buy UI
     private List<ShopItem> shopItems = new();
+    private List<GameObject> dividerObjects = new();
 
-    
+
     [Header("Input Actions")]
     public InputActionReference previousPageAction; // expects Button
     public InputActionReference nextPageAction; // expects Button
@@ -324,6 +325,7 @@ public class ShopMenu : Menu
                 if (dividerPrefab != null)
                 {
                     GameObject divider = Instantiate(dividerPrefab, listContentArea);
+                    dividerObjects.Add(divider);
                     TextMeshProUGUI label = divider.GetComponentInChildren<TextMeshProUGUI>();
                     if (label != null)
                     {
@@ -355,6 +357,7 @@ public class ShopMenu : Menu
                 {
                     listItemComponent.Init(bait, this, bait.baitUpgrade.upgradeName, item.price);
                     listItems.Add(listItemComponent);
+                    listItemComponent.listIndex = listItems.Count - 1;
                 }
             }
             else if (type == ShopItem.ShopItemType.Fish && item.TryGetFish(out var fish))
@@ -365,6 +368,7 @@ public class ShopMenu : Menu
                 {
                     listItemComponent.Init(fish, this, fish.fish.fishName, item.price);
                     listItems.Add(listItemComponent);
+                    listItemComponent.listIndex = listItems.Count - 1;
                 }
             }
             else if (type == ShopItem.ShopItemType.Upgrade && item.TryGetUpgrade(out var upgrade))
@@ -375,6 +379,7 @@ public class ShopMenu : Menu
                 {
                     listItemComponent.Init(upgrade, this, upgrade.upgrade.upgradeName, item.price);
                     listItems.Add(listItemComponent);
+                    listItemComponent.listIndex = listItems.Count - 1;
                 }
 
                 // If the player already owns this upgrade, visually stamp the item
@@ -392,31 +397,35 @@ public class ShopMenu : Menu
 
     public void PopulateSellList(List<CaughtFish> fishTypes)
     {
-        BeginListRebuild();
-        // Reset main selection panel and clear existing list items
-        listItems.Clear();
         selectedShopItem = null;
         nameField.text = "Selling Fish";
         descriptionField.text = "";
-        // Clear existing list items (iterate backwards to avoid skipping when destroying)
-        for (int i = listContentArea.childCount - 1; i >= 0; i--)
+
+        DestroyDividers();
+
+        PopulateList(fishTypes, listSellPrefab, (listItem, caughtFish, i) =>
         {
-            Destroy(listContentArea.GetChild(i).gameObject);
-        }
+            ((SellListItem)listItem).Init(caughtFish, this, caughtFish.fish.fishName, caughtFish.fish.sprite,
+                subtext: $"Weight: {caughtFish.weight:F2}",
+                subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}",
+                description: caughtFish.fish.description);
+        });
 
-        // Instantiate new list items based on the provided list of caught fish
-        for (int i = 0; i < GameManager.Instance.playerInventory.caughtFish.Count; i++)
+        // Insert divider at the top after list items are placed
+        if (dividerPrefab != null)
         {
-            CaughtFish caughtFish = GameManager.Instance.playerInventory.caughtFish[i];
-
-            GameObject newItem = Instantiate(listSellPrefab, listContentArea);
-            SellListItem listItemComponent = newItem.GetComponent<SellListItem>();
-
-            listItemComponent.Init(caughtFish, this, caughtFish.fish.fishName, caughtFish.fish.sprite, subtext: $"Weight: {caughtFish.weight:F2}",
-            subtext2: $"Value: {GameManager.CalculateFishValue(caughtFish):F2}", description: caughtFish.fish.description);
-            listItems.Add(listItemComponent);
+            GameObject divider = Instantiate(dividerPrefab, listContentArea);
+            divider.transform.SetSiblingIndex(0);
+            dividerObjects.Add(divider);
+            TextMeshProUGUI label = divider.GetComponentInChildren<TextMeshProUGUI>();
+            if (label != null) label.text = "Your Fish";
         }
+    }
 
-        SetupNavigation();
+    private void DestroyDividers()
+    {
+        foreach (var divider in dividerObjects)
+            Destroy(divider);
+        dividerObjects.Clear();
     }
 }

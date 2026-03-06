@@ -130,9 +130,9 @@ public class PlayerInventory
     }
 
 
-    public void AddFish(CaughtFish newCatch)
+    public void AddFish(CaughtFish newCatch, bool ignoreLimit = false)
     {
-        if (caughtFish.Count < MaxFishStorage)
+        if (caughtFish.Count < MaxFishStorage || ignoreLimit)
         {
             // Assign a unique ID when the fish is actually added to inventory
             newCatch.id = NewID();
@@ -279,6 +279,12 @@ public class PlayerInventory
         foreach (var sf in save.caughtFish)
         {
             if (string.IsNullOrEmpty(sf.fishTypeName)) continue;
+            // Check if inventory is already at max capacity
+            if (caughtFish.Count >= MaxFishStorage)
+            {
+                Debug.LogWarning($"Cannot load more fish from save: inventory capacity of {MaxFishStorage} reached.");
+                break;
+            }
             Fish fishType = GameManager.FindFishTypeByName(sf.fishTypeName);
             if (fishType == null)
             {
@@ -286,7 +292,7 @@ public class PlayerInventory
                 continue;
             }
             CaughtFish cf = new CaughtFish(fishType, sf.weight, sf.planetOfOrigin);
-            // Use AddFish so IDs are assigned consistently and storage limits are respected
+            // Use AddFish so IDs are assigned consistently
             AddFish(cf);
         }
 

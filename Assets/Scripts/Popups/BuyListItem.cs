@@ -114,5 +114,7 @@ public class BuyListItem : ListItem
             // Update selection visuals for this item and siblings
             UpdateSelectionHighlight();
         }
+
+        parentMenuBase?.OnListItemSelected(listIndex);
     }
 }
