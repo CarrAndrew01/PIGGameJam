@@ -1,16 +1,13 @@
 using System;
-using UnityEditor;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DebugTools : MonoBehaviour
 {
-#if UNITY_EDITOR
-    public static readonly bool DEBUG_ENABLED = true;
-#else
-    public static readonly bool DEBUG_ENABLED = false;
-#endif
 
     private static DebugTools _instance;
 
@@ -27,6 +24,10 @@ public class DebugTools : MonoBehaviour
             return _instance;
         }
     }
+
+    public GameObject debugMenu;
+    public GameObject debugMenuInstantiate;
+
     void Update()
     {
 
@@ -35,35 +36,118 @@ public class DebugTools : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        // F2 breaks the editor
-        else if (Input.GetKeyDown(KeyCode.F2))
-        {
-            Debug.Break();
-        }
-        // F3 logs the current scene name
-        else if (Input.GetKeyDown(KeyCode.F3))
-        {
-            Debug.Log("Current Scene: " + SceneManager.GetActiveScene().name);
-        }
-        // F4 adds 100 money to the player
-        else if (Input.GetKeyDown(KeyCode.F4))
-        {
-            GameManager.AdjustMoney(100);
-        }
-        // F5 adds 10 temporary fish to the player
-        else if (Input.GetKeyDown(KeyCode.F5))
-        {
-            CaughtFish tempFish = new CaughtFish
-            {
-                fish = GameManager.Instance.TEMPFISH,
-                weight = 1f,
-                planetOfOrigin = "/DEBUG"
-            };
 
-            for (int i = 0; i < 10; i++)
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            //bring up the debug tool
+            if(debugMenu != null)
             {
-                GameManager.AddFishToInventory(tempFish, ignoreLimit: true);
+                debugMenu.SetActive(!debugMenu.activeInHierarchy);
+                
+                TMP_InputField inputField = debugMenu.GetComponent<TMP_InputField>();
+
+                if(inputField != null){
+                    inputField.Select();
+                    inputField.ActivateInputField();
+                }
+            }
+            else
+            {
+                Debug.Log("No debug menu set here, better make a new one now");
+                if(debugMenuInstantiate != null)
+                {
+                    debugMenu = Instantiate(debugMenuInstantiate);
+                }
+            }
+        }
+
+        if(debugMenu != null && debugMenu.activeInHierarchy)
+        {
+                TMP_InputField inputField = debugMenu.GetComponent<TMP_InputField>();
+
+            if (Input.GetKeyDown(KeyCode.Return) && inputField != null)
+            {
+                string input = inputField.text;
+                Debug.Log(input);
+                inputField.text = string.Empty; //does this work?
+
+                List<string> inputs = input.Split(" ").ToList();
+
+                switch (inputs[0])
+                {
+                    case "giveall" : 
+                    //give us all of everything everything
+
+                    //first, set the inventory size to big enough no matter what
+                        GameManager.Instance.playerStats.currentStats[StatType.fishStorage] = 1000f; //big inventory
+
+                        foreach (Fish fish in GameManager.Instance.allFish)
+                        {
+                            CaughtFish cf = new(fish, UnityEngine.Random.Range(fish.minWeight, fish.maxWeight) * GameManager.GetPlayerStat(StatType.fishWeight), "debug");
+                            GameManager.AddFishToInventory(cf);                  
+                        }
+
+                        foreach(Upgrade upg in GameManager.Instance.allUpgrades)
+                        {
+                            GameManager.AddUpgrade(upg); //give us all upgrades
+                        }
+                        
+                        break;
+
+                    case "removeall" :
+                        //completely nukes our inventory
+
+                    case "cleardata" :
+                        //clear player data
+                        GameManager.ClearPlayerData();
+                        break;
+
+                    case "givefish" :
+                    //give us a specific thing
+                        if(inputs.Count() > 1)
+                        {
+                            //first thing, 
+                            int number = 1;
+
+                            //if player specifies a number in the THIRD string, you get that much, otherwise sets count to 1
+                            if(inputs.Count() > 2)
+                            {
+                                int.TryParse(inputs[2], out number);
+                            }
+
+                            //the second string specifies what fish we want
+                            Fish fish = GameManager.Instance.GetFish(inputs[1]);
+
+                            if (fish != null)
+                            {
+                                for(int i = 0; i < number; i++)
+                                {
+                                    CaughtFish cf = new(fish, UnityEngine.Random.Range(fish.minWeight, fish.maxWeight) * GameManager.GetPlayerStat(StatType.fishWeight), "debug");
+                                    GameManager.AddFishToInventory(cf);
+                                    
+                                }
+                            }
+                        }
+                        break;
+
+                    case "giveupgrade" :
+                        if(inputs.Count() > 1)
+                        {
+                            //the second string specifies what upgrade we want
+                            Upgrade upg = GameManager.Instance.GetUpgrade(inputs[1]);
+
+                            if (upg != null)
+                            {
+                                GameManager.AddUpgrade(upg);
+                            }
+                        }
+
+                        break;
+                }
             }
         }
     }
+
+
+
 }

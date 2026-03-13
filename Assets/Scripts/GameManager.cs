@@ -34,6 +34,15 @@ public class GameManager : MonoBehaviour
 
     public static Popup MenuPopup => Instance.menuPopup; // Static accessor for the menu popup
 
+
+    /*****
+    DEBUG STUFF just leaving this here as its easier to remember to update it :)
+    ****/
+
+    public List<Fish> allFish = new();
+    public List<Upgrade> allUpgrades = new();
+
+
     void Awake()
     {
         // Singleton
@@ -92,6 +101,33 @@ public class GameManager : MonoBehaviour
         Quest[] quests = Resources.LoadAll<Quest>("Quests");
         AllQuests.AddRange(quests);
     }
+
+    public Fish GetFish(string fishName)
+    {
+        foreach(Fish fish in allFish)
+        {
+            if(fish.name == fishName || fish.fishName == fishName)
+            {
+                return fish;
+            }
+        }
+        return null;
+    }
+
+    public Upgrade GetUpgrade(string upgradeName)
+    {
+        foreach(Upgrade upgrade in allUpgrades)
+        {
+            if(upgrade.name == upgradeName || upgrade.upgradeName == upgradeName)
+            {
+                return upgrade;
+            }
+        }
+        return null;
+
+    }
+
+
 
 
     // Static methods
