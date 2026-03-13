@@ -50,10 +50,51 @@ public class WhackAMole : MonoBehaviour
         UpdateScore(0);
 
         PopUp();
+
+        AdjustBasedOnPlayerUpgrades();
+
         totalGameTimer = 10;
         fishShadow = Fishing.LastFishShadow;
     }
 
+
+
+    private float statCatchSpeed, statCatchArea, statHookGravity, statFishEscapeRate, statHookPullForce;
+
+    //for reference
+    //BASE STATS:
+    /*
+    1
+    1
+    1
+    1
+    0
+
+
+
+    */
+
+    void AdjustBasedOnPlayerUpgrades()
+    { 
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            statCatchSpeed = GameManager.GetPlayerStat(StatType.catchSpeed);
+            statCatchArea = GameManager.GetPlayerStat(StatType.catchArea);
+            statHookGravity = GameManager.GetPlayerStat(StatType.hookGravity);
+            statFishEscapeRate = GameManager.GetPlayerStat(StatType.fishEscapeRate);
+
+            
+
+
+
+
+
+
+
+
+        }
+    }
 
     public void UpdateScore(int amount)
     {
@@ -90,6 +131,10 @@ public class WhackAMole : MonoBehaviour
     {
         if (gameOver)
             return;
+
+
+
+
         
         //check if we;re using joystick
 
