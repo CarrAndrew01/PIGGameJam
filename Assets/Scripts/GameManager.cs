@@ -127,6 +127,23 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //weird little function
+    //basically I don't want to have to check for every upgrade and compare its value directly for non-Stardew minigames
+    //especially if we add more or change values
+
+    //so this returns the amount of upgrade you get as a simple int (first upgrade is 1, second is 2 etc.) for the logic in the individual minigame to work out
+    /// <param name="amountOrLevel">Whether we're counting how many upgrades only (true), or what level they are as well (false)</param>
+    public int GetAmountOfUpgrades(string prefix, int upgradeNum = 1, int iterator = 0, bool amountOrLevel = false)
+    {
+        bool upg = PlayerHasUpgrade(GetUpgrade(prefix + upgradeNum.ToString()));
+        
+        if (!upg)
+        {
+            return iterator;           
+        }
+
+        return GetAmountOfUpgrades(prefix, upgradeNum + 1, iterator + (amountOrLevel ? 1 : upgradeNum), amountOrLevel);
+    }
 
 
 

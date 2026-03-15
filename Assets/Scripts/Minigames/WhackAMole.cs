@@ -13,6 +13,8 @@ public class WhackAMole : MonoBehaviour
 
     private GameObject currentPopupTarget;
 
+    public int difficulty;//there will be different prefab variants
+
     //Timer stuff
     private float popDownTimer = 0; //timer. Coroutines are annoying.
     Vector2 timerRange = new(0.8f, 1.3f); //how long the timer should be before we pop down and start again. Randomized for fun.
@@ -23,8 +25,9 @@ public class WhackAMole : MonoBehaviour
 
     //Scoring variables
     public int score = 0;
-    public int targetScore = 8;
+    public int targetScore = 10;
     public bool gameOver = false;
+
 
     //UI stuff
     public TextMeshProUGUI scoreText;
@@ -51,15 +54,43 @@ public class WhackAMole : MonoBehaviour
 
         PopUp();
 
+        AdjustDifficulty();
         AdjustBasedOnPlayerUpgrades();
 
-        totalGameTimer = 10;
-        fishShadow = Fishing.LastFishShadow;
+        if(Fishing.LastFishShadow != null){
+            fishShadow = Fishing.LastFishShadow;
+        }
     }
 
+    void AdjustDifficulty()
+    {
+        //adjust the timer range based on difficulty
+
+        //wtf you can do this
+        //cool syntax
+        timerRange = difficulty switch
+        {
+            1 => new Vector2(0.8f, 1.6f),
+            2 => new Vector2(0.6f, 1.1f),
+            3 => new Vector2(0.3f, 0.6f),
+            4 => new Vector2(0.2f, 0.4f),
+            _ => new Vector2(0.8f, 1.3f),
+        };
+
+        //adjust the total game timer based on difficulty
+        totalGameTimer = difficulty switch
+        {
+            1 => 15f,
+            2 => 12f,
+            3 => 10f,
+            4 => 8f,
+            _ => 10f,
+        };
 
 
-    private float statCatchSpeed, statCatchArea, statHookGravity, statFishEscapeRate, statHookPullForce;
+    }
+
+    private int statCatchSpeed, statCatchArea, statHookGravity, statFishEscapeRate, statHookPullForce;
 
     //for reference
     //BASE STATS:
@@ -76,24 +107,25 @@ public class WhackAMole : MonoBehaviour
 
     void AdjustBasedOnPlayerUpgrades()
     { 
+        
+        statCatchSpeed = GameManager.Instance.GetAmountOfUpgrades("CatchSpeed", 1, 0, true);
+        statCatchArea = GameManager.Instance.GetAmountOfUpgrades("CatchArea");
+        statHookGravity = GameManager.Instance.GetAmountOfUpgrades("Sinker");
+        statFishEscapeRate = GameManager.Instance.GetAmountOfUpgrades("EscapeRate");
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            statCatchSpeed = GameManager.GetPlayerStat(StatType.catchSpeed);
-            statCatchArea = GameManager.GetPlayerStat(StatType.catchArea);
-            statHookGravity = GameManager.GetPlayerStat(StatType.hookGravity);
-            statFishEscapeRate = GameManager.GetPlayerStat(StatType.fishEscapeRate);
+        //catch speed = amount you need to press to win
+        //cant really make this different depending on which upgrades because the score would just get too low
+        //so instead its this awkward soltuion lol
+        targetScore -= statCatchSpeed;
 
-            
+        //catch area = amount of time total
+        totalGameTimer += statCatchArea;
 
+        //fish escape rate = amount of time they stay up for
+        //so you get 0.1, 0.1+0.2, 0.1+0.2+0.3 more time depending on upgrade
+        timerRange.x += 0.1f * statFishEscapeRate;
+        timerRange.y += 0.1f * statFishEscapeRate;
 
-
-
-
-
-
-
-        }
     }
 
     public void UpdateScore(int amount)
@@ -131,8 +163,6 @@ public class WhackAMole : MonoBehaviour
     {
         if (gameOver)
             return;
-
-
 
 
         
