@@ -54,10 +54,10 @@ public class SelectableController : MonoBehaviour
             entry.OnDeselected += HandleEntryDeselected;
         }
 
-        Menus.OnMenuStateChanged += HandleMenuStateChanged;
+        MenuManager.OnMenuStateChanged += HandleMenuStateChanged;
         InputUtils.OnControllerActiveChanged += HandleControllerActiveChanged;
 
-        if (InputUtils.IsControllerActive && !Menus.IsAnyMenuOpen)
+        if (InputUtils.IsControllerActive && !MenuManager.IsAnyMenuOpen)
             selectionPending = true;
     }
 
@@ -71,7 +71,7 @@ public class SelectableController : MonoBehaviour
             entry.OnDeselected -= HandleEntryDeselected;
         }
 
-        Menus.OnMenuStateChanged -= HandleMenuStateChanged;
+        MenuManager.OnMenuStateChanged -= HandleMenuStateChanged;
         InputUtils.OnControllerActiveChanged -= HandleControllerActiveChanged;
     }
 
@@ -90,7 +90,7 @@ public class SelectableController : MonoBehaviour
 
     private void HandleControllerActiveChanged(bool controllerActive)
     {
-        if (Menus.IsAnyMenuOpen) return;
+        if (MenuManager.IsAnyMenuOpen) return;
 
         if (controllerActive)
             selectionPending = true;
@@ -100,7 +100,7 @@ public class SelectableController : MonoBehaviour
 
     private void HandleEntryDeactivated()
     {
-        if (!InputUtils.IsControllerActive || Menus.IsAnyMenuOpen) return;
+        if (!InputUtils.IsControllerActive || MenuManager.IsAnyMenuOpen) return;
 
         selectionPending = true;
     }
@@ -108,7 +108,7 @@ public class SelectableController : MonoBehaviour
     private void HandleEntrySelected(SelectableEntry entry)
     {
         // Ignore selections made by this controller — only user navigation reshuffles.
-        if (suppressReshuffle || !InputUtils.IsControllerActive || Menus.IsAnyMenuOpen) return;
+        if (suppressReshuffle || !InputUtils.IsControllerActive || MenuManager.IsAnyMenuOpen) return;
 
         // Move the selected entry to the front — it becomes highest priority.
         if (normalOrder.Remove(entry))

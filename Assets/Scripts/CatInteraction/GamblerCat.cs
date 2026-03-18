@@ -4,13 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class GamblerCat : CatInteract
 {
-    private Menus menus;
+    private MenuManager menus;
     private Coroutine interactionCoroutine;
 
     public override void Start()
     {
         base.Start();
-        menus = GameManager.MenuPopup.GetComponent<Menus>();
+        menus = GameManager.MenuPopup.GetComponent<MenuManager>();
     }
 
     public override void InteractWithCat()

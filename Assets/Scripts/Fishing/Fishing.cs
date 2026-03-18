@@ -20,7 +20,7 @@ public class Fishing : MonoBehaviour
 #else
     private static bool IsGamePlaying => true; // Always return true in builds
 #endif
-    [ShowInInspector, ReadOnly] public static bool CanFish => IsGamePlaying && (IsMinigameActive == false || Instance.IsCharging) && Instance.CurrentBobber == null && !Menus.IsAnyMenuOpen;
+    [ShowInInspector, ReadOnly] public static bool CanFish => IsGamePlaying && (IsMinigameActive == false || Instance.IsCharging) && Instance.CurrentBobber == null && !MenuManager.IsAnyMenuOpen;
     [ShowInInspector, ReadOnly] public static bool IsFishing => IsGamePlaying && Instance.CurrentBobber != null;
     [ShowInInspector, ReadOnly] public static bool IsMinigameActive => IsGamePlaying && GameManager.MinigamePopup != null && GameManager.MinigamePopup.childCanvas != null;
     [ShowInInspector, ReadOnly] public static bool IsReelingIn => IsGamePlaying && IsFishing && Instance.CurrentBobber.IsReelingIn;
@@ -128,7 +128,7 @@ public class Fishing : MonoBehaviour
         else if (!CanFish && Instance.CurrentBobber != null && fishAction.action.WasPressedThisFrame())
         {
             // Debug.Log("Fish button pressed while bobber is in water, trying to reel it in");
-            if (!IsMinigameActive && Menus.IsAnyMenuOpen == false)
+            if (!IsMinigameActive && MenuManager.IsAnyMenuOpen == false)
             {
                 ReelInCurrentBobber();
             }

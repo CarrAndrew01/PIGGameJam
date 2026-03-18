@@ -17,7 +17,7 @@ public class EscapeMenu : MonoBehaviour
 
     public void GotoSettings()
     {
-        Menus.Instance.TriggerSettingsMenu();
+        MenuManager.Instance.TriggerSettingsMenu();
     }
 
     public void ExitGame()

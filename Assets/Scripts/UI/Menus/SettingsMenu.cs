@@ -121,7 +121,7 @@ public class SettingsMenu : MonoBehaviour
     }
     public void CloseMenu()
     {
-        Menus.Instance.CloseCurrentMenu();
+        MenuManager.Instance.CloseCurrentMenu();
     }
 
     private void UpdateSliderColor(Slider slider, Image fillImage, ref float lastFillValue, bool overwrite = false)

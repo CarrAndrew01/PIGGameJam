@@ -36,16 +36,16 @@ public class BlackjackButton : MonoBehaviour
 
     private void OnEnable()
     {
-        Menus.OnMenuStateChanged += HandleMenuStateChanged;
+        MenuManager.OnMenuStateChanged += HandleMenuStateChanged;
 
         // Sync to current state in case events were missed while disabled
         if (button != null)
-            button.enabled = !Menus.IsAnyMenuOpen;
+            button.enabled = !MenuManager.IsAnyMenuOpen;
     }
 
     private void OnDisable()
     {
-        Menus.OnMenuStateChanged -= HandleMenuStateChanged;
+        MenuManager.OnMenuStateChanged -= HandleMenuStateChanged;
     }
 
     private void HandleMenuStateChanged(bool menuOpen)

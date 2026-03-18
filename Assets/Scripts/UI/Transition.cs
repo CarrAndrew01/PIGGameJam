@@ -82,12 +82,12 @@ public class Transition : MonoBehaviour
 
     private void OnEnable()
     {
-        Menus.OnMenuStateChanged += HandleMenuStateChanged;
+        MenuManager.OnMenuStateChanged += HandleMenuStateChanged;
     }
 
     private void OnDisable()
     {
-        Menus.OnMenuStateChanged -= HandleMenuStateChanged;
+        MenuManager.OnMenuStateChanged -= HandleMenuStateChanged;
     }
 
     private void HandleMenuStateChanged(bool menuOpen)
@@ -134,7 +134,7 @@ public class Transition : MonoBehaviour
 
     private void Update()
     {
-        if (returnToMainAction.action.WasPressedThisFrame() && !Menus.IsAnyMenuOpen)
+        if (returnToMainAction.action.WasPressedThisFrame() && !MenuManager.IsAnyMenuOpen)
         {
             switch (currentScreen)
             {
@@ -152,7 +152,7 @@ public class Transition : MonoBehaviour
         // If a controller is active and we haven't selected the first button on the current screen yet, do so.
         if (InputUtils.IsControllerActive)
         {
-            if (Menus.IsAnyMenuOpen)
+            if (MenuManager.IsAnyMenuOpen)
             {
                 // A menu is open and owns navigation — reset so we re-select when it closes.
                 hasSelectedFirstButton = false;

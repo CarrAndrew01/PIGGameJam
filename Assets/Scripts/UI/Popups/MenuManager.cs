@@ -6,11 +6,11 @@ using System;
 /// <summary>
 /// Handles opening and closing various menus.
 /// </summary>
-public class Menus : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
-    public static Menus Instance { get; private set; }
+    public static MenuManager Instance { get; private set; }
 
-    private static bool IsGamePlaying => UnityEngine.Application.isPlaying; // Check if the game is currently running (not in editor mode or paused)
+    private static bool IsGamePlaying => Application.isPlaying; // Check if the game is currently running (not in editor mode or paused)
     [ShowInInspector, ReadOnly]
     public static bool IsAnyMenuOpen => IsGamePlaying && Instance != null && Instance.CurrentMenu != null;
 

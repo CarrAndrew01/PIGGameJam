@@ -25,7 +25,7 @@ public class ShipMovement : MonoBehaviour
     public float spinDuration = 0.5f; // Duration of the spin animation when turning around
     public float speedAffectSpinFactor = 0.02f; // (higher means faster spins at higher speeds)
 
-    public bool CanMove => !Menus.IsAnyMenuOpen && (!Fishing.IsMinigameActive || Fishing.Instance.IsCharging) && (!Fishing.IsFishing || Fishing.IsReelingIn);
+    public bool CanMove => !MenuManager.IsAnyMenuOpen && (!Fishing.IsMinigameActive || Fishing.Instance.IsCharging) && (!Fishing.IsFishing || Fishing.IsReelingIn);
 
     [Header("Bobbing Settings")]
     public float bobbingAmplitude = 0.1f;

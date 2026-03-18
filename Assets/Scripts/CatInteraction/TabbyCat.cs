@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class TabbyCat : CatInteract
 {
-    private Menus menus;
+    private MenuManager menus;
 
     public override void Start()
     {
         base.Start();
-        menus = GameManager.MenuPopup.GetComponent<Menus>();
+        menus = GameManager.MenuPopup.GetComponent<MenuManager>();
     }
 
     public override void InteractWithCat()

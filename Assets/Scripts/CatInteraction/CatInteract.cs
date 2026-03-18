@@ -22,10 +22,10 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         // Sync button state now that button is initialized
         if (button != null)
-            button.enabled = !Menus.IsAnyMenuOpen;
+            button.enabled = !MenuManager.IsAnyMenuOpen;
 
         // If the controller was already active when this scene loaded, no event will fire so we do it here
-        if (selectFromStart && InputUtils.IsControllerActive && !Menus.IsAnyMenuOpen && !controllerSelectStarted)
+        if (selectFromStart && InputUtils.IsControllerActive && !MenuManager.IsAnyMenuOpen && !controllerSelectStarted)
         {
             controllerSelectStarted = true;
             if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == null)
@@ -36,13 +36,13 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     protected virtual void OnEnable()
     {
         controllerSelectStarted = false;
-        Menus.OnMenuStateChanged += HandleMenuStateChanged;
+        MenuManager.OnMenuStateChanged += HandleMenuStateChanged;
         InputUtils.OnControllerActiveChanged += HandleControllerActiveChanged;
     }
 
     protected virtual void OnDisable()
     {
-        Menus.OnMenuStateChanged -= HandleMenuStateChanged;
+        MenuManager.OnMenuStateChanged -= HandleMenuStateChanged;
         InputUtils.OnControllerActiveChanged -= HandleControllerActiveChanged;
     }
 
@@ -72,7 +72,7 @@ public class CatInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private void HandleControllerActiveChanged(bool controllerActive)
     {
-        if (Menus.IsAnyMenuOpen) return;
+        if (MenuManager.IsAnyMenuOpen) return;
 
         if (controllerActive)
         {
