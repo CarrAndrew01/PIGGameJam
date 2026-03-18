@@ -33,6 +33,10 @@ public class WhackAMole : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timerText;
 
+    public TextMeshProUGUI upgradeTimerText;
+    public TextMeshProUGUI upgradeScoreText;
+
+
     public bool usingJoystick = false;
 
     public GameObject fakeCursor;
@@ -86,6 +90,7 @@ public class WhackAMole : MonoBehaviour
             4 => 8f,
             _ => 10f,
         };
+        
 
 
     }
@@ -126,6 +131,20 @@ public class WhackAMole : MonoBehaviour
         timerRange.x += 0.1f * statFishEscapeRate;
         timerRange.y += 0.1f * statFishEscapeRate;
 
+        //damn it I dont wanna get the actual upgrades so I'm just going to put the number in the text box
+        //plus it takes up too much room anyway
+        //thats my excuse for being lazy 
+        if(statCatchSpeed > 0 && upgradeScoreText != null)
+        {
+            upgradeScoreText.gameObject.SetActive(true);
+            upgradeScoreText.text = "- " + statCatchSpeed.ToString() + " Score Required";
+        }
+
+        if(statCatchArea > 0 && upgradeTimerText != null)
+        {
+            upgradeTimerText.gameObject.SetActive(true);
+            upgradeTimerText.text = "+ " + statCatchArea.ToString() + " Seconds";
+        }
     }
 
     public void UpdateScore(int amount)
