@@ -95,7 +95,6 @@ public class WhackAMole : MonoBehaviour
 
     }
 
-    private int statCatchSpeed, statCatchArea, statHookGravity, statFishEscapeRate, statHookPullForce;
 
     //for reference
     //BASE STATS:
@@ -112,6 +111,8 @@ public class WhackAMole : MonoBehaviour
 
     void AdjustBasedOnPlayerUpgrades()
     { 
+        
+        int statCatchSpeed, statCatchArea, statHookGravity, statFishEscapeRate, statHookPullForce;
         
         statCatchSpeed = GameManager.Instance.GetAmountOfUpgrades("CatchSpeed", 1, 0, true);
         statCatchArea = GameManager.Instance.GetAmountOfUpgrades("CatchArea");
