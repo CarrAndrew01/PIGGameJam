@@ -9,6 +9,7 @@ TagManager:
   - CircleWhack
   - BogWhack
   - Fish
+  - HealthBar
   layers:
   - Default
   - TransparentFX
