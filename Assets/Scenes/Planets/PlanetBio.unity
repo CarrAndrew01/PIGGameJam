@@ -8159,7 +8159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8517081318201010704, guid: be524a614cc9106418aba739bfe08dbb, type: 3}
       propertyPath: fishTypes.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8517081318201010704, guid: be524a614cc9106418aba739bfe08dbb, type: 3}
       propertyPath: fishTypes.Array.data[0].fish
@@ -8186,6 +8186,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 5f6b75b47a105580a9a1386b83b1b909, type: 2}
     - target: {fileID: 8517081318201010704, guid: be524a614cc9106418aba739bfe08dbb, type: 3}
+      propertyPath: fishTypes.Array.data[6].fish
+      value: 
+      objectReference: {fileID: 11400000, guid: ac54e09877c651ff392fc6ae491af34f, type: 2}
+    - target: {fileID: 8517081318201010704, guid: be524a614cc9106418aba739bfe08dbb, type: 3}
       propertyPath: fishTypes.Array.data[0].chance
       value: 0
       objectReference: {fileID: 0}
@@ -8208,6 +8212,10 @@ PrefabInstance:
     - target: {fileID: 8517081318201010704, guid: be524a614cc9106418aba739bfe08dbb, type: 3}
       propertyPath: fishTypes.Array.data[5].chance
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517081318201010704, guid: be524a614cc9106418aba739bfe08dbb, type: 3}
+      propertyPath: fishTypes.Array.data[6].chance
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

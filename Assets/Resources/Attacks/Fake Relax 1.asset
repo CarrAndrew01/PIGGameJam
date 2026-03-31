@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Fake Relax 1
   m_EditorClassIdentifier: 
   nameOfMove: Feint Relax
-  description: Pretend to relax
+  description: 'Damage: 65\nAccuracy:50%'
+  animationTrigger: FakeRelax
   damage: 65
   healAmount: -10000
-  healEnemyAmount: -10000
   accuracy: 50

@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771a00b746a3833c8b461b9a085d84f6, type: 3}
   m_Name: FishHeal 1
   m_EditorClassIdentifier: 
-  nameOfMove: fishheal
+  nameOfMove: Relax
   description: 
+  animationTrigger: FishRelax
   damage: -10000
   healAmount: 25
-  healEnemyAmount: -10000
-  recoil: -10000
   accuracy: 100

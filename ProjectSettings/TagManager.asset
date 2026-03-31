@@ -10,6 +10,7 @@ TagManager:
   - BogWhack
   - Fish
   - HealthBar
+  - PlayerPokemon
   layers:
   - Default
   - TransparentFX

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Wrestle 1
   m_EditorClassIdentifier: 
   nameOfMove: Wrestle
-  description: 
+  description: 'Damage: 55 and 25 recoil\nAccuracy: 100%'
+  animationTrigger: Wrestle
   damage: 55
   healAmount: -25
-  healEnemyAmount: -10000
   accuracy: 100

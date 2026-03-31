@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Reel In 1
   m_EditorClassIdentifier: 
   nameOfMove: Reel In
-  description: reel in
+  description: 'Damage: 25\nAccuracy: 100%'
+  animationTrigger: ReelIn
   damage: 25
   healAmount: -10000
-  healEnemyAmount: -10000
   accuracy: 100

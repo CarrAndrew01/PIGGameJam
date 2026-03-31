@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 771a00b746a3833c8b461b9a085d84f6, type: 3}
   m_Name: Struggle 1
   m_EditorClassIdentifier: 
-  nameOfMove: Struggle
+  nameOfMove: Wriggle
   description: 
+  animationTrigger: FishAttack
   damage: 25
   healAmount: -10000
-  healEnemyAmount: -10000
   accuracy: 100
