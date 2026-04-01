@@ -30,6 +30,7 @@ MonoBehaviour:
   preferredBaitType: 0
   minSummonTime: 20
   maxSummonTime: 60
+  tempBoolForPokemon: 1
   jumpiness: 0.902
   speed: 0.786
   stubbornness: 0.368

@@ -12,7 +12,9 @@ public struct CaughtFish
     public float weight;
     public string planetOfOrigin;
 
-    public CaughtFish(Fish fish, float weight, string planetOfOrigin)
+    public float valueMultiplier;//extra variable for some fish that might be worth more for whatever reason
+
+    public CaughtFish(Fish fish, float weight, string planetOfOrigin, float valueMultiplier = 1f)
     {
         // Do not assign an inventory ID here. IDs are assigned when a fish is added to inventory
         // Otherwise we count really high just with shadows
@@ -20,6 +22,7 @@ public struct CaughtFish
         this.fish = fish;
         this.weight = weight;
         this.planetOfOrigin = planetOfOrigin;
+        this.valueMultiplier = valueMultiplier;
     }
 
 }
@@ -51,6 +54,8 @@ public class Fish : ScriptableObject
     public int preferredBaitType; // A specific number that must be matched by the baitType stat in order to bite, 0 for no preference
     public float minSummonTime = 20f, maxSummonTime = 60f; // Time range for how long it takes the fish to be summoned with correct bait
 
+    public bool tempBoolForPokemon = true;
+
     [Header("Stardew variables")]
     [Range(0f, 1f)]
     [Tooltip("How much random movement a fish has when struggling (standing still).")]
@@ -67,4 +72,5 @@ public class Fish : ScriptableObject
 
     [Header("Prefabs")]
     public GameObject minigamePrefab;
+    
 }

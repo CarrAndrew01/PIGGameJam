@@ -167,7 +167,7 @@ public class GameManager : MonoBehaviour
     public static void AddFishToInventory(CaughtFish newCatch, bool ignoreLimit = false) => Instance.playerInventory.AddFish(newCatch, ignoreLimit);
     public static void RemoveFishFromInventory(CaughtFish catchToRemove) => Instance.playerInventory.RemoveFish(catchToRemove);
     public static void RemoveFishFromInventoryIndex(int index) => Instance.playerInventory.RemoveFishAt(index);
-    public static float CalculateFishValue(CaughtFish fish) => fish.fish.value + (fish.fish.value * GetNormalizedWeight(fish.weight, fish.fish.minWeight, fish.fish.maxWeight));
+    public static float CalculateFishValue(CaughtFish fish) => (fish.fish.value + (fish.fish.value * GetNormalizedWeight(fish.weight, fish.fish.minWeight, fish.fish.maxWeight))) * fish.valueMultiplier;
     public static void AddBaitToInventory(Upgrade baitUpgrade, int uses) => Instance.playerInventory.AddBait(baitUpgrade, uses);
     public static void RemoveBaitFromInventory(Upgrade baitUpgrade, int uses) => Instance.playerInventory.RemoveBait(baitUpgrade, uses);
     public static void SelectBaitUpgrade(Upgrade baitUpgrade) => Instance.playerInventory.SelectBait(baitUpgrade);

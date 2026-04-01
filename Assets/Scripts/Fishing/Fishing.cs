@@ -58,6 +58,9 @@ public class Fishing : MonoBehaviour
     //public GameObject fishingMinigamePrefab; // Prefab for the fishing minigame popup
     public GameObject bobberPrefab; // Prefab for the bobber that is thrown when fishing
 
+    public GameObject pokemonPrefab; //any fish has a 5% to be this instead of it's proper minigame. i guess.
+
+
 
     // ANIMATION
     public static Action<string> OnCast;
@@ -158,6 +161,7 @@ public class Fishing : MonoBehaviour
             Instance.CurrentBobber.BeginReelIn();
         }
     }
+
     public static void StartFishingMinigame(FishShadow fishShadow)
     {
         if (fishShadow != null)
@@ -166,7 +170,20 @@ public class Fishing : MonoBehaviour
             LastFishShadow = fishShadow;
 
             // Trigger the fishing minigame popup
-            GameObject chosenMinigamePrefab = fishShadow.fishData.fish.minigamePrefab;
+
+            //ANDREW: my ass is NOT drag-and-dropping new minigames into every single scriptable, we're doing it like this
+            
+            float pkmn = UnityEngine.Random.Range(0,1f);
+
+            if(!fishShadow.fishData.fish.tempBoolForPokemon){
+                pkmn = 0;
+            }
+
+            //5% of the time you get the pokemon minigame, though only on fish not on the ice planet
+
+            GameObject chosenMinigamePrefab = pkmn > 0.95f ? Instance.pokemonPrefab : fishShadow.fishData.fish.minigamePrefab;
+
+
             if (chosenMinigamePrefab != null)
             {
                 GameManager.TriggerPopIn(GameManager.MinigamePopup, chosenMinigamePrefab, forceSwap: true, onBeforeShow: go =>

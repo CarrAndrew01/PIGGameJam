@@ -29,6 +29,8 @@ public class PlayerInventory
     // State
     public List<CaughtFish> caughtFish = new List<CaughtFish>();
     public List<Bait> baits = new List<Bait>();
+    
+    [SerializeField]
     public Upgrade currentBaitUpgrade; // Reference to the currently equipped bait upgrade, if any
 
     // Variables

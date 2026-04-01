@@ -5,6 +5,7 @@ using UnityEngine;
 /// Represents an upgrade that can be applied to the player, modifying their stats in some way.
 /// </summary>
 [CreateAssetMenu(fileName = "New Upgrade", menuName = "Upgrade")]
+[System.Serializable]
 public class Upgrade : ScriptableObject
 {
     public enum UpgradeModifierType

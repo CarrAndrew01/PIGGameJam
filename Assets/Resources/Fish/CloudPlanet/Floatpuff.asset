@@ -20,14 +20,17 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 5413e7d052d95229883524beb7bde1ec, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
+  value: 20
   minWeight: 0.3
   maxWeight: 0.6
   minAmount: 1
   maxAmount: 1
   preferredBaitType: 0
-  value: 20
-  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
+  minSummonTime: 20
+  maxSummonTime: 60
+  tempBoolForPokemon: 1
   jumpiness: 0.258
   speed: 0.158
   stubbornness: 0.172
   size: 0.646
+  minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}

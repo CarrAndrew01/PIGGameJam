@@ -155,6 +155,7 @@ MonoBehaviour:
   castLineRenderer: {fileID: 5234964400167045}
   castingPrefab: {fileID: 2941649925059469388, guid: cd09a98bce460004fb1c1cc23464ec33, type: 3}
   bobberPrefab: {fileID: 8260265438531314335, guid: 6f5b86d33f5b18f48b01394765360e54, type: 3}
+  pokemonPrefab: {fileID: 1533861940500961755, guid: c5d22923d4f46bdde9fa9857829eb350, type: 3}
 --- !u!1 &2627616015998451968
 GameObject:
   m_ObjectHideFlags: 0

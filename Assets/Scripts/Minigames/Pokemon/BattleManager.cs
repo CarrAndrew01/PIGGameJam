@@ -21,14 +21,19 @@ public class Pokemon
 
     public GameObject healthbar; //gameobject for now, this shouldn't be here but I'm making ANOTHER class for screen-representative pokemon here
     public float healthBarScaleInitial = 0.5f;
-    public float currentHealth = 100;
 
     //MODIFIERS
     //rather than stats, this 
-    public float damageModifier = 1f; //for damage buffs and debuffs
-    public float defenceModifier = 1f;
-    private float catchModifier = 0f;
-    public float speedModifer = 1f;
+
+    //not going to worry about keep reference to what upgrades are being applied for speed and health, we'll just change these in Start()
+    public float currentSpeed; 
+    public float currentHealth = 100;
+
+    public float defenceModifier;
+    public float attackModifier;
+    public float chanceToUseThird; //fish has a third attack, this determines how often it uses it. But, the 
+
+
 
 
     public float accuracyModifier = 1f;
@@ -49,6 +54,8 @@ public class Pokemon
     // public int specialAttackStat;
     // public int specialDefenseStat;
     // public int speedStat;
+
+    public Attack currentAttack;//null if nothing- NULL CHECKS NEEDED
 }
 
 
@@ -56,7 +63,13 @@ public class Pokemon
 public class PokemonStats
 {
     public string nameOfPokemon;
+
+    //might as well put the base stats in here, and the upgrade/fish stat effected versions in the Pokemon variables
     public int maxHealth = 100;//for now we'll use this to store the max health since we're not doing stats or levels
+    public int speed = 100;
+    //defence/attack doesn't need a stat here really
+
+
     public List<Attack> attacks = new(); //the attacks this pokemon could potentially learn
 
     //we're using none of these lol
@@ -140,7 +153,8 @@ public class BattleManager : MonoBehaviour
 
 
     bool movingLastFrame = false; //for some reason you have to do this to stop it being fast for the vector thing whatever
- 
+    
+    //bigger number = easier to catch
     private float catchModifier = 0f;
 
     public FishShadow lastFish;
@@ -154,9 +168,6 @@ public class BattleManager : MonoBehaviour
     //protected classes? Something else?
     //hm.
     public GameObject restZ;
-
-    public Attack currentPlayerAttack; //I forgot to properly carry a reference, hacking
-    public Attack currentEnemyAttack;
 
 
     #region UIStuff
@@ -203,6 +214,7 @@ public class BattleManager : MonoBehaviour
             lastFish = Fishing.LastFishShadow;
         }
 
+
     }
 
     void Update()
@@ -226,6 +238,7 @@ public class BattleManager : MonoBehaviour
         GameObject go3 = Instantiate(restZ, battleData.currentPlayerMon.spawnPoint.transform.position, Quaternion.identity, battleData.currentPlayerMon.spawnPoint.transform);
         //animation ending is just handled in the central animation for now
 
+
     }
 
     //keeping this simple right now, just don't have time to do a full extensible implementation
@@ -237,6 +250,7 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         GameObject go3 = Instantiate(restZ, battleData.currentEnemyMon.spawnPoint.transform.position, Quaternion.identity, battleData.currentEnemyMon.spawnPoint.transform);
         //animation ending is just handled in the central animation for now
+
     }
 
 
@@ -406,78 +420,101 @@ public class BattleManager : MonoBehaviour
         currentUIState = UIState.Attack;
         currentSelectedButton = attackButtons[0];
         currentSelectedButton.arrow.SetActive(true);
+        battleData.currentPlayerMon.animator.SetInteger("AttackID",-1);
+        battleData.currentEnemyMon.animator.SetInteger("AttackID",-1);
 
+        mainText.text = "";
 
-
+        second = false;
     }
-
+    
+    bool second;
     //called by the animation event at the end of the attack animation
     public void OnAnimationEnd(bool player)
     {
+        Debug.Log("animend  " + player + "    second: " + second);
         //switch to the other attack or go to the next turn.
-        //and right now player always go first.
+
+        if(second)
+        {
+            if (player)
+            {
+                ImplementMove(battleData.currentEnemyMon, battleData.currentPlayerMon, battleData.currentPlayerMon.currentAttack);
+            }
+            else
+            {
+                ImplementMove(battleData.currentPlayerMon, battleData.currentEnemyMon, battleData.currentEnemyMon.currentAttack);
+            }
+            
+            StartTurn();
+            return;
+        }
+
         if (player)
         {
-            ImplementMove(battleData.currentEnemyMon, battleData.currentPlayerMon, currentPlayerAttack);
+            ImplementMove(battleData.currentEnemyMon, battleData.currentPlayerMon, battleData.currentPlayerMon.currentAttack);
+            ImplementMoveAnimation(battleData.currentPlayerMon, battleData.currentEnemyMon, battleData.currentEnemyMon.currentAttack);
 
-            currentEnemyAttack = EnemyAIDecider();
-
-            ImplementMoveAnimation(battleData.currentPlayerMon, battleData.currentEnemyMon, currentEnemyAttack);
             battleData.currentPlayerMon.animator.SetInteger("AttackID",-1);
         }
         else
         {
-            ImplementMove(battleData.currentPlayerMon, battleData.currentEnemyMon, currentEnemyAttack);
-            StartTurn();
+            ImplementMove(battleData.currentPlayerMon, battleData.currentEnemyMon, battleData.currentEnemyMon.currentAttack);
+            ImplementMoveAnimation(battleData.currentEnemyMon, battleData.currentPlayerMon, battleData.currentPlayerMon.currentAttack);
+ 
             battleData.currentEnemyMon.animator.SetInteger("AttackID", -1);
-
         }
+
+        second = true;
+
     }
 
-    //as any fish can randomly generate the pokemon minigame, this is based on 
+    //as any fish can randomly generate the pokemon minigame, this is based on their stats
     void AdjustBasedOnFishStats()
     {
-       // battleData.currentEnemyMon. lastFish.fishData.fish.jumpiness;
+        //first, assign each of the fish's stat
+        Pokemon pkmn = battleData.currentEnemyMon;
 
+        //everything starts at a base value which is multiplied by 1 + the fish stats (between 0 and 1). so speed starts at 100 and becomes between 100 and 200
+        pkmn.currentSpeed *= 1 + lastFish.fishData.fish.speed;
+        pkmn.attackModifier *= 1 + lastFish.fishData.fish.jumpiness;
+        pkmn.defenceModifier *= 1 + lastFish.fishData.fish.size;
 
+        //stubborness makes it just slightly more difficult to catch, between 0 and 0.1
+        catchModifier -= 0.1f * lastFish.fishData.fish.stubbornness;
     }
 
     void AdjustBasedOnPlayerUpgrades()
     { 
         
-        int statCatchArea, statHookGravity, statFishEscapeRate, statHookPullForce;
+        int statCatchArea, statHookGravity, statFishEscapeRate, statCatchSpeed;
 
         //amount of damage you do
-        catchModifier = GameManager.Instance.GetAmountOfUpgrades("CatchSpeed");
+       // catchModifier = GameManager.Instance.GetAmountOfUpgrades("CatchSpeed");
+
+
         
-        //amount of health enemy has
+        //Catch area effects out damage
         statCatchArea = GameManager.Instance.GetAmountOfUpgrades("CatchArea");
+        battleData.currentPlayerMon.attackModifier = 0.05f * statCatchArea;
 
-        statHookGravity = GameManager.Instance.GetAmountOfUpgrades("Sinker");
-        
+        //fish escape rate lowers enemy accuracy
         statFishEscapeRate = GameManager.Instance.GetAmountOfUpgrades("EscapeRate");
-
-        //so what do all these do?
-        //fish escape rate == accuracy down on enemy
-        //5% per level of upgrade (5, 15, 30 ) for each upgrade
-
         battleData.currentEnemyMon.accuracyModifier = 1 - (0.05f * statFishEscapeRate);
 
 
         //catch speed == better catch chance
-        catchModifier = 0.05f * statCatchArea;
-        
-
-        //catch area == defence buff on player?
-
+        statCatchSpeed = GameManager.Instance.GetAmountOfUpgrades("CatchSpeed");
+        catchModifier = 0.03f * statCatchSpeed;
         
         //hook gravity == buffs every attack in a slightly different way
-
-
+        //actually lets just give us an attack buff
+        statHookGravity = GameManager.Instance.GetAmountOfUpgrades("Sinker");
+        battleData.currentPlayerMon.attackModifier += 0.05f * statHookGravity;
     }
 
     //works in damage and healing
-    void AdjustHealth(int num, Pokemon pokemon)
+    void AdjustHealth(float num, Pokemon pokemon)
     {
 
         if(pokemon.currentHealth + num > pokemon.stats.maxHealth)
@@ -496,27 +533,44 @@ public class BattleManager : MonoBehaviour
         AdjustHealthbar(pokemon);
     }
 
+
+    //takes everything and work out the damage
+    float CalculateDamage(Pokemon target, Pokemon originator, Attack attack)
+    {
+        //takes the base damage of the attack, multiply it by the attack 
+        float damage = attack.damage;
+
+
+        damage *= 1 + originator.attackModifier;
+        damage *= 1 - target.defenceModifier; //this is quite high but we can just make base damage on moves quite high
+        damage = Mathf.RoundToInt(damage);
+
+        return damage;
+    }
+
     void ImplementMove(Pokemon target, Pokemon originator, Attack attack)
     {
         //hit
+
+        float dmg = CalculateDamage(target, originator, attack);
+
         if(attack.damage != -10000)
         {
-            AdjustHealth(-attack.damage, target);
+            AdjustHealth(-dmg, target);
         }
         
         if(attack.healAmount != -10000)
         {
             AdjustHealth(attack.healAmount, originator);
         }
-        
     }
 
     IEnumerator MoveMissed(Pokemon originator)
     {
+        yield return new WaitForSeconds(1.5f);
         mainText.text = "The attack missed!";
         yield return new WaitForSeconds(1.5f);
         OnAnimationEnd(originator == battleData.currentPlayerMon);
-
     }
  
     void ImplementMoveAnimation(Pokemon target, Pokemon originator, Attack attack)
@@ -528,6 +582,7 @@ public class BattleManager : MonoBehaviour
         if(roll <= attack.accuracy * originator.accuracyModifier)
         {
             originator.animator.SetInteger("AttackID", attack.AnimationReturner());
+
         }
         else
         {
@@ -550,18 +605,32 @@ public class BattleManager : MonoBehaviour
     public void OnMovePressed(Attack atk)
     {
         //num always corresponds to the position in the attacks list
+
+        //speed determines attacker
+        battleData.currentPlayerMon.currentAttack = atk;
+        battleData.currentEnemyMon.currentAttack = EnemyAIDecider();
  
         if(atk!=null)
         {
-            mainText.text = $"{battleData.currentPlayerMon.stats.nameOfPokemon} used {atk.nameOfMove}!";
             AttackAnimationsPause();
-            currentPlayerAttack = atk;
-            ImplementMoveAnimation(battleData.currentEnemyMon, battleData.currentPlayerMon, currentPlayerAttack);
+
+            if(battleData.currentPlayerMon.currentSpeed > battleData.currentEnemyMon.currentSpeed)
+            {
+                mainText.text = $"{battleData.currentPlayerMon.stats.nameOfPokemon} uses {battleData.currentPlayerMon.currentAttack.nameOfMove}!";
+                ImplementMoveAnimation(battleData.currentEnemyMon, battleData.currentPlayerMon, atk);
+            }
+            else
+            {
+                mainText.text = $"Enemy {battleData.currentEnemyMon.stats.nameOfPokemon} uses {battleData.currentEnemyMon.currentAttack.nameOfMove}!";
+                ImplementMoveAnimation(battleData.currentPlayerMon, battleData.currentEnemyMon, battleData.currentEnemyMon.currentAttack);
+            }
+
             //for now, no animation so immediately call 
         }
         else
         { 
             Debug.Log("Player tried to use an attack that doesn't exist");
+            lastFish.EndFishing(false);
         }
     }
 
@@ -615,6 +684,7 @@ public class BattleManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
             if(lastFish != null)
             {
+                lastFish.fishData.valueMultiplier = 3; //fish caught through pokemon are worth 3x as much.
                 lastFish.EndFishing(true);
             }
         }

@@ -168,6 +168,8 @@ public class FishShadow : MonoBehaviour
     {
         leaveTimer = 0f;
     }
+
+    //ADNREW: added 2 params, as the pokemon minigame takes longer to make it worth it.  valueMultiplier just multiplies the value of the fish
     public void Catch()
     {
         AudioManager.playSound?.Invoke("Fish_Caught");
@@ -183,7 +185,9 @@ public class FishShadow : MonoBehaviour
         for (int i = 1; i < amountInCatch; i++)
         {
             // Create additional caught fish for any extra amount
-            CaughtFish extraFish = new CaughtFish(fishData.fish, Random.Range(fishData.fish.minWeight, fishData.fish.maxWeight) * statFishWeight, Environment.CurrentEnvironment != null ? Environment.CurrentEnvironment.name : fishData.planetOfOrigin);
+            CaughtFish extraFish = new CaughtFish(fishData.fish, Random.Range(fishData.fish.minWeight, fishData.fish.maxWeight) * statFishWeight, 
+            Environment.CurrentEnvironment != null ? Environment.CurrentEnvironment.name : fishData.planetOfOrigin);
+
             GameManager.AddFishToInventory(extraFish);
         }
 
@@ -291,15 +295,23 @@ public class FishShadow : MonoBehaviour
                 if (!IsHooked && IsWithinHookRange(targetBobber))
                 {
                     // If the fish is in hook range, hook it (if it likes the bait)
-                    if (fishData.fish.preferredBaitType == GameManager.GetPlayerStat(StatType.baitType))
+                    //ANDREW: I made it so you always get a successful fish if theres no bait or preferred bait
+                    //dunno if this is what nathan wanted but atm the fish was ignoring the rod half the time if it has no preferred bait or equipped bait
+                    if (fishData.fish.preferredBaitType == GameManager.GetPlayerStat(StatType.baitType) 
+                    || (fishData.fish.preferredBaitType == 0 && GameManager.Instance.playerInventory.currentBaitUpgrade == null))
                     {
                         IsHooked = true;
                         BeginFishing();
                     }
                     else
                     {
+                        //ANDREW: this is 
                         if (fishData.fish.preferredBaitType == 0) // If the fish usually likes no bait, we roll a chance to have no intereset
                         {
+                            //ANDREW: I did this. I don't know if there was a reason for fish to be ignoring an unbaited hook if they had no preferred bait 
+                            //but I don't think it was meant to
+
+
                             if (Random.value < wrongBaitBadIgnoreChance)
                             {
                                 targetBobber = null;
@@ -316,6 +328,7 @@ public class FishShadow : MonoBehaviour
                                 return;
                             }
                         }
+
                         // Bite the wrong bait anyway
                         IsHooked = true;
                         BeginFishing();
