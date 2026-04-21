@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Sapfish
   description: "A symbiotic lifeform, the sapfish has learned to cultivate tiny seeds
-    along its back, which in turn attract the insects that it eats.\\n\\n\n\nChef\u2019s
+    along its back, which in turn attract the insects that it eats.\\n\\nChef\u2019s
     Notes:\\n\nThe plants can\u2019t be eaten, but the fish tastes like\u2026 well,
     fish. "
   sprite: {fileID: 319325203572441677, guid: d540c3ebaeb3a464aac2457f8d101a53, type: 3}

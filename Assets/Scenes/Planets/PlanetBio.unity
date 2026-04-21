@@ -8158,6 +8158,10 @@ PrefabInstance:
       value: Bio Planet
       objectReference: {fileID: 0}
     - target: {fileID: 8517081318201010704, guid: be524a614cc9106418aba739bfe08dbb, type: 3}
+      propertyPath: environmentName
+      value: Lantis
+      objectReference: {fileID: 0}
+    - target: {fileID: 8517081318201010704, guid: be524a614cc9106418aba739bfe08dbb, type: 3}
       propertyPath: fishTypes.Array.size
       value: 7
       objectReference: {fileID: 0}

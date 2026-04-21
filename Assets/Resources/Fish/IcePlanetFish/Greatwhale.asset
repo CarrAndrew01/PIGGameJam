@@ -16,7 +16,7 @@ MonoBehaviour:
   description: These enormous mammals originate from another world entirely, where
     they have long been extinct. They were brought to Boreala in a desperate attempt
     to keep their species alive, and have fared surprisingly well here for over 200
-    years.\n\n  Chef's notes:\nI prefer "quality" over "quantity", but the Wale is
+    years.\n\nChef's notes:\nI prefer "quality" over "quantity", but the Wale is
     happy marriage of both. It's enormous size and ample fat reserves combine to
     be a truly delectable mountain of caloric quality.
   sprite: {fileID: -7559995653518803251, guid: 0fd903cf4975920bd83f404b52f2284d, type: 3}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Frost Trout
   description: Fast, agile and light, these would be more difficult to catch if they
-    weren't barely lighter than a feather.\n\n  Chef's notes:\nA staple of my cooking,
+    weren't barely lighter than a feather.\n\nChef's notes:\nA staple of my cooking,
     as it goes with anything. Particularly nice barbequed.
   sprite: {fileID: -1060274179321268171, guid: cc1046d54f86a4d33b7889e39424f56a, type: 3}
   WithBackground: {fileID: 0}

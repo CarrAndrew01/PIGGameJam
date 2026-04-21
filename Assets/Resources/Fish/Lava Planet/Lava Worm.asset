@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Lava Worm
   description: "Small and inconspicuous, these lowly creatures attach themselves
-    to rocks at the banks of magma flows, extracting minerals from within the stones.\\n\\n 
-    Chef\u2019s Notes:\\nA favourite at carnivals, battered and deepfried on a stick."
+    to rocks at the banks of magma flows, extracting minerals from within the stones.\\n\\nChef\u2019s
+    Notes:\\nA favourite at carnivals, battered and deepfried on a stick."
   sprite: {fileID: -7397340389886535319, guid: 733aa1335ed87e2538ffa203a0356eb2, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}

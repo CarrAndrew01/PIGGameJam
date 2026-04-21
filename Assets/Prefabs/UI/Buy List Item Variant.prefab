@@ -243,6 +243,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 4899372975266073244, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899372975266073244, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899372975266073244, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899372975266073244, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899372975266073244, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4938393223379864619, guid: 822d9ac8f0c07f746b868174700cd1f3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -475,6 +495,7 @@ MonoBehaviour:
     fish: {fileID: 0}
     weight: 0
     planetOfOrigin: 
+    valueMultiplier: 0
   priceValue: 0
   multField: {fileID: 5535871481627702227}
 --- !u!114 &5564549098304162244 stripped

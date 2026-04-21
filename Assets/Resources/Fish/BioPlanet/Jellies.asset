@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Glow Jellies
   description: "Possibly a relative of the Valentines Jellies of Boreala, these brainless
-    creatures are far less poisonous and far more difficult to catch.\\n\\n\n\nChef\u2019s
+    creatures are far less poisonous and far more difficult to catch.\\n\\nChef\u2019s
     Notes:\\nI suppose they can be\u2026 boiled maybe? Why did you bring me this? "
   sprite: {fileID: 7569122246748246755, guid: dd07622db208603b6aedf08a7a29021f, type: 3}
   WithBackground: {fileID: 0}

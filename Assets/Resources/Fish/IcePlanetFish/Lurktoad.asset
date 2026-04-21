@@ -15,10 +15,10 @@ MonoBehaviour:
   fishName: Lurktoad
   description: "Famously difficult to catch, the lurktoad's prescence can be identified
     by the distinctive groups of holes it leaves in the ice when feeding every 2-3
-    months. These are also the only time it is possible to see- and capture- one.\\n\\n 
-    Chef's Notes:\\nNyaaaa, never has something been so difficult to find, yet so
-    useless in the kitchen! If they weren\u2019t so rare, noone would be interested
-    in eating them at all..."
+    months. These are also the only time it is possible to see- and capture- one.\\n\\nChef's
+    Notes:\\nNyaaaa, never has something been so difficult to find, yet so useless
+    in the kitchen! If they weren\u2019t so rare, noone would be interested in eating
+    them at all..."
   sprite: {fileID: 4358029419721268408, guid: 42dd9567d0ae0d4bebfb9f9bd42ed8be, type: 3}
   WithBackground: {fileID: 7730991607962479806, guid: 018d3a37aa02f804eabb4198e358234b, type: 3}
   background: {fileID: 0}

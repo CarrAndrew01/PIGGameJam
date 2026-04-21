@@ -16,7 +16,7 @@ MonoBehaviour:
   description: It's unclear why these eels leap out of the water at night, the act
     that gives them their name. In summer- such as it is on Boreala- swarms of hundreds
     can be seen leaping out of the water at a time, often directly into waiting Nyaalines
-    nets.\n\n  Chef's notes:\nSlice thin and serve raw for optimal flavour. No sauce
+    nets.\n\nChef's notes:\nSlice thin and serve raw for optimal flavour. No sauce
     needed- the Mooneel is naturally delicious.
   sprite: {fileID: 1907370706717288651, guid: 1658c1bc092ffdd3e871c9de0ec61495, type: 3}
   WithBackground: {fileID: 0}

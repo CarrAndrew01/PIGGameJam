@@ -15,9 +15,9 @@ MonoBehaviour:
   fishName: Bloatwinnow
   description: The closest thing to an actual fish on Nimbus, the bloatwinnow expands
     itself to enormous size, then releases it to move through the upper-atmosphere
-    at high speed.\n\n  Chef's Notes:\nA huge bag of wind and almost no brains. Reminds
+    at high speed.\n\nChef's Notes:\nA huge bag of wind and almost no brains. Reminds
     me of some of my customers, nyaaa!
-  sprite: {fileID: 21300000, guid: bc32602138d1ed54a978cebc53959430, type: 3}
+  sprite: {fileID: -2327823066388363959, guid: bc32602138d1ed54a978cebc53959430, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
   value: 8

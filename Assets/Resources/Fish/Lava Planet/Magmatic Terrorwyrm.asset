@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Possibly the most dangerous creature across all four planets in the
     system, terrorwyrms are peerless hunters both on land and in the magma-flows
     of Firax. A wise hunter waits until it has taken a dip in the lava to draw it
-    out.\n\n  Chef's Notes:\nWell worth the trouble! Like most predators, its meat
+    out.\n\nChef's Notes:\nWell worth the trouble! Like most predators, its meat
     is naturally tough, but after a long slow-cook, garnished with fireweed and powdered
     Magma Crab shell, a Terrorwyrm roast is one of the best crowd-pleasers around!
   sprite: {fileID: -6507732772421794743, guid: 4ef26123630546c81a8874571704abd4, type: 3}

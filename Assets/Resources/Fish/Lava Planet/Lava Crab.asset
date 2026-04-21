@@ -15,9 +15,9 @@ MonoBehaviour:
   fishName: Magma Crab
   description: Scientists were baffled by the Magma Crab's body when it was first
     sighted. However, they soon learned the volcano on it's back is only cosmetic-
-    a form of camoflage developed to blend in with the rough terrain of Firax.\n\n 
-    Chef's Notes:\nThe body isn't any nicer than its distant cousin on Boreala, but
-    the fake "lava" on it's back- some sort of gelatin- makes for a lovely thickener,
+    a form of camoflage developed to blend in with the rough terrain of Firax.\n\nChef's
+    Notes:\nThe body isn't any nicer than its distant cousin on Boreala, but the
+    fake "lava" on it's back- some sort of gelatin- makes for a lovely thickener,
     and its shell can be powdered and used as a spice.
   sprite: {fileID: 2104901783972924173, guid: eb2e8851a498f2245b256fe8df4be4c0, type: 3}
   WithBackground: {fileID: 0}

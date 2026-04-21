@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Gribblesnail
   description: A strange creature indeed, the Gribblesnail is technically a giant
-    form of plankton. it's slow and gentle, but surprisingly strong.\n\n  Chef's
-    Notes:\nThe only bit worth eating is the eggs that line all adult Gribblesnails
-    backs.
+    form of plankton. it's slow and gentle, but surprisingly strong.\n\nChef's Notes:\nThe
+    only bit worth eating is the eggs that line all adult Gribblesnails backs.
   sprite: {fileID: -8455539998564936456, guid: 7ccfa97e9c9a0d9abb4dc8e2d908bcfc, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}

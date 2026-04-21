@@ -4348,6 +4348,10 @@ PrefabInstance:
       value: Lava Planet
       objectReference: {fileID: 0}
     - target: {fileID: 8605051606740615530, guid: de9d472cf23dccd41a4544c65fb93443, type: 3}
+      propertyPath: environmentName
+      value: Firax
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605051606740615530, guid: de9d472cf23dccd41a4544c65fb93443, type: 3}
       propertyPath: fishTypes.Array.size
       value: 7
       objectReference: {fileID: 0}

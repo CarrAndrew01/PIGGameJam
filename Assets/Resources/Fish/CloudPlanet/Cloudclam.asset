@@ -17,9 +17,9 @@ MonoBehaviour:
     of its bulk is made up of a cotton-candy like fur that seems to have evolved
     to blend in with Nimbus 's clouds. Because of this, there is a persistant myth
     that Nimbus actually began as a cloudclam, which grew to a gigantic size only
-    after millions of years.\n\n  Chef's Notes:\nThe fur makes for an excellent garnish,
+    after millions of years.\n\n Chef's Notes:\nThe fur makes for an excellent garnish,
     and the spindly little body inside can be turned to jerky.
-  sprite: {fileID: 21300000, guid: f2d584bda738b25b3bb207f4e5561631, type: 3}
+  sprite: {fileID: 5723285377887484275, guid: f2d584bda738b25b3bb207f4e5561631, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
   value: 12

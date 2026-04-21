@@ -809,7 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding: {x: 263.3, y: 62, z: 263.3, w: 80.6}
+  m_Padding: {x: 202.8, y: 41.5, z: 202.7, w: 54.4}
   m_Softness: {x: 0, y: 0}
 --- !u!222 &7830548605873160142
 CanvasRenderer:
@@ -1007,7 +1007,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 16, y: -4}
+  m_AnchoredPosition: {x: 4.7858887, y: 0}
   m_SizeDelta: {x: -1214.8726, y: -905.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2326469369943580422

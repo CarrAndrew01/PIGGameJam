@@ -3654,6 +3654,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
+      propertyPath: environmentName
+      value: Boreala
+      objectReference: {fileID: 0}
+    - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
       propertyPath: fishTypes.Array.size
       value: 6
       objectReference: {fileID: 0}

@@ -7005,6 +7005,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
+      propertyPath: environmentName
+      value: Nimbus
+      objectReference: {fileID: 0}
+    - target: {fileID: 179441685209997019, guid: 82509131e48297d4fa9d178eb206fecc, type: 3}
       propertyPath: fishTypes.Array.size
       value: 5
       objectReference: {fileID: 0}

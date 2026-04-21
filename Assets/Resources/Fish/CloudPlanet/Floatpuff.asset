@@ -15,9 +15,9 @@ MonoBehaviour:
   fishName: Floatpuff
   description: Like the Cloudclam, the Floatpuff has no way of moving itself, simply
     letting the winds of Nimbus blow it wherever, absorbing microscopic lifeforms
-    for food.\n\n  Chef's Notes:\nOne of my own Protege's discovered a delicious
-    way to prepare these- but I can't tell you what it. Kitchen secret, I'm afraid!
-  sprite: {fileID: 21300000, guid: 5413e7d052d95229883524beb7bde1ec, type: 3}
+    for food.\n\n Chef's Notes:\nOne of my own Protege's discovered a delicious way
+    to prepare these- but I can't tell you what it. Kitchen secret, I'm afraid!
+  sprite: {fileID: -9182602395641932690, guid: 5413e7d052d95229883524beb7bde1ec, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
   value: 20

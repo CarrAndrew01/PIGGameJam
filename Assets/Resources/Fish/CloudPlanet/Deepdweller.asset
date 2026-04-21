@@ -15,11 +15,11 @@ MonoBehaviour:
   fishName: Deepdweller
   description: Dwelling on the mysterious solid core of Nimbus, noone is quite sure
     what the deep dweller actually looks like, as the incredible stresses placed
-    on its body during the long journey into orbit has caused immense malformation.\n\n 
+    on its body during the long journey into orbit has caused immense malformation.\n\n
     Chef's Notes:\nAre you sure there's no way to catch one of these things without
     manglin' it like that? Like this, we have to mash it up and reconstitute it just
     to get a decent cut of meat...
-  sprite: {fileID: 21300000, guid: 6378ae0564221342abbda4fdf7e781e8, type: 3}
+  sprite: {fileID: 1309489925366895345, guid: 6378ae0564221342abbda4fdf7e781e8, type: 3}
   WithBackground: {fileID: 0}
   background: {fileID: 0}
   value: 75
