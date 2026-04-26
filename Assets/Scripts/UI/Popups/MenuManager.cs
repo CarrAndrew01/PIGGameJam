@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.UI;
 
 /// <summary>
 /// Handles opening and closing various menus.
@@ -80,6 +81,7 @@ public class MenuManager : MonoBehaviour
     public GameObject questMenuPrefab; // Prefab for the quest menu popup
     public GameObject baitMenuPrefab; // Prefab for the bait menu popup
     public GameObject settingsMenuPrefab; // Prefab for the settings menu popup
+    public GameObject blurGameObject;
 
     [Header("Debug")]
     public GameObject CurrentMenu { get; private set; } = null; // Reference to the currently open menu, if any
@@ -122,7 +124,7 @@ public class MenuManager : MonoBehaviour
     {
         if (!GameManager.MenuPopup.ReadyForInput || Transition.CurrentScreen == Transition.Screen.Main || Fishing.IsMinigameActive)
             return; // Don't allow menu input if the popup is currently animating or problems occur
-    
+
         if (closeMenuAction != null && CurrentMenu != null && closeMenuAction.action.WasPressedThisFrame())
         {
             CloseCurrentMenu();
@@ -237,6 +239,10 @@ public class MenuManager : MonoBehaviour
         GameObject prefabToOpen = GetPrefabForMenuType(menuType);
         if (prefabToOpen != null)
         {
+            if (blurGameObject != null)
+            {
+                blurGameObject.SetActive(true);
+            }
             GameManager.TriggerPopIn(GameManager.MenuPopup, prefabToOpen, forceSwap: priority, onBeforeShow: go =>
             {
                 CurrentMenu = go;
@@ -250,6 +256,10 @@ public class MenuManager : MonoBehaviour
 
     public void CloseCurrentMenu()
     {
+        if (blurGameObject != null)
+        {
+            blurGameObject.SetActive(false);
+        }
         if (CurrentMenu != null)
         {
             GameManager.TriggerPopOut(GameManager.MenuPopup, onAfter: go =>
