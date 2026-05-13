@@ -33,6 +33,8 @@ public class PlayerInventory
     [SerializeField]
     public Upgrade currentBaitUpgrade; // Reference to the currently equipped bait upgrade, if any
 
+    public float difficultyModifier = 1f; // Set by the player in settings (stored in inventory in case we ever want multiple accounts or something)
+
     // Variables
     public int MaxFishStorage => (int)GameManager.GetPlayerStat(StatType.fishStorage);
 
@@ -52,6 +54,7 @@ public class PlayerInventory
         caughtFish.Clear();
         baits.Clear();
         currentBaitUpgrade = null;
+        difficultyModifier = 1f;
         money = 0;
         maxInt = 0;
     }
@@ -258,7 +261,7 @@ public class PlayerInventory
                 uses = b.numberOfUses
             });
         }
-
+        save.difficultyModifier = difficultyModifier;
         save.currentBaitUpgradeName = currentBaitUpgrade != null ? currentBaitUpgrade.name : "";
         save.money = money;
 
@@ -316,6 +319,7 @@ public class PlayerInventory
 
         // Restore saved money
         money = save.money;
+        difficultyModifier = save.difficultyModifier;
 
         // Ensure maxInt reflects the highest assigned ID in the inventory so
         // subsequent calls to NewID() generate unique IDs above existing ones.

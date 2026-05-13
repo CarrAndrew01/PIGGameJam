@@ -1,4 +1,6 @@
 using System;
+using System.Reflection;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 /// <summary>
@@ -59,18 +61,32 @@ public class Fish : ScriptableObject
     [Header("Stardew variables")]
     [Range(0f, 1f)]
     [Tooltip("How much random movement a fish has when struggling (standing still).")]
-    public float jumpiness = 1f;   // feinting or sudden movements
+    [SerializeField] private float jumpiness = 1f;   // feinting or sudden movements
     [Range(0f, 1f)]
     [Tooltip("How quickly the fish reaches max velocity.")]
-    public float speed = 1f;       // how quickly the fish can move
+    [SerializeField] private float speed = 1f;       // how quickly the fish can move
     [Range(0f, 1f)]
     [Tooltip("How likely the fish is to change direction when struggling.")]
-    public float stubbornness = 1f;// how unlikely the fish is to change direction
+    [SerializeField] private float stubbornness = 1f;// how unlikely the fish is to change direction
     [Range(0f, 1f)]
     [Tooltip("How much momentum the fish has (slows down slower).")]
-    public float size = 1f;        // how big the fish is
+    [SerializeField] private float size = 1f;        // how big the fish is
+
+    [Header("Modifiers")]
+    [Tooltip("Multiplier for how much the fish struggles (bigger is more struggle)")]
+    [SerializeField] private float timeToCatchMult = 1f; // Multiplier for how long it takes to catch the fish
+    [Tooltip("Multiplier for how long it takes for the fish to escape (bigger is longer)")]
+    [SerializeField] private float timeToEscapeMult = 1f; // Multiplier for how long it takes for the fish to escape
 
     [Header("Prefabs")]
     public GameObject minigamePrefab;
-    
+
+    // Access properties
+    public float Jumpiness => jumpiness * GameManager.GetDifficultyModifier();
+    public float Speed => speed * GameManager.GetDifficultyModifier();
+    public float Stubbornness => stubbornness * GameManager.GetDifficultyModifier();
+    public float Size => size * GameManager.GetDifficultyModifier();
+
+    public float TimeToCatchMult => timeToCatchMult * GameManager.GetDifficultyModifier();
+    public float TimeToEscapeMult => timeToEscapeMult / GameManager.GetDifficultyModifier();
 }

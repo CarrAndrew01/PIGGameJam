@@ -62,8 +62,8 @@ public class Stardew : MonoBehaviour
     // Catch properties that take into account player stats, upgrades, and difficulty ramp
     private float RampT => Mathf.Clamp01(timeElapsed / rampDuration);
     private float DifficultyRampT => Mathf.Clamp01(timeElapsed / difficultyRampDuration);
-    public float CatchRate => catchRate * statCatchSpeed * Mathf.Lerp(catchStartMultiplier, 1f, RampT);
-    public float EscapeRate => escapeRate * statFishEscapeRate * Mathf.Lerp(1f, escapeEndMultiplier, DifficultyRampT);
+    public float CatchRate => catchRate * statCatchSpeed * Mathf.Lerp(catchStartMultiplier, 1f, RampT) / TimeToCatchMult;
+    public float EscapeRate => escapeRate * statFishEscapeRate * Mathf.Lerp(1f, escapeEndMultiplier, DifficultyRampT) / TimeToEscapeMult;
     public float HookGravity => hookGravity * statHookGravity;
     public float CatchAreaSize => catchSize * statCatchArea;
 
@@ -77,10 +77,13 @@ public class Stardew : MonoBehaviour
     public float sizeMult = 1f; // Multiplier for how big the fish is, which will affect catch area
 
     // Fish properties which take into account modifers
-    public float Jumpiness => fish.jumpiness * jumpinessMult;
-    public float Speed => fish.speed * speedMult;
-    public float Stubbornness => fish.stubbornness * stubbornnessMult;
-    public float Size => fish.size * sizeMult;
+    public float Jumpiness => fish.Jumpiness * jumpinessMult;
+    public float Speed => fish.Speed * speedMult;
+    public float Stubbornness => fish.Stubbornness * stubbornnessMult;
+    public float Size => fish.Size * sizeMult;
+
+    public float TimeToCatchMult => fish.TimeToCatchMult;
+    public float TimeToEscapeMult => fish.TimeToEscapeMult;
 
     // Player stats that affect minigame
     private float statCatchSpeed, statCatchArea, statHookGravity, statFishEscapeRate, statHookPullForce;

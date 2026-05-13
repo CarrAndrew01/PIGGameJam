@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Singleton manager for game state, progression, etc.
@@ -21,11 +22,10 @@ public class GameManager : MonoBehaviour
     [Header("Quests")]
     public List<Quest> AllQuests { get; private set; } = new List<Quest>(); // List of all quests in the game, populated at runtime
 
-    public Fish TEMPFISH;
-
-
     // Variables
     public const string TITLE_SCENE_NAME = "Title";
+    public const float MIN_DIFFICULTY_MODIFIER = 0.5f;
+    public const float MAX_DIFFICULTY_MODIFIER = 1.5f;
 
     // Components
     [HideInInspector] public Popup minigamePopup; // Reference to the Popup component for minigame pop-ups
@@ -173,7 +173,27 @@ public class GameManager : MonoBehaviour
     public static void SelectBaitUpgrade(Upgrade baitUpgrade) => Instance.playerInventory.SelectBait(baitUpgrade);
     public static void DeselectBaitUpgrade() => Instance.playerInventory.DeselectBait();
     public static bool IsInventoryFull() => Instance.playerInventory.caughtFish.Count >= Instance.playerInventory.MaxFishStorage;
+    public static float GetDifficultyModifier() => Instance.playerInventory.difficultyModifier;
+    public static float GetDifficultyModifierNormalized(float sliderMin = -1f, float sliderMax = -1f)
+    {
+        // Convert the current difficulty modifier to a 0-1 range for slider representation
+        float normalized = Mathf.InverseLerp(MIN_DIFFICULTY_MODIFIER, MAX_DIFFICULTY_MODIFIER, GetDifficultyModifier());
 
+        // If sliderMin and sliderMax are set to valid values, remap the normalized value to that range instead (useful if the slider doesn't use a 0-1 range)
+        if (sliderMin >= 0f && sliderMax > sliderMin)
+        {
+            normalized = Mathf.Lerp(sliderMin, sliderMax, normalized);
+        }
+        return normalized;
+    }
+    public static float GetDifficultyModifierNormalized(Slider slider) => GetDifficultyModifierNormalized(slider.minValue, slider.maxValue);
+    public static void SetDifficultyModifier(float modNormal)
+    {
+        // Convert from 0-1 slider range to the defined difficulty modifier range
+        float modifier = Mathf.Lerp(MIN_DIFFICULTY_MODIFIER, MAX_DIFFICULTY_MODIFIER, modNormal);
+
+        Instance.playerInventory.difficultyModifier = modifier;
+    }
     // Popups and Menus
     public static void TriggerPopIn(Popup popup, GameObject canvasPrefab, bool forceSwap = false, System.Action<GameObject> onComplete = null, System.Action<GameObject> onBeforeShow = null) => Instance.StartCoroutine(popup.TriggerPopIn(canvasPrefab, -1f, forceSwap, onComplete, onBeforeShow));
     public static void TriggerPopOut(Popup popup, System.Action<GameObject> onAfter = null, System.Action<GameObject> onBefore = null, float durationOverride = -1f) => Instance.StartCoroutine(popup.TriggerPopOut(durationOverride, onAfter, onBefore));

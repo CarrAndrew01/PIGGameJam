@@ -476,12 +476,12 @@ public class BattleManager : MonoBehaviour
         Pokemon pkmn = battleData.currentEnemyMon;
 
         //everything starts at a base value which is multiplied by 1 + the fish stats (between 0 and 1). so speed starts at 100 and becomes between 100 and 200
-        pkmn.currentSpeed *= 1 + lastFish.fishData.fish.speed;
-        pkmn.attackModifier *= 1 + lastFish.fishData.fish.jumpiness;
-        pkmn.defenceModifier *= 1 + lastFish.fishData.fish.size;
+        pkmn.currentSpeed *= 1 + lastFish.fishData.fish.Speed;
+        pkmn.attackModifier *= 1 + lastFish.fishData.fish.Jumpiness;
+        pkmn.defenceModifier *= 1 + lastFish.fishData.fish.Size;
 
         //stubborness makes it just slightly more difficult to catch, between 0 and 0.1
-        catchModifier -= 0.1f * lastFish.fishData.fish.stubbornness;
+        catchModifier -= 0.1f * lastFish.fishData.fish.Stubbornness;
     }
 
     void AdjustBasedOnPlayerUpgrades()

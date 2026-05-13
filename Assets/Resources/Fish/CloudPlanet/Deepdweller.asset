@@ -35,4 +35,6 @@ MonoBehaviour:
   speed: 1
   stubbornness: 0.522
   size: 0.249
+  timeToCatchMult: 1.5
+  timeToEscapeMult: 1.15
   minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}

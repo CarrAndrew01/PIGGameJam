@@ -10,23 +10,32 @@ public class SettingsMenu : MonoBehaviour
     public Color sliderEndColor = Color.white;
 
     [Header("Components")]
+    // Sound
     public Slider masterVolumeSlider;
     public Slider musicVolumeSlider;
     public Slider sfxVolumeSlider;
     public Slider ambientVolumeSlider;
     public Slider uiVolumeSlider;
 
+    // Gameplay
+    public Slider difficultySlider;
+
+
+    // Components
     private Image masterSliderFill;
     private Image musicSliderFill;
     private Image sfxSliderFill;
     private Image ambientSliderFill;
     private Image uiSliderFill;
+    private Image difficultySliderFill;
 
+    // Cached fill values
     private float lastMasterFillValue = -1f;
     private float lastMusicFillValue = -1f;
     private float lastSfxFillValue = -1f;
     private float lastAmbientFillValue = -1f;
     private float lastUiFillValue = -1f;
+    private float lastDifficultyFillValue = -1f;
     private void Awake()
     {
         // Get references to the fill images of each slider
@@ -35,6 +44,7 @@ public class SettingsMenu : MonoBehaviour
         sfxSliderFill = sfxVolumeSlider.fillRect.GetComponent<Image>();
         ambientSliderFill = ambientVolumeSlider.fillRect.GetComponent<Image>();
         uiSliderFill = uiVolumeSlider.fillRect.GetComponent<Image>();
+        difficultySliderFill = difficultySlider.fillRect.GetComponent<Image>();
 
         // Initialize slider colors
         UpdateSliderColor(masterVolumeSlider, masterSliderFill, ref lastMasterFillValue, overwrite: true);
@@ -42,6 +52,7 @@ public class SettingsMenu : MonoBehaviour
         UpdateSliderColor(sfxVolumeSlider, sfxSliderFill, ref lastSfxFillValue, overwrite: true);
         UpdateSliderColor(ambientVolumeSlider, ambientSliderFill, ref lastAmbientFillValue, overwrite: true);
         UpdateSliderColor(uiVolumeSlider, uiSliderFill, ref lastUiFillValue, overwrite: true);
+        UpdateSliderColor(difficultySlider, difficultySliderFill, ref lastDifficultyFillValue, overwrite: true);
     }
 
     private void Start()
@@ -52,6 +63,9 @@ public class SettingsMenu : MonoBehaviour
         sfxVolumeSlider.value = AudioManager.instance.GetSFXVolume();
         ambientVolumeSlider.value = AudioManager.instance.GetAmbientVolume();
         uiVolumeSlider.value = AudioManager.instance.GetUIVolume();
+
+        // Initialize gameplay sliders with current values from GameManager/PlayerInventory
+        difficultySlider.value = GameManager.GetDifficultyModifierNormalized(difficultySlider);
     }
 
     void OnDestroy()
@@ -80,7 +94,7 @@ public class SettingsMenu : MonoBehaviour
         Debug.Log("SFX Volume: " + PlayerPrefs.GetFloat("Settings_SFXVolume", -1f));
         Debug.Log("Ambient Volume: " + PlayerPrefs.GetFloat("Settings_AmbientVolume", -1f));
         Debug.Log("UI Volume: " + PlayerPrefs.GetFloat("Settings_UIVolume", -1f));
-
+        Debug.Log("Difficulty Modifier: " + PlayerPrefs.GetFloat("Settings_DifficultyModifier", -1f));
         SetupNavigation();
     }
 
@@ -92,6 +106,7 @@ public class SettingsMenu : MonoBehaviour
         UpdateSliderColor(sfxVolumeSlider, sfxSliderFill, ref lastSfxFillValue);
         UpdateSliderColor(ambientVolumeSlider, ambientSliderFill, ref lastAmbientFillValue);
         UpdateSliderColor(uiVolumeSlider, uiSliderFill, ref lastUiFillValue);
+        UpdateSliderColor(difficultySlider, difficultySliderFill, ref lastDifficultyFillValue);
     }
 
     // Methods
@@ -118,6 +133,11 @@ public class SettingsMenu : MonoBehaviour
     public void SetUIVolume(float volume)
     {
         AudioManager.instance.SetUIVolume(volume);
+    }
+    public void SetDifficultyModifier(float modifier)
+    {
+        float normalizedModifier = Mathf.InverseLerp(difficultySlider.minValue, difficultySlider.maxValue, modifier);
+        GameManager.SetDifficultyModifier(normalizedModifier);
     }
     public void CloseMenu()
     {
