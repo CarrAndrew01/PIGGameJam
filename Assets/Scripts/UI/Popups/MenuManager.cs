@@ -62,6 +62,7 @@ public class MenuManager : MonoBehaviour
     [Header("Settings")]
     public MenuOpenableFlags OpenableMenus = MenuOpenableFlags.All; // Which menus can be opened with their respective buttons
     public EscapeMenuButtonFlags EscapeMenuButtons = EscapeMenuButtonFlags.All; // Which buttons should be appear on the escape menu
+    public bool blurBackgroundOnMenu = true; // Whether to show blur
     public InputActionReference menuAction; // expects Button
     public InputActionReference upgradeMenuAction; // expects Button
     public InputActionReference inventoryMenuAction; // expects Button
@@ -239,7 +240,7 @@ public class MenuManager : MonoBehaviour
         GameObject prefabToOpen = GetPrefabForMenuType(menuType);
         if (prefabToOpen != null)
         {
-            if (blurGameObject != null)
+            if (blurBackgroundOnMenu && blurGameObject != null)
             {
                 blurGameObject.SetActive(true);
             }
@@ -256,7 +257,7 @@ public class MenuManager : MonoBehaviour
 
     public void CloseCurrentMenu()
     {
-        if (blurGameObject != null)
+        if (blurBackgroundOnMenu && blurGameObject != null)
         {
             blurGameObject.SetActive(false);
         }

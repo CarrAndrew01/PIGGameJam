@@ -1463,6 +1463,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -290707541
       objectReference: {fileID: 0}
+    - target: {fileID: 7410456370226657384, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
+      propertyPath: blurBackgroundOnMenu
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9100356463631806347, guid: 0c1147b6e6bdc0541bbe4228b98d9b46, type: 3}
       propertyPath: m_Pivot.x
       value: 0
