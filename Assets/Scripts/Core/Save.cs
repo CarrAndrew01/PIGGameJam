@@ -28,6 +28,8 @@ public class InventorySave
     public float difficultyModifier = 1f;
     public float money = 0;
 
+    public bool hasSeenIntro = false; //I guess this goes here? There isn't really a general or misc category for saving so it goes in inventory
+
     public string ToJson()
     {
         return JsonUtility.ToJson(this);

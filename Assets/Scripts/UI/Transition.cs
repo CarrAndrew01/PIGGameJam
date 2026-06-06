@@ -18,6 +18,9 @@ public class Transition : MonoBehaviour
     {
         Main,
         Galaxy,
+        FadeToBlackAndCats,
+        InstantPlanetsFadeOut, //instantly go to the planet view, then fade the thing out
+
         Settings,
         None
     }
@@ -43,6 +46,12 @@ public class Transition : MonoBehaviour
     private bool queuedFadeText = true;
 
     private Animator animator;
+
+
+    public Image fadeImage;
+    private AnimationCurve fadeCurve = AnimationCurve.EaseInOut(0, 0, 1, 1); // Default ease in/out
+ 
+
 
     private void Awake()
     {
@@ -125,6 +134,12 @@ public class Transition : MonoBehaviour
                 ExecuteTransitionTo(Screen.Galaxy, false);
                 GameManager.Instance.intendedScreen = Screen.Main;
                 break;
+            case Screen.InstantPlanetsFadeOut:
+                //first, get the blackout alpha up
+                ExecuteTransitionTo(Screen.InstantPlanetsFadeOut, false);
+                GameManager.Instance.intendedScreen = Screen.Main;
+
+                break;
             case Screen.Settings:
                 ExecuteTransitionTo(Screen.Settings, false);
                 GameManager.Instance.intendedScreen = Screen.Main;
@@ -205,8 +220,8 @@ public class Transition : MonoBehaviour
 
         foreach (TMP_Text textObject in TextObjects)
         {
-            var btn = textObject.GetComponent<Button>();
-            if (btn != null) btn.enabled = false;
+            var btn = textObject.GetComponent<Button>(); //why this? Why not the gameobject? 
+            if (btn != null) btn.gameObject.SetActive(false);
         }
 
         // Get rid of the coroutine reference so we can start new transitions
@@ -218,7 +233,7 @@ public class Transition : MonoBehaviour
         foreach (TMP_Text textObject in TextObjects)
         {
             var btn = textObject.GetComponent<Button>();
-            if (btn != null) btn.enabled = true;
+            if (btn != null) btn.gameObject.SetActive(true);
         }
 
         for (int i = 0; i < 255; i++)
@@ -272,6 +287,7 @@ public class Transition : MonoBehaviour
         switch (target)
         {
             case Screen.Galaxy:
+ 
                 animator.SetBool("PlanetTransition", true);
                 currentScreen = Screen.Galaxy;
                 OnTransition?.Invoke();
@@ -280,6 +296,33 @@ public class Transition : MonoBehaviour
                 AudioManager.playSound("Fly_By");
                 hasSelectedFirstButton = false;
                 break;
+
+            case Screen.FadeToBlackAndCats:
+                animator.SetBool("PlanetTransition", true);
+                OnTransition?.Invoke();
+
+                StartCoroutine(FadeCoroutine(1f, 1.3f, "Cat Ship"));
+
+                AudioManager.playSound("Fly_By");
+                hasSelectedFirstButton = false;//not sure what this does
+                
+                break;
+
+            case Screen.InstantPlanetsFadeOut:
+                
+                //the problem with using an animation is that alpha is weighted towards one end so it fades to being visible very quickly then takes ages to fade out completely
+                //so we reuse the function from introController.
+                HideAllText();
+                animator.SetTrigger("InstantGalaxy");
+                currentScreen = Screen.Galaxy;
+                OnTransition?.Invoke();
+                fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1f); // Instantly set to fully opaque
+                StartCoroutine(FadeCoroutine(0f, 3f));
+                hasSelectedFirstButton = false;
+                GameManager.Instance.HasSeenIntro = true; // Set the flag to indicate the intro has been seen
+                
+                break;
+
             case Screen.Settings:
                 animator.SetBool("SettingsTransition", true);
                 currentScreen = Screen.Settings;
@@ -288,11 +331,12 @@ public class Transition : MonoBehaviour
                 else HideAllText();
                 hasSelectedFirstButton = false;
                 break;
+
             case Screen.Main:
                 if (currentScreen == Screen.Galaxy)
-                    animator.SetBool("PlanetTransition", false);
+                animator.SetBool("PlanetTransition", false);
                 else if (currentScreen == Screen.Settings)
-                    animator.SetBool("SettingsTransition", false);
+                animator.SetBool("SettingsTransition", false);
                 currentScreen = Screen.Main;
                 OnTransition?.Invoke();
                 FadeCoroutineStarter(UnFadeTextCoroutine());
@@ -314,8 +358,68 @@ public class Transition : MonoBehaviour
         ExecuteTransitionTo(target, fade);
     }
 
+
+    public void ChangeScene(string sceneName)
+    {
+        //change scene to the catship
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+
+    }
+
+
+    private IEnumerator FadeCoroutine(float targetAlpha, float fadeDuration, string sceneToLoad = "")
+    {
+        float startAlpha = fadeImage.color.a;
+        float elapsed = 0f;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / fadeDuration;
+            
+            // Apply custom curve
+            float curvedT = fadeCurve.Evaluate(t);
+            
+            float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, curvedT);
+            
+            Color color = fadeImage.color;
+            color.a = newAlpha;
+            fadeImage.color = color;
+
+            yield return null;
+        }
+
+        // Ensure final value
+        Color finalColor = fadeImage.color;
+        finalColor.a = targetAlpha;
+        fadeImage.color = finalColor;
+
+        if (!string.IsNullOrEmpty(sceneToLoad))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneToLoad);
+        }
+    }
+
     public void TransitionToPlanets(bool fadeText = true)
     {
+        //if this is the very first time we're going to the planets view, we should skip straight to the cat ship, if there was an intro cutscene it would go here
+
+        if (!GameManager.Instance.HasSeenIntro)
+        {
+            if (IsInAnimatorTransition())
+            {
+                QueueTransition(Screen.FadeToBlackAndCats, false);
+                return;
+            }
+
+            Debug.Log("right bool");
+
+            ExecuteTransitionTo(Screen.FadeToBlackAndCats, false);
+            return;
+
+        }
+
+
         if (IsInAnimatorTransition())
         {
             QueueTransition(Screen.Galaxy, fadeText);

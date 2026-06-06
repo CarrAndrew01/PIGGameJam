@@ -86,6 +86,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Shop",
+                    "type": "Button",
+                    "id": "91d21451-176c-4929-9592-445b400408fb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -495,6 +504,17 @@
                     "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d9554b8e-4f36-43e7-8b2c-8b3a687f3f48",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -659,6 +679,33 @@
                     "name": "Next Page",
                     "type": "Button",
                     "id": "bd25bff6-0b73-4ab4-a8fa-db573b953242",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shop",
+                    "type": "Button",
+                    "id": "d2bdc4f9-3e15-4614-91b7-5a81bed34972",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Quests",
+                    "type": "Button",
+                    "id": "afb8fe14-fbf8-4d4e-94c6-3a6bf23e0a39",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Blackjack",
+                    "type": "Button",
+                    "id": "b7a3dcb0-6e13-4d18-b696-3faf2fe3b9a5",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1224,6 +1271,50 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Previous Page",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e20211fa-9acd-4494-8afe-173a317d377b",
+                    "path": "<Keyboard>/#(S)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Shop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1470000-333f-45ed-a9b9-482f908be3c2",
+                    "path": "<Keyboard>/#(S)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Shop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "098fb753-d90c-4e33-b6ab-54734fd0dcca",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Quests",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f99b66f6-0dfb-4a5d-9d51-c72948b4f06e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Blackjack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

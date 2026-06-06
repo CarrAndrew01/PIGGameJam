@@ -34,6 +34,9 @@ public class PlayerStats
     // State
     [ReadOnly]
     public bool hasAppliedUpgrades = false;
+
+    public bool hasSeenIntro = false;
+
     [ShowInInspector, ReadOnly] public Dictionary<StatType, float> currentStats = new Dictionary<StatType, float>(); // Dictionary to hold the player's current stats
     public Dictionary<StatType, float> baseStats = new Dictionary<StatType, float>(); // Dictionary to hold the base values of stats before upgrades, used for calculating the effects of upgrades
     public List<Upgrade> upgrades = new List<Upgrade>();

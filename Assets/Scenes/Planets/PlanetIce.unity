@@ -3683,7 +3683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
       propertyPath: fishTypes.Array.data[3].chance
-      value: 10000
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5539118556162128932, guid: 3f1f832a40352a14195d5653d00ddfb2, type: 3}
       propertyPath: fishTypes.Array.data[4].chance

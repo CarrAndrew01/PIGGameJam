@@ -359,6 +359,9 @@ MonoBehaviour:
   onItemSelected:
     m_PersistentCalls:
       m_Calls: []
+  onItemSubmitted:
+    m_PersistentCalls:
+      m_Calls: []
   listContentArea: {fileID: 8637233673709497708}
   nameField: {fileID: 3535195292548654308}
   descriptionField: {fileID: 6623288124461152249}

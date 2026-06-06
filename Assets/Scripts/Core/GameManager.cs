@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     // State
     public static GameManager Instance { get; private set; }
 
+    public bool HasSeenIntro { get; set; } = false; // Whether the player has seen the intro cutscene, can be used to skip it on subsequent playthroughs
+
     [Header("Player Stats and Inventory")]
     public PlayerStats playerStats = new PlayerStats(); // Manages player upgrades and stats
     public PlayerInventory playerInventory = new PlayerInventory(); // Manages player inventory
@@ -42,6 +44,13 @@ public class GameManager : MonoBehaviour
     public List<Fish> allFish = new();
     public List<Upgrade> allUpgrades = new();
 
+
+    public void LoadGalaxyMapDirectly()
+    {
+        //a version that immediately chucks us into the planets map instead of the title star bit
+
+         
+    }
 
     void Awake()
     {

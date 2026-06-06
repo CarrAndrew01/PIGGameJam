@@ -57,6 +57,7 @@ public class PlayerInventory
         difficultyModifier = 1f;
         money = 0;
         maxInt = 0;
+        GameManager.Instance.HasSeenIntro = false; // Reset the intro seen flag when clearing inventory
     }
     
     public void AddBait(Upgrade baitUpgrade, int uses)
@@ -264,6 +265,7 @@ public class PlayerInventory
         save.difficultyModifier = difficultyModifier;
         save.currentBaitUpgradeName = currentBaitUpgrade != null ? currentBaitUpgrade.name : "";
         save.money = money;
+        save.hasSeenIntro = GameManager.Instance.HasSeenIntro; // Save the intro seen flag in inventory save
 
         string json = save.ToJson();
         PlayerPrefs.SetString("Manager_Inventory", json);
@@ -320,6 +322,9 @@ public class PlayerInventory
         // Restore saved money
         money = save.money;
         difficultyModifier = save.difficultyModifier;
+
+        //check if we've cleared the intro
+        GameManager.Instance.HasSeenIntro = save.hasSeenIntro;
 
         // Ensure maxInt reflects the highest assigned ID in the inventory so
         // subsequent calls to NewID() generate unique IDs above existing ones.

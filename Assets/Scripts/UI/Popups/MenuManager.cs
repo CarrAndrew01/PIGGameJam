@@ -68,6 +68,10 @@ public class MenuManager : MonoBehaviour
     public InputActionReference inventoryMenuAction; // expects Button
     public InputActionReference baitMenuAction; // expects Button
 
+
+    public InputActionReference dialogueOpen; // expects Button
+
+
     public InputActionReference shopMenuAction; // expects Button
     public InputActionReference questMenuAction; // expects Button
     public InputActionReference settingsMenuAction; // expects Button
@@ -83,6 +87,8 @@ public class MenuManager : MonoBehaviour
     public GameObject baitMenuPrefab; // Prefab for the bait menu popup
     public GameObject settingsMenuPrefab; // Prefab for the settings menu popup
     public GameObject blurGameObject;
+    
+    public GameObject dialoguePrefab;
 
     [Header("Debug")]
     public GameObject CurrentMenu { get; private set; } = null; // Reference to the currently open menu, if any
@@ -119,6 +125,8 @@ public class MenuManager : MonoBehaviour
         Transition.OnTransition -= CloseCurrentMenu;
         Fishing.MinigameStarted -= CloseCurrentMenu;
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -182,6 +190,8 @@ public class MenuManager : MonoBehaviour
             CurrentMenuType = menuType;
         }
     }
+
+
 
     public void TriggerShopMenu()
     {
