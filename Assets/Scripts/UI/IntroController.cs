@@ -52,15 +52,28 @@ public class IntroController : MonoBehaviour
     public GameObject dialogueBox;
     public GameObject exitBox;
 
-    public void FadeTo(float targetAlpha, float duration = -1f, bool sceneChange = false)
+    public void FadeTo(float targetAlpha, float duration = -1f, float currentAlpha = -1f, string sceneChange = "")
     {
         if (duration > 0) fadeDuration = duration;
+
+        if(currentAlpha != -1f)
+        {
+            Color color = fadeImage.color;
+            color.a = currentAlpha;
+            fadeImage.color = color;
+            
+        }
+
+        if(fadeImage.enabled == false)
+        {
+            fadeImage.enabled = true;
+        }
         
         if (currentFade != null) StopCoroutine(currentFade);
         currentFade = StartCoroutine(FadeCoroutine(targetAlpha, sceneChange));
     }
 
-    private IEnumerator FadeCoroutine(float targetAlpha, bool sceneChange)
+    private IEnumerator FadeCoroutine(float targetAlpha, string sceneChange)
     {
         float startAlpha = fadeImage.color.a;
         float elapsed = 0f;
@@ -87,10 +100,10 @@ public class IntroController : MonoBehaviour
         finalColor.a = targetAlpha;
         fadeImage.color = finalColor;
 
-        if(sceneChange)
+        if(!string.IsNullOrEmpty(sceneChange))
         {
             GameManager.Instance.intendedScreen = Transition.Screen.InstantPlanetsFadeOut;
-            SceneManager.LoadScene("Title");
+            SceneManager.LoadScene(sceneChange);
         }
 
     }
@@ -115,7 +128,7 @@ public class IntroController : MonoBehaviour
                 {
                     state = State.Finished;
                     //we're at the end of the dialogue, so we can go back to the galaxy map and start the game proper
-                    FadeTo(1f, 3f, true);
+                    FadeTo(1f, 3f, -1f, "Title");
                     //GameManager.Instance.HasSeenIntro = true;
 
 

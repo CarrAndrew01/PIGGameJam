@@ -462,6 +462,7 @@ public class Transition : MonoBehaviour
         ExecuteTransitionTo(Screen.Main, true);
     }
 
+
     public void QuitGame()
     {
         Application.Quit();

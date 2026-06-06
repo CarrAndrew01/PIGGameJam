@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class QuestMenu : Menu
@@ -20,10 +22,13 @@ public class QuestMenu : Menu
 
     [Header("Cache")]
     public Quest.Completed[] cachedQuestStatuses; // Cache for quest statuses loaded from player prefs, indexed to match the order of quests in GameManager.Instance.AllQuests
+    public IntroController introController;
 
 
     public void Start()
     {
+        introController = FindFirstObjectByType<IntroController>();
+
         PopulateQuestList();
     }
 
@@ -261,6 +266,7 @@ public class QuestMenu : Menu
     }
 
 
+
     /*
         handles logic for quest completion, and updates stuff
     */
@@ -333,7 +339,13 @@ public class QuestMenu : Menu
         {
             GameManager.AddUpgrade(completedQuest.rewardUpgrade);
         }
+
+        //if we've finished every quest, the ending is triggered
+
     }
+
+
+    
 
     // NOTE: Added these to store completion data into player prefs -- it will persist across sessions unless you reset it
     public static void SaveQuestStatus(string questName, Quest.Completed status)
@@ -366,4 +378,18 @@ public class QuestMenu : Menu
         }
         return statuses;
     }
+
+    void Update()
+    {
+
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            
+            //close the quest menu
+            CloseMenu();
+            introController.FadeTo(1f, 5f, 0f, "Credits");
+            
+        }
+    }
+
 }
