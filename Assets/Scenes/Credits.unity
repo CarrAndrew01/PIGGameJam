@@ -1782,7 +1782,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 1325400063
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -3341,7 +3341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 92, y: -251}
+  m_AnchoredPosition: {x: 92, y: -182}
   m_SizeDelta: {x: 1291.43, y: 1199.25}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &971191999
@@ -3452,13 +3452,17 @@ MonoBehaviour:
 
     Music:
 
-    ???
+    Kieran
+    Mulvany
 
-    ???
+    Taylor Lewincamp
 
-    ???
+    Rastin Godejohann
 
-    ???'
+
+
+
+    Thanks for Playing!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3819eb46d4f4f6d48a5bb56251af9fbb, type: 2}
   m_sharedMaterial: {fileID: 2088428522752285740, guid: 3819eb46d4f4f6d48a5bb56251af9fbb, type: 2}
@@ -3485,8 +3489,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 29.3
-  m_fontSizeBase: 29.3
+  m_fontSize: 27.48
+  m_fontSizeBase: 27.48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
