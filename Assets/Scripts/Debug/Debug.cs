@@ -50,6 +50,15 @@ public class DebugTools : MonoBehaviour
                     inputField.Select();
                     inputField.ActivateInputField();
                 }
+
+                // Disable/enable the player UI buttons when the debug menu is toggled
+                if (debugMenu.activeInHierarchy)
+                {
+                    MenuManager.Instance.enabled = false;
+                } else
+                {
+                    MenuManager.Instance.enabled = true;
+                }
             }
             else
             {
@@ -72,6 +81,12 @@ public class DebugTools : MonoBehaviour
                 inputField.text = string.Empty; //does this work?
 
                 List<string> inputs = input.Split(" ").ToList();
+
+                // Re-enable the player UI buttons when a command is entered
+                MenuManager.Instance.enabled = true;
+
+                // Disable the input field to prevent multiple commands being entered at once
+                debugMenu.SetActive(false);
 
                 switch (inputs[0])
                 {
