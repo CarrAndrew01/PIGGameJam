@@ -341,6 +341,12 @@ public class QuestMenu : Menu
         }
 
         //if we've finished every quest, the ending is triggered
+        if(GameManager.Instance.AllQuests.TrueForAll(q => GetCachedStatusForQuest(q) == Quest.Completed.Completed))
+        {
+            CloseMenu();
+            introController.FadeTo(1f, 5f, 0f, "Credits");
+        }
+
 
     }
 
@@ -379,17 +385,5 @@ public class QuestMenu : Menu
         return statuses;
     }
 
-    void Update()
-    {
-
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            
-            //close the quest menu
-            CloseMenu();
-            introController.FadeTo(1f, 5f, 0f, "Credits");
-            
-        }
-    }
 
 }

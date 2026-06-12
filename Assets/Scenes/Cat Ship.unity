@@ -1002,7 +1002,7 @@ GameObject:
   - component: {fileID: 356019395}
   - component: {fileID: 356019394}
   m_Layer: 5
-  m_Name: BlackScreen
+  m_Name: IntroController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1112,7 +1112,7 @@ MonoBehaviour:
   fadeImage: {fileID: 356019395}
   imgIcon: {fileID: 1021018104}
   tmp: {fileID: 1973453403}
-  selectAction: {fileID: 1781555164194001046, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  selectAction: {fileID: 1942953371436515391, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   dialogueBox: {fileID: 489287268}
   exitBox: {fileID: 621963541}
   Interact:
