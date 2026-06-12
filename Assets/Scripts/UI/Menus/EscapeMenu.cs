@@ -12,7 +12,7 @@ public class EscapeMenu : MonoBehaviour
 
     public void GotoGalaxy()
     {
-        GameManager.GotoTitleScreen(Transition.Screen.Galaxy);
+        GameManager.GotoTitleScreen(Transition.Screen.InstantPlanetsFadeOut);
     }
 
     public void GotoSettings()
