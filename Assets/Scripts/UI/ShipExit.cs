@@ -20,7 +20,7 @@ public class ShipExit : MonoBehaviour
 
     public void ExitShip()
     {
-        GameManager.Instance.intendedScreen = Transition.Screen.Galaxy;
+        GameManager.Instance.intendedScreen = Transition.Screen.InstantPlanetsFadeOut;
         SceneManager.LoadScene("Title");
     }
 

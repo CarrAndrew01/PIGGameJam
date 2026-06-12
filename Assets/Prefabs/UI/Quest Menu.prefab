@@ -480,6 +480,7 @@ MonoBehaviour:
   - {fileID: 4143637240341006116}
   rewardText: {fileID: 9023082723950070664}
   cachedQuestStatuses: 
+  introController: {fileID: 0}
 --- !u!1 &2059272145516127266
 GameObject:
   m_ObjectHideFlags: 0
@@ -3285,6 +3286,14 @@ PrefabInstance:
     - target: {fileID: 3637017962935787358, guid: c80037732347c90459260825da765d7a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429602510775033285, guid: c80037732347c90459260825da765d7a, type: 3}
+      propertyPath: m_fontSize
+      value: 10.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429602510775033285, guid: c80037732347c90459260825da765d7a, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 10.08
       objectReference: {fileID: 0}
     - target: {fileID: 6533538647696936296, guid: c80037732347c90459260825da765d7a, type: 3}
       propertyPath: m_Pivot.x
