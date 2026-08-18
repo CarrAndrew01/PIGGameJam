@@ -706,6 +706,77 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3831937068520011907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2179166579096759062}
+  - component: {fileID: 3371804137067184564}
+  - component: {fileID: 660030708302499397}
+  m_Layer: 0
+  m_Name: Line
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2179166579096759062
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831937068520011907}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3006507557491079422}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3371804137067184564
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831937068520011907}
+  m_CullTransparentMesh: 1
+--- !u!114 &660030708302499397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831937068520011907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc318af3ab5f06f40816d3fcd28c3e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 2100000, guid: 799bb313693d8aa49981199d21ba2486, type: 2}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  lineWidth: 5
+  tileTexture: 1
+  textureRepeatPerUnit: 0.05
+  scrollSpeed: 0
+  currentOffset: 0
+  points:
+  - {x: -40.4, y: 0}
+  - {x: 0, y: 800}
+  - {x: 100, y: 800}
+  - {x: 100, y: 400}
 --- !u!1 &3894258577987571045
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,6 +1125,7 @@ RectTransform:
   - {fileID: 3185545677831426982}
   - {fileID: 5462014975664979597}
   - {fileID: 8096885618710875071}
+  - {fileID: 2179166579096759062}
   - {fileID: 6030126332575118563}
   - {fileID: 956349945288339947}
   - {fileID: 1965580806262426728}
@@ -1145,6 +1217,7 @@ MonoBehaviour:
   speedMult: 1.75
   stubbornnessMult: 2
   sizeMult: 1
+  lineScrollMultiplier: 28.1
   reelAction: {fileID: 1120369429361536294, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   fishSlider: {fileID: 308167335481033471}
   catchSlider: {fileID: 1377393695156173234}
@@ -1153,6 +1226,7 @@ MonoBehaviour:
   catchImage: {fileID: 5857738689423441747}
   successImage: {fileID: 7645321926643288664}
   reelImage: {fileID: 2332841034824505504}
+  fishingLine: {fileID: 660030708302499397}
   fish: {fileID: 11400000, guid: 3cc61a6697ba7d34f8b9bc2a60e7f425, type: 2}
   rampDuration: 3
   difficultyRampDuration: 10

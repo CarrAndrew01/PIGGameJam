@@ -76,6 +76,9 @@ public class Stardew : MonoBehaviour
     public float stubbornnessMult = 1f; // Multiplier for how unlikely the fish is to change direction
     public float sizeMult = 1f; // Multiplier for how big the fish is, which will affect catch area
 
+    [Header("Component Settings")]
+    public float lineScrollMultiplier = 0.5f;
+
     // Fish properties which take into account modifers
     public float Jumpiness => fish.Jumpiness * jumpinessMult;
     public float Speed => fish.Speed * speedMult;
@@ -101,6 +104,10 @@ public class Stardew : MonoBehaviour
     public Image catchImage; // ^ but for the catch slider
     public Image successImage; // Reference to the fill area of the success slider, which changes color based on success
     public Image reelImage;
+    public UILineRenderer fishingLine;
+    private int lastLineIndex = 0; // Cached index so we don't have to recalc
+    private bool isFishingLineCached = false;
+
     private RectTransform hookRect;
     private RectTransform sliderRect;
     [HideInInspector] public Fish fish; // Reference to the fish ScriptableObject, set when we create the Stardew instance in the scene
@@ -201,6 +208,24 @@ public class Stardew : MonoBehaviour
         {
             float rotationAngle = Mathf.Lerp(-360f, 360f, catchSlider.value);
             reelImage.rectTransform.localRotation = Quaternion.Euler(0f, 0f, rotationAngle);
+        }
+
+        // Move final point of the fishing line to the hook position and update the scroll
+        if (fishingLine != null)
+        {
+            if (!isFishingLineCached)
+            {
+                lastLineIndex = fishingLine.points.Length - 1;
+                isFishingLineCached = true;
+            }
+
+            // Convert hook position to fishing line local space
+            Vector2 localHookPosition = fishingLine.rectTransform.InverseTransformPoint(hookRect.position);
+            fishingLine.points[lastLineIndex] = localHookPosition;
+            fishingLine.SetVerticesDirty();
+            
+            // Sets scroll speed to hook velocity
+            fishingLine.scrollSpeed = currentHookVelocity * lineScrollMultiplier;
         }
     }
 
