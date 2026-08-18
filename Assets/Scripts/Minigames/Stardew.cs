@@ -100,6 +100,7 @@ public class Stardew : MonoBehaviour
     public Image fishImage; // Reference to the Image component of the slider handle
     public Image catchImage; // ^ but for the catch slider
     public Image successImage; // Reference to the fill area of the success slider, which changes color based on success
+    public Image reelImage;
     private RectTransform hookRect;
     private RectTransform sliderRect;
     [HideInInspector] public Fish fish; // Reference to the fish ScriptableObject, set when we create the Stardew instance in the scene
@@ -194,6 +195,13 @@ public class Stardew : MonoBehaviour
 
         // Then, update the caught progress based on whether the player is currently filling the catch slider or not
         UpdateCaughtProgress();
+
+        // Also rotate the reel image based on hook position
+        if (reelImage != null)
+        {
+            float rotationAngle = Mathf.Lerp(-360f, 360f, catchSlider.value);
+            reelImage.rectTransform.localRotation = Quaternion.Euler(0f, 0f, rotationAngle);
+        }
     }
 
     private void GetInput()
@@ -362,13 +370,16 @@ public class Stardew : MonoBehaviour
 
     private void IsInCatchArea()
     {
-        float fishValue = fishSlider.value;
-        float catchValue = catchSlider.value;
+        // float fishValue = fishSlider.value;
+        // float catchValue = catchSlider.value;
+
 
         // Use cached RectTransforms to figure out the radius of the catch area in slider value
-        float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f;
+        // float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f;
 
-        isCatching = Mathf.Abs(fishValue - catchValue) <= catchHalfSizeNormalized;
+        // isCatching = Mathf.Abs(fishValue - catchValue) <= catchHalfSizeNormalized;
+
+        isCatching = catchSlider.handleRect.RectOverlaps(fishSlider.handleRect, 1f);
     }
 
     private void UpdateCaughtProgress()
@@ -415,5 +426,23 @@ public class Stardew : MonoBehaviour
 
         else
             successImage.color = Color.Lerp(catchNeutralColor, catchFailureColor, -caughtProgress);
+    }
+}
+
+// Lets me easily get the Rect of a RectTransform and check for overlaps.
+// from here: https://stackoverflow.com/questions/42043017/check-if-ui-elements-recttransform-are-overlapping
+public static class RectTransformOverlapExtension
+{
+    public static bool RectOverlaps(this RectTransform rectTrans1, RectTransform rectTrans2, float modifier = 1f)
+    {
+        float modifiedWidth = rectTrans2.rect.width * modifier;
+        float modifiedHeight = rectTrans2.rect.height * modifier;
+        float modifiedX = rectTrans2.localPosition.x - (modifiedWidth - rectTrans2.rect.width) / 2f;
+        float modifiedY = rectTrans2.localPosition.y - (modifiedHeight - rectTrans2.rect.height) / 2f;
+
+        Rect rect1 = new Rect(rectTrans1.localPosition.x, rectTrans1.localPosition.y, rectTrans1.rect.width, rectTrans1.rect.height);
+        Rect rect2 = new Rect(modifiedX, modifiedY, modifiedWidth, modifiedHeight);
+
+        return rect1.Overlaps(rect2);
     }
 }
