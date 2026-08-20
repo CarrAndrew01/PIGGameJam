@@ -223,7 +223,7 @@ public class Stardew : MonoBehaviour
             Vector2 localHookPosition = fishingLine.rectTransform.InverseTransformPoint(hookRect.position);
             fishingLine.points[lastLineIndex] = localHookPosition;
             fishingLine.SetVerticesDirty();
-            
+
             // Sets scroll speed to hook velocity
             fishingLine.scrollSpeed = currentHookVelocity * lineScrollMultiplier;
         }
@@ -404,7 +404,7 @@ public class Stardew : MonoBehaviour
 
         // isCatching = Mathf.Abs(fishValue - catchValue) <= catchHalfSizeNormalized;
 
-        isCatching = catchSlider.handleRect.RectOverlaps(fishSlider.handleRect, 1f);
+        isCatching = catchSlider.handleRect.RectOverlaps(fishImage.rectTransform, 1f);
     }
 
     private void UpdateCaughtProgress()
@@ -458,16 +458,27 @@ public class Stardew : MonoBehaviour
 // from here: https://stackoverflow.com/questions/42043017/check-if-ui-elements-recttransform-are-overlapping
 public static class RectTransformOverlapExtension
 {
-    public static bool RectOverlaps(this RectTransform rectTrans1, RectTransform rectTrans2, float modifier = 1f)
+    public static bool RectOverlaps(this RectTransform first, RectTransform second, float modifier = 1f)
     {
-        float modifiedWidth = rectTrans2.rect.width * modifier;
-        float modifiedHeight = rectTrans2.rect.height * modifier;
-        float modifiedX = rectTrans2.localPosition.x - (modifiedWidth - rectTrans2.rect.width) / 2f;
-        float modifiedY = rectTrans2.localPosition.y - (modifiedHeight - rectTrans2.rect.height) / 2f;
+        Bounds firstBounds = GetWorldBounds(first);
+        Bounds secondBounds = GetWorldBounds(second);
 
-        Rect rect1 = new Rect(rectTrans1.localPosition.x, rectTrans1.localPosition.y, rectTrans1.rect.width, rectTrans1.rect.height);
-        Rect rect2 = new Rect(modifiedX, modifiedY, modifiedWidth, modifiedHeight);
+        Vector3 expandedSize = secondBounds.size * modifier;
+        secondBounds = new Bounds(secondBounds.center, expandedSize);
 
-        return rect1.Overlaps(rect2);
+        return firstBounds.Intersects(secondBounds);
+    }
+
+    private static Bounds GetWorldBounds(RectTransform rectTransform)
+    {
+        Vector3[] corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners);
+
+        Bounds bounds = new Bounds(corners[0], Vector3.zero);
+
+        for (int i = 1; i < corners.Length; i++)
+            bounds.Encapsulate(corners[i]);
+
+        return bounds;
     }
 }
