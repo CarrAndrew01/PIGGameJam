@@ -53,6 +53,23 @@ public class Stardew : MonoBehaviour
     private float wriggleTimer = 0f;
     private float wriggleInterval = 0.3f;
 
+    // For affecting the game elsewhere
+    private float hookMult = 1f;
+    private float fishMult = 1f;
+    private bool freezeHook = false;
+
+    // Fish properties which take into account modifiers
+    public float Jumpiness => fish.Jumpiness * jumpinessMult;
+    public float Speed => fish.Speed * speedMult * fishMult;
+    public float Stubbornness => fish.Stubbornness * stubbornnessMult;
+    public float Size => fish.Size * sizeMult;
+
+    public float TimeToCatchMult => fish.TimeToCatchMult;
+    public float TimeToEscapeMult => fish.TimeToEscapeMult;
+
+    // Player stats that affect minigame
+    private float statCatchSpeed, statCatchArea, statHookGravity, statFishEscapeRate, statHookPullForce;
+
     // Variables
     [Header("Catching Settings")]
     public float catchSize = 200f; // Size of the catch area in pixels
@@ -75,7 +92,8 @@ public class Stardew : MonoBehaviour
     private float DifficultyRampT => Mathf.Clamp01(timeElapsed / difficultyRampDuration);
     public float CatchRate => catchRate * statCatchSpeed * Mathf.Lerp(catchStartMultiplier, 1f, RampT) / TimeToCatchMult;
     public float EscapeRate => escapeRate * statFishEscapeRate * Mathf.Lerp(1f, escapeEndMultiplier, DifficultyRampT) / TimeToEscapeMult;
-    public float HookGravity => hookGravity * statHookGravity;
+    public float HookAcceleration => hookAcceleration * hookMult * (freezeHook ? 0 : 1);
+    public float HookGravity => hookGravity * statHookGravity * hookMult * (freezeHook ? 0 : 1);
     public float CatchAreaSize => catchSize * statCatchArea;
 
     [Header("Fish Settings")]
@@ -89,18 +107,6 @@ public class Stardew : MonoBehaviour
 
     [Header("Component Settings")]
     public float lineScrollMultiplier = 0.5f;
-
-    // Fish properties which take into account modifers
-    public float Jumpiness => fish.Jumpiness * jumpinessMult;
-    public float Speed => fish.Speed * speedMult;
-    public float Stubbornness => fish.Stubbornness * stubbornnessMult;
-    public float Size => fish.Size * sizeMult;
-
-    public float TimeToCatchMult => fish.TimeToCatchMult;
-    public float TimeToEscapeMult => fish.TimeToEscapeMult;
-
-    // Player stats that affect minigame
-    private float statCatchSpeed, statCatchArea, statHookGravity, statFishEscapeRate, statHookPullForce;
 
     // Input actions
     [Header("Input Actions")]
@@ -240,6 +246,47 @@ public class Stardew : MonoBehaviour
         }
     }
 
+    public void SetHookAccelMult(float mult)
+    {
+        hookMult = mult;
+    }
+    public void SetFishAccelMult(float mult)
+    {
+        fishMult = mult;
+    }
+    public bool ResetHookAccelMult()
+    {
+        if (hookMult == 1f)
+            return false;
+        else
+        {
+            hookMult = 1f;
+            return true;
+        }
+    }
+    public bool ResetFishAccelMult()
+    {
+        if (fishMult == 1f)
+            return false;
+        else
+        {
+            fishMult = 1f;
+            return true;
+        }
+    }
+
+    public void FreezeHook()
+    {
+        freezeHook = true;
+        // Do whatever we do when the hook is frozen
+    }
+
+    public void UnfreezeHook()
+    {
+        freezeHook = false;
+        // Whatever we do when the hook is unfrozen
+    }
+
     private void GetInput()
     {
         isReeling = reelAction.action.IsPressed();
@@ -249,7 +296,7 @@ public class Stardew : MonoBehaviour
         // Only apply reeling (upward acceleration) if not at top
         if (isReeling && !atTop)
         {
-            currentHookVelocity += hookAcceleration * Time.deltaTime;
+            currentHookVelocity += HookAcceleration * Time.deltaTime;
         }
     }
 
@@ -271,6 +318,13 @@ public class Stardew : MonoBehaviour
     {
         currentHookVelocity = Mathf.Clamp(currentHookVelocity, -hookMaxVelocity, hookMaxVelocity);
         catchSlider.value += currentHookVelocity * Time.deltaTime;
+
+        // Reduce velocity if frozen
+        if (freezeHook)
+        {
+            float freezeDeceleration = hookAcceleration * hookMult; // literally just unfreezing the acceleration to apply in reverse
+            currentHookVelocity = Mathf.MoveTowards(currentHookVelocity, 0f, freezeDeceleration * Time.deltaTime);
+        }
 
         // Calculate the normalized half-size of the hook handle (using cached RectTransforms)
         float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f + hookEdgeOffset;

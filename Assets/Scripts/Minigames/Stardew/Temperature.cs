@@ -9,9 +9,12 @@ public class Temperature : MonoBehaviour
     public Color coldColor = Color.blue;
     public Color middleColor = Color.white;
     public Color hotColor = Color.red;
-    public bool visible = false;
     public float alphaSpeed = 0.1f;
+    public float iceAlphaSpeed = 0.1f;
+
+    private bool visible = false;
     private Coroutine alphaControl;
+    private Coroutine iceAlphaControl;
 
     [Header("Temperature")]
     public Zone.Activator target;
@@ -21,12 +24,19 @@ public class Temperature : MonoBehaviour
     public float heatLoss = 0.001f;
     public float stabilisation = 0.0005f;
 
+    private bool doesStabilise = true;
+    private bool doZonesWork = true;
+    private bool frozen = false;
+
     [Header("Components")]
+    public Stardew minigame;
     public Slider temperatureSlider;
     public CanvasGroup group;
-    private Image temperatureFill;
+    public CanvasGroup iceGroup;
     public List<Zone> coldZones;
     public List<Zone> hotZones;
+
+    private Image temperatureFill;
 
     void Awake()
     {
@@ -59,16 +69,50 @@ public class Temperature : MonoBehaviour
 
     void Heat(Zone.Activator activator)
     {
-        if (activator != target) return;
+        if (activator != target || !doZonesWork) return;
 
         netGain += heatGain;
     }
 
     void Cool(Zone.Activator activator)
     {
-        if (activator != target) return;
+        if (activator != target || !doZonesWork) return;
 
         netGain -= heatLoss;
+    }
+
+    void Freeze()
+    {
+        Debug.Log("Freezing hook.");
+        if (minigame && !frozen)
+        {
+            frozen = true;
+            doZonesWork = false;
+
+            minigame.FreezeHook();
+
+            if (iceGroup)
+            {
+                StartCoroutine(Fade(iceGroup, true, iceAlphaControl));
+            }
+        }
+    }
+
+    void Unfreeze()
+    {
+        Debug.Log("Unfreezing hook.");
+        if (minigame && frozen)
+        {
+            frozen = false;
+            doZonesWork = true;
+
+            minigame.UnfreezeHook();
+
+            if (iceGroup)
+            {
+                StartCoroutine(Fade(iceGroup, false, iceAlphaControl));
+            }
+        }
     }
 
     void Update()
@@ -88,58 +132,75 @@ public class Temperature : MonoBehaviour
 
     void LateUpdate()
     {
-        if (netGain != 0)
+        // Handle frozen state
+        if (frozen)
+        {
+            // Do QTE or something I don't know, for now just slowly unfreeze
+            temperatureSlider.value += stabilisation;
+
+            if (temperatureSlider.value >= 0.5f)
+                Unfreeze();
+        }
+        // In zone state
+        else if (netGain != 0)
         {
             temperatureSlider.value += netGain;
+
+            // Check for freeze/burn
+            if (temperatureSlider.value == 0f)
+                Freeze();
 
             // Appear
             if (!visible)
             {
-                alphaControl = StartCoroutine(Appear());
+                visible = true;
+                alphaControl = StartCoroutine(Fade(group, true, alphaControl));
             }
         }
+        // Normal state
         else
         {
-            if (temperatureSlider.value > normalTemp)
-                temperatureSlider.value -= stabilisation;
-            else if (temperatureSlider.value < normalTemp)
-                temperatureSlider.value += stabilisation;
+            // Stabilisation
+            if (doesStabilise)
+            {
+                if (temperatureSlider.value > normalTemp)
+                    temperatureSlider.value -= stabilisation;
+                else if (temperatureSlider.value < normalTemp)
+                    temperatureSlider.value += stabilisation;
+            }
 
             // Disappear
             if (visible)
             {
                 if (temperatureSlider.value >= normalTemp - 0.1f && temperatureSlider.value <= normalTemp + 0.1f)
                 {
-                    alphaControl = StartCoroutine(Disappear());
+                    visible = false;
+                    alphaControl = StartCoroutine(Fade(group, false, alphaControl));
                 }
             }
         }
         netGain = 0;
     }
-
-    public IEnumerator Disappear()
+    public IEnumerator Fade(CanvasGroup canvasGroup, bool fadeIn = true, Coroutine control = null)
     {
-        if (alphaControl != null)
-            StopCoroutine(alphaControl);
-        visible = false;
+        if (control != null)
+            StopCoroutine(control);
 
-        while (group.alpha > 0)
+        if (fadeIn)
         {
-            group.alpha -= alphaSpeed;
-            yield return null;
+            while (canvasGroup.alpha < 1)
+            {
+                canvasGroup.alpha += alphaSpeed;
+                yield return null;
+            }
         }
-    }
-
-    public IEnumerator Appear()
-    {
-        if (alphaControl != null)
-            StopCoroutine(alphaControl);
-        visible = true;
-
-        while (group.alpha < 1)
+        else
         {
-            group.alpha += alphaSpeed;
-            yield return null;
+            while (canvasGroup.alpha > 0)
+            {
+                canvasGroup.alpha -= alphaSpeed;
+                yield return null;
+            }
         }
     }
 }
