@@ -21,6 +21,17 @@ public class Stardew : MonoBehaviour
         Escaped
     }
 
+    [System.Flags]
+    public enum Modifiers
+    {
+        None = 0,
+        Icebergs = 1 << 0,
+        ReversePhysics = 1 << 1,
+        Light = 1 << 2,
+        Lava = 1 << 3,
+        All = ~0
+    }
+
     // Constants
     public static readonly string DEFAULT_FISH_RESOURCE_PATH = "Fish/DEFAULT FISH"; // The path in the Resources folder where the default Fish is
 
