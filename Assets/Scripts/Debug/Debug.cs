@@ -55,24 +55,28 @@ public class DebugTools : MonoBehaviour
                 if (debugMenu.activeInHierarchy)
                 {
                     MenuManager.Instance.enabled = false;
+                    //this isn't great but I'd have to find all the inputs and disable otherwise and I'd rather not do that
+                    //so this works as a dev solution since this isn't technically a player-forward feature anyway
+                    Time.timeScale = 0f; //reset time scale to normal when opening debug menu
+
                 } else
                 {
+                    Time.timeScale = 1f; //reset time scale to normal when closing debug menu
+
                     MenuManager.Instance.enabled = true;
                 }
             }
             else
             {
-                Debug.Log("No debug menu set here, better make a new one now");
-                if(debugMenuInstantiate != null)
-                {
-                    debugMenu = Instantiate(debugMenuInstantiate);
-                }
+                Debug.Log("Nope, no debug menu here, gotta put it in manually as I couldn't work out canvas things");
+
             }
         }
 
         if(debugMenu != null && debugMenu.activeInHierarchy)
         {
-                TMP_InputField inputField = debugMenu.GetComponent<TMP_InputField>();
+            
+            TMP_InputField inputField = debugMenu.GetComponent<TMP_InputField>();
 
             if (Input.GetKeyDown(KeyCode.Return) && inputField != null)
             {
@@ -87,6 +91,7 @@ public class DebugTools : MonoBehaviour
 
                 // Disable the input field to prevent multiple commands being entered at once
                 debugMenu.SetActive(false);
+                    Time.timeScale = 1f; //reset time scale to normal when closing debug menu
 
                 switch (inputs[0])
                 {
@@ -95,6 +100,8 @@ public class DebugTools : MonoBehaviour
 
                     //first, set the inventory size to big enough no matter what
                         GameManager.Instance.playerStats.currentStats[StatType.fishStorage] = 1000f; //big inventory
+
+                        GameManager.Instance.HasSeenIntro = true; //skip the intro
 
                         foreach (Fish fish in GameManager.Instance.allFish)
                         {
@@ -111,6 +118,21 @@ public class DebugTools : MonoBehaviour
 
                     case "removeall" :
                         //completely nukes our inventory
+                        GameManager.Instance.playerInventory.ClearInventory();
+                        GameManager.Instance.playerStats.ClearUpgrades();
+                        break;
+
+                    case "givemoney" :
+                        if(inputs.Count()> 1)
+                        {   
+                            GameManager.Instance.playerInventory.money += float.Parse(inputs[1]); //give us a specific amount of money
+                        }
+                        else
+                        {
+                            GameManager.Instance.playerInventory.money += 1000f; //give us a specific amount of money
+                        }
+
+                        break;
 
                     case "cleardata" :
                         //clear player data
@@ -158,11 +180,10 @@ public class DebugTools : MonoBehaviour
                         }
 
                         break;
+
+
                 }
             }
         }
     }
-
-
-
 }

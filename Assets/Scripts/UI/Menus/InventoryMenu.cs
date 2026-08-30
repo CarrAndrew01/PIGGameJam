@@ -30,14 +30,18 @@ public class InventoryMenu : MonoBehaviour
     }
 
     // Methods
-    public void ToggleSortByGroup()
+    public void ToggleSortByGroup(TextMeshProUGUI buttonText)
     {
         sortByGroup = !sortByGroup;
+
+        buttonText.text = sortByGroup ? "Sort by: Groups" : "Sort by: Time";
 
         // Repopulate the list to reflect the new sorting method
         PopulateList();
         ButtonColorUpdate();
     }
+
+
 
     private void PopulateList()
     {
@@ -49,6 +53,7 @@ public class InventoryMenu : MonoBehaviour
                 menuComponent.PopulateListWithFishCount(GameManager.Instance.playerInventory.GetFishCountsByType(), GameManager.Instance.playerInventory.caughtFish);
         }
     }
+
     private void ButtonColorUpdate()
     {
         if (sortByGroup)
@@ -56,6 +61,7 @@ public class InventoryMenu : MonoBehaviour
         else
             sortByGroupButton.image.color = groupSortOffColor;
     }
+    
     private void UpdateCapacityText()
     {
         float capacity = GameManager.GetPlayerStat(StatType.fishStorage);

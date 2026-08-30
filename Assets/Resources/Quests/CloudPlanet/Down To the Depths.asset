@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: Down to the Depths
   description: 'Excellent work on my last assignment- my chef has never been happier.
-    However, he desires another rare creature- one of the famed Deepdwellers of Boreala-
+    However, he desires another rare creature- one of the famed Deepdwellers of NImbus-
     for his next culinary "project". They dwell all the way at the core of Nimbus,
     so you''ll need an extremely heavy lure to have a hope of finding one. '
   completedStatus: 2

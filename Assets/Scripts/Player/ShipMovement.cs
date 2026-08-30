@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using Sirenix.Utilities;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +14,7 @@ public class ShipMovement : MonoBehaviour
     // State
     public float currentVelocity = 0f; // Current speed of the ship, positive is right, negative is left
     private Vector2 inputDirection; // Direction of input, x is left/right, y is unused
+
     public int LastDirection { get; private set; } = 1; // Either 1 (right) or -1 (left)
     private Vector3 originalScale; // Original scale of the ship for flipping
     private Coroutine spinCoroutine; // Reference to the current spin coroutine
@@ -101,11 +105,15 @@ public class ShipMovement : MonoBehaviour
         }
 
         inputDirection = moveAction.action.ReadValue<Vector2>();
+
         // If input direction changes from left to right or vice versa, start the spin animation
         if (inputDirection.x > 0 && LastDirection == -1)
             BeginSpin(1);
         else if (inputDirection.x < 0 && LastDirection == 1)
             BeginSpin(-1);
+
+
+
     }
 
     private void HandleMovement()
@@ -120,8 +128,42 @@ public class ShipMovement : MonoBehaviour
         {
             currentVelocity = Mathf.MoveTowards(currentVelocity, 0, deceleration * Time.fixedDeltaTime);
         }
+
+
         // Clamp velocity to max speed
         currentVelocity = Mathf.Clamp(currentVelocity, -maxVelocity, maxVelocity);
+        #region yMovementStuffIgnore
+        /*
+        float scaleAdjuster = 0.005f;
+        float yMovement = 0.03f;
+
+        float scaleAim = 0.78f;
+
+
+        //just testing out some Y axis movement into the background, dont know if we'll like that though
+        if(inputDirection.y > 0 && spriteTransform.localScale.y > scaleAim)
+        {
+            //move player up while scaling the sprite down slightly
+            spriteTransform.localScale = new Vector3(Mathf.MoveTowards(spriteTransform.localScale.x, scaleAim, scaleAdjuster), 
+            Mathf.MoveTowards(spriteTransform.localScale.y, scaleAim, scaleAdjuster), originalScale.z); // Scale down slightly
+
+            transform.position += new Vector3(0, yMovement, 0); // Move up slightlyq
+
+            
+        }else if(inputDirection.y < 0 && spriteTransform.localScale.y < 1f)
+        {
+            //cant work out a better way to do this rn
+
+            //move player down while scaling the sprite up slightly
+            spriteTransform.localScale = new Vector3(Mathf.MoveTowards(spriteTransform.localScale.x, 
+            spriteTransform.localScale.x > 0 ? 1f : -1f, 
+            scaleAdjuster), 
+            Mathf.MoveTowards(spriteTransform.localScale.y, 1f, scaleAdjuster), originalScale.z); // Scale down slightly
+
+            transform.position -= new Vector3(0, yMovement, 0); // Move down slightly
+        }
+        */
+        #endregion
     }
 
     private void ApplyVelocity()
@@ -132,6 +174,9 @@ public class ShipMovement : MonoBehaviour
 
     private void ApplyBobbing()
     {
+
+        //TODO: adjust bobbing height by a % of the scale so it looks right
+
         // Bobbing effect on the child so it doesn't interfere with physics
         float bobbingY = Mathf.Sin(Time.time * bobbingFrequency) * bobbingAmplitude;
 
@@ -159,17 +204,49 @@ public class ShipMovement : MonoBehaviour
 
         float elapsed = 0f;
         float startScaleX = spriteTransform.localScale.x;
-        float targetScaleX = originalScale.x * LastDirection; // Flip the scale to spin
+        
+        float targetScaleX = math.abs(spriteTransform.localScale.x) * LastDirection; // Flip the scale to spin
+ 
+        //just a conveniance variable
+        //true if we're facing right, false if we're facing left
+        bool directionFacingOnTurn = spriteTransform.localScale.x > 0;
 
+        //ANDREW: I've changed this stuff so its possible to move up and down with the ship getting smaller. Just an experiment/idea but it works as normal 
+        //now as the input stuff for y axis is commented out
+        //so anything with the y scale can basically be ignored here
         while (elapsed < affectedSpinDuration)
         {
             elapsed += Time.deltaTime;
+
             float newScaleX = Mathf.Lerp(startScaleX, targetScaleX, elapsed / affectedSpinDuration);
             spriteTransform.localScale = new Vector3(newScaleX, spriteTransform.localScale.y, spriteTransform.localScale.z);
+
+            if (directionFacingOnTurn)
+            {
+                //we are turning left because we're already facing right
+                if(spriteTransform.localScale.x <= -spriteTransform.localScale.y)
+                {
+                    spriteTransform.localScale = new Vector3(-spriteTransform.localScale.y, spriteTransform.localScale.y, 1);
+                    yield break;
+                }
+            }
+            else
+            {
+                //we are turning right because we're already facing left
+                if(spriteTransform.localScale.x >= spriteTransform.localScale.y)
+                {
+                    spriteTransform.localScale = new Vector3(spriteTransform.localScale.y, spriteTransform.localScale.y, 1);
+                    yield break;
+                }                
+            }
+
             yield return null;
         }
 
+        float xScale = directionFacingOnTurn ? -spriteTransform.localScale.y : spriteTransform.localScale.y;
+
         // Ensure final scale is set
-        spriteTransform.localScale = new Vector3(targetScaleX, spriteTransform.localScale.y, spriteTransform.localScale.z);
+        spriteTransform.localScale = new Vector3(xScale, 
+        spriteTransform.localScale.y, spriteTransform.localScale.z);
     }
 }

@@ -25,12 +25,13 @@ public class IntroController : MonoBehaviour
 
     public enum State
     {
+        Inactive,
         Delay,
         ReadyForNext,
         Finished
     }
 
-    public State state = State.Delay; 
+    public State state = State.Inactive;
 
     public float timer = 0f;
     public float delay = 0.8f;
@@ -103,6 +104,7 @@ public class IntroController : MonoBehaviour
         if(!string.IsNullOrEmpty(sceneChange))
         {
             GameManager.Instance.intendedScreen = Transition.Screen.InstantPlanetsFadeOut;
+
             SceneManager.LoadScene(sceneChange);
         }
 
@@ -119,6 +121,7 @@ public class IntroController : MonoBehaviour
         //when a little bit of time has passed, players can now press the next button to skip dialogue (enter? the confirm button anyway)
         //check the input and go to the next queue
         
+ 
         if(state == State.Delay)
         {
             timer+=Time.deltaTime;
@@ -128,6 +131,8 @@ public class IntroController : MonoBehaviour
                 {
                     state = State.Finished;
                     //we're at the end of the dialogue, so we can go back to the galaxy map and start the game proper
+                    Debug.Log("here");
+
                     FadeTo(1f, 3f, -1f, "Title");
                     //GameManager.Instance.HasSeenIntro = true;
 
@@ -181,6 +186,9 @@ public class IntroController : MonoBehaviour
     void Start()
     {
         if(GameManager.Instance.HasSeenIntro) return;
+        Debug.Log("123" + GameManager.Instance.HasSeenIntro);
+        state = State.ReadyForNext;
+
 
         //quickly throw the black up, then fade it back out
         if(gameObject.GetComponent<Image>() == null)
@@ -202,6 +210,7 @@ public class IntroController : MonoBehaviour
 
         dialogueBox.SetActive(true);
         exitBox.SetActive(false);
+            Debug.Log("here");
 
         FadeTo(0f, 3f);
         NextDialogue();

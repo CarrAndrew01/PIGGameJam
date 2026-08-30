@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6300131083065144623}
   - component: {fileID: 7095474395187160419}
   - component: {fileID: 3595072946783019663}
-  - component: {fileID: 6061033984732926202}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -49,15 +48,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats:
     hasAppliedUpgrades: 0
+    hasSeenIntro: 0
     upgrades: []
   playerInventory:
     caughtFish: []
     baits: []
     currentBaitUpgrade: {fileID: 0}
+    difficultyModifier: 1
     maxInt: 0
     money: 0
   intendedScreen: 0
-  TEMPFISH: {fileID: 11400000, guid: 2b7558cde3445f944ac5f639a3a4fe6e, type: 2}
   minigamePopup: {fileID: 0}
   menuPopup: {fileID: 0}
   allFish:
@@ -131,17 +131,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1eebd5b06b4fb04aaa80f3b18d7f33d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6061033984732926202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3077475692530973662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b63da59144d1cabb0a8cfceb44551ce5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMenu: {fileID: 0}
-  debugMenuInstantiate: {fileID: 0}

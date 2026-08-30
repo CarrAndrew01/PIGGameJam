@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Highest Roller
   description: Okay, you have a problem.
-  mechDescriptionOverride: Gamble another 95 coins per wager (before mult)
+  mechDescriptionOverride: Gamble another 95 coins per wager (before multiplier)
   icon: {fileID: 0}
   type: 14
   modifierType: 0
