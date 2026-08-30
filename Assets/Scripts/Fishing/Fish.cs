@@ -76,6 +76,7 @@ public class Fish : ScriptableObject
     [SerializeField] private float timeToCatchMult = 1f; // Multiplier for how long it takes to catch the fish
     [Tooltip("Multiplier for how long it takes for the fish to escape (bigger is longer)")]
     [SerializeField] private float timeToEscapeMult = 1f; // Multiplier for how long it takes for the fish to escape
+    [SerializeField] private Stardew.Modifiers modifiers;
 
     [Header("Prefabs")]
     public GameObject minigamePrefab;

@@ -21,6 +21,17 @@ public class Stardew : MonoBehaviour
         Escaped
     }
 
+    [System.Flags]
+    public enum Modifiers
+    {
+        None = 0,
+        Icebergs = 1 << 0,
+        ReversePhysics = 1 << 1,
+        Light = 1 << 2,
+        Lava = 1 << 3,
+        All = ~0
+    }
+
     // Constants
     public static readonly string DEFAULT_FISH_RESOURCE_PATH = "Fish/DEFAULT FISH"; // The path in the Resources folder where the default Fish is
 
@@ -41,6 +52,23 @@ public class Stardew : MonoBehaviour
     private float currentHookVelocity = 0f; // ^ but for the catch slider
     private float wriggleTimer = 0f;
     private float wriggleInterval = 0.3f;
+
+    // For affecting the game elsewhere
+    private float hookMult = 1f;
+    private float fishMult = 1f;
+    private bool freezeHook = false;
+
+    // Fish properties which take into account modifiers
+    public float Jumpiness => fish.Jumpiness * jumpinessMult;
+    public float Speed => fish.Speed * speedMult * fishMult;
+    public float Stubbornness => fish.Stubbornness * stubbornnessMult;
+    public float Size => fish.Size * sizeMult;
+
+    public float TimeToCatchMult => fish.TimeToCatchMult;
+    public float TimeToEscapeMult => fish.TimeToEscapeMult;
+
+    // Player stats that affect minigame
+    private float statCatchSpeed, statCatchArea, statHookGravity, statFishEscapeRate, statHookPullForce;
 
     // Variables
     [Header("Catching Settings")]
@@ -64,7 +92,8 @@ public class Stardew : MonoBehaviour
     private float DifficultyRampT => Mathf.Clamp01(timeElapsed / difficultyRampDuration);
     public float CatchRate => catchRate * statCatchSpeed * Mathf.Lerp(catchStartMultiplier, 1f, RampT) / TimeToCatchMult;
     public float EscapeRate => escapeRate * statFishEscapeRate * Mathf.Lerp(1f, escapeEndMultiplier, DifficultyRampT) / TimeToEscapeMult;
-    public float HookGravity => hookGravity * statHookGravity;
+    public float HookAcceleration => hookAcceleration * hookMult * (freezeHook ? 0 : 1);
+    public float HookGravity => hookGravity * statHookGravity * hookMult * (freezeHook ? 0 : 1);
     public float CatchAreaSize => catchSize * statCatchArea;
 
     [Header("Fish Settings")]
@@ -76,17 +105,8 @@ public class Stardew : MonoBehaviour
     public float stubbornnessMult = 1f; // Multiplier for how unlikely the fish is to change direction
     public float sizeMult = 1f; // Multiplier for how big the fish is, which will affect catch area
 
-    // Fish properties which take into account modifers
-    public float Jumpiness => fish.Jumpiness * jumpinessMult;
-    public float Speed => fish.Speed * speedMult;
-    public float Stubbornness => fish.Stubbornness * stubbornnessMult;
-    public float Size => fish.Size * sizeMult;
-
-    public float TimeToCatchMult => fish.TimeToCatchMult;
-    public float TimeToEscapeMult => fish.TimeToEscapeMult;
-
-    // Player stats that affect minigame
-    private float statCatchSpeed, statCatchArea, statHookGravity, statFishEscapeRate, statHookPullForce;
+    [Header("Component Settings")]
+    public float lineScrollMultiplier = 0.5f;
 
     // Input actions
     [Header("Input Actions")]
@@ -100,6 +120,11 @@ public class Stardew : MonoBehaviour
     public Image fishImage; // Reference to the Image component of the slider handle
     public Image catchImage; // ^ but for the catch slider
     public Image successImage; // Reference to the fill area of the success slider, which changes color based on success
+    public Image reelImage;
+    public UILineRenderer fishingLine;
+    private int lastLineIndex = 0; // Cached index so we don't have to recalc
+    private bool isFishingLineCached = false;
+
     private RectTransform hookRect;
     private RectTransform sliderRect;
     [HideInInspector] public Fish fish; // Reference to the fish ScriptableObject, set when we create the Stardew instance in the scene
@@ -194,6 +219,72 @@ public class Stardew : MonoBehaviour
 
         // Then, update the caught progress based on whether the player is currently filling the catch slider or not
         UpdateCaughtProgress();
+
+        // Also rotate the reel image based on hook position
+        if (reelImage != null)
+        {
+            float rotationAngle = Mathf.Lerp(-360f, 360f, catchSlider.value);
+            reelImage.rectTransform.localRotation = Quaternion.Euler(0f, 0f, rotationAngle);
+        }
+
+        // Move final point of the fishing line to the hook position and update the scroll
+        if (fishingLine != null)
+        {
+            if (!isFishingLineCached)
+            {
+                lastLineIndex = fishingLine.points.Length - 1;
+                isFishingLineCached = true;
+            }
+
+            // Convert hook position to fishing line local space
+            Vector2 localHookPosition = fishingLine.rectTransform.InverseTransformPoint(hookRect.position);
+            fishingLine.points[lastLineIndex] = localHookPosition;
+            fishingLine.SetVerticesDirty();
+
+            // Sets scroll speed to hook velocity
+            fishingLine.scrollSpeed = currentHookVelocity * lineScrollMultiplier;
+        }
+    }
+
+    public void SetHookAccelMult(float mult)
+    {
+        hookMult = mult;
+    }
+    public void SetFishAccelMult(float mult)
+    {
+        fishMult = mult;
+    }
+    public bool ResetHookAccelMult()
+    {
+        if (hookMult == 1f)
+            return false;
+        else
+        {
+            hookMult = 1f;
+            return true;
+        }
+    }
+    public bool ResetFishAccelMult()
+    {
+        if (fishMult == 1f)
+            return false;
+        else
+        {
+            fishMult = 1f;
+            return true;
+        }
+    }
+
+    public void FreezeHook()
+    {
+        freezeHook = true;
+        // Do whatever we do when the hook is frozen
+    }
+
+    public void UnfreezeHook()
+    {
+        freezeHook = false;
+        // Whatever we do when the hook is unfrozen
     }
 
     private void GetInput()
@@ -205,7 +296,7 @@ public class Stardew : MonoBehaviour
         // Only apply reeling (upward acceleration) if not at top
         if (isReeling && !atTop)
         {
-            currentHookVelocity += hookAcceleration * Time.deltaTime;
+            currentHookVelocity += HookAcceleration * Time.deltaTime;
         }
     }
 
@@ -227,6 +318,13 @@ public class Stardew : MonoBehaviour
     {
         currentHookVelocity = Mathf.Clamp(currentHookVelocity, -hookMaxVelocity, hookMaxVelocity);
         catchSlider.value += currentHookVelocity * Time.deltaTime;
+
+        // Reduce velocity if frozen
+        if (freezeHook)
+        {
+            float freezeDeceleration = hookAcceleration * hookMult; // literally just unfreezing the acceleration to apply in reverse
+            currentHookVelocity = Mathf.MoveTowards(currentHookVelocity, 0f, freezeDeceleration * Time.deltaTime);
+        }
 
         // Calculate the normalized half-size of the hook handle (using cached RectTransforms)
         float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f + hookEdgeOffset;
@@ -362,13 +460,16 @@ public class Stardew : MonoBehaviour
 
     private void IsInCatchArea()
     {
-        float fishValue = fishSlider.value;
-        float catchValue = catchSlider.value;
+        // float fishValue = fishSlider.value;
+        // float catchValue = catchSlider.value;
+
 
         // Use cached RectTransforms to figure out the radius of the catch area in slider value
-        float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f;
+        // float catchHalfSizeNormalized = (hookRect.sizeDelta.y / sliderRect.rect.height) / 2f;
 
-        isCatching = Mathf.Abs(fishValue - catchValue) <= catchHalfSizeNormalized;
+        // isCatching = Mathf.Abs(fishValue - catchValue) <= catchHalfSizeNormalized;
+
+        isCatching = catchSlider.handleRect.RectOverlaps(fishImage.rectTransform, 1f);
     }
 
     private void UpdateCaughtProgress()
@@ -415,5 +516,34 @@ public class Stardew : MonoBehaviour
 
         else
             successImage.color = Color.Lerp(catchNeutralColor, catchFailureColor, -caughtProgress);
+    }
+}
+
+// Lets me easily get the Rect of a RectTransform and check for overlaps.
+// from here: https://stackoverflow.com/questions/42043017/check-if-ui-elements-recttransform-are-overlapping
+public static class RectTransformOverlapExtension
+{
+    public static bool RectOverlaps(this RectTransform first, RectTransform second, float modifier = 1f)
+    {
+        Bounds firstBounds = GetWorldBounds(first);
+        Bounds secondBounds = GetWorldBounds(second);
+
+        Vector3 expandedSize = secondBounds.size * modifier;
+        secondBounds = new Bounds(secondBounds.center, expandedSize);
+
+        return firstBounds.Intersects(secondBounds);
+    }
+
+    private static Bounds GetWorldBounds(RectTransform rectTransform)
+    {
+        Vector3[] corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners);
+
+        Bounds bounds = new Bounds(corners[0], Vector3.zero);
+
+        for (int i = 1; i < corners.Length; i++)
+            bounds.Encapsulate(corners[i]);
+
+        return bounds;
     }
 }
