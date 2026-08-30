@@ -159,6 +159,9 @@ public class Transition : MonoBehaviour
                 case Screen.Settings:
                     TransitionToMainMenuFromSettings();
                     break;
+                case Screen.InstantPlanetsFadeOut:
+                    TransitionToMainMenuFromPlanets();
+                    break;
                 default:
                     break;
             }
@@ -320,7 +323,6 @@ public class Transition : MonoBehaviour
                 StartCoroutine(FadeCoroutine(0f, 3f));
                 hasSelectedFirstButton = false;
                 GameManager.Instance.HasSeenIntro = true; // Set the flag to indicate the intro has been seen
-                
                 break;
 
             case Screen.Settings:
@@ -334,9 +336,15 @@ public class Transition : MonoBehaviour
 
             case Screen.Main:
                 if (currentScreen == Screen.Galaxy)
-                animator.SetBool("PlanetTransition", false);
+                {
+                    animator.SetBool("PlanetTransition", false);
+                    animator.SetTrigger("FromInstantToDefault");
+
+                }
                 else if (currentScreen == Screen.Settings)
-                animator.SetBool("SettingsTransition", false);
+                {
+                    animator.SetBool("SettingsTransition", false);
+                }
                 currentScreen = Screen.Main;
                 OnTransition?.Invoke();
                 FadeCoroutineStarter(UnFadeTextCoroutine());

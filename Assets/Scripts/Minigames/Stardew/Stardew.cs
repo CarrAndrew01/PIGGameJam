@@ -43,6 +43,7 @@ public class Stardew : MonoBehaviour
     [ShowInInspector, ReadOnly] private FishState fishState = FishState.Struggling; // Whether the fish is currently up, down, or struggling
     [ShowInInspector, ReadOnly, Range(-1f, 1f)]
     private float caughtProgress = 0f;
+    private Modifiers modifiers = Modifiers.None;
     private float timeSinceStateChange = 0f; // How much time has passed since the fish last changed state
     private float currentStateDuration = 0f; // How long the fish will stay in its current state
     private float timeElapsed = 0f; // Total time the minigame has been active, used for difficulty ramp
@@ -122,6 +123,10 @@ public class Stardew : MonoBehaviour
     public Image successImage; // Reference to the fill area of the success slider, which changes color based on success
     public Image reelImage;
     public UILineRenderer fishingLine;
+
+    public BioLight bio;
+    public Temperature temperature;
+
     private int lastLineIndex = 0; // Cached index so we don't have to recalc
     private bool isFishingLineCached = false;
 
@@ -186,6 +191,9 @@ public class Stardew : MonoBehaviour
         sliderRect = catchSlider.GetComponent<RectTransform>();
         hookRect.sizeDelta = new Vector2(hookRect.sizeDelta.x, CatchAreaSize);
         catchImage.color = hookColor;
+        modifiers = fish.modifiers;
+
+        EnableModifiers();
 
         OnCatching.Invoke("Reel");
     }
@@ -285,6 +293,30 @@ public class Stardew : MonoBehaviour
     {
         freezeHook = false;
         // Whatever we do when the hook is unfrozen
+    }
+
+    private void EnableModifiers()
+    {
+        if (modifiers.HasFlag(Modifiers.Icebergs))
+        {
+            // Enable cold
+            temperature.enabled = true;
+        }
+        if (modifiers.HasFlag(Modifiers.Lava))
+        {
+            // Enable hot
+            temperature.enabled = true;
+        }
+        if (modifiers.HasFlag(Modifiers.ReversePhysics))
+        {
+            // Reverse physics
+        }
+        if (modifiers.HasFlag(Modifiers.Light))
+        {
+            // Enable lighting
+            if (temperature)
+                bio.SetLighting(true);
+        }
     }
 
     private void GetInput()

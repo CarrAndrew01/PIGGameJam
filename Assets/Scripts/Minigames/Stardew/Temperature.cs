@@ -19,14 +19,17 @@ public class Temperature : MonoBehaviour
     [Header("Temperature")]
     public Zone.Activator target;
     public float normalTemp = 0.5f;
-    public float netGain = 0f;
     public float heatGain = 0.001f;
     public float heatLoss = 0.001f;
     public float stabilisation = 0.0005f;
+    public float heatRecovery = 0.001f;
+    public float coldRecovery = 0.001f;
 
+    private float netGain = 0f;
     private bool doesStabilise = true;
     private bool doZonesWork = true;
     private bool frozen = false;
+    private bool burnt = false;
 
     [Header("Components")]
     public Stardew minigame;
@@ -115,6 +118,26 @@ public class Temperature : MonoBehaviour
         }
     }
 
+    void Burn()
+    {
+        Debug.Log("Burning hook.");
+        if (minigame && !burnt)
+        {
+            burnt = true;
+            doZonesWork = false;
+        }
+    }
+
+    void Unburn()
+    {
+        Debug.Log("Unburning hook.");
+        if (minigame && burnt)
+        {
+            burnt = false;
+            doZonesWork = true;
+        }
+    }
+
     void Update()
     {
         if (temperatureSlider.value > 0.5f)
@@ -136,10 +159,18 @@ public class Temperature : MonoBehaviour
         if (frozen)
         {
             // Do QTE or something I don't know, for now just slowly unfreeze
-            temperatureSlider.value += stabilisation;
+            temperatureSlider.value += coldRecovery;
 
             if (temperatureSlider.value >= 0.5f)
                 Unfreeze();
+        }
+        // Handle burnt state
+        else if (burnt)
+        {
+            temperatureSlider.value -= heatRecovery;
+
+            if (temperatureSlider.value <= 0.5f)
+                Unburn();
         }
         // In zone state
         else if (netGain != 0)
@@ -149,6 +180,8 @@ public class Temperature : MonoBehaviour
             // Check for freeze/burn
             if (temperatureSlider.value == 0f)
                 Freeze();
+            else if (temperatureSlider.value == 1f)
+                Burn();
 
             // Appear
             if (!visible)
@@ -181,7 +214,7 @@ public class Temperature : MonoBehaviour
         }
         netGain = 0;
     }
-    public IEnumerator Fade(CanvasGroup canvasGroup, bool fadeIn = true, Coroutine control = null)
+    IEnumerator Fade(CanvasGroup canvasGroup, bool fadeIn = true, Coroutine control = null)
     {
         if (control != null)
             StopCoroutine(control);

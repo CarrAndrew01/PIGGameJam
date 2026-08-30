@@ -40,13 +40,14 @@ public class DebugTools : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F11))
         {
             //bring up the debug tool
-            if(debugMenu != null)
+            if (debugMenu != null)
             {
                 debugMenu.SetActive(!debugMenu.activeInHierarchy);
-                
+
                 TMP_InputField inputField = debugMenu.GetComponent<TMP_InputField>();
 
-                if(inputField != null){
+                if (inputField != null)
+                {
                     inputField.Select();
                     inputField.ActivateInputField();
                 }
@@ -59,7 +60,8 @@ public class DebugTools : MonoBehaviour
                     //so this works as a dev solution since this isn't technically a player-forward feature anyway
                     Time.timeScale = 0f; //reset time scale to normal when opening debug menu
 
-                } else
+                }
+                else
                 {
                     Time.timeScale = 1f; //reset time scale to normal when closing debug menu
 
@@ -73,9 +75,9 @@ public class DebugTools : MonoBehaviour
             }
         }
 
-        if(debugMenu != null && debugMenu.activeInHierarchy)
+        if (debugMenu != null && debugMenu.activeInHierarchy)
         {
-            
+
             TMP_InputField inputField = debugMenu.GetComponent<TMP_InputField>();
 
             if (Input.GetKeyDown(KeyCode.Return) && inputField != null)
@@ -91,14 +93,14 @@ public class DebugTools : MonoBehaviour
 
                 // Disable the input field to prevent multiple commands being entered at once
                 debugMenu.SetActive(false);
-                    Time.timeScale = 1f; //reset time scale to normal when closing debug menu
+                Time.timeScale = 1f; //reset time scale to normal when closing debug menu
 
                 switch (inputs[0])
                 {
-                    case "giveall" : 
-                    //give us all of everything everything
+                    case "giveall":
+                        //give us all of everything everything
 
-                    //first, set the inventory size to big enough no matter what
+                        //first, set the inventory size to big enough no matter what
                         GameManager.Instance.playerStats.currentStats[StatType.fishStorage] = 1000f; //big inventory
 
                         GameManager.Instance.HasSeenIntro = true; //skip the intro
@@ -106,25 +108,25 @@ public class DebugTools : MonoBehaviour
                         foreach (Fish fish in GameManager.Instance.allFish)
                         {
                             CaughtFish cf = new(fish, UnityEngine.Random.Range(fish.minWeight, fish.maxWeight) * GameManager.GetPlayerStat(StatType.fishWeight), "debug");
-                            GameManager.AddFishToInventory(cf);                  
+                            GameManager.AddFishToInventory(cf);
                         }
 
-                        foreach(Upgrade upg in GameManager.Instance.allUpgrades)
+                        foreach (Upgrade upg in GameManager.Instance.allUpgrades)
                         {
                             GameManager.AddUpgrade(upg); //give us all upgrades
                         }
-                        
+
                         break;
 
-                    case "removeall" :
+                    case "removeall":
                         //completely nukes our inventory
                         GameManager.Instance.playerInventory.ClearInventory();
                         GameManager.Instance.playerStats.ClearUpgrades();
                         break;
 
-                    case "givemoney" :
-                        if(inputs.Count()> 1)
-                        {   
+                    case "givemoney":
+                        if (inputs.Count() > 1)
+                        {
                             GameManager.Instance.playerInventory.money += float.Parse(inputs[1]); //give us a specific amount of money
                         }
                         else
@@ -134,20 +136,20 @@ public class DebugTools : MonoBehaviour
 
                         break;
 
-                    case "cleardata" :
+                    case "cleardata":
                         //clear player data
                         GameManager.ClearPlayerData();
                         break;
 
-                    case "givefish" :
-                    //give us a specific thing
-                        if(inputs.Count() > 1)
+                    case "givefish":
+                        //give us a specific thing
+                        if (inputs.Count() > 1)
                         {
                             //first thing, 
                             int number = 1;
 
                             //if player specifies a number in the THIRD string, you get that much, otherwise sets count to 1
-                            if(inputs.Count() > 2)
+                            if (inputs.Count() > 2)
                             {
                                 int.TryParse(inputs[2], out number);
                             }
@@ -157,18 +159,18 @@ public class DebugTools : MonoBehaviour
 
                             if (fish != null)
                             {
-                                for(int i = 0; i < number; i++)
+                                for (int i = 0; i < number; i++)
                                 {
                                     CaughtFish cf = new(fish, UnityEngine.Random.Range(fish.minWeight, fish.maxWeight) * GameManager.GetPlayerStat(StatType.fishWeight), "debug");
                                     GameManager.AddFishToInventory(cf);
-                                    
+
                                 }
                             }
                         }
                         break;
 
-                    case "giveupgrade" :
-                        if(inputs.Count() > 1)
+                    case "giveupgrade":
+                        if (inputs.Count() > 1)
                         {
                             //the second string specifies what upgrade we want
                             Upgrade upg = GameManager.Instance.GetUpgrade(inputs[1]);
@@ -179,6 +181,18 @@ public class DebugTools : MonoBehaviour
                             }
                         }
 
+                        break;
+                    case "unlockplanets":
+                        String[] upgrades = new String[] { "Atmospheric Mapper", "Bio Filter", "Thermal Shielding" };
+
+                        foreach (String upg in upgrades)
+                        {
+                            Upgrade upgrade = GameManager.Instance.GetUpgrade(upg);
+                            if (upgrade != null)
+                            {
+                                GameManager.AddUpgrade(upgrade);
+                            }
+                        }
                         break;
 
 

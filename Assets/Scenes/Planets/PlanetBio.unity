@@ -8166,6 +8166,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8517081318201010704, guid: be524a614cc9106418aba739bfe08dbb, type: 3}
+      propertyPath: fishingBackgroundImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 5147ea61b691cc341862f0125744a580, type: 3}
+    - target: {fileID: 8517081318201010704, guid: be524a614cc9106418aba739bfe08dbb, type: 3}
       propertyPath: fishTypes.Array.data[0].fish
       value: 
       objectReference: {fileID: 11400000, guid: 3fc782acc6737645988360f3cfd41c9b, type: 2}
