@@ -25,6 +25,7 @@ public class Environment : MonoBehaviour
     public List<FishCatchInfo> fishTypes; // List of different fish types that can be caught in this environment
     public bool doesSpawnFish = true; // Whether this environment should spawn fish shadows
     public float waterHeight = -3.5f;
+    public Sprite fishingBackgroundImage;
 
 
     [Header("Fish Spawn Settings")]
@@ -43,6 +44,7 @@ public class Environment : MonoBehaviour
 
     // Properties
     public static string Name => CurrentEnvironment != null ? CurrentEnvironment.environmentName : "Unknown Environment";
+    public static Sprite Background => CurrentEnvironment != null ? CurrentEnvironment.fishingBackgroundImage : null;
     public static float WaterHeight => CurrentEnvironment != null ? CurrentEnvironment.waterHeight : 0f;
 
     void Awake()

@@ -37,4 +37,5 @@ MonoBehaviour:
   size: 1
   timeToCatchMult: 2
   timeToEscapeMult: 2
+  modifiers: 8
   minigamePrefab: {fileID: 9067129867402091520, guid: 8251c7f9414d6c643b4930cb9ec93da1, type: 3}
