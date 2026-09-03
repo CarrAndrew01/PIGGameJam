@@ -35,7 +35,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Popup menuPopup; // Reference to the Popup component for handling menus, etc.
 
     public static Popup MenuPopup => Instance.menuPopup; // Static accessor for the menu popup
-
+    public SceneSwitcher sceneSwitcher;
+    public static SceneSwitcher SceneSwitcher => Instance.sceneSwitcher;
 
     /*****
     DEBUG STUFF just leaving this here as its easier to remember to update it :)
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
         // Load inventory after stats so that the max storage limit is applied
         playerInventory.LoadFromPlayerPrefs();
         // playerInventory.Init();
+        sceneSwitcher = GetComponent<SceneSwitcher>();
     }
 
     void OnApplicationQuit()
@@ -209,7 +211,8 @@ public class GameManager : MonoBehaviour
     public static void GotoTitleScreen(Transition.Screen intendedScreen)
     {
         Instance.intendedScreen = intendedScreen;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(TITLE_SCENE_NAME);
+        SceneSwitcher.BeginSceneTransition(TITLE_SCENE_NAME);
+        // UnityEngine.SceneManagement.SceneManager.LoadScene(TITLE_SCENE_NAME);
     }
 
     // Other
