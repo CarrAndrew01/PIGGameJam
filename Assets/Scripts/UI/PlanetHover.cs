@@ -83,8 +83,11 @@ public class PlanetHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         if (canEnter)
         {
+            if (TransitionManager.Instance != null) {
             TransitionManager.Instance.BeginSceneTransition(planetSceneName);
-            // PlanetSelection.Instance.GoToPlanetScene(planetSceneName);
+            } else {
+            PlanetSelection.Instance.GoToPlanetScene(planetSceneName);
+            }
         }
         else
         {
