@@ -53,14 +53,14 @@ public class TransitionManager : MonoBehaviour
                 loadingScreenTimeline = loadingScreenTimelineObject.GetComponent<PlayableDirector>();
                 StartCoroutine(TransitionScene());
             }
-            
-
         }
+        TriggerOpen();
     }
 
     // Starts the process by sending the player to the loading screen
     public void BeginSceneTransition(string switchScene)
     {
+        TriggerClose();
         // grabs the scene that we actually want to go to
         sceneToSwitchTo = switchScene;
         // sends us to the loading screen
@@ -75,10 +75,18 @@ public class TransitionManager : MonoBehaviour
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToSwitchTo);
         asyncLoad.allowSceneActivation = false; // scene can't load until we let it
         // waits for the async scene to fully load
+        bool triggeredTransition = false;
+
         while (!asyncLoad.isDone)
         {
-            bool animationComplete = loadingScreenTimeline.time >= loadingScreenTimeline.duration;
+            double remainingTime = loadingScreenTimeline.duration - loadingScreenTimeline.time;
+            bool animationComplete = remainingTime <= 0;
 
+            if (!triggeredTransition && remainingTime <= 0.6f)
+            {
+                TriggerClose();
+                triggeredTransition = true;
+            }
             if (asyncLoad.progress >= 0.9f && animationComplete)
             {
                 asyncLoad.allowSceneActivation = true;
@@ -100,14 +108,22 @@ public class TransitionManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftBracket))
         {
-            topAnimator.SetTrigger("TopClose");
-            bottomAnimator.SetTrigger("BottomClose");
+            TriggerClose();
         } 
         if (Input.GetKeyDown(KeyCode.RightBracket))
         {
-            topAnimator.SetTrigger("TopOpen");
-            bottomAnimator.SetTrigger("BottomOpen");
+            TriggerOpen();
         }       
+    }
+    void TriggerClose()
+    {
+        topAnimator.SetTrigger("TopClose");
+        bottomAnimator.SetTrigger("BottomClose");
+    }
+    void TriggerOpen()
+    {
+        topAnimator.SetTrigger("TopOpen");
+        bottomAnimator.SetTrigger("BottomOpen");
     }
     
 }

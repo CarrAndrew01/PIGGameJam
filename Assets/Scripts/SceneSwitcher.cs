@@ -14,7 +14,7 @@ public class SceneSwitcher : MonoBehaviour
     public static event  Action CompleteTransition;
 
     public static void TriggerCompleteTransition() {
-        CompleteTransition?.Invoke();
+  
     }
     private void OnEnable()
     {
