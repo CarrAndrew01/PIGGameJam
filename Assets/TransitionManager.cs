@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class TransitionManager : MonoBehaviour
@@ -7,9 +8,10 @@ public class TransitionManager : MonoBehaviour
     public static TransitionManager Instance { get; private set;}
     // Animators to handle transitions
     [SerializeField]
-    Animator topAnimator;
+    Animator topAnimator; // top of black bars
     [SerializeField]
-    Animator bottomAnimator;
+    Animator bottomAnimator; // bottom of black bars
+    PlayableDirector loadingScreenTimeline; // exists to catch the values of the loading screen being done
     // Scene variables
 
     public string sceneToSwitchTo;
@@ -44,7 +46,15 @@ public class TransitionManager : MonoBehaviour
         Debug.Log("Current Scene: "+scene.name);
         if (scene.name.ToString() == "Loading Screen")
         {
-            StartCoroutine(TransitionScene());
+            // maybe grab the animator here?
+            GameObject loadingScreenTimelineObject = GameObject.Find("Timeline");
+            if (loadingScreenTimelineObject != null)
+            {
+                loadingScreenTimeline = loadingScreenTimelineObject.GetComponent<PlayableDirector>();
+                StartCoroutine(TransitionScene());
+            }
+            
+
         }
     }
 
@@ -63,9 +73,17 @@ public class TransitionManager : MonoBehaviour
     IEnumerator TransitionScene()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToSwitchTo);
+        asyncLoad.allowSceneActivation = false; // scene can't load until we let it
         // waits for the async scene to fully load
         while (!asyncLoad.isDone)
         {
+            bool animationComplete = loadingScreenTimeline.time >= loadingScreenTimeline.duration;
+
+            if (asyncLoad.progress >= 0.9f && animationComplete)
+            {
+                asyncLoad.allowSceneActivation = true;
+            }
+
             yield return null;
         }
         Debug.Log("Switching to: "+sceneToSwitchTo);
