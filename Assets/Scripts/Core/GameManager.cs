@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
     public static void GotoTitleScreen(Transition.Screen intendedScreen)
     {
         Instance.intendedScreen = intendedScreen;
-        SceneSwitcher.BeginSceneTransition(TITLE_SCENE_NAME);
+        TransitionManager.Instance.BeginSceneTransition(TITLE_SCENE_NAME);
         // UnityEngine.SceneManagement.SceneManager.LoadScene(TITLE_SCENE_NAME);
     }
 
