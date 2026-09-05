@@ -60,9 +60,15 @@ public class TransitionManager : MonoBehaviour
     // Starts the process by sending the player to the loading screen
     public void BeginSceneTransition(string switchScene)
     {
-        TriggerClose();
         // grabs the scene that we actually want to go to
         sceneToSwitchTo = switchScene;
+        TriggerClose();
+        StartCoroutine(BeginSceneTransitionCoroutine());
+        
+    }
+    IEnumerator BeginSceneTransitionCoroutine()
+    {
+        yield return new WaitForSeconds(0.5111f);
         // sends us to the loading screen
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(LOADING_SCREEN);
 
