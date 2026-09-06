@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8636186026593049818}
   - component: {fileID: 4609951706820462269}
   - component: {fileID: 6562862576937119777}
+  - component: {fileID: 2932767900223162034}
+  - component: {fileID: 490271755872781369}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Player
@@ -156,6 +158,44 @@ MonoBehaviour:
   castingPrefab: {fileID: 2941649925059469388, guid: cd09a98bce460004fb1c1cc23464ec33, type: 3}
   bobberPrefab: {fileID: 8260265438531314335, guid: 6f5b86d33f5b18f48b01394765360e54, type: 3}
   pokemonPrefab: {fileID: 1533861940500961755, guid: c5d22923d4f46bdde9fa9857829eb350, type: 3}
+--- !u!95 &2932767900223162034
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155156845450328795}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2880860fd097a4863a60a66151e7aec1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &490271755872781369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155156845450328795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde04e8fb12394def8d853ff2e6ea68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipMovementScript: {fileID: 4609951706820462269}
+  fishingScript: {fileID: 6562862576937119777}
+  shipAnimator: {fileID: 2932767900223162034}
+  enabledAtStart: 0
 --- !u!1 &2627616015998451968
 GameObject:
   m_ObjectHideFlags: 0
