@@ -166,7 +166,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155156845450328795}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2880860fd097a4863a60a66151e7aec1, type: 2}
   m_CullingMode: 0
@@ -195,6 +195,7 @@ MonoBehaviour:
   shipMovementScript: {fileID: 4609951706820462269}
   fishingScript: {fileID: 6562862576937119777}
   shipAnimator: {fileID: 2932767900223162034}
+  shipChildAnimator: {fileID: 5950555103727501478}
   enabledAtStart: 0
 --- !u!1 &2627616015998451968
 GameObject:
@@ -294,7 +295,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2627616015998451968}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 3fb824d2126a14ab1938d6b678399f66, type: 2}
   m_CullingMode: 0

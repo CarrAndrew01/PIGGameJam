@@ -11,6 +11,8 @@ public class ShipEnabler : MonoBehaviour
     [SerializeField]
     Animator shipAnimator;
     [SerializeField]
+    Animator shipChildAnimator;
+    [SerializeField]
     bool enabledAtStart = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,5 +38,15 @@ public class ShipEnabler : MonoBehaviour
     void AnimationComplete()
     {
         ToggleControls(true);
+
+    }
+    void ToggleBobbing(int enabled)
+    {
+        bool toggle = false;
+        if (enabled == 1)
+        {
+         toggle = true;   
+        }
+        shipChildAnimator.enabled = toggle; // allows bobbing
     }
 }
