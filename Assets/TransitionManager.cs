@@ -58,16 +58,21 @@ public class TransitionManager : MonoBehaviour
     }
 
     // Starts the process by sending the player to the loading screen
-    public void BeginSceneTransition(string switchScene)
+    public void BeginSceneTransition(string switchScene, bool delay = false)
     {
         // grabs the scene that we actually want to go to
         sceneToSwitchTo = switchScene;
-        TriggerClose();
-        StartCoroutine(BeginSceneTransitionCoroutine());
+        StartCoroutine(BeginSceneTransitionCoroutine(delay));
         
     }
-    IEnumerator BeginSceneTransitionCoroutine()
+    IEnumerator BeginSceneTransitionCoroutine(bool delay)
     {
+        // if it needs to wait for the ship to take off
+        if (delay)
+        {
+            yield return new WaitForSeconds(3f);
+        }
+        TriggerClose();
         yield return new WaitForSeconds(0.5111f);
         // sends us to the loading screen
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(LOADING_SCREEN);
