@@ -178,14 +178,14 @@ public class ShipMovement : MonoBehaviour
         //TODO: adjust bobbing height by a % of the scale so it looks right
 
         // Bobbing effect on the child so it doesn't interfere with physics
-        float bobbingY = Mathf.Sin(Time.time * bobbingFrequency) * bobbingAmplitude;
+        // float bobbingY = Mathf.Sin(Time.time * bobbingFrequency) * bobbingAmplitude;
 
-        // Scale shadow based on bobbing
-        float shadowScale = Mathf.Lerp(shadowMax, shadowMin, (bobbingY + bobbingAmplitude) / (2 * bobbingAmplitude));
-        float shipScaleX = spriteTransform.localScale.x / originalScale.x; // Get the current horizontal scale factor (1 or -1)
-        spriteShadow.localScale = new Vector3(shadowScale * shipScaleX, .5f, 1f);
+        // // Scale shadow based on bobbing
+        // float shadowScale = Mathf.Lerp(shadowMax, shadowMin, (bobbingY + bobbingAmplitude) / (2 * bobbingAmplitude));
+        // float shipScaleX = spriteTransform.localScale.x / originalScale.x; // Get the current horizontal scale factor (1 or -1)
+        // spriteShadow.localScale = new Vector3(shadowScale * shipScaleX, .5f, 1f);
 
-        spriteTransform.localPosition = new Vector3(0f, bobbingY, 0f);
+        // spriteTransform.localPosition = new Vector3(0f, bobbingY, 0f);
     }
 
     private void BeginSpin(int direction)
