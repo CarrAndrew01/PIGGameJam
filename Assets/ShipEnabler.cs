@@ -27,12 +27,12 @@ public class ShipEnabler : MonoBehaviour
         
     }
     // disables all player control and activates animator
-    void ToggleControls(bool enabled)
+    public void ToggleControls(bool enabled)
     {
         if (shipMovementScript == null || fishingScript == null || shipAnimator == null) return;
         shipMovementScript.enabled = enabled;
         fishingScript.enabled = enabled;
-        shipAnimator.enabled = !enabled;
+        // shipAnimator.enabled = !enabled;
     }
     // allows the player to move when the landing animation is finished
     void AnimationComplete()

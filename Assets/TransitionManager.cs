@@ -70,6 +70,9 @@ public class TransitionManager : MonoBehaviour
         // if it needs to wait for the ship to take off
         if (delay)
         {
+            GameObject ship = GameObject.Find("Ship");
+
+            ship.GetComponent<ShipEnabler>().ToggleControls(false);
             yield return new WaitForSeconds(3f);
         }
         TriggerClose();
