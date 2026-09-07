@@ -24,7 +24,10 @@ public class ShipEnabler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            shipChildAnimator.SetTrigger("ExitScene");
+        }
     }
     // disables all player control and activates animator
     public void ToggleControls(bool enabled)
