@@ -72,7 +72,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0.5
-        value: {x: -3.2, y: 6.39, z: 0}
+        value: {x: -3.2, y: 9.02, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -81,7 +81,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 2.9833333
-        value: {x: -1.115435, y: -0.7889228, z: 0}
+        value: {x: -1.115435, y: 1.8410773, z: 0}
         inSlope: {x: 1.1176296, y: -3.1868923, z: 0}
         outSlope: {x: 1.1176296, y: -3.1868923, z: 0}
         tangentMode: 0
@@ -90,7 +90,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 4
-        value: {x: -0.19260208, y: -2.63, z: 0}
+        value: {x: -0.19260208, y: 0, z: 0}
         inSlope: {x: 0.6037173, y: 0, z: 0}
         outSlope: {x: 0.6037173, y: 0, z: 0}
         tangentMode: 0
@@ -99,7 +99,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 4.5
-        value: {x: 0, y: -2.63, z: 0}
+        value: {x: 0, y: 0, z: 0}
         inSlope: {x: 0.14394014, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -196,7 +196,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0.5
-        value: 6.39
+        value: 9.02
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -205,7 +205,16 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 4
-        value: -2.63
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 4.5
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -320,14 +329,7 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 4
-    functionName: ToggleBobbing
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 4.483333
+  - time: 4.5
     functionName: AnimationComplete
     data: 
     objectReferenceParameter: {fileID: 0}

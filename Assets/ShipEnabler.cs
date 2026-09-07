@@ -11,8 +11,6 @@ public class ShipEnabler : MonoBehaviour
     [SerializeField]
     Animator shipAnimator;
     [SerializeField]
-    Animator shipChildAnimator;
-    [SerializeField]
     bool enabledAtStart = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +24,7 @@ public class ShipEnabler : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            shipChildAnimator.SetTrigger("ExitScene");
+            shipAnimator.SetTrigger("ExitScene");
         }
     }
     // disables all player control and activates animator
@@ -35,7 +33,6 @@ public class ShipEnabler : MonoBehaviour
         if (shipMovementScript == null || fishingScript == null || shipAnimator == null) return;
         shipMovementScript.enabled = enabled;
         fishingScript.enabled = enabled;
-        // shipAnimator.enabled = !enabled;
     }
     // allows the player to move when the landing animation is finished
     void AnimationComplete()
@@ -43,13 +40,8 @@ public class ShipEnabler : MonoBehaviour
         ToggleControls(true);
 
     }
-    void ToggleBobbing(int enabled)
+    void LeaveStart()
     {
-        bool toggle = false;
-        if (enabled == 1)
-        {
-         toggle = true;   
-        }
-        shipChildAnimator.enabled = toggle; // allows bobbing
+        ToggleControls(false);
     }
 }
