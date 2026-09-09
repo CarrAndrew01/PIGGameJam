@@ -271,7 +271,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &2163910501952848605
 MonoBehaviour:
@@ -327,3 +327,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topAnimator: {fileID: 6487197831703064219}
   bottomAnimator: {fileID: 2757945465544709548}
+  sceneToSwitchTo: 

@@ -44,6 +44,7 @@ public class TransitionManager : MonoBehaviour
     void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
         Debug.Log("Current Scene: "+scene.name);
+        TriggerOpen();
         if (scene.name.ToString() == "Loading Screen")
         {
             // maybe grab the animator here?
@@ -54,7 +55,7 @@ public class TransitionManager : MonoBehaviour
                 StartCoroutine(TransitionScene());
             }
         }
-        TriggerOpen();
+      
     }
 
     // Starts the process by sending the player to the loading screen
@@ -72,7 +73,7 @@ public class TransitionManager : MonoBehaviour
         {
             GameObject ship = GameObject.Find("Ship");
 
-            ship.GetComponent<ShipEnabler>().ToggleControls(false);
+            ship.GetComponentInChildren<ShipEnabler>().ToggleControls(false);
             yield return new WaitForSeconds(3f);
         }
         TriggerClose();
